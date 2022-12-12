@@ -2,15 +2,7 @@ import './Register.scss';
 import { useState } from 'react';
 import axios from 'axios';
 
-type RegisterRequest = {
-  Firstname: string;
-  Lastname: string;
-  Email: string;
-  Password: string;
-}
-
 function Register() {
-
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
