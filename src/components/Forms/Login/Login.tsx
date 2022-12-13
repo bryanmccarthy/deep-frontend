@@ -9,9 +9,13 @@ function Login() {
   async function loginUser() {
     const res = await axios.post('http://localhost:3000/users/login', {
       Email: email,
-      Password: password
+      Password: password,
+    }, 
+    {
+      withCredentials: true,
     })
-    console.log(res.data);
+    sessionStorage.setItem('user', res.data);
+    window.location.reload();
   }
 
   return (

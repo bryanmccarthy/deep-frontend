@@ -1,18 +1,17 @@
 import './App.scss';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import Auth from './components/Forms/Forms';
-import Secret from './components/Secret';
+import Forms from './components/Forms/Forms';
+import Main from './components/Main';
 
 const queryClient = new QueryClient();
 
 function App() {
-
-  const user = false;
+  const user = sessionStorage.getItem('user');
   
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
-        { user ? <Secret /> : <Auth /> }
+        { user ? <Main /> : <Forms /> }
       </div>
     </QueryClientProvider>
   )
