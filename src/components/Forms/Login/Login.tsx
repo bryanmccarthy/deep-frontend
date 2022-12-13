@@ -22,12 +22,10 @@ function Login() {
     <div className="Login">
       <form className="LoginForm">
         <div className="LoginTitle">Login</div>
-        
-        <label htmlFor="email">Email</label>
-        <input className="LoginInput" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
 
-        <label htmlFor="password">Password</label>
-        <input className="LoginInput" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input className="LoginInput" placeholder="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+
+        <input className="LoginInput" placeholder="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
         <button className="LoginButton" type="button" onClick={loginUser}>Login</button>
       </form>
