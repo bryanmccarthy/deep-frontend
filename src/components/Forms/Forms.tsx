@@ -1,3 +1,4 @@
+import './Forms.scss';
 import { useState } from 'react';
 import Login from './Login/Login';
 import Register from './Register/Register';
@@ -10,7 +11,7 @@ function Forms() {
   }
 
   return (
-    <div className="forms">
+    <div className="Forms">
       { form === 'login' ? <Login /> : <Register /> }
       { form === 'login' ? <button onClick={handleFormChange}>Don't have an account? Register</button> : <button onClick={handleFormChange}>Already have an account? Login</button> }
     </div>

@@ -20,15 +20,16 @@ function Login() {
 
   return (
     <div className="Login">
-      <h1>Login</h1>
       <form className="LoginForm">
+        <div className="LoginTitle">Login</div>
+        
         <label htmlFor="email">Email</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input className="LoginInput" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
 
         <label htmlFor="password">Password</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input className="LoginInput" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
-        <button type="button" onClick={loginUser}>Login</button>
+        <button className="LoginButton" type="button" onClick={loginUser}>Login</button>
       </form>
     </div>
   )

@@ -5,22 +5,16 @@ function Main() {
     const res = await axios.get('http://localhost:3000/users/logout', {
       withCredentials: true,
     })
-    sessionStorage.removeItem('user');
-    window.location.reload();
-  }
-
-  async function test() {
-    const res = await axios.get('http://localhost:3000/users/secret', {
-      withCredentials: true,
-    })
-    console.log(res.data);
+    if (res && res.status === 200) {
+      sessionStorage.removeItem('user');
+      window.location.reload();
+    }
   }
 
   return (
     <div>
       <h1>Main</h1>
       <button onClick={handleLogout}>Logout</button>
-      <button onClick={test}>Test</button>
     </div>
   );
 }
