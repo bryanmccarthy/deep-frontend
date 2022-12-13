@@ -13,7 +13,7 @@ function Forms() {
   return (
     <div className="Forms">
       { form === 'login' ? <Login /> : <Register /> }
-      { form === 'login' ? <button onClick={handleFormChange}>Don't have an account? Register</button> : <button onClick={handleFormChange}>Already have an account? Login</button> }
+      { form === 'login' ? <button className="FormButton" onClick={handleFormChange}>Don't have an account? Register</button> : <button className="FormButton" onClick={handleFormChange}>Already have an account? Login</button> }
     </div>
   )
 }
