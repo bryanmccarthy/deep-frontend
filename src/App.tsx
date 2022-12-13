@@ -1,28 +1,18 @@
 import './App.scss';
-import Login from './components/Login/Login';
-import Register from './components/Register/Register';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { useState } from 'react';
+import Auth from './components/Forms/Forms';
+import Secret from './components/Secret';
 
 const queryClient = new QueryClient();
 
 function App() {
+
+  const user = false;
   
-  const [form, setForm] = useState('login');
-
-  function handleFormChange() {
-    if (form === 'login') {
-      setForm('register');
-    } else {
-      setForm('login');
-    }
-  }
-
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
-        { form === 'login' ? <Login /> : <Register /> }
-        { form === 'login' ? <button onClick={handleFormChange}>Don't have an account?</button> : <button onClick={handleFormChange}>Already have an account?</button> }
+        { user ? <Secret /> : <Auth /> }
       </div>
     </QueryClientProvider>
   )
