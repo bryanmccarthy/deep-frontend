@@ -19,21 +19,22 @@ function Register() {
 
   return (
     <div className="Register">
-      <h1>Register</h1>
       <form className="RegisterForm">
+        <div className="RegisterTitle">Register</div>
+
         <label htmlFor="firstname">Firstname</label>
-        <input type="text" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
+        <input className="RegisterInput" type="text" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
 
         <label htmlFor="lastname">Lastname</label>
-        <input type="text" value={lastname} onChange={(e) => setLastname(e.target.value)} />
+        <input className="RegisterInput" type="text" value={lastname} onChange={(e) => setLastname(e.target.value)} />
 
         <label htmlFor="email">Email</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input className="RegisterInput" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
 
         <label htmlFor="password">Password</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input className="RegisterInput" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
-        <button type="button" onClick={registerUser}>Register</button>
+        <button className="RegisterButton" type="button" onClick={registerUser}>Register</button>
       </form>
     </div>
   )
