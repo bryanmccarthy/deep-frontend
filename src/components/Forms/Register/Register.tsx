@@ -21,15 +21,10 @@ function Register() {
     <div className="Register">
       <form className="RegisterForm">
         <div className="RegisterTitle">Register</div>
-
         <input className="RegisterInput" placeholder="firstname" type="text" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
-
         <input className="RegisterInput" placeholder="lastname" type="text" value={lastname} onChange={(e) => setLastname(e.target.value)} />
-
         <input className="RegisterInput" placeholder="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-
         <input className="RegisterInput" placeholder="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-
         <button className="RegisterButton" type="button" onClick={registerUser}>Register</button>
       </form>
     </div>

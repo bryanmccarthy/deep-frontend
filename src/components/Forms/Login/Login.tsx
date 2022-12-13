@@ -22,11 +22,8 @@ function Login() {
     <div className="Login">
       <form className="LoginForm">
         <div className="LoginTitle">Login</div>
-
         <input className="LoginInput" placeholder="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-
         <input className="LoginInput" placeholder="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-
         <button className="LoginButton" type="button" onClick={loginUser}>Login</button>
       </form>
     </div>
