@@ -20,7 +20,7 @@ function Register() {
   return (
     <div className="Register">
       <h1>Register</h1>
-      <form className="registerForm">
+      <form className="RegisterForm">
         <label htmlFor="firstname">Firstname</label>
         <input type="text" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
 
