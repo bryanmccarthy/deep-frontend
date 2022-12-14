@@ -7,7 +7,7 @@ function Login() {
   const [password, setPassword] = useState('');
 
   async function loginUser() {
-    const res = await axios.post('http://localhost:3000/users/login', {
+    const res = await axios.post('http://localhost:3000/auth/login', {
       Email: email,
       Password: password,
     }, 

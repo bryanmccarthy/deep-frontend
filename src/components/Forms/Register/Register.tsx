@@ -9,7 +9,7 @@ function Register() {
   const [password, setPassword] = useState('');
 
   async function registerUser() {
-    await axios.post('http://localhost:3000/users/register', {
+    await axios.post('http://localhost:3000/auth/register', {
       Firstname: firstname,
       Lastname: lastname,
       Email: email,

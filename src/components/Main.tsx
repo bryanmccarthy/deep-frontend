@@ -2,7 +2,7 @@ import axios from "axios";
 
 function Main() {
   async function handleLogout() {
-    const res = await axios.get('http://localhost:3000/users/logout', {
+    const res = await axios.get('http://localhost:3000/auth/logout', {
       withCredentials: true,
     })
     if (res && res.status === 200) {
