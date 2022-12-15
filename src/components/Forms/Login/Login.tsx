@@ -7,7 +7,7 @@ function Login() {
   const [password, setPassword] = useState('');
 
   async function loginUser() {
-    const res = await axios.post('http://localhost:3000/auth/login', {
+    const res = await axios.post(import.meta.env.VITE_URL + '/auth/login', {
       Email: email,
       Password: password,
     }, 

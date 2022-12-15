@@ -9,7 +9,7 @@ function Register() {
   const [password, setPassword] = useState('');
 
   async function registerUser() {
-    await axios.post('http://localhost:3000/auth/register', {
+    await axios.post(import.meta.env.VITE_URL + '/auth/register', {
       Firstname: firstname,
       Lastname: lastname,
       Email: email,

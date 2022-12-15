@@ -16,7 +16,7 @@ function Header({ page, setPage }: { page: string, setPage: Function}) {
   }
 
   async function handleLogout() {
-    const res = await axios.get('http://localhost:3000/auth/logout', {
+    const res = await axios.get(import.meta.env.VITE_URL + '/auth/logout', {
       withCredentials: true,
       }
     )
