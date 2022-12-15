@@ -14,8 +14,10 @@ function Login() {
     {
       withCredentials: true,
     })
-    sessionStorage.setItem('user', res.data);
-    window.location.reload();
+    if (res && res.status === 200) {
+      sessionStorage.setItem('user', res.data);
+      window.location.reload();
+    }
   }
 
   return (
