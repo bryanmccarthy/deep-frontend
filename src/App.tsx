@@ -6,12 +6,12 @@ import Main from './components/Main';
 const queryClient = new QueryClient();
 
 function App() {
-  const userName = sessionStorage.getItem('user');
+  const user = sessionStorage.getItem('user');
   
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App">
-        { userName ? <Main /> : <Forms /> }
+        { user ? <Main /> : <Forms /> }
       </div>
     </QueryClientProvider>
   )
