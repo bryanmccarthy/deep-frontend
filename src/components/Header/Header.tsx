@@ -1,18 +1,18 @@
 import './Header.scss'
 import axios from "axios";
 
-function Header() {
+function Header({ page, setPage }: { page: string, setPage: Function}) {
 
   function handleJournal() {
-    // handle journal
+    setPage('journal');
   }
-  
+
   function handlePomodoro() {
-    // handle pomodoro
+    setPage('pomodoro');
   }
 
   function handleDashboard() {
-    // handle dashboard
+    setPage('dashboard');
   }
 
   async function handleLogout() {
