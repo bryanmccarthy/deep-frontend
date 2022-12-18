@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './Timer.scss';
 
 function Timer() {
-  const [seconds, setSeconds] = useState(3);
+  const [seconds, setSeconds] = useState(60);
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -14,7 +14,7 @@ function Timer() {
 
   return (
     <div className="timer">
-      <h1>{seconds}</h1>
+      <h1>{seconds > 0 ? seconds : 'done'}</h1>
     </div>
   )
 }
