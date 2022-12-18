@@ -4,15 +4,15 @@ import { useState } from 'react';
 
 function Pomodoro() {
   const [currentTimer, setCurrentTimer] = useState('work');
-  // TODO: Request workTime and breakTime from the user
+  const [workDuration, setWorkDuration] = useState(60 * 60);
+  const [breakDuration, setBreakDuration] = useState(5 * 60);
 
-  console.log(currentTimer);
+  // TODO: Request workDuration and breakDuration from the user
 
   return (
     <div className="pomodoro">
-      <h1>Pomodoro</h1>
-      <Timer />
-      <Settings setCurrentTimer={setCurrentTimer} />
+      <Timer workDuration={workDuration} breakDuration={breakDuration} currentTimer={currentTimer} />
+      <Settings setCurrentTimer={setCurrentTimer} setWorkDuration={setWorkDuration} setBreakDuration={setBreakDuration} />
     </div>
   )
 }
