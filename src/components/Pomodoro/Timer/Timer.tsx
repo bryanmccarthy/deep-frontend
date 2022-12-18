@@ -8,7 +8,7 @@ interface TimerProps {
 }
 
 function Timer({ workDuration, breakDuration, currentTimer }: TimerProps) {
-  const [seconds, setSeconds] = useState(currentTimer === 'work' ? workDuration : breakDuration);
+  const [seconds, setSeconds] = useState(currentTimer === 'work' ? workDuration : breakDuration); // TODO: Set seconds globally
   const [formattedDuration, setFormattedDuration] = useState('');
 
   useEffect(() => {
