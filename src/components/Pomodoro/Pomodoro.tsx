@@ -23,7 +23,7 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
     <div className="Pomodoro" style={{ visibility: showPomodoro ? "visible" : "hidden" }}>
       <button className="CloseButton" onClick={handleClosePomodoro}>&times;</button>
       <Timer workDuration={workDuration} breakDuration={breakDuration} currentTimer={currentTimer} />
-      <Settings setCurrentTimer={setCurrentTimer} setWorkDuration={setWorkDuration} setBreakDuration={setBreakDuration} />
+      <Settings currentTimer={currentTimer} setCurrentTimer={setCurrentTimer} setWorkDuration={setWorkDuration} setBreakDuration={setBreakDuration} />
     </div>
   )
 }

@@ -1,10 +1,13 @@
+import './Settings.scss'
+
 interface SettingsProps {
+  currentTimer: string;
   setCurrentTimer: (timer: string) => void;
   setWorkDuration: (duration: number) => void;
   setBreakDuration: (duration: number) => void;
 }
 
-function Settings({ setCurrentTimer, setWorkDuration, setBreakDuration }: SettingsProps ) {
+function Settings({ currentTimer, setCurrentTimer, setWorkDuration, setBreakDuration }: SettingsProps ) {
 
   const handleWorkClick = () => {
     setCurrentTimer('work');
@@ -23,10 +26,9 @@ function Settings({ setCurrentTimer, setWorkDuration, setBreakDuration }: Settin
   }
 
   return (
-    <div className="settings">
-      <h1>Settings</h1>
-      <button className="workButton" onClick={handleWorkClick}>work</button>
-      <button className="breakButton" onClick={handleBreakClick}>break</button>
+    <div className="Settings">
+      <button className="Button" style={{backgroundColor: currentTimer === 'work' ? '#000' : '#fff', color: currentTimer === 'work' ? '#fff' : '#000'}} onClick={handleWorkClick}>work</button>
+      <button className="Button" style={{backgroundColor: currentTimer === 'break' ? '#000' : '#fff', color: currentTimer === 'break' ? '#fff' : '#000'}} onClick={handleBreakClick}>break</button>
     </div>
   )
 }
