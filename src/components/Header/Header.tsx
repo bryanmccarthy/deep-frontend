@@ -1,18 +1,26 @@
 import './Header.scss'
+import Pomodoro from '../Pomodoro/Pomodoro';
+import { useState } from 'react';
 import axios from "axios";
 
-function Header({ page, setPage }: { page: string, setPage: Function}) {
+interface HeaderProps {
+  setShowPomodoro: (show: boolean) => void;
+  page: string;
+  setPage: (page: string) => void;
+}
+
+function Header({ setShowPomodoro, page, setPage }: HeaderProps) {
 
   function handleJournal() {
     setPage('journal');
   }
 
-  function handlePomodoro() {
-    setPage('pomodoro');
-  }
-
   function handleDashboard() {
     setPage('dashboard');
+  }
+
+  function handlePomodoro() {
+    setShowPomodoro(true);
   }
 
   async function handleLogout() {
@@ -30,8 +38,8 @@ function Header({ page, setPage }: { page: string, setPage: Function}) {
   return (
     <div className="Header">
       <button className="NavButton" onClick={ handleJournal }>journal</button>
-      <button className="NavButton" onClick={ handlePomodoro }>pomodoro</button>
       <button className="NavButton" onClick={ handleDashboard }>dashboard</button>
+      <button className="NavButton" onClick={ handlePomodoro }>Pomodoro</button>
       <button className="LogoutButton" onClick={handleLogout}>logout</button>
     </div>
   );

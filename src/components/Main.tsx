@@ -6,19 +6,19 @@ import Dashboard from "./Dashboard/Dashboard";
 import { useState } from 'react';
 
 function Main() {
-
+  const [showPomodoro, setShowPomodoro] = useState<boolean>(false);
   const [page, setPage] = useState('journal');
 
   return (
     <div className="Main">
-      <Header page={page} setPage={setPage} />
+      <Header setShowPomodoro={setShowPomodoro} page={page} setPage={setPage} />
       <div className="Page">
         { page === 'journal' ? <Journal /> : null }
-        { page === 'pomodoro' ? <Pomodoro /> : null }
         { page === 'dashboard' ? <Dashboard /> : null }
+        <Pomodoro showPomodoro={showPomodoro} setShowPomodoro={setShowPomodoro} />
       </div>
     </div>
-  );
+  )
 }
 
 export default Main;
