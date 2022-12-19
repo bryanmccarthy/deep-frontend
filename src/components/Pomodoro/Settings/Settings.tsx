@@ -60,14 +60,22 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
     <div className="Settings">
       <div className="DurationSettings">
         {currentTimer === 'work' ? 
-          <Slider value={workDuration} onChange={handleSliderChange} valueLabelDisplay="off" step={300} min={0} max={7200} />
+          <Slider disabled={isActive ? true : false} value={workDuration} onChange={handleSliderChange} valueLabelDisplay="off" step={300} min={0} max={7200} />
         : 
-          <Slider value={breakDuration} onChange={handleSliderChange} valueLabelDisplay="off" step={60} min={0} max={1800} />
+          <Slider disabled={isActive ? true : false} value={breakDuration} onChange={handleSliderChange} valueLabelDisplay="off" step={60} min={0} max={1800} />
         }
       </div>
       <div className="TimerSettings">
-        <button className="Button" style={{backgroundColor: currentTimer === 'work' ? '#000' : '#fff', color: currentTimer === 'work' ? '#fff' : '#000'}} onClick={handleWorkClick}>work</button>
-        <button className="Button" style={{backgroundColor: currentTimer === 'break' ? '#000' : '#fff', color: currentTimer === 'break' ? '#fff' : '#000'}} onClick={handleBreakClick}>break</button>
+        <button disabled={isActive ? true : false} className="TimerButton" 
+          style={{backgroundColor: currentTimer === 'work' ? '#000' : '#fff', color: currentTimer === 'work' ? '#fff' : '#000'}} 
+          onClick={handleWorkClick}>
+            work
+        </button>
+        <button disabled={isActive ? true : false} className="TimerButton" 
+          style={{backgroundColor: currentTimer === 'break' ? '#000' : '#fff', color: currentTimer === 'break' ? '#fff' : '#000'}} 
+          onClick={handleBreakClick}>
+            break
+        </button>
       </div>
       <div className="StartStopSettings">
         <button className="StartButton" onClick={handleStartStopClick}>{ isActive ? 'Stop' : 'Start'}</button>
