@@ -29,14 +29,16 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
     setFormattedDuration(formatDuration(breakDuration))
   }
 
-  const handleWorkDurationChange = () => {
-    setWorkDuration(workDuration + 100); // TODO: handle change
-    if (currentTimer === 'work') setFormattedDuration(formatDuration(workDuration + 100));
-  }
-
-  const handleBreakDurationChange = () => {
-    setBreakDuration(breakDuration + 100); // TODO: handle change
-    if (currentTimer === 'break') setFormattedDuration(formatDuration(breakDuration + 100));
+  const handleDurationChange = () => {
+    if (currentTimer === 'work') {
+      setWorkDuration(workDuration + 100); // TODO: handle change PUT
+      setSeconds(workDuration + 100);
+      setFormattedDuration(formatDuration(workDuration + 100));
+    } else {
+      setBreakDuration(breakDuration + 100); // TODO: handle change PUT
+      setSeconds(breakDuration + 100);
+      setFormattedDuration(formatDuration(breakDuration + 100));
+    }
   }
 
   const handleStartStopClick = () => {
@@ -58,8 +60,7 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
         <button className="Button" style={{backgroundColor: currentTimer === 'break' ? '#000' : '#fff', color: currentTimer === 'break' ? '#fff' : '#000'}} onClick={handleBreakClick}>break</button>
       </div>
       <div className="DurationSettings">
-        <button className="Button" style={{border: '1px solid black'}} onClick={handleWorkDurationChange}>Change Work</button>
-        <button className="Button" style={{border: '1px solid black'}} onClick={handleBreakDurationChange}>Change Break</button>
+        <button className="Button" onClick={handleDurationChange}>Change Duration</button>
       </div>
       <div className="StartStopSettings">
         <button className="Button" onClick={handleStartStopClick}>{ isActive ? 'Stop' : 'Start'}</button>
