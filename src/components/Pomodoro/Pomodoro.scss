@@ -1,21 +1,28 @@
 .Pomodoro {
   position: absolute;
-  top: 3.5em;
+  top: 4em;
+  left: 50%;
+  transform: translate(-50%, 0);
   background-color: #fff;
-  height: 20em;
-  width: 28em;
+  height: 30em;
+  width: 40em;
   border: none;
   border-radius: 0.2em;
-  box-shadow: 0 0 0.2em #000000;
+  box-shadow: 0 0 0.2em #000;
 
   .CloseButton {
     border: none;
-    border-radius: 0.2em;
+    border-radius: 0.1em;
     background: none;
     position: absolute;
     top: 0em;
     right: 0em;
     font-size: 2em;
     cursor: pointer;
+    
+    &:hover {
+      color: #fff;
+      background-color: #000;
+    }
   }
 }
