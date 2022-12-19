@@ -1,6 +1,6 @@
 import './Pomodoro.scss'
 import Settings from './Settings/Settings';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface PomodoroProps {
   showPomodoro: boolean;
@@ -9,7 +9,7 @@ interface PomodoroProps {
 
 function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
   const [currentTimer, setCurrentTimer] = useState('work');
-  const [seconds, setSeconds] = useState(0);
+  const [seconds, setSeconds] = useState(25 * 60);
   const [workDuration, setWorkDuration] = useState(25 * 60);
   const [breakDuration, setBreakDuration] = useState(5 * 60);
   const [formattedDuration, setFormattedDuration] = useState('25:00');
@@ -20,6 +20,19 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
   console.log('workDuration', workDuration);
   console.log('breakDuration', breakDuration);
   console.log('isActive', isActive);
+
+  useEffect(() => {
+    let interval: any = null;
+    if (isActive) {
+      interval = setInterval(() => {
+        setSeconds((seconds) => seconds - 1);
+        formatDuration(seconds);
+      }, 1000);
+    } else if (!isActive && seconds !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, seconds]);
 
   // TODO: Request workDuration and breakDuration from the user
 
@@ -44,7 +57,8 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
       <Settings currentTimer={currentTimer} setCurrentTimer={setCurrentTimer} 
       setSeconds={setSeconds} workDuration={workDuration} 
       setWorkDuration={setWorkDuration} breakDuration={breakDuration} 
-      setBreakDuration={setBreakDuration} setFormattedDuration={setFormattedDuration} isActive={isActive} setIsActive={setIsActive} />
+      setBreakDuration={setBreakDuration} setFormattedDuration={setFormattedDuration} 
+      isActive={isActive} setIsActive={setIsActive} />
     </div>
   )
 }

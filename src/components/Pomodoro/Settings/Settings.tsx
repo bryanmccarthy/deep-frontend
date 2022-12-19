@@ -13,7 +13,9 @@ interface SettingsProps {
   setIsActive: (active: boolean) => void;
 }
 
-function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration, setWorkDuration, breakDuration, setBreakDuration, setFormattedDuration, isActive, setIsActive }: SettingsProps ) {
+function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration, 
+                    setWorkDuration, breakDuration, setBreakDuration, setFormattedDuration, 
+                    isActive, setIsActive }: SettingsProps ) {
 
   const handleWorkClick = () => {
     setCurrentTimer('work');
