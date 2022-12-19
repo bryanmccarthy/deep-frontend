@@ -1,4 +1,5 @@
 import './Settings.scss'
+import Slider from '@mui/material/Slider';
 
 interface SettingsProps {
   currentTimer: string;
@@ -29,15 +30,17 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
     setFormattedDuration(formatDuration(breakDuration))
   }
 
-  const handleDurationChange = () => {
+  const handleSliderChange = (event: Event, value: number | number[]) => {
+    console.log('Slider changed');
     if (currentTimer === 'work') {
-      setWorkDuration(workDuration + 100); // TODO: handle change PUT
-      setSeconds(workDuration + 100);
-      setFormattedDuration(formatDuration(workDuration + 100));
-    } else {
-      setBreakDuration(breakDuration + 100); // TODO: handle change PUT
-      setSeconds(breakDuration + 100);
-      setFormattedDuration(formatDuration(breakDuration + 100));
+      setWorkDuration(value as number);
+      setSeconds(value as number);
+      setFormattedDuration(formatDuration(value as number));
+    }
+    else {
+      setBreakDuration(value as number);
+      setSeconds(value as number);
+      setFormattedDuration(formatDuration(value as number));
     }
   }
 
@@ -55,15 +58,19 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
 
   return (
     <div className="Settings">
+      <div className="DurationSettings">
+        {currentTimer === 'work' ? 
+          <Slider value={workDuration} onChange={handleSliderChange} valueLabelDisplay="off" step={300} min={0} max={7200} />
+        : 
+          <Slider value={breakDuration} onChange={handleSliderChange} valueLabelDisplay="off" step={60} min={0} max={1800} />
+        }
+      </div>
       <div className="TimerSettings">
         <button className="Button" style={{backgroundColor: currentTimer === 'work' ? '#000' : '#fff', color: currentTimer === 'work' ? '#fff' : '#000'}} onClick={handleWorkClick}>work</button>
         <button className="Button" style={{backgroundColor: currentTimer === 'break' ? '#000' : '#fff', color: currentTimer === 'break' ? '#fff' : '#000'}} onClick={handleBreakClick}>break</button>
       </div>
-      <div className="DurationSettings">
-        <button className="Button" onClick={handleDurationChange}>Change Duration</button>
-      </div>
       <div className="StartStopSettings">
-        <button className="Button" onClick={handleStartStopClick}>{ isActive ? 'Stop' : 'Start'}</button>
+        <button className="StartButton" onClick={handleStartStopClick}>{ isActive ? 'Stop' : 'Start'}</button>
       </div>
     </div>
   )
