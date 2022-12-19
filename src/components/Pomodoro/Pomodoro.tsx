@@ -9,9 +9,9 @@ interface PomodoroProps {
 }
 
 function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
-  const [currentTimer, setCurrentTimer] = useState('work');
-  const [workDuration, setWorkDuration] = useState(60 * 60);
-  const [breakDuration, setBreakDuration] = useState(5 * 60);
+  const [currentTimer, setCurrentTimer] = useState('');
+  const [workDuration, setWorkDuration] = useState(30);
+  const [breakDuration, setBreakDuration] = useState(30);
 
   // TODO: Request workDuration and breakDuration from the user
 

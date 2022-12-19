@@ -37,10 +37,10 @@ function Header({ setShowPomodoro, page, setPage }: HeaderProps) {
 
   return (
     <div className="Header">
-      <button className="NavButton" onClick={ handleJournal }>journal</button>
-      <button className="NavButton" onClick={ handleDashboard }>dashboard</button>
+      <button className="NavButton" onClick={ handleJournal }>Journal</button>
+      <button className="NavButton" onClick={ handleDashboard }>Dashboard</button>
       <button className="NavButton" onClick={ handlePomodoro }>Pomodoro</button>
-      <button className="LogoutButton" onClick={handleLogout}>logout</button>
+      <button className="LogoutButton" onClick={handleLogout}>Logout</button>
     </div>
   );
 }
