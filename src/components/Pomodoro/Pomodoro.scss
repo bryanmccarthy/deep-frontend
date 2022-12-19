@@ -25,4 +25,16 @@
       background-color: #000;
     }
   }
+
+  .Timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    height: 5em;
+  
+    .FormattedDuration {
+      color: #000;
+    }
+  }
 }
