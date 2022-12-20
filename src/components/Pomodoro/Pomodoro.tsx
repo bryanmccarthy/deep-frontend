@@ -1,5 +1,6 @@
 import './Pomodoro.scss'
 import Settings from './Settings/Settings';
+import { formatDuration } from './Settings/Settings';
 import { useEffect, useState } from 'react';
 
 interface PomodoroProps {
@@ -27,7 +28,7 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
     if (isActive) {
       interval = setInterval(() => {
         setSeconds((seconds) => seconds - 1);
-        formatDuration(seconds);
+        setFormattedDuration(formatDuration(seconds));
       }, 1000);
     } else if (!isActive && seconds !== 0) {
       clearInterval(interval);
@@ -39,14 +40,6 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
 
   const handleClosePomodoro = () => {
     setShowPomodoro(false);
-  }
-
-  const formatDuration = (time: number) => {
-
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-
-    setFormattedDuration(`${minutes}:${seconds < 10 ? '0' + seconds : seconds}`);
   }
 
   return (

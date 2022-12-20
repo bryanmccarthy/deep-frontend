@@ -60,14 +60,6 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
     }
   }
 
-  const formatDuration = (time: number) => {
-
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-
-    return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-  }
-
   return (
     <div className="Settings">
       <div className="DurationSettings">
@@ -97,3 +89,12 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
 }
 
 export default Settings;
+
+// TODO: Move to helper
+export function formatDuration(time: number) {
+
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+
+  return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+}
