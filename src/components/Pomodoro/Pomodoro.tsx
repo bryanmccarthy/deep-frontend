@@ -55,7 +55,7 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
 
   // TODO: Request workDuration and breakDuration from the user
 
-  const handleClosePomodoro = () => {
+  const handleClosePomodoro = () => { // TODO: handle click outside of Pomodoro also
     setShowPomodoro(false);
   }
 
