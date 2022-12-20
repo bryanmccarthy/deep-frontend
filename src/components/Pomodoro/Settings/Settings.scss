@@ -4,7 +4,13 @@
   justify-content: center;
   align-items: center;
 
+  .DurationSettings {
+    margin-top: 1em;
+    width: 40%;
+  }
+
   .TimerButton {
+    margin-top: 1em;
     height: 1.8em;
     border: none;
     border-radius: 0.2em;
@@ -15,16 +21,12 @@
     cursor: pointer;
   }
 
-  .DurationSettings {
-    width: 40%;
-  }
-
   .TimerSettings {
     margin-top: 1em;
   }
 
   .StartStopSettings {
-    margin-top: 4em;
+    margin-top: 4.5em;
 
     .StartButton {
       height: 1.8em;

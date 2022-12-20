@@ -31,7 +31,6 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
   }
 
   const handleSliderChange = (event: Event, value: number | number[]) => {
-    console.log('Slider changed');
     if (currentTimer === 'Work') {
       setWorkDuration(value as number);
       setSeconds(value as number);
@@ -72,12 +71,14 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
       </div>
       <div className="TimerSettings"> {/* TODO: change color to gray when disabled */}
         <button disabled={isActive ? true : false} className="TimerButton" 
-          style={{backgroundColor: currentTimer === 'Work' ? '#000' : '#fff', color: currentTimer === 'Work' ? '#fff' : '#000'}} 
+          style={{backgroundColor: isActive && currentTimer === 'Work' ? '#ccc' : currentTimer === 'Work' ? '#000' : '#fff',
+                 color: isActive && currentTimer !== 'Work' ? '#ccc' : currentTimer === 'Work' ? '#fff' : '#000'}} 
           onClick={handleWorkClick}>
             work
         </button>
         <button disabled={isActive ? true : false} className="TimerButton" 
-          style={{backgroundColor: currentTimer === 'Break' ? '#000' : '#fff', color: currentTimer === 'Break' ? '#fff' : '#000'}} 
+          style={{backgroundColor: isActive && currentTimer === 'Break' ? '#ccc' : currentTimer === 'Break' ? '#000' : '#fff',
+                 color: isActive && currentTimer !== 'Break' ? '#ccc' : currentTimer === 'Break' ? '#fff' : '#000'}} 
           onClick={handleBreakClick}>
             break
         </button>

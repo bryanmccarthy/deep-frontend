@@ -39,7 +39,7 @@ function Header({ setShowPomodoro, page, setPage }: HeaderProps) {
     <div className="Header">
       <button className="NavButton" onClick={ handleJournal }>Journal</button>
       <button className="NavButton" onClick={ handleDashboard }>Dashboard</button>
-      <button className="NavButton" onClick={ handlePomodoro }>Pomodoro</button>
+      <button className="NavButton" onClick={ handlePomodoro }>Pomodoro</button> {/* TODO: add clock icon */}
       <button className="LogoutButton" onClick={handleLogout}>Logout</button>
     </div>
   );
