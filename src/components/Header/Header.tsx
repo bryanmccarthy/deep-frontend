@@ -2,6 +2,8 @@ import './Header.scss'
 import Pomodoro from '../Pomodoro/Pomodoro';
 import { useState } from 'react';
 import axios from "axios";
+import { MdDashboard } from 'react-icons/md';
+import { AiFillClockCircle } from 'react-icons/ai';
 
 interface HeaderProps {
   setShowPomodoro: (show: boolean) => void;
@@ -38,8 +40,8 @@ function Header({ setShowPomodoro, page, setPage }: HeaderProps) {
   return (
     <div className="Header">
       <button className="NavButton" onClick={ handleJournal }>Journal</button>
-      <button className="NavButton" onClick={ handleDashboard }>Dashboard</button>
-      <button className="NavButton" onClick={ handlePomodoro }>Pomodoro</button> {/* TODO: add clock icon */}
+      <button className="NavButton" onClick={ handleDashboard }><MdDashboard /></button>
+      <button className="NavButton" onClick={ handlePomodoro }><AiFillClockCircle /></button> {/* TODO: add clock icon */}
       <button className="LogoutButton" onClick={handleLogout}>Logout</button>
     </div>
   );
