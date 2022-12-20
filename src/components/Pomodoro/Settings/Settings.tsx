@@ -19,20 +19,20 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
                     isActive, setIsActive }: SettingsProps ) {
 
   const handleWorkClick = () => {
-    setCurrentTimer('work');
+    setCurrentTimer('Work');
     setSeconds(workDuration);
     setFormattedDuration(formatDuration(workDuration))
   }
 
   const handleBreakClick = () => {
-    setCurrentTimer('break');
+    setCurrentTimer('Break');
     setSeconds(breakDuration);
     setFormattedDuration(formatDuration(breakDuration))
   }
 
   const handleSliderChange = (event: Event, value: number | number[]) => {
     console.log('Slider changed');
-    if (currentTimer === 'work') {
+    if (currentTimer === 'Work') {
       setWorkDuration(value as number);
       setSeconds(value as number);
       setFormattedDuration(formatDuration(value as number));
@@ -51,7 +51,8 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
     }
 
     setIsActive(false); // TODO: prompt user to confirm before stopping
-    if (currentTimer === 'work') {
+    document.title='Deep';
+    if (currentTimer === 'Work') {
       setSeconds(workDuration);
       setFormattedDuration(formatDuration(workDuration));
     } else {
@@ -63,7 +64,7 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
   return (
     <div className="Settings">
       <div className="DurationSettings">
-        {currentTimer === 'work' ? 
+        {currentTimer === 'Work' ? 
           <Slider disabled={isActive ? true : false} value={workDuration} onChange={handleSliderChange} valueLabelDisplay="off" step={300} min={0} max={7200} />
         : 
           <Slider disabled={isActive ? true : false} value={breakDuration} onChange={handleSliderChange} valueLabelDisplay="off" step={60} min={0} max={1800} />
@@ -71,12 +72,12 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
       </div>
       <div className="TimerSettings"> {/* TODO: change color to gray when disabled */}
         <button disabled={isActive ? true : false} className="TimerButton" 
-          style={{backgroundColor: currentTimer === 'work' ? '#000' : '#fff', color: currentTimer === 'work' ? '#fff' : '#000'}} 
+          style={{backgroundColor: currentTimer === 'Work' ? '#000' : '#fff', color: currentTimer === 'Work' ? '#fff' : '#000'}} 
           onClick={handleWorkClick}>
             work
         </button>
         <button disabled={isActive ? true : false} className="TimerButton" 
-          style={{backgroundColor: currentTimer === 'break' ? '#000' : '#fff', color: currentTimer === 'break' ? '#fff' : '#000'}} 
+          style={{backgroundColor: currentTimer === 'Break' ? '#000' : '#fff', color: currentTimer === 'Break' ? '#fff' : '#000'}} 
           onClick={handleBreakClick}>
             break
         </button>

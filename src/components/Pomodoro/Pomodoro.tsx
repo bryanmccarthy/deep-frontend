@@ -9,7 +9,7 @@ interface PomodoroProps {
 }
 
 function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
-  const [currentTimer, setCurrentTimer] = useState('work');
+  const [currentTimer, setCurrentTimer] = useState('Work');
   const [seconds, setSeconds] = useState(25 * 60);
   const [workDuration, setWorkDuration] = useState(25 * 60);
   const [breakDuration, setBreakDuration] = useState(5 * 60);
@@ -27,22 +27,27 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
     let interval: any = null;
     if (isActive && seconds >= 0) {
       interval = setInterval(() => {
+        let formattedDuration = formatDuration(seconds - 1);
+        setFormattedDuration(formattedDuration);
+        document.title = `${currentTimer}: ${formattedDuration}`;
+
         setSeconds(seconds - 1);
-        setFormattedDuration(formatDuration(seconds - 1));
       }, 1000);
     }
 
     if (seconds < 0) {
       // TODO: Handle notification
-      if (currentTimer === 'work') {
-        setCurrentTimer('break');
+      if (currentTimer === 'Work') {
+        setCurrentTimer('Break');
         setSeconds(breakDuration);
         setFormattedDuration(formatDuration(breakDuration));
       } else {
-        setCurrentTimer('work');
+        setCurrentTimer('Work');
         setSeconds(workDuration);
         setFormattedDuration(formatDuration(workDuration));
       }
+
+      document.title = 'Deep';
       setIsActive(false);
     }
     return () => clearInterval(interval);
