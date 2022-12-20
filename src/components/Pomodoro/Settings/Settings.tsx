@@ -50,7 +50,7 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
       return;
     }
 
-    setIsActive(false);
+    setIsActive(false); // TODO: prompt user to confirm before stopping
     if (currentTimer === 'work') {
       setSeconds(workDuration);
       setFormattedDuration(formatDuration(workDuration));
@@ -69,7 +69,7 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
           <Slider disabled={isActive ? true : false} value={breakDuration} onChange={handleSliderChange} valueLabelDisplay="off" step={60} min={0} max={1800} />
         }
       </div>
-      <div className="TimerSettings">
+      <div className="TimerSettings"> {/* TODO: change color to gray when disabled */}
         <button disabled={isActive ? true : false} className="TimerButton" 
           style={{backgroundColor: currentTimer === 'work' ? '#000' : '#fff', color: currentTimer === 'work' ? '#fff' : '#000'}} 
           onClick={handleWorkClick}>

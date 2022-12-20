@@ -25,13 +25,25 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
 
   useEffect(() => {
     let interval: any = null;
-    if (isActive) {
+    if (isActive && seconds >= 0) {
       interval = setInterval(() => {
-        setSeconds((seconds) => seconds - 1);
-        setFormattedDuration(formatDuration(seconds));
+        setSeconds(seconds - 1);
+        setFormattedDuration(formatDuration(seconds - 1));
       }, 1000);
-    } else if (!isActive && seconds !== 0) {
-      clearInterval(interval);
+    }
+
+    if (seconds < 0) {
+      // TODO: Handle notification
+      if (currentTimer === 'work') {
+        setCurrentTimer('break');
+        setSeconds(breakDuration);
+        setFormattedDuration(formatDuration(breakDuration));
+      } else {
+        setCurrentTimer('work');
+        setSeconds(workDuration);
+        setFormattedDuration(formatDuration(workDuration));
+      }
+      setIsActive(false);
     }
     return () => clearInterval(interval);
   }, [isActive, seconds]);
