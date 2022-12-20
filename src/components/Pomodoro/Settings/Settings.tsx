@@ -45,7 +45,19 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
   }
 
   const handleStartStopClick = () => {
-    setIsActive(!isActive);
+    if (!isActive) {
+      setIsActive(true);
+      return;
+    }
+
+    setIsActive(false);
+    if (currentTimer === 'work') {
+      setSeconds(workDuration);
+      setFormattedDuration(formatDuration(workDuration));
+    } else {
+     setSeconds(breakDuration);
+      setFormattedDuration(formatDuration(breakDuration));
+    }
   }
 
   const formatDuration = (time: number) => {
@@ -53,7 +65,7 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
 
-    return`${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+    return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
   }
 
   return (
@@ -78,7 +90,7 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
         </button>
       </div>
       <div className="StartStopSettings">
-        <button className="StartButton" onClick={handleStartStopClick}>{ isActive ? 'Stop' : 'Start'}</button>
+        <button className="StartButton" onClick={handleStartStopClick}>{ isActive ? 'Cancel' : 'Start'}</button>
       </div>
     </div>
   )
