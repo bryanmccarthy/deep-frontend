@@ -69,7 +69,7 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
           <Slider disabled={isActive ? true : false} value={breakDuration} onChange={handleSliderChange} valueLabelDisplay="off" step={60} min={0} max={1800} />
         }
       </div>
-      <div className="TimerSettings"> {/* TODO: change color to gray when disabled */}
+      <div className="TimerSettings">
         <button disabled={isActive ? true : false} className="TimerButton" 
           style={{backgroundColor: isActive && currentTimer === 'Work' ? '#ccc' : currentTimer === 'Work' ? '#000' : '#fff',
                  color: isActive && currentTimer !== 'Work' ? '#ccc' : currentTimer === 'Work' ? '#fff' : '#000'}} 
