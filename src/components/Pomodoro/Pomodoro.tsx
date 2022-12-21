@@ -17,12 +17,6 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
   const [seconds, setSeconds] = useState<number>(workDuration);
   const [formattedDuration, setFormattedDuration] = useState<string>(formatDuration(workDuration));
   const [isActive, setIsActive] = useState<boolean>(false);
-  
-  console.log('seconds: ', seconds);
-  console.log('isActive: ', isActive);
-  console.log('currentTimer: ', currentTimer);
-  console.log('workDuration: ', workDuration);
-  console.log('breakDuration: ', breakDuration);
 
   useEffect(() => {
     let interval: any = null;
@@ -53,8 +47,6 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
     }
     return () => clearInterval(interval);
   }, [isActive, seconds]);
-
-  // TODO: Request workDuration and breakDuration from the user
 
   const handleClosePomodoro = () => {
     setShowPomodoro(false);
