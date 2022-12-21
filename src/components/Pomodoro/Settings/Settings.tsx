@@ -5,18 +5,15 @@ interface SettingsProps {
   currentTimer: string;
   setCurrentTimer: (timer: string) => void;
   setSeconds: (seconds: number) => void;
-  workDuration: number;
-  setWorkDuration: (duration: number) => void;
-  breakDuration: number;
-  setBreakDuration: (duration: number) => void;
   setFormattedDuration: (duration: string) => void;
   isActive: boolean;
   setIsActive: (active: boolean) => void;
 }
 
-function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration, 
-                    setWorkDuration, breakDuration, setBreakDuration, setFormattedDuration, 
-                    isActive, setIsActive }: SettingsProps ) {
+function Settings({ currentTimer, setCurrentTimer, setSeconds, 
+                    setFormattedDuration, isActive, setIsActive }: SettingsProps ) {
+  const workDuration: number = localStorage.getItem('workDuration') ? parseInt(localStorage.getItem('workDuration') as string) : 25 * 60;
+  const breakDuration: number = localStorage.getItem('breakDuration') ? parseInt(localStorage.getItem('breakDuration') as string) : 5 * 60;
 
   const handleWorkClick = () => {
     setCurrentTimer('Work');
@@ -32,12 +29,12 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
 
   const handleSliderChange = (event: Event, value: number | number[]) => {
     if (currentTimer === 'Work') {
-      setWorkDuration(value as number);
+      localStorage.setItem('workDuration', value as unknown as string);
       setSeconds(value as number);
       setFormattedDuration(formatDuration(value as number));
     }
     else {
-      setBreakDuration(value as number);
+      localStorage.setItem('breakDuration', value as unknown as string);
       setSeconds(value as number);
       setFormattedDuration(formatDuration(value as number));
     }

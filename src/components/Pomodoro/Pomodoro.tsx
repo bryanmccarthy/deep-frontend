@@ -10,12 +10,19 @@ interface PomodoroProps {
 
 function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
   const ref = useRef<HTMLInputElement>(null);
-  const [currentTimer, setCurrentTimer] = useState('Work');
-  const [seconds, setSeconds] = useState(25 * 60);
-  const [workDuration, setWorkDuration] = useState(25 * 60);
-  const [breakDuration, setBreakDuration] = useState(5 * 60);
-  const [formattedDuration, setFormattedDuration] = useState('25:00');
-  const [isActive, setIsActive] = useState(false);
+  const workDuration: number = localStorage.getItem('workDuration') ? parseInt(localStorage.getItem('workDuration') as string) : 25 * 60;
+  const breakDuration: number = localStorage.getItem('breakDuration') ? parseInt(localStorage.getItem('breakDuration') as string) : 5 * 60;
+
+  const [currentTimer, setCurrentTimer] = useState<string>('Work');
+  const [seconds, setSeconds] = useState<number>(0);
+  const [formattedDuration, setFormattedDuration] = useState<string>(formatDuration(workDuration));
+  const [isActive, setIsActive] = useState<boolean>(false);
+  
+  console.log('seconds: ', seconds);
+  console.log('isActive: ', isActive);
+  console.log('currentTimer: ', currentTimer);
+  console.log('workDuration: ', workDuration);
+  console.log('breakDuration: ', breakDuration);
 
   useEffect(() => {
     let interval: any = null;
@@ -73,9 +80,7 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
         <h1 className="FormattedDuration">{ formattedDuration }</h1>
       </div>
       <Settings currentTimer={currentTimer} setCurrentTimer={setCurrentTimer} 
-      setSeconds={setSeconds} workDuration={workDuration} 
-      setWorkDuration={setWorkDuration} breakDuration={breakDuration} 
-      setBreakDuration={setBreakDuration} setFormattedDuration={setFormattedDuration} 
+      setSeconds={setSeconds} setFormattedDuration={setFormattedDuration} 
       isActive={isActive} setIsActive={setIsActive} />
     </div>
   )
