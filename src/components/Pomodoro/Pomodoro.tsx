@@ -17,13 +17,6 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
   const [formattedDuration, setFormattedDuration] = useState('25:00');
   const [isActive, setIsActive] = useState(false);
 
-  // TODO: Remove console.logs
-  console.log('currentTimer: ', currentTimer);
-  console.log('seconds', seconds);
-  console.log('workDuration', workDuration);
-  console.log('breakDuration', breakDuration);
-  console.log('isActive', isActive);
-
   useEffect(() => {
     let interval: any = null;
     if (isActive && seconds >= 0) {
