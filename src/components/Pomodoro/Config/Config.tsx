@@ -2,7 +2,7 @@ import './Config.scss'
 import Slider from '@mui/material/Slider';
 import { BsToggleOff, BsToggleOn } from 'react-icons/bs';
 
-interface SettingsProps {
+interface ConfigProps {
   currentTimer: string;
   setCurrentTimer: (timer: string) => void;
   setSeconds: (seconds: number) => void;
@@ -11,8 +11,8 @@ interface SettingsProps {
   setIsActive: (active: boolean) => void;
 }
 
-function Settings({ currentTimer, setCurrentTimer, setSeconds, 
-                    setFormattedDuration, isActive, setIsActive }: SettingsProps ) {
+function Config({ currentTimer, setCurrentTimer, setSeconds, 
+                    setFormattedDuration, isActive, setIsActive }: ConfigProps ) {
   const workDuration: number = localStorage.getItem('workDuration') ? parseInt(localStorage.getItem('workDuration') as string) : 25 * 60;
   const breakDuration: number = localStorage.getItem('breakDuration') ? parseInt(localStorage.getItem('breakDuration') as string) : 5 * 60;
 
@@ -88,7 +88,7 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds,
   )
 }
 
-export default Settings;
+export default Config;
 
 // TODO: Move to helper
 export function formatDuration(time: number) {

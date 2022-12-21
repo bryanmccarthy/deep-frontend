@@ -1,5 +1,5 @@
 import './Pomodoro.scss'
-import Settings from './Config/Config';
+import Config from './Config/Config';
 import { formatDuration } from './Config/Config';
 import { useEffect, useState, useRef } from 'react';
 
@@ -72,7 +72,7 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
       <div className="Timer">
         <h1 className="FormattedDuration">{ formattedDuration }</h1>
       </div>
-      <Settings currentTimer={currentTimer} setCurrentTimer={setCurrentTimer} 
+      <Config currentTimer={currentTimer} setCurrentTimer={setCurrentTimer} 
       setSeconds={setSeconds} setFormattedDuration={setFormattedDuration} 
       isActive={isActive} setIsActive={setIsActive} />
     </div>

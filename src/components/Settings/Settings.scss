@@ -30,4 +30,22 @@
       background-color: #000;
     }
   }
+
+  .SettingsList {
+    display: flex;
+    flex-direction: column;
+    margin: 3em 6em;
+
+    .SettingsItem {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 1em 0;
+
+      .SettingsToggle {
+        height: 1.5em;
+        width: 1.5em;
+      }
+    }
+  }
 }
