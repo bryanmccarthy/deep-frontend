@@ -1,7 +1,9 @@
 // Main scss
-.main {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.Main {
+  height: 100%;
+  width: 100%;
+
+  .Page {
+    position: relative;
+  }
 }

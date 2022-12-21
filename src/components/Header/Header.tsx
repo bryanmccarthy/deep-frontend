@@ -1,14 +1,15 @@
 import './Header.scss'
 import axios from "axios";
 import { AiFillClockCircle } from 'react-icons/ai';
+import { MdSettings } from 'react-icons/md';
 
 interface HeaderProps {
-  setShowPomodoro: (show: boolean) => void;
-  page: string;
   setPage: (page: string) => void;
+  setShowPomodoro: (show: boolean) => void;
+  setShowSettings: (show: boolean) => void;
 }
 
-function Header({ setShowPomodoro, page, setPage }: HeaderProps) {
+function Header({ setPage, setShowPomodoro, setShowSettings }: HeaderProps) {
 
   function handleJournal() {
     setPage('journal');
@@ -20,6 +21,10 @@ function Header({ setShowPomodoro, page, setPage }: HeaderProps) {
 
   function handlePomodoro() {
     setShowPomodoro(true);
+  }
+
+  function handleSettings() {
+    setShowSettings(true);
   }
 
   async function handleLogout() {
@@ -36,11 +41,14 @@ function Header({ setShowPomodoro, page, setPage }: HeaderProps) {
 
   return (
     <div className="Header">
-      <div className="Navigation">
+      <div className="NavPages">
         <button className="NavButton" onClick={ handleJournal }>Journal</button>
         <button className="NavButton" onClick={ handleDashboard }>Dashboard</button>
       </div>
-      <AiFillClockCircle className="PomodoroIcon" onClick={ handlePomodoro }/> {/* TODO: change icon */}
+      <div className="NavIcons">
+        <AiFillClockCircle className="Icon" onClick={ handlePomodoro } />
+        <MdSettings className="Icon" onClick={ handleSettings } />
+      </div>
       <button className="NavButton" onClick={handleLogout}>Logout</button>
     </div>
   );

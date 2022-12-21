@@ -1,5 +1,6 @@
-import './Settings.scss'
+import './Config.scss'
 import Slider from '@mui/material/Slider';
+import { BsToggleOff, BsToggleOn } from 'react-icons/bs';
 
 interface SettingsProps {
   currentTimer: string;
@@ -58,7 +59,7 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds,
   }
 
   return (
-    <div className="Settings">
+    <div className="Config">
       <div className="DurationSettings">
         {currentTimer === 'Work' ? 
           <Slider disabled={isActive ? true : false} value={workDuration} sx={{color: 'navy'}} onChange={handleSliderChange} valueLabelDisplay="off" step={300} min={0} max={7200} />
@@ -66,16 +67,16 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds,
           <Slider disabled={isActive ? true : false} value={breakDuration} sx={{color: 'navy'}} onChange={handleSliderChange} valueLabelDisplay="off" step={60} min={0} max={1800} />
         }
       </div>
-      <div className="TimerSettings">
+      <div className="TimerToggle">
         <button disabled={isActive ? true : false} className="TimerButton" 
           style={{backgroundColor: isActive && currentTimer === 'Work' ? '#ccc' : currentTimer === 'Work' ? '#000' : '#fff',
-                 color: isActive && currentTimer !== 'Work' ? '#ccc' : currentTimer === 'Work' ? '#fff' : '#000'}} 
+                color: isActive && currentTimer !== 'Work' ? '#ccc' : currentTimer === 'Work' ? '#fff' : '#000'}} 
           onClick={handleWorkClick}>
             work
         </button>
         <button disabled={isActive ? true : false} className="TimerButton" 
           style={{backgroundColor: isActive && currentTimer === 'Break' ? '#ccc' : currentTimer === 'Break' ? '#000' : '#fff',
-                 color: isActive && currentTimer !== 'Break' ? '#ccc' : currentTimer === 'Break' ? '#fff' : '#000'}} 
+                color: isActive && currentTimer !== 'Break' ? '#ccc' : currentTimer === 'Break' ? '#fff' : '#000'}} 
           onClick={handleBreakClick}>
             break
         </button>

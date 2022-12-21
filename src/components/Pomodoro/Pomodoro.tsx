@@ -1,6 +1,6 @@
 import './Pomodoro.scss'
-import Settings from './Settings/Settings';
-import { formatDuration } from './Settings/Settings';
+import Settings from './Config/Config';
+import { formatDuration } from './Config/Config';
 import { useEffect, useState, useRef } from 'react';
 
 interface PomodoroProps {
@@ -33,6 +33,7 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
     if (seconds < 0) {
       // TODO: Handle notification
       if (currentTimer === 'Work') {
+        // TODO: Handle saving current work time
         setCurrentTimer('Break');
         setSeconds(breakDuration);
         setFormattedDuration(formatDuration(breakDuration));

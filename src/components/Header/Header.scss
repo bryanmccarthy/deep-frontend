@@ -24,15 +24,21 @@
     }
   }
 
-  .PomodoroIcon {
-    height: 1.4em;
-    width: 1.4em;
-    border-radius: 1em;
-    cursor: pointer;
+  .NavIcons {
+    display: flex;
+    justify-content: space-between;
+    width: 3em;
 
-    &:hover {
-      color: #fff;
-      background-color: #000;
+    .Icon {
+      height: 1.2em;
+      width: 1.2em;
+      border-radius: 1em;
+      cursor: pointer;
+
+      &:hover {
+        color: #fff;
+        background-color: #000;
+      }
     }
   }
 }
