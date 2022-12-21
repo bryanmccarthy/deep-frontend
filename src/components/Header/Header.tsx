@@ -1,6 +1,5 @@
 import './Header.scss'
 import axios from "axios";
-import { MdDashboard } from 'react-icons/md';
 import { AiFillClockCircle } from 'react-icons/ai';
 
 interface HeaderProps {
@@ -37,10 +36,12 @@ function Header({ setShowPomodoro, page, setPage }: HeaderProps) {
 
   return (
     <div className="Header">
-      <button className="NavButton" onClick={ handleJournal }>Journal</button>
-      <button className="NavButton" onClick={ handleDashboard }><MdDashboard /></button>
-      <button className="NavButton" onClick={ handlePomodoro }><AiFillClockCircle /></button>
-      <button className="LogoutButton" onClick={handleLogout}>Logout</button>
+      <div className="Navigation">
+        <button className="NavButton" onClick={ handleJournal }>Journal</button>
+        <button className="NavButton" onClick={ handleDashboard }>Dashboard</button>
+      </div>
+      <AiFillClockCircle className="PomodoroIcon" onClick={ handlePomodoro }/> {/* TODO: change icon */}
+      <button className="NavButton" onClick={handleLogout}>Logout</button>
     </div>
   );
 }
