@@ -14,7 +14,7 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
   const breakDuration: number = localStorage.getItem('breakDuration') ? parseInt(localStorage.getItem('breakDuration') as string) : 5 * 60;
 
   const [currentTimer, setCurrentTimer] = useState<string>('Work');
-  const [seconds, setSeconds] = useState<number>(0);
+  const [seconds, setSeconds] = useState<number>(workDuration);
   const [formattedDuration, setFormattedDuration] = useState<string>(formatDuration(workDuration));
   const [isActive, setIsActive] = useState<boolean>(false);
   
