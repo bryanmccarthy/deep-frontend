@@ -1,7 +1,7 @@
 import './Pomodoro.scss'
 import Settings from './Settings/Settings';
 import { formatDuration } from './Settings/Settings';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 interface PomodoroProps {
   showPomodoro: boolean;
@@ -9,6 +9,7 @@ interface PomodoroProps {
 }
 
 function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
+  const ref = useRef<HTMLInputElement>(null);
   const [currentTimer, setCurrentTimer] = useState('Work');
   const [seconds, setSeconds] = useState(25 * 60);
   const [workDuration, setWorkDuration] = useState(25 * 60);
@@ -55,12 +56,25 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
 
   // TODO: Request workDuration and breakDuration from the user
 
-  const handleClosePomodoro = () => { // TODO: handle click outside of Pomodoro also
+  const handleClosePomodoro = () => {
     setShowPomodoro(false);
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setShowPomodoro(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  });
+
   return (
-    <div className="Pomodoro" style={{ visibility: showPomodoro ? "visible" : "hidden" }}>
+    <div ref={ref} className="Pomodoro" style={{ visibility: showPomodoro ? "visible" : "hidden" }}>
       <button className="CloseButton" onClick={handleClosePomodoro}>&times;</button>
       <div className="Timer">
         <h1 className="FormattedDuration">{ formattedDuration }</h1>
