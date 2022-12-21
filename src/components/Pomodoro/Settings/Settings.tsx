@@ -64,9 +64,9 @@ function Settings({ currentTimer, setCurrentTimer, setSeconds, workDuration,
     <div className="Settings">
       <div className="DurationSettings">
         {currentTimer === 'Work' ? 
-          <Slider disabled={isActive ? true : false} value={workDuration} onChange={handleSliderChange} valueLabelDisplay="off" step={300} min={0} max={7200} />
+          <Slider disabled={isActive ? true : false} value={workDuration} sx={{color: 'navy'}} onChange={handleSliderChange} valueLabelDisplay="off" step={300} min={0} max={7200} />
         : 
-          <Slider disabled={isActive ? true : false} value={breakDuration} onChange={handleSliderChange} valueLabelDisplay="off" step={60} min={0} max={1800} />
+          <Slider disabled={isActive ? true : false} value={breakDuration} sx={{color: 'navy'}} onChange={handleSliderChange} valueLabelDisplay="off" step={60} min={0} max={1800} />
         }
       </div>
       <div className="TimerSettings">
