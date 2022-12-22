@@ -10,6 +10,7 @@ function Main() {
   const [showPomodoro, setShowPomodoro] = useState<boolean>(false);
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [page, setPage] = useState('journal');
+  const [mode, setMode] = useState(localStorage.getItem('mode') ? localStorage.getItem('mode') : 'light');
 
   return (
     <div className="Main">
@@ -18,7 +19,7 @@ function Main() {
         { page === 'journal' ? <Journal /> : null }
         { page === 'dashboard' ? <Dashboard /> : null }
         <Pomodoro showPomodoro={showPomodoro} setShowPomodoro={setShowPomodoro} />
-        <Settings showSettings={showSettings} setShowSettings={setShowSettings} />
+        <Settings showSettings={showSettings} setShowSettings={setShowSettings} mode={mode} setMode={setMode} />
       </div>
     </div>
   )
