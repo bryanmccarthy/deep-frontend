@@ -29,7 +29,7 @@ function Main() {
       <Header setPage={setPage} setShowPomodoro={setShowPomodoro} setShowSettings={setShowSettings} />
       <div className="Page">
         { page === 'journal' ? <Journal style={style} /> : null }
-        { page === 'dashboard' ? <Dashboard /> : null }
+        { page === 'dashboard' ? <Dashboard style={style}/> : null }
         <Pomodoro showPomodoro={showPomodoro} setShowPomodoro={setShowPomodoro} />
         <Settings showSettings={showSettings} setShowSettings={setShowSettings} mode={mode} setMode={setMode} />
       </div>
