@@ -6,10 +6,9 @@ import { MdSettings } from 'react-icons/md';
 interface HeaderProps {
   setPage: (page: string) => void;
   setShowPomodoro: (show: boolean) => void;
-  setShowSettings: (show: boolean) => void;
 }
 
-function Header({ setPage, setShowPomodoro, setShowSettings }: HeaderProps) {
+function Header({ setPage, setShowPomodoro }: HeaderProps) {
 
   function handleJournal() {
     setPage('journal');
@@ -21,10 +20,6 @@ function Header({ setPage, setShowPomodoro, setShowSettings }: HeaderProps) {
 
   function handlePomodoro() {
     setShowPomodoro(true);
-  }
-
-  function handleSettings() {
-    setShowSettings(true);
   }
 
   async function handleLogout() {
@@ -47,7 +42,6 @@ function Header({ setPage, setShowPomodoro, setShowSettings }: HeaderProps) {
       </div>
       <div className="NavIcons">
         <AiFillClockCircle className="Icon" onClick={ handlePomodoro } />
-        <MdSettings className="Icon" onClick={ handleSettings } />
       </div>
       <button className="NavButton" onClick={handleLogout}>Logout</button>
     </div>

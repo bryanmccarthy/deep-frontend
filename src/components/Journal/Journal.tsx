@@ -1,19 +1,10 @@
 import './Journal.scss'
 
-type Style = {
-  color: string;
-  backgroundColor: string;
-}
-
-interface JournalProps {
-  style: Style;
-}
-
-function Journal({ style }: JournalProps) {
+function Journal() {
   // TODO: time blocker / management
   // TODO: deep work journal
   return (
-    <div className="Journal" style={{color: style.color, backgroundColor: style.backgroundColor}}>
+    <div className="Journal">
       <h1>Journal</h1> 
     </div>
   )
