@@ -1,5 +1,6 @@
 import './Journal.scss'
 import { useState } from 'react';
+import { useQuery } from 'react-query';
 import axios from 'axios';
 
 function Journal() {
@@ -27,11 +28,15 @@ function Journal() {
     setTasks(res.data);
   }
 
+  const { status } = useQuery('tasks', getTasks);
+
+  if (status === 'loading') return <div>Loading...</div>;
+  if (status === 'error') return <div>Error</div>;
+
   return (
     <div className="Journal">
       <input className="RegisterInput" placeholder="title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
       <input className="RegisterInput" placeholder="due date" type="text" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
-      <button className="CreateTaskButton" type="button" onClick={createTask}>Create Task</button>
 
       <h1>Tasks:</h1>
       {
@@ -41,7 +46,6 @@ function Journal() {
           </div>
         ))
       }
-      <button className="GetTasksButton" type="button" onClick={getTasks}>Get Tasks</button>
     </div>
   )
 }
