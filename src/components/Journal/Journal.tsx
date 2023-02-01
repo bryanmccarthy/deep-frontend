@@ -36,13 +36,13 @@ function Journal() {
   return (
     <div className="Journal">
       <input className="RegisterInput" placeholder="title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-      <input className="RegisterInput" placeholder="due date" type="text" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
+      <button className="RegisterButton" onClick={createTask}>Create Task</button>
 
       <h1>Tasks:</h1>
       {
         tasks.map((task: any) => (
           <div key={task.ID}>
-             <p>id={task.ID} title={task.Title} timeSpent={task.TimeSpent} due={task.DueDate} current={task.Current} completed={task.Completed}</p>
+             <p>id: {task.ID} title: {task.Title} timeSpent: {task.TimeSpent} current: {task.Current} completed: {task.Completed}</p>
           </div>
         ))
       }
