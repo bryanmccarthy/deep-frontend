@@ -7,13 +7,11 @@ function Journal() {
   // TODO: time blocker / management
 
   const [title, setTitle] = useState('');
-  const [dueDate, setDueDate] = useState('');
   const [tasks, setTasks] = useState<[]>([]);
 
   async function createTask() {
     await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
       Title: title,
-      DueDate: dueDate,
     },
     {
       withCredentials: true,
