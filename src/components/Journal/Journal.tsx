@@ -26,6 +26,20 @@ function Journal() {
     setTasks(res.data);
   }
 
+  async function updateTask() {
+    const res = await axios.put(import.meta.env.VITE_URL + '/tasks/update', {
+      ID: 1,
+      Title: 'updated title',
+      TimeSpent: 'long time',
+      Current: true,
+      Completed: false,
+    },
+    {
+      withCredentials: true,
+    });
+    console.log(res);
+  }
+
   const { status } = useQuery('tasks', getTasks);
 
   if (status === 'loading') return <div>Loading...</div>;
@@ -44,6 +58,8 @@ function Journal() {
           </div>
         ))
       }
+      <button className="UpdateTaskButton" onClick={updateTask}>Update Task</button> 
+      {/* // TODO: test remove update task with id 1 */}
     </div>
   )
 }
