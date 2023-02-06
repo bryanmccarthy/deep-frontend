@@ -4,8 +4,6 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 
 function Journal() {
-  // TODO: time blocker / management
-
   const [title, setTitle] = useState('');
   const [tasks, setTasks] = useState<[]>([]);
 
@@ -30,8 +28,8 @@ function Journal() {
     const res = await axios.put(import.meta.env.VITE_URL + '/tasks/update', {
       ID: 1,
       Title: 'updated title',
-      TimeSpent: 'long time',
-      Current: true,
+      TimeSpent: 0,
+      Current: false,
       Completed: false,
     },
     {
