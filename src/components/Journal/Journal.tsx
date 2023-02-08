@@ -2,19 +2,49 @@ import './Journal.scss'
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import DataTable from 'react-data-table-component';
 
 function Journal() {
   const [title, setTitle] = useState('');
   const [tasks, setTasks] = useState<[]>([]);
 
+  const columns = [
+    {
+      name: 'Task',
+      selector: (row: any) => row.Title,
+    },
+    {
+      name: 'Time Spent',
+      selector: (row: any) => row.TimeSpent,
+    },
+    {
+      name: 'Current',
+      selector: (row: any) => row.Current,
+    },
+    {
+      name: 'Completed',
+      selector: (row: any) => row.Completed,
+    },
+  ]
+
   // Create task initially with title
   async function createTask() {
     await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
-      Title: title,
+      Title: 'test task 4828',
     },
     {
       withCredentials: true,
-    })
+    });
+  }
+  
+  // Delete task
+  async function deleteTask(id: number) {
+    await axios.delete(import.meta.env.VITE_URL + '/tasks/delete', {
+      data: {
+        ID: id,
+      },
+      withCredentials: true,
+    });
   }
 
   async function getTasks() {
@@ -32,14 +62,17 @@ function Journal() {
 
   return (
     <div className="Journal">
-      {
-        tasks.map((task: any) => (
-          <div key={task.ID}>
-             <p>id: {task.ID} title: {task.Title} timeSpent: {task.TimeSpent} current: {task.Current} completed: {task.Completed}</p>
-          </div>
-        ))
-      }
+      <DataTable
+        columns={columns}
+        data={tasks}
+        pagination
+        highlightOnHover
+        pointerOnHover
+        // onRowClicked={(row) => expandTask(row.ID)} // TODO: Onclick expands the task to view notes
+      />
+      
     </div>
+    
   )
 }
 
