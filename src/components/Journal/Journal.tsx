@@ -3,6 +3,10 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import DataTable from 'react-data-table-component';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CircleIcon from '@mui/icons-material/Circle';
+import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+
 
 function Journal() {
   const [title, setTitle] = useState('');
@@ -21,17 +25,27 @@ function Journal() {
     {
       name: 'Current',
       selector: (row: any) => row.Current,
-      cell: (row: any) => row.Current ? 'Yes' : 'No', // TODO: change to icon that is toggleable
+      cell: (row: any) => row.Current ? <CircleIcon onClick={() => toggleCurrent(row.ID)} /> : <CircleOutlinedIcon onClick={() => toggleCurrent(row.ID)} />,
     },
     {
       name: 'Completed',
       selector: (row: any) => row.Completed,
-      cell: (row: any) => row.Completed ? 'Yes' : 'No', // TODO: change to icon that is toggleable
+      cell: (row: any) => row.Completed ? <CircleIcon onClick={() => toggleCompleted(row.ID) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.ID) } />,
     },
     {
-      cell: (row: any) => <button onClick={() => deleteTask(row.ID)}>DEL</button>, // TODO: change to icon
+      cell: (row: any) => <DeleteIcon onClick={() => deleteTask(row.ID)}>DEL</DeleteIcon>, // TODO: change to icon
     }
   ]
+
+  // Toggle current task
+  async function toggleCurrent(id: number) {
+    // TODO: toggle current task
+  }
+
+  // Toggle completed task
+  async function toggleCompleted(id: number) {
+    // TODO: toggle completed task
+  }
 
   // Create task initially with title
   async function createTask() {
