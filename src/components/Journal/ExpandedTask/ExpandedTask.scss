@@ -1,0 +1,24 @@
+.ExpandedTask {
+  position: absolute;
+  
+  .CloseButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1em;
+    width: 1em;
+    border: none;
+    border-radius: 0.1em;
+    background: none;
+    position: absolute;
+    top: 0.2em;
+    right: 0.2em;
+    font-size: 2em;
+    cursor: pointer;
+    
+    &:hover {
+      color: #fff;
+      background-color: #000;
+    }
+  }
+}
