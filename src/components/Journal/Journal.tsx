@@ -18,7 +18,7 @@ type DataRow = {
 function Journal() {
   const [title, setTitle] = useState('');
   const [tasks, setTasks] = useState<[]>([]);
-
+  
   const columns: TableColumn<DataRow>[] = [
     {
       name: 'Task',
@@ -82,6 +82,15 @@ function Journal() {
     setTasks(res.data);
   }
 
+  // Expand task to view notes
+  async function expandTask(row: DataRow) {
+    console.log(row.ID)
+    console.log(row.Title)
+    console.log(row.TimeSpent)
+    console.log(row.Current)
+    console.log(row.Completed)
+  }
+
   const { status } = useQuery('tasks', getTasks);
 
   if (status === 'loading') return <div>Loading...</div>;
@@ -95,7 +104,7 @@ function Journal() {
         pagination
         highlightOnHover
         pointerOnHover
-        // onRowClicked={(row) => expandTask(row.ID)} // TODO: Onclick expands the task to view notes
+        onRowClicked={(row) => expandTask(row)} // TODO: Onclick expands the task to view notes
       />
       
     </div>
