@@ -2,38 +2,45 @@ import './Journal.scss'
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
-import DataTable from 'react-data-table-component';
+import DataTable, { TableColumn } from 'react-data-table-component';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircleIcon from '@mui/icons-material/Circle';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 
+type DataRow = {
+  ID: number;
+  Title: string;
+  TimeSpent: number;
+  Current: boolean;
+  Completed: boolean;
+}
 
 function Journal() {
   const [title, setTitle] = useState('');
   const [tasks, setTasks] = useState<[]>([]);
 
-  const columns = [
+  const columns: TableColumn<DataRow>[] = [
     {
       name: 'Task',
-      selector: (row: any) => row.Title,
+      selector: row => row.Title,
     },
     {
       name: 'Time Spent',
-      selector: (row: any) => row.TimeSpent,
+      selector: row => row.TimeSpent,
       sortable: true,
     },
     {
       name: 'Current',
-      selector: (row: any) => row.Current,
-      cell: (row: any) => row.Current ? <CircleIcon onClick={() => toggleCurrent(row.ID)} /> : <CircleOutlinedIcon onClick={() => toggleCurrent(row.ID)} />,
+      selector: row => row.Current,
+      cell: row => row.Current ? <CircleIcon onClick={() => toggleCurrent(row.ID)} /> : <CircleOutlinedIcon onClick={() => toggleCurrent(row.ID)} />,
     },
     {
       name: 'Completed',
-      selector: (row: any) => row.Completed,
-      cell: (row: any) => row.Completed ? <CircleIcon onClick={() => toggleCompleted(row.ID) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.ID) } />,
+      selector: row => row.Completed,
+      cell: row => row.Completed ? <CircleIcon onClick={() => toggleCompleted(row.ID) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.ID) } />,
     },
     {
-      cell: (row: any) => <DeleteIcon onClick={() => deleteTask(row.ID)}>DEL</DeleteIcon>, // TODO: change to icon
+      cell: row => <DeleteIcon onClick={() => deleteTask(row.ID)}>DEL</DeleteIcon>, // TODO: change to icon
     }
   ]
 
