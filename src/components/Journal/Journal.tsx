@@ -16,6 +16,7 @@ type DataRow = {
 }
 
 function Journal() {
+  const [showExpandedTask, setShowExpandedTask] = useState<boolean>(false);
   const [title, setTitle] = useState('');
   const [tasks, setTasks] = useState<[]>([]);
   
@@ -30,11 +31,6 @@ function Journal() {
       sortable: true,
     },
     {
-      name: 'Current',
-      selector: row => row.Current,
-      cell: row => row.Current ? <CircleIcon onClick={() => toggleCurrent(row.ID)} /> : <CircleOutlinedIcon onClick={() => toggleCurrent(row.ID)} />,
-    },
-    {
       name: 'Completed',
       selector: row => row.Completed,
       cell: row => row.Completed ? <CircleIcon onClick={() => toggleCompleted(row.ID) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.ID) } />,
@@ -42,12 +38,7 @@ function Journal() {
     {
       cell: row => <DeleteIcon onClick={() => deleteTask(row.ID)}>DEL</DeleteIcon>, // TODO: change to icon
     }
-  ]
-
-  // Toggle current task
-  async function toggleCurrent(id: number) {
-    // TODO: toggle current task
-  }
+  ];
 
   // Toggle completed task
   async function toggleCompleted(id: number) {
@@ -64,7 +55,6 @@ function Journal() {
     });
   }
   
-  // Delete task
   async function deleteTask(id: number) {
     await axios.delete(import.meta.env.VITE_URL + '/tasks/delete', {
       data: {
@@ -82,12 +72,10 @@ function Journal() {
     setTasks(res.data);
   }
 
-  // Expand task to view notes
   async function expandTask(row: DataRow) {
     console.log(row.ID)
     console.log(row.Title)
     console.log(row.TimeSpent)
-    console.log(row.Current)
     console.log(row.Completed)
   }
 
@@ -104,7 +92,7 @@ function Journal() {
         pagination
         highlightOnHover
         pointerOnHover
-        onRowClicked={(row) => expandTask(row)} // TODO: Onclick expands the task to view notes
+        onRowClicked={(row) => expandTask(row)}
       />
       
     </div>
