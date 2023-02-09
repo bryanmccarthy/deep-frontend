@@ -18,6 +18,7 @@ type DataRow = {
 
 function Journal() {
   const [showExpandedTask, setShowExpandedTask] = useState<boolean>(false);
+  const [expandedTaskData, setExpandedTaskData] = useState<any>([]);
   const [title, setTitle] = useState('');
   const [tasks, setTasks] = useState<[]>([]);
   
@@ -79,10 +80,9 @@ function Journal() {
   }
 
   async function expandTask(row: DataRow) {
-    console.log(row.ID)
-    console.log(row.Title)
-    console.log(row.TimeSpent)
-    console.log(row.Completed)
+    const rowArray = Object.entries(row);
+
+    setExpandedTaskData(rowArray);
     setShowExpandedTask(true);
   }
 
@@ -102,8 +102,7 @@ function Journal() {
         onRowClicked={(row) => expandTask(row)}
       />
 
-      <ExpandedTask showExpandedTask={showExpandedTask} setShowExpandedTask={setShowExpandedTask} />
-      
+      <ExpandedTask showExpandedTask={showExpandedTask} setShowExpandedTask={setShowExpandedTask} expandedTaskData={expandedTaskData} />
     </div>
     
   )
