@@ -16,15 +16,21 @@ function Journal() {
     {
       name: 'Time Spent',
       selector: (row: any) => row.TimeSpent,
+      sortable: true,
     },
     {
       name: 'Current',
       selector: (row: any) => row.Current,
+      cell: (row: any) => row.Current ? 'Yes' : 'No', // TODO: change to icon that is toggleable
     },
     {
       name: 'Completed',
       selector: (row: any) => row.Completed,
+      cell: (row: any) => row.Completed ? 'Yes' : 'No', // TODO: change to icon that is toggleable
     },
+    {
+      cell: (row: any) => <button onClick={() => deleteTask(row.ID)}>DEL</button>, // TODO: change to icon
+    }
   ]
 
   // Create task initially with title
