@@ -1,4 +1,5 @@
-import './Journal.scss'
+import './Journal.scss';
+import ExpandedTask from './ExpandedTask/ExpandedTask';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
@@ -24,6 +25,11 @@ function Journal() {
     {
       name: 'Task',
       selector: row => row.Title,
+    },
+    {
+      name: 'Difficulty',
+      // selector: row => row.Difficulty, 
+      sortable: true,
     },
     {
       name: 'Time Spent',
@@ -77,6 +83,7 @@ function Journal() {
     console.log(row.Title)
     console.log(row.TimeSpent)
     console.log(row.Completed)
+    setShowExpandedTask(true);
   }
 
   const { status } = useQuery('tasks', getTasks);
@@ -94,6 +101,8 @@ function Journal() {
         pointerOnHover
         onRowClicked={(row) => expandTask(row)}
       />
+
+      <ExpandedTask showExpandedTask={showExpandedTask} setShowExpandedTask={setShowExpandedTask} />
       
     </div>
     
