@@ -3,9 +3,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 2.2em;
+  height: 2.4em;
   border-bottom: 0.5px solid #000;
-
 
   .NavButton {
     margin: 0 0.2em;
@@ -26,8 +25,8 @@
     width: 3.8em;
 
     .Icon {
-      height: 1.2em;
-      width: 1.2em;
+      height: 1em;
+      width: 1em;
       cursor: pointer;
     }
   }

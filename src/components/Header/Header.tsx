@@ -1,8 +1,8 @@
 import './Header.scss'
 import axios from "axios";
-import { AiFillClockCircle } from 'react-icons/ai';
-import AddIcon from '@mui/icons-material/Add';
-import { Add } from '@mui/icons-material';
+import TimerIcon from '@mui/icons-material/Timer';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import { Timer } from '@mui/icons-material';
 
 interface HeaderProps {
   setPage: (page: string) => void;
@@ -51,8 +51,8 @@ function Header({ setPage, showPomodoro, setShowPomodoro, showNewTask, setShowNe
         <button className="NavButton" onClick={ handleDashboard }>Dashboard</button>
       </div>
       <div className="NavIcons">
-        <AiFillClockCircle className="Icon" onClick={ handlePomodoro } />
-        <AddIcon className="Icon" onClick={ handleNewTask } />
+        <NoteAddIcon className="Icon" onClick={ handleNewTask } />
+        <TimerIcon className="Icon" onClick={ handlePomodoro } />
       </div>
       <button className="NavButton" onClick={handleLogout}>Logout</button>
     </div>
