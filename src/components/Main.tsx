@@ -13,7 +13,8 @@ function Main() {
 
   return (
     <div className="Main">
-      <Header setPage={setPage} setShowPomodoro={setShowPomodoro} setShowNewTask={setShowNewTask} />
+      <Header setPage={setPage} showPomodoro={showPomodoro} setShowPomodoro={setShowPomodoro}
+      showNewTask={showNewTask} setShowNewTask={setShowNewTask} />
       <div className="Page">
         { page === 'tasks' ? <Tasks /> : null }
         { page === 'dashboard' ? <Dashboard /> : null }

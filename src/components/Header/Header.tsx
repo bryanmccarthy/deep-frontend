@@ -6,11 +6,13 @@ import { Add } from '@mui/icons-material';
 
 interface HeaderProps {
   setPage: (page: string) => void;
+  showPomodoro: boolean;
   setShowPomodoro: (show: boolean) => void;
+  showNewTask: boolean;
   setShowNewTask: (show: boolean) => void;
 }
 
-function Header({ setPage, setShowPomodoro, setShowNewTask }: HeaderProps) {
+function Header({ setPage, showPomodoro, setShowPomodoro, showNewTask, setShowNewTask }: HeaderProps) {
 
   function handleTasks() {
     setPage('tasks');
@@ -21,10 +23,12 @@ function Header({ setPage, setShowPomodoro, setShowNewTask }: HeaderProps) {
   }
 
   function handlePomodoro() {
+    if (showNewTask) setShowNewTask(false);
     setShowPomodoro(true);
   }
 
   function handleNewTask() {
+    if (showPomodoro) setShowPomodoro(false);
     setShowNewTask(true);
   }
 
