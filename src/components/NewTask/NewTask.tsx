@@ -10,7 +10,6 @@ interface NewTaskProps {
 function NewTask({ showNewTask, setShowNewTask }: NewTaskProps) {
   const [title, setTitle] = useState('');
 
-  // Create task initially with title
   async function createTask() {
     await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
       Title: title,
@@ -18,6 +17,7 @@ function NewTask({ showNewTask, setShowNewTask }: NewTaskProps) {
     {
       withCredentials: true,
     });
+    // TODO: need to try change tasks state after creating new task
   }
 
   function handleCloseNewTask() {
