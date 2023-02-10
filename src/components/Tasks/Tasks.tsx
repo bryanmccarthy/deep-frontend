@@ -12,7 +12,7 @@ type DataRow = {
   ID: number;
   Title: string;
   TimeSpent: number;
-  Current: boolean;
+  Difficulty: number;
   Completed: boolean;
 }
 
@@ -29,7 +29,7 @@ function Tasks() {
     },
     {
       name: 'Difficulty',
-      // selector: row => row.Difficulty, 
+      selector: row => row.Difficulty, 
       sortable: true,
     },
     {
