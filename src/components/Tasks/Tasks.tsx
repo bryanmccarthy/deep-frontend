@@ -46,6 +46,24 @@ function Tasks() {
     }
   ];
 
+  const customStyles = {
+    rows: {
+      style: {
+        minHeight: '60px',
+      }
+    },
+    headCells: {
+      style: {
+        fontSize: '14px',
+      },
+    },
+    cells: {
+      style: {
+        fontSize: '12px',
+      },
+    }, 
+  };
+
   async function toggleCompleted(id: number, completed: boolean) {
     await axios.put(import.meta.env.VITE_URL + '/tasks/update/completed', {
       ID: id,
@@ -91,6 +109,7 @@ function Tasks() {
       <DataTable
         columns={columns}
         data={tasks}
+        customStyles={customStyles}
         pagination
         highlightOnHover
         pointerOnHover
