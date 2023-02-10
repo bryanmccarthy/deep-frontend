@@ -19,7 +19,6 @@ type DataRow = {
 function Tasks() {
   const [showExpandedTask, setShowExpandedTask] = useState<boolean>(false);
   const [expandedTaskData, setExpandedTaskData] = useState<any>([]);
-  const [title, setTitle] = useState('');
   const [tasks, setTasks] = useState<[]>([]);
   
   const columns: TableColumn<DataRow>[] = [
@@ -56,16 +55,6 @@ function Tasks() {
       withCredentials: true,
     });
     getTasks(); // TODO: update state instead of refetching
-  }
-
-  // Create task initially with title
-  async function createTask() {
-    await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
-      Title: 'test task 4828',
-    },
-    {
-      withCredentials: true,
-    });
   }
   
   async function deleteTask(id: number) {
