@@ -1,4 +1,4 @@
-import './Journal.scss';
+import './Tasks.scss';
 import ExpandedTask from './ExpandedTask/ExpandedTask';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
@@ -16,7 +16,7 @@ type DataRow = {
   Completed: boolean;
 }
 
-function Journal() {
+function Tasks() {
   const [showExpandedTask, setShowExpandedTask] = useState<boolean>(false);
   const [expandedTaskData, setExpandedTaskData] = useState<any>([]);
   const [title, setTitle] = useState('');
@@ -92,7 +92,7 @@ function Journal() {
   if (status === 'error') return <div>Error</div>;
 
   return (
-    <div className="Journal">
+    <div className="Tasks">
       <DataTable
         columns={columns}
         data={tasks}
@@ -108,4 +108,4 @@ function Journal() {
   )
 }
 
-export default Journal;
+export default Tasks;

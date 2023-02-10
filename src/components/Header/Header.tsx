@@ -10,8 +10,8 @@ interface HeaderProps {
 
 function Header({ setPage, setShowPomodoro }: HeaderProps) {
 
-  function handleJournal() {
-    setPage('journal');
+  function handleTasks() {
+    setPage('tasks');
   }
 
   function handleDashboard() {
@@ -37,7 +37,7 @@ function Header({ setPage, setShowPomodoro }: HeaderProps) {
   return (
     <div className="Header">
       <div className="NavPages">
-        <button className="NavButton" onClick={ handleJournal }>Journal</button>
+        <button className="NavButton" onClick={ handleTasks }>Tasks</button>
         <button className="NavButton" onClick={ handleDashboard }>Dashboard</button>
       </div>
       <div className="NavIcons">
