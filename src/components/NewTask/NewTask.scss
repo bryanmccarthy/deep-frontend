@@ -1,4 +1,7 @@
 .NewTask {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -25,5 +28,57 @@
     right: 0.2em;
     font-size: 2em;
     cursor: pointer;
+  }
+
+  .NewTaskForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4.6em;
+    width: 50%;
+
+    .TitleInput {
+      height: 2em;
+      border: none;
+      border-bottom: 1px solid #000;
+      background: none;
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+      outline: none;
+    }
+
+    .DifficultySetting {
+      margin-top: 2em;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      .DifficultyLabel {
+        font-size: 24px;
+        font-weight: 600;
+      }
+    }
+
+    .CreateTaskButton {
+      margin-top: 2em;
+      padding: 0.5em 0;
+      width: 5em;
+      border: 1px solid #000;
+      border-radius: 0.1em;
+      color: #000;
+      background-color: #fff;
+      font-size: 32px;
+      font-weight: 600;
+      cursor: pointer;
+
+      &:hover {
+        transition: 0.3s;
+        font-size: 34px;
+      }
+    }
   }
 }
