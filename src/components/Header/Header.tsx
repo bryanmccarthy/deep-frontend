@@ -1,14 +1,16 @@
 import './Header.scss'
 import axios from "axios";
 import { AiFillClockCircle } from 'react-icons/ai';
-import { MdSettings } from 'react-icons/md';
+import AddIcon from '@mui/icons-material/Add';
+import { Add } from '@mui/icons-material';
 
 interface HeaderProps {
   setPage: (page: string) => void;
   setShowPomodoro: (show: boolean) => void;
+  setShowNewTask: (show: boolean) => void;
 }
 
-function Header({ setPage, setShowPomodoro }: HeaderProps) {
+function Header({ setPage, setShowPomodoro, setShowNewTask }: HeaderProps) {
 
   function handleTasks() {
     setPage('tasks');
@@ -20,6 +22,10 @@ function Header({ setPage, setShowPomodoro }: HeaderProps) {
 
   function handlePomodoro() {
     setShowPomodoro(true);
+  }
+
+  function handleNewTask() {
+    setShowNewTask(true);
   }
 
   async function handleLogout() {
@@ -42,6 +48,7 @@ function Header({ setPage, setShowPomodoro }: HeaderProps) {
       </div>
       <div className="NavIcons">
         <AiFillClockCircle className="Icon" onClick={ handlePomodoro } />
+        <AddIcon className="Icon" onClick={ handleNewTask } />
       </div>
       <button className="NavButton" onClick={handleLogout}>Logout</button>
     </div>

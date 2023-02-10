@@ -43,7 +43,7 @@ function Tasks() {
       cell: row => row.Completed ? <CircleIcon onClick={() => toggleCompleted(row.ID, true) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.ID, false) } />,
     },
     {
-      cell: row => <DeleteIcon onClick={() => deleteTask(row.ID)}>DEL</DeleteIcon>, // TODO: change to icon
+      cell: row => <DeleteIcon onClick={() => deleteTask(row.ID)}>DEL</DeleteIcon>,
     }
   ];
 
@@ -55,6 +55,7 @@ function Tasks() {
     {
       withCredentials: true,
     });
+    getTasks(); // TODO: update state instead of refetching
   }
 
   // Create task initially with title

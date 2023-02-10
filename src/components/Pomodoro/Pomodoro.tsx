@@ -49,7 +49,7 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
     return () => clearInterval(interval);
   }, [isActive, seconds]);
 
-  const handleClosePomodoro = () => {
+  function handleClosePomodoro() {
     setShowPomodoro(false);
   }
 

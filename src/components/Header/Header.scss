@@ -17,28 +17,18 @@
     color: #000;
     background-color: #fff;
     cursor: pointer;
-
-    &:hover {
-      color: #fff;
-      background-color: #000;
-    }
   }
 
   .NavIcons {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    width: 3em;
+    width: 3.8em;
 
     .Icon {
       height: 1.2em;
       width: 1.2em;
-      border-radius: 1em;
       cursor: pointer;
-
-      &:hover {
-        color: #fff;
-        background-color: #000;
-      }
     }
   }
 }
