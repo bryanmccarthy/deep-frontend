@@ -40,16 +40,21 @@ function Tasks() {
     {
       name: 'Completed',
       selector: row => row.Completed,
-      cell: row => row.Completed ? <CircleIcon onClick={() => toggleCompleted(row.ID) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.ID) } />,
+      cell: row => row.Completed ? <CircleIcon onClick={() => toggleCompleted(row.ID, true) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.ID, false) } />,
     },
     {
       cell: row => <DeleteIcon onClick={() => deleteTask(row.ID)}>DEL</DeleteIcon>, // TODO: change to icon
     }
   ];
 
-  // Toggle completed task
-  async function toggleCompleted(id: number) {
-    // TODO: toggle completed task
+  async function toggleCompleted(id: number, completed: boolean) {
+    await axios.put(import.meta.env.VITE_URL + '/tasks/update/completed', {
+      ID: id,
+      Completed: !completed,
+    },
+    {
+      withCredentials: true,
+    });
   }
 
   // Create task initially with title
