@@ -9,6 +9,11 @@ import TimerIcon from '@mui/icons-material/Timer';
 function Main() {
   const [showPomodoro, setShowPomodoro] = useState<boolean>(false);
   const [page, setPage] = useState<string>('tasks');
+  const [sidebarHidden, setSidebarHidden] = useState<boolean>(false);
+
+  function handleShowSiderbar() {
+    setSidebarHidden(false);
+  }
 
   function handlePomodoro() {
     setShowPomodoro(true);
@@ -16,7 +21,7 @@ function Main() {
 
   return (
     <div className="Main">
-      <Sidebar setPage={setPage} />
+      { sidebarHidden === true ? <button className="OpenSidebarButton" onClick={handleShowSiderbar}>-)</button> : <Sidebar setPage={setPage} setSidebarHidden={setSidebarHidden} /> }
       <div className="Page">
         { page === 'tasks' ? <Tasks /> : null }
         { page === 'dashboard' ? <Dashboard /> : null }

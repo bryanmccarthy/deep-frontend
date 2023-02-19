@@ -1,11 +1,15 @@
 import './Sidebar.scss'
 import axios from "axios";
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 interface SidebarProps {
   setPage: (page: string) => void;
+  setSidebarHidden: (sidebarHidden: boolean) => void;
 }
 
-function Sidebar({ setPage }: SidebarProps) {
+function Sidebar({ setPage, setSidebarHidden }: SidebarProps) {
 
   function handleTasks() {
     setPage('tasks');
@@ -30,11 +34,21 @@ function Sidebar({ setPage }: SidebarProps) {
 
   return (
     <div className="Sidebar">
-      <div className="NavPages">
-        <button className="NavButton" onClick={ handleTasks }>Tasks</button>
-        <button className="NavButton" onClick={ handleDashboard }>Dashboard</button>
-      </div>
-      <button className="NavButton" onClick={handleLogout}>Logout</button>
+        <div className="NavPages">
+          <div className="NavSection">
+            <FormatListBulletedIcon className="NavIcon" onClick={ handleTasks } />
+            <button className="NavButton" onClick={ handleTasks }>Tasks</button>
+          </div>
+          <div className="NavSection">
+            <DashboardIcon className="NavIcon" onClick={ handleDashboard } />
+            <button className="NavButton" onClick={ handleDashboard }>Dashboard</button>
+          </div>
+          <div className="NavSection">
+            <LogoutIcon className="NavIcon" onClick={handleLogout} />
+            <button className="NavButton" onClick={handleLogout}>Logout</button>
+          </div>
+        </div>
+        <button className="CloseSidebarButton" onClick={() => setSidebarHidden(true)}>(-</button>
     </div>
   );
 }

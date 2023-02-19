@@ -1,19 +1,19 @@
 .Sidebar {
-  position: relative;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  border-right: 0.5px solid #000;
 
-  .NavPages {
+  .NavSection {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+
+    .NavIcon {
+      width: 1em;
+      height: 1em;
+      cursor: pointer;
+    }
   }
 
   .NavButton {
     display: flex;
-    flex-direction: column;
     width: 100%;
     padding: 0.7em 0.5em;
     font-size: 16px;
@@ -21,7 +21,15 @@
     color: #000;
     background-color: #fff;
     border: none;
-    border-bottom: 0.5px solid #000;
+    cursor: pointer;
+  }
+
+  .CloseSidebarButton {
+    padding: 0.1em;
+    border: none;
+    border-left: 0.5px solid #000;
+    border-right: 0.5px solid #000;
+    background-color: antiquewhite;
     cursor: pointer;
   }
 }
