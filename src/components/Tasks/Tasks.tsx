@@ -126,7 +126,7 @@ function Tasks() {
         onRowClicked={(row) => expandTask(row)}
       />
 
-      <NewTask showNewTask={showNewTask} setShowNewTask={setShowNewTask} />
+      <NewTask showNewTask={showNewTask} setShowNewTask={setShowNewTask} getTasks={getTasks} />
       <ExpandedTask showExpandedTask={showExpandedTask} setShowExpandedTask={setShowExpandedTask} expandedTaskData={expandedTaskData} />
     </div>
     

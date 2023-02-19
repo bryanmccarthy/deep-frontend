@@ -6,9 +6,10 @@ import Slider from '@mui/material/Slider';
 interface NewTaskProps {
   showNewTask: boolean;
   setShowNewTask: (show: boolean) => void;
+  getTasks: () => void;
 }
 
-function NewTask({ showNewTask, setShowNewTask }: NewTaskProps) {
+function NewTask({ showNewTask, setShowNewTask, getTasks }: NewTaskProps) {
   const ref = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState('');
   const [difficulty, setDifficulty] = useState(0);
@@ -21,6 +22,7 @@ function NewTask({ showNewTask, setShowNewTask }: NewTaskProps) {
     {
       withCredentials: true,
     });
+    getTasks();
   }
 
   const handleSliderChange = (event: Event, value: number | number[]) => {
