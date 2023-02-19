@@ -45,7 +45,7 @@ function Tasks() {
       cell: row => row.Completed ? <CircleIcon onClick={() => toggleCompleted(row.ID, true) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.ID, false) } />,
     },
     {
-      cell: row => <DeleteIcon onClick={() => deleteTask(row.ID)}>DEL</DeleteIcon>,
+      cell: row => <DeleteIcon onClick={() => deleteTask(row.ID)}></DeleteIcon>,
     }
   ];
 
@@ -114,7 +114,11 @@ function Tasks() {
 
   return (
     <div className="Tasks">
-      <NoteAddIcon className="NoteAddIcon" onClick={ handleNewTask } />
+      <div className="TasksHeading">
+        <NoteAddIcon className="NoteAddIcon" onClick={ handleNewTask } />
+        <div className="UserHeading">{sessionStorage.getItem('userFirstName')} {sessionStorage.getItem('userLastName')}'s Tasks</div>
+      </div>
+
       <DataTable
         className="DataTable"
         columns={columns}

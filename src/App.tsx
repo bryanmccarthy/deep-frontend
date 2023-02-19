@@ -6,7 +6,7 @@ import Main from './components/Main';
 const queryClient = new QueryClient();
 
 function App() {
-  const user = sessionStorage.getItem('user');
+  const user = sessionStorage.getItem('userFirstName');
   
   return (
     <QueryClientProvider client={queryClient}>

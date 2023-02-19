@@ -15,7 +15,8 @@ function Login() {
       withCredentials: true,
     })
     if (res && res.status === 200) {
-      sessionStorage.setItem('user', res.data);
+      sessionStorage.setItem('userFirstName', res.data.firstname);
+      sessionStorage.setItem('userLastName', res.data.lastname);
       window.location.reload();
     }
   }

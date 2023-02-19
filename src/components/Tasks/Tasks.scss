@@ -4,10 +4,23 @@
   margin: 0;
   height: 100%;
 
-  .NoteAddIcon {
-    margin: 0.2em;
-    height: 1.5em;
-    width: 1.5em;
-    cursor: pointer;
+  .TasksHeading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .NoteAddIcon {
+      margin: 0.2em;
+      height: 1.5em;
+      width: 1.5em;
+      cursor: pointer;
+    }
+
+    .UserHeading {
+      margin: 0.2em;
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+    }
   }
 }

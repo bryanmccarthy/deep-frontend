@@ -15,6 +15,7 @@ function Register() {
       Email: email,
       Password: password
     })
+    // TODO: Clear form fields & display success message and switch to login page
   }
 
   return (

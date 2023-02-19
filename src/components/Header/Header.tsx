@@ -30,7 +30,8 @@ function Header({ setPage, showPomodoro, setShowPomodoro }: HeaderProps) {
     )
   
     if (res && res.status === 200) {
-      sessionStorage.removeItem('user');
+      sessionStorage.removeItem('userFirstName');
+      sessionStorage.removeItem('userLastName');
       window.location.reload();
     }
   }
