@@ -5,6 +5,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import Pomodoro from "./Pomodoro/Pomodoro";
 import { useState } from 'react';
 import TimerIcon from '@mui/icons-material/Timer';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 function Main() {
   const [showPomodoro, setShowPomodoro] = useState<boolean>(false);
@@ -21,7 +22,7 @@ function Main() {
 
   return (
     <div className="Main">
-      { sidebarHidden === true ? <button className="OpenSidebarButton" onClick={handleShowSiderbar}>-)</button> : <Sidebar setPage={setPage} setSidebarHidden={setSidebarHidden} /> }
+      { sidebarHidden === true ? <button className="OpenSidebarButton" onClick={handleShowSiderbar}><ArrowRightIcon /></button> : <Sidebar setPage={setPage} setSidebarHidden={setSidebarHidden} /> }
       <div className="Page">
         { page === 'tasks' ? <Tasks /> : null }
         { page === 'dashboard' ? <Dashboard /> : null }
