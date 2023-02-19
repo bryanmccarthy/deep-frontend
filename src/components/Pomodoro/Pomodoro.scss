@@ -1,12 +1,10 @@
 .Pomodoro {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
+  top: 0.6em;
+  right: 2.3em;
   background-color: #fff;
-  height: 30em;
-  width: 30em;
+  height: 20em;
+  width: 22em;
   border: none;
   border-radius: 0.2em;
   box-shadow: 0 0 0.2em #000;
@@ -28,7 +26,6 @@
   }
 
   .Timer {
-    margin-top: 2.8em;
     display: flex;
     justify-content: center;
     align-items: center;

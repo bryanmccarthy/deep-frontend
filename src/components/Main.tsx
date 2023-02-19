@@ -24,7 +24,7 @@ function Main() {
     <div className="Main">
       { sidebarHidden === true ? <button className="OpenSidebarButton" onClick={handleShowSiderbar}><ArrowRightIcon /></button> : <Sidebar setPage={setPage} setSidebarHidden={setSidebarHidden} /> }
       <div className="Page">
-        { page === 'tasks' ? <Tasks /> : null }
+        { page === 'tasks' ? <Tasks sidebarHidden={sidebarHidden} /> : null }
         { page === 'dashboard' ? <Dashboard /> : null }
         <Pomodoro showPomodoro={showPomodoro} setShowPomodoro={setShowPomodoro} />
       </div>

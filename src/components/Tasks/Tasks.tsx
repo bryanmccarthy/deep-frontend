@@ -19,7 +19,11 @@ type DataRow = {
   Completed: boolean;
 }
 
-function Tasks() {
+interface TasksProps {
+  sidebarHidden: boolean;
+}
+
+function Tasks({ sidebarHidden }: TasksProps) {
   const [showExpandedTask, setShowExpandedTask] = useState<boolean>(false);
   const [showNewTask, setShowNewTask] = useState<boolean>(false);
   const [expandedTaskData, setExpandedTaskData] = useState<any>([]);
@@ -131,7 +135,7 @@ function Tasks() {
         onRowClicked={(row) => expandTask(row)}
       />
 
-      <NewTask showNewTask={showNewTask} setShowNewTask={setShowNewTask} getTasks={getTasks} />
+      <NewTask showNewTask={showNewTask} setShowNewTask={setShowNewTask} getTasks={getTasks} sidebarHidden={sidebarHidden} />
       <ExpandedTask showExpandedTask={showExpandedTask} setShowExpandedTask={setShowExpandedTask} expandedTaskData={expandedTaskData} />
     </div>
     

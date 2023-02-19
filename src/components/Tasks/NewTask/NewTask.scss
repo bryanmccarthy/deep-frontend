@@ -3,13 +3,10 @@
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
+  top: 0.6em;
   background-color: #fff;
-  height: 30em;
-  width: 30em;
+  height: 20em;
+  width: 22em;
   border: none;
   border-radius: 0.2em;
   box-shadow: 0 0 0.2em #000;
@@ -35,7 +32,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 4.6em;
+    margin-top: 2em;
     width: 50%;
 
     .TitleInput {
@@ -50,7 +47,7 @@
     }
 
     .DifficultySetting {
-      margin-top: 2em;
+      margin-top: 0.5em;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -64,7 +61,7 @@
     }
 
     .CreateTaskButton {
-      margin-top: 2em;
+      margin-top: 1em;
       padding: 0.5em 0;
       width: 5em;
       border: 1px solid #000;
