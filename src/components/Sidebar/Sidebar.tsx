@@ -49,7 +49,7 @@ function Sidebar({ setPage, setSidebarHidden }: SidebarProps) {
             <button className="NavButton" onClick={handleLogout}>Logout</button>
           </div>
         </div>
-        <button className="CloseSidebarButton" onClick={() => setSidebarHidden(true)}><ArrowLeftIcon /></button>
+        <button className="CloseSidebarButton" onClick={() => setSidebarHidden(true)}><ArrowLeftIcon fontSize="large" /></button>
     </div>
   );
 }

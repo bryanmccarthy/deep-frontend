@@ -1,5 +1,7 @@
 import './Config.scss'
 import Slider from '@mui/material/Slider';
+import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 interface ConfigProps {
   currentTimer: string;
@@ -67,20 +69,20 @@ function Config({ currentTimer, setCurrentTimer, setSeconds, setFormattedDuratio
       </div>
       <div className="TimerToggle">
         <button disabled={isActive ? true : false} className="TimerButton" 
-          style={{backgroundColor: isActive && currentTimer === 'Work' ? '#ccc' : currentTimer === 'Work' ? '#000' : '#fff',
+          style={{backgroundColor: isActive && currentTimer === 'Work' ? '#ccc' : currentTimer === 'Work' ? '#000' : '#faf9f6',
                 color: isActive && currentTimer !== 'Work' ? '#ccc' : currentTimer === 'Work' ? '#fff' : '#000'}} 
           onClick={handleWorkClick}>
             work
         </button>
         <button disabled={isActive ? true : false} className="TimerButton" 
-          style={{backgroundColor: isActive && currentTimer === 'Break' ? '#ccc' : currentTimer === 'Break' ? '#000' : '#fff',
+          style={{backgroundColor: isActive && currentTimer === 'Break' ? '#ccc' : currentTimer === 'Break' ? '#000' : '#faf9f6',
                 color: isActive && currentTimer !== 'Break' ? '#ccc' : currentTimer === 'Break' ? '#fff' : '#000'}} 
           onClick={handleBreakClick}>
             break
         </button>
       </div>
       <div className="StartStopSettings">
-        <button className="StartButton" onClick={handleStartStopClick}>{ isActive ? 'Cancel' : 'Start'}</button>
+        { isActive ? <CancelIcon className="StartButton" onClick={handleStartStopClick} /> : <PlayCircleFilledIcon className="StartButton" onClick={handleStartStopClick} /> }
       </div>
     </div>
   )

@@ -1,5 +1,6 @@
 .Sidebar {
   display: flex;
+  background-color: #faf9f6;
 
   .NavSection {
     display: flex;
@@ -19,7 +20,7 @@
     font-size: 16px;
     font-weight: 600;
     color: #000;
-    background-color: #fff;
+    background-color: #faf9f6;
     border: none;
     cursor: pointer;
   }
@@ -28,13 +29,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1em;
+    width: 1.1em;
     padding: 0.1em;
-    border: none;
-    border-left: 0.5px solid #000;
-    border-right: 0.5px solid #000;
+    border: 0.8px solid #000;
     border-radius: 1em;
-    background-color: antiquewhite;
+    background-color: #fffaf4;
     cursor: pointer;
   }
 }

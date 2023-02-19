@@ -22,7 +22,7 @@ function Main() {
 
   return (
     <div className="Main">
-      { sidebarHidden === true ? <button className="OpenSidebarButton" onClick={handleShowSiderbar}><ArrowRightIcon /></button> : <Sidebar setPage={setPage} setSidebarHidden={setSidebarHidden} /> }
+      { sidebarHidden === true ? <button className="OpenSidebarButton" onClick={handleShowSiderbar}><ArrowRightIcon fontSize="large" /></button> : <Sidebar setPage={setPage} setSidebarHidden={setSidebarHidden} /> }
       <div className="Page">
         { page === 'tasks' ? <Tasks sidebarHidden={sidebarHidden} /> : null }
         { page === 'dashboard' ? <Dashboard /> : null }

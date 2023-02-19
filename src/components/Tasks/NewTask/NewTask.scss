@@ -4,12 +4,12 @@
   align-items: center;
   position: absolute;
   top: 0.6em;
-  background-color: #fff;
+  background-color: #faf9f6;
   height: 20em;
   width: 22em;
   border: none;
   border-radius: 0.2em;
-  box-shadow: 0 0 0.2em #000;
+  box-shadow: 0 0 0.1em #000;
 
   .CloseButton {
     display: flex;
@@ -32,7 +32,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 2em;
+    margin-top: 2.2em;
     width: 50%;
 
     .TitleInput {
@@ -62,20 +62,9 @@
 
     .CreateTaskButton {
       margin-top: 1em;
-      padding: 0.5em 0;
-      width: 5em;
-      border: 1px solid #000;
-      border-radius: 0.1em;
-      color: #000;
-      background-color: #fff;
-      font-size: 32px;
-      font-weight: 600;
+      height: 2em;
+      width: 2em;
       cursor: pointer;
-
-      &:hover {
-        transition: 0.3s;
-        font-size: 34px;
-      }
     }
   }
 }

@@ -28,20 +28,9 @@
     margin-top: 2em;
 
     .StartButton {
-      padding: 0.5em 0;
-      width: 5em;
-      border: 1px solid #000;
-      border-radius: 0.1em;
-      color: #000;
-      background-color: #fff;
-      font-size: 32px;
-      font-weight: 600;
+      height: 2em;
+      width: 2em;
       cursor: pointer;
-
-      &:hover {
-        transition: 0.3s;
-        font-size: 34px;
-      }
     }
   }
 }

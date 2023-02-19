@@ -2,6 +2,7 @@ import './NewTask.scss';
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import Slider from '@mui/material/Slider';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 interface NewTaskProps {
   showNewTask: boolean;
@@ -61,7 +62,7 @@ function NewTask({ showNewTask, setShowNewTask, getTasks, sidebarHidden }: NewTa
           <p className="DifficultyLabel">{ difficultyText }</p>
           <Slider value={difficulty} sx={{color: 'navy'}} onChange={handleSliderChange} valueLabelDisplay="off" step={1} min={0} max={2} />
         </div>
-        <button className="CreateTaskButton" onClick={createTask}>Create</button>
+        <AddBoxIcon className="CreateTaskButton" onClick={createTask} />
       </div>
     </div>
   )
