@@ -1,10 +1,9 @@
+@import '../../../utils/variables.scss';
+
 .Register {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #000;
-  border-radius: 1em;
-  width: 20em;
 
   .RegisterForm {
     display: flex;
@@ -13,36 +12,28 @@
     justify-content: center;
     padding: 2em;
 
-    .RegisterTitle {
-      font-size: 28px;
-      font-weight: 600;
-      margin-bottom: 2em;
-    }
-
     .RegisterInput {
-      height: 3em;
+      height: 2em;
       margin-bottom: 2em;
-      border: 1px solid #000;
-      border-radius: 0.3em;
-      padding: 0.8em;
-      box-sizing: border-box;
+      border: none;
+      border-bottom: 1px solid $black;
+      background: none;
+      font-size: 18px;
+      font-weight: 600;
+      color: $black;
+      outline: none;
     }
 
     .RegisterButton {
       width: 100%;
       height: 3em;
-      border: 1px solid #000;
-      border-radius: 0.3em;
-      color: #000;
-      background-color: #fff;
-      font-size: 14px;
+      border: 1px solid $black;
+      border-radius: 3em;
+      color: $white;
+      background-color: $form-button;
+      font-size: 18px;
       font-weight: 600;
       cursor: pointer;
-      &:hover {
-        color: #fff;
-        background-color: #000;
-      }
     }
   }
-
 }

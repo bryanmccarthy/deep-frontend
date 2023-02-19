@@ -1,15 +1,17 @@
+@import '../../../utils/variables';
+
 .NewTask {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: absolute;
   top: 0.6em;
-  background-color: #faf9f6;
+  background-color: $off-white;
   height: 20em;
   width: 22em;
   border: none;
-  border-radius: 0.2em;
-  box-shadow: 0 0 0.1em #000;
+  border-radius: 0.4em;
+  box-shadow: 0 0 0.1em $black;
 
   .CloseButton {
     display: flex;
@@ -38,11 +40,11 @@
     .TitleInput {
       height: 2em;
       border: none;
-      border-bottom: 1px solid #000;
+      border-bottom: 1px solid $black;
       background: none;
       font-size: 18px;
       font-weight: 600;
-      color: #000;
+      color: $black;
       outline: none;
     }
 

@@ -1,13 +1,15 @@
+@import '../../utils/variables';
+
 .Pomodoro {
   position: absolute;
   top: 0.6em;
   right: 2.3em;
-  background-color: #faf9f6;
+  background-color: $off-white;
   height: 20em;
   width: 22em;
   border: none;
-  border-radius: 0.2em;
-  box-shadow: 0 0 0.1em #000;
+  border-radius: 0.4em;
+  box-shadow: 0 0 0.1em $black;
 
   .CloseButton {
     display: flex;
@@ -33,7 +35,7 @@
     height: 5em;
   
     .FormattedDuration {
-      color: #000;
+      color: $black;
     }
   }
 }

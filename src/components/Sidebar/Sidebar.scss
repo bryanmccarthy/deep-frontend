@@ -1,6 +1,8 @@
+@import '../../utils/variables.scss';
+
 .Sidebar {
   display: flex;
-  background-color: #faf9f6;
+  background-color: $off-white;
 
   .NavSection {
     display: flex;
@@ -11,29 +13,29 @@
       height: 1em;
       cursor: pointer;
     }
-  }
 
-  .NavButton {
-    display: flex;
-    width: 100%;
-    padding: 0.7em 0.5em;
-    font-size: 16px;
-    font-weight: 600;
-    color: #000;
-    background-color: #faf9f6;
-    border: none;
-    cursor: pointer;
+    .NavButton {
+      display: flex;
+      width: 100%;
+      padding: 0.7em 0.5em;
+      font-size: 16px;
+      font-weight: 600;
+      color: $black;
+      background-color: $off-white;
+      border: none;
+      cursor: pointer;
+    }
   }
 
   .CloseSidebarButton {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1.1em;
+    width: 1.2em;
     padding: 0.1em;
-    border: 0.8px solid #000;
+    border: 0.8px solid $black;
     border-radius: 1em;
-    background-color: #fffaf4;
+    background-color: $off-white;
     cursor: pointer;
   }
 }

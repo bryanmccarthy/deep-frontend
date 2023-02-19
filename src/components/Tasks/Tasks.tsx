@@ -57,19 +57,28 @@ function Tasks({ sidebarHidden }: TasksProps) {
   const customStyles = {
     rows: {
       style: {
-        minHeight: '60px',
+        minHeight: '5em',
+        backgroundColor: '#faf9f6',
       }
     },
     headCells: {
       style: {
-        fontSize: '16px',
+        fontSize: '18px',
+        fontWeight: '600',
+        backgroundColor: '#faf9f6',
       },
     },
     cells: {
       style: {
-        fontSize: '14px',
+        fontSize: '16px',
       },
-    }, 
+    },
+    pagination: {
+      style: {
+        fontSize: '16px',
+        backgroundColor: '#faf9f6',
+      }
+    }
   };
 
   async function toggleCompleted(id: number, completed: boolean) {

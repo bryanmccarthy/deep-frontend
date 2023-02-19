@@ -1,8 +1,11 @@
+@import '../utils/variables.scss';
+
 .Main {
   position: relative;
   display: flex;
   height: 100%;
   width: 100%;
+  background-color: $off-white;
 
   .Page {
     height: 100%;
@@ -22,11 +25,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 1.1em;
+      width: 1.2em;
       padding: 0.1em;
-      border: 0.8px solid #000;
+      border: 0.8px solid $black;
       border-radius: 1em;
-      background-color: #fffaf4;
+      background-color: $off-white;
       cursor: pointer;
     }
 }
