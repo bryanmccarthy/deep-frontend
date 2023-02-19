@@ -1,6 +1,6 @@
 import './NewTask.scss';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Slider from '@mui/material/Slider';
 
 interface NewTaskProps {
@@ -9,6 +9,7 @@ interface NewTaskProps {
 }
 
 function NewTask({ showNewTask, setShowNewTask }: NewTaskProps) {
+  const ref = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState('');
   const [difficulty, setDifficulty] = useState(0);
 
@@ -29,9 +30,22 @@ function NewTask({ showNewTask, setShowNewTask }: NewTaskProps) {
   function handleCloseNewTask() {
     setShowNewTask(false);
   }
+
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setShowNewTask(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside, true);
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  });
   
   return (
-    <div className="NewTask" style={{ visibility: showNewTask ? "visible" : "hidden" }}>
+    <div ref={ref} className="NewTask" style={{ visibility: showNewTask ? "visible" : "hidden" }}>
       <button className="CloseButton" onClick={handleCloseNewTask}>&times;</button>
       <div className="NewTaskForm">
         <input className="TitleInput" type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
