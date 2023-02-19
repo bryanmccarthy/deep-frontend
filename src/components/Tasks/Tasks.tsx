@@ -33,7 +33,7 @@ function Tasks() {
     {
       name: 'Difficulty',
       selector: row => row.Difficulty,
-      cell: row => row.Difficulty === 0 ? <p>Easy</p> : row.Difficulty === 1 ? <p>Medium</p> : <p>Hard</p>,
+      cell: row => row.Difficulty === 0 ? <p style={{ color: 'green' }}>Easy</p> : row.Difficulty === 1 ? <p style={{ color: 'orange' }}>Medium</p> : <p style={{ color: 'red' }}>Hard</p>,
       sortable: true,
     },
     {
