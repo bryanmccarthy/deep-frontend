@@ -1,12 +1,11 @@
-import './Header.scss'
+import './Sidebar.scss'
 import axios from "axios";
-import TimerIcon from '@mui/icons-material/Timer';
 
-interface HeaderProps {
+interface SidebarProps {
   setPage: (page: string) => void;
 }
 
-function Header({ setPage }: HeaderProps) {
+function Sidebar({ setPage }: SidebarProps) {
 
   function handleTasks() {
     setPage('tasks');
@@ -30,7 +29,7 @@ function Header({ setPage }: HeaderProps) {
   }
 
   return (
-    <div className="Header">
+    <div className="Sidebar">
       <div className="NavPages">
         <button className="NavButton" onClick={ handleTasks }>Tasks</button>
         <button className="NavButton" onClick={ handleDashboard }>Dashboard</button>
@@ -40,4 +39,4 @@ function Header({ setPage }: HeaderProps) {
   );
 }
 
-export default Header;
+export default Sidebar;

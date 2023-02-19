@@ -1,5 +1,5 @@
 import './Main.scss';
-import Header from "./Header/Header";
+import Sidebar from "./Sidebar/Sidebar";
 import Tasks from "./Tasks/Tasks";
 import Dashboard from "./Dashboard/Dashboard";
 import Pomodoro from "./Pomodoro/Pomodoro";
@@ -16,7 +16,7 @@ function Main() {
 
   return (
     <div className="Main">
-      <Header setPage={setPage} />
+      <Sidebar setPage={setPage} />
       <div className="Page">
         { page === 'tasks' ? <Tasks /> : null }
         { page === 'dashboard' ? <Dashboard /> : null }
