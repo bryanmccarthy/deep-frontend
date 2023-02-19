@@ -6,21 +6,13 @@
 
   .TasksHeading {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
 
     .NoteAddIcon {
-      margin: 0.2em;
-      height: 1.5em;
-      width: 1.5em;
+      margin-left: 0.2em;
+      margin-top: 0.2em;
+      height: 1.2em;
+      width: 1.2em;
       cursor: pointer;
-    }
-
-    .UserHeading {
-      margin: 0.2em;
-      font-size: 22px;
-      font-weight: 600;
-      color: #000;
     }
   }
 }

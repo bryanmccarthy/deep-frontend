@@ -118,7 +118,6 @@ function Tasks() {
     <div className="Tasks">
       <div className="TasksHeading">
         <NoteAddIcon className="NoteAddIcon" onClick={ handleNewTask } />
-        <div className="UserHeading">{sessionStorage.getItem('userFirstName')} {sessionStorage.getItem('userLastName')}'s Tasks</div>
       </div>
 
       <DataTable

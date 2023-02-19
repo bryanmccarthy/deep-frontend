@@ -1,11 +1,20 @@
 .Main {
   position: relative;
   display: flex;
-  flex-direction: column;
   height: 100%;
   width: 100%;
 
   .Page {
     height: 100%;
+    width: 100%;
   }
+
+    .Icon {
+      position: absolute;
+      top: 0.2em;
+      right: 0.2em;
+      height: 1.2em;
+      width: 1.2em;
+      cursor: pointer;
+    }
 }

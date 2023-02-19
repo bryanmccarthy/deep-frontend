@@ -1,33 +1,27 @@
 .Header {
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 2.4em;
-  border-bottom: 0.5px solid #000;
+  border-right: 0.5px solid #000;
+
+  .NavPages {
+    display: flex;
+    flex-direction: column;
+  }
 
   .NavButton {
-    margin: 0 0.2em;
-    padding: 0.4em 0.5em;
-    border: none;
-    border-radius: 0.2em;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0.7em 0.5em;
     font-size: 16px;
     font-weight: 600;
     color: #000;
     background-color: #fff;
+    border: none;
+    border-bottom: 0.5px solid #000;
     cursor: pointer;
-  }
-
-  .NavIcons {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 3.8em;
-
-    .Icon {
-      height: 1em;
-      width: 1em;
-      cursor: pointer;
-    }
   }
 }
