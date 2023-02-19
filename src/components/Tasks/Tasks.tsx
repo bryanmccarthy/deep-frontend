@@ -9,6 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CircleIcon from '@mui/icons-material/Circle';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import { red } from '@mui/material/colors';
 
 type DataRow = {
   ID: number;
@@ -31,7 +32,8 @@ function Tasks() {
     },
     {
       name: 'Difficulty',
-      selector: row => row.Difficulty, 
+      selector: row => row.Difficulty,
+      cell: row => row.Difficulty === 0 ? <p>Easy</p> : row.Difficulty === 1 ? <p>Medium</p> : <p>Hard</p>,
       sortable: true,
     },
     {
@@ -45,7 +47,7 @@ function Tasks() {
       cell: row => row.Completed ? <CircleIcon onClick={() => toggleCompleted(row.ID, true) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.ID, false) } />,
     },
     {
-      cell: row => <DeleteIcon onClick={() => deleteTask(row.ID)}></DeleteIcon>,
+      cell: row => <DeleteIcon color="action" onClick={() => deleteTask(row.ID)}></DeleteIcon>,
     }
   ];
 

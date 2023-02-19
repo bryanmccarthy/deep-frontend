@@ -13,6 +13,7 @@ function NewTask({ showNewTask, setShowNewTask, getTasks }: NewTaskProps) {
   const ref = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState('');
   const [difficulty, setDifficulty] = useState(0);
+  const [difficultyText, setDifficultyText] = useState('Easy');
 
   async function createTask() {
     await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
@@ -22,11 +23,16 @@ function NewTask({ showNewTask, setShowNewTask, getTasks }: NewTaskProps) {
     {
       withCredentials: true,
     });
+    setTitle('');
+    setShowNewTask(false);
+    setDifficulty(0);
+    setDifficultyText('Easy');
     getTasks();
   }
 
   const handleSliderChange = (event: Event, value: number | number[]) => {
     setDifficulty(value as number);
+    setDifficultyText(value === 0 ? 'Easy' : value === 1 ? 'Medium' : 'Hard');
   }
 
   function handleCloseNewTask() {
@@ -52,8 +58,8 @@ function NewTask({ showNewTask, setShowNewTask, getTasks }: NewTaskProps) {
       <div className="NewTaskForm">
         <input className="TitleInput" type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
         <div className="DifficultySetting">
-          <p className="DifficultyLabel">Difficulty: { difficulty }</p>
-          <Slider value={difficulty} sx={{color: 'navy'}} onChange={handleSliderChange} valueLabelDisplay="off" step={1} min={0} max={10} />
+          <p className="DifficultyLabel">{ difficultyText }</p>
+          <Slider value={difficulty} sx={{color: 'navy'}} onChange={handleSliderChange} valueLabelDisplay="off" step={1} min={0} max={2} />
         </div>
         <button className="CreateTaskButton" onClick={createTask}>Create</button>
       </div>
