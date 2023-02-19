@@ -1,5 +1,6 @@
 import './Tasks.scss';
 import ExpandedTask from './ExpandedTask/ExpandedTask';
+import NewTask from './NewTask/NewTask';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
@@ -7,6 +8,7 @@ import DataTable, { TableColumn } from 'react-data-table-component';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircleIcon from '@mui/icons-material/Circle';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 
 type DataRow = {
   ID: number;
@@ -18,6 +20,7 @@ type DataRow = {
 
 function Tasks() {
   const [showExpandedTask, setShowExpandedTask] = useState<boolean>(false);
+  const [showNewTask, setShowNewTask] = useState<boolean>(false);
   const [expandedTaskData, setExpandedTaskData] = useState<any>([]);
   const [tasks, setTasks] = useState<[]>([]);
   
@@ -54,12 +57,12 @@ function Tasks() {
     },
     headCells: {
       style: {
-        fontSize: '14px',
+        fontSize: '16px',
       },
     },
     cells: {
       style: {
-        fontSize: '12px',
+        fontSize: '14px',
       },
     }, 
   };
@@ -72,7 +75,7 @@ function Tasks() {
     {
       withCredentials: true,
     });
-    getTasks(); // TODO: update state instead of refetching
+    getTasks();
   }
   
   async function deleteTask(id: number) {
@@ -82,6 +85,7 @@ function Tasks() {
       },
       withCredentials: true,
     });
+    getTasks();
   }
 
   async function getTasks() {
@@ -99,6 +103,10 @@ function Tasks() {
     setShowExpandedTask(true);
   }
 
+  function handleNewTask() {
+    setShowNewTask(true);
+  }
+
   const { status } = useQuery('tasks', getTasks);
 
   if (status === 'loading') return <div>Loading...</div>;
@@ -106,7 +114,9 @@ function Tasks() {
 
   return (
     <div className="Tasks">
+      <NoteAddIcon className="NoteAddIcon" onClick={ handleNewTask } />
       <DataTable
+        className="DataTable"
         columns={columns}
         data={tasks}
         customStyles={customStyles}
@@ -116,6 +126,7 @@ function Tasks() {
         onRowClicked={(row) => expandTask(row)}
       />
 
+      <NewTask showNewTask={showNewTask} setShowNewTask={setShowNewTask} />
       <ExpandedTask showExpandedTask={showExpandedTask} setShowExpandedTask={setShowExpandedTask} expandedTaskData={expandedTaskData} />
     </div>
     

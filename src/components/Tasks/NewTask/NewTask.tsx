@@ -20,7 +20,6 @@ function NewTask({ showNewTask, setShowNewTask }: NewTaskProps) {
     {
       withCredentials: true,
     });
-    // TODO: need to try change tasks state after creating new task
   }
 
   const handleSliderChange = (event: Event, value: number | number[]) => {

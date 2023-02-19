@@ -1,18 +1,15 @@
 import './Header.scss'
 import axios from "axios";
 import TimerIcon from '@mui/icons-material/Timer';
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import { Timer } from '@mui/icons-material';
 
 interface HeaderProps {
   setPage: (page: string) => void;
   showPomodoro: boolean;
   setShowPomodoro: (show: boolean) => void;
-  showNewTask: boolean;
-  setShowNewTask: (show: boolean) => void;
 }
 
-function Header({ setPage, showPomodoro, setShowPomodoro, showNewTask, setShowNewTask }: HeaderProps) {
+function Header({ setPage, showPomodoro, setShowPomodoro }: HeaderProps) {
 
   function handleTasks() {
     setPage('tasks');
@@ -23,13 +20,7 @@ function Header({ setPage, showPomodoro, setShowPomodoro, showNewTask, setShowNe
   }
 
   function handlePomodoro() {
-    if (showNewTask) setShowNewTask(false);
     setShowPomodoro(true);
-  }
-
-  function handleNewTask() {
-    if (showPomodoro) setShowPomodoro(false);
-    setShowNewTask(true);
   }
 
   async function handleLogout() {
@@ -51,7 +42,6 @@ function Header({ setPage, showPomodoro, setShowPomodoro, showNewTask, setShowNe
         <button className="NavButton" onClick={ handleDashboard }>Dashboard</button>
       </div>
       <div className="NavIcons">
-        <NoteAddIcon className="Icon" onClick={ handleNewTask } />
         <TimerIcon className="Icon" onClick={ handlePomodoro } />
       </div>
       <button className="NavButton" onClick={handleLogout}>Logout</button>
