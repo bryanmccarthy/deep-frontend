@@ -2,7 +2,11 @@ import './Login.scss';
 import { useState } from 'react';
 import axios from 'axios';
 
-function Login() {
+interface LoginProps {
+  setUser: (user: string | null) => void;
+}
+
+function Login({ setUser }: LoginProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -17,7 +21,7 @@ function Login() {
     if (res && res.status === 200) {
       sessionStorage.setItem('userFirstName', res.data.firstname);
       sessionStorage.setItem('userLastName', res.data.lastname);
-      window.location.reload();
+      setUser(res.data.firstname)
     }
   }
 

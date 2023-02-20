@@ -3,7 +3,11 @@ import { useState } from 'react';
 import Login from './Login/Login';
 import Register from './Register/Register';
 
-function Forms() {
+interface FormsProps {
+  setUser: (user: string | null) => void;
+}
+
+function Forms({ setUser }: FormsProps) {
   const [form, setForm] = useState('login');
 
   function handleFormChange() {
@@ -12,7 +16,7 @@ function Forms() {
 
   return (
     <div className="Forms">
-      { form === 'login' ? <Login /> : <Register /> }
+      { form === 'login' ? <Login setUser={setUser} /> : <Register /> }
       { form === 'login' ? <button className="FormButton" onClick={handleFormChange}>Don't have an account? Register</button> : <button className="FormButton" onClick={handleFormChange}>Already have an account? Login</button> }
     </div>
   )
