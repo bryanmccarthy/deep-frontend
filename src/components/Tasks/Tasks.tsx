@@ -6,7 +6,7 @@ import { useQuery } from 'react-query';
 import axios from 'axios';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import DeleteIcon from '@mui/icons-material/Delete';
-import CircleIcon from '@mui/icons-material/Circle';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 
@@ -48,13 +48,13 @@ function Tasks({ sidebarHidden }: TasksProps) {
     },
     {
       name: 'Time Spent',
-      selector: row => row.TimeSpent,
+      selector: row => formattedTimeSpent(row.TimeSpent),
       sortable: true,
     },
     {
       name: 'Completed',
       selector: row => row.Completed,
-      cell: row => row.Completed ? <CircleIcon onClick={() => toggleCompleted(row.ID, true) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.ID, false) } />,
+      cell: row => row.Completed ? <CheckCircleIcon onClick={() => toggleCompleted(row.ID, true) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.ID, false) } />,
     },
     {
       cell: row => <DeleteIcon color="action" onClick={() => deleteTask(row.ID)}></DeleteIcon>,
@@ -121,7 +121,7 @@ function Tasks({ sidebarHidden }: TasksProps) {
     const taskArray = Object.entries(row);
     const taskObject = Object.fromEntries(taskArray);
 
-    // request notes for task
+    // Request notes for task
     const res = await axios.get(import.meta.env.VITE_URL + `/notes/${taskObject.ID}`, {
       withCredentials: true,
     });
@@ -138,8 +138,20 @@ function Tasks({ sidebarHidden }: TasksProps) {
     setShowExpandedTask(true);
   }
 
+  function handleCloseExpandedTask() {
+    setShowExpandedTask(false);
+    getTasks();
+  }
+
   function handleNewTask() {
     setShowNewTask(true);
+  }
+
+  function formattedTimeSpent(timeSpent: number) {
+    const hours = Math.floor(timeSpent / 60);
+    const minutes = timeSpent % 60;
+
+    return `${hours}h ${minutes}m`;
   }
 
   const { status } = useQuery('tasks', getTasks);
@@ -165,9 +177,9 @@ function Tasks({ sidebarHidden }: TasksProps) {
       />
 
       <NewTask showNewTask={showNewTask} setShowNewTask={setShowNewTask} getTasks={getTasks} sidebarHidden={sidebarHidden} />
-      <ExpandedTask showExpandedTask={showExpandedTask} setShowExpandedTask={setShowExpandedTask} expandedTaskID={expandedTaskID}
+      <ExpandedTask showExpandedTask={showExpandedTask} handleCloseExpandedTask={handleCloseExpandedTask} expandedTaskID={expandedTaskID}
       expandedTaskTitle={expandedTaskTitle}  expandedTaskDifficulty={expandedTaskDifficulty}expandedTaskTimeSpent={expandedTaskTimeSpent} 
-      expandedTaskCompleted={expandedTaskCompleted} expandedTaskNotes={expandedTaskNotes} />
+      expandedTaskCompleted={expandedTaskCompleted} setExpandedTaskCompleted={setExpandedTaskCompleted} expandedTaskNotes={expandedTaskNotes} />
     </div>
     
   )
