@@ -25,7 +25,14 @@ interface TasksProps {
 function Tasks({ sidebarHidden }: TasksProps) {
   const [showExpandedTask, setShowExpandedTask] = useState<boolean>(false);
   const [showNewTask, setShowNewTask] = useState<boolean>(false);
-  const [expandedTaskData, setExpandedTaskData] = useState<any>([]);
+
+  const [expandedTaskID, setExpandedTaskID] = useState<any>(0);
+  const [expandedTaskTitle, setExpandedTaskTitle] = useState<any>('');
+  const [expandedTaskDifficulty, setExpandedTaskDifficulty] = useState<any>(0);
+  const [expandedTaskTimeSpent, setExpandedTaskTimeSpent] = useState<any>(0);
+  const [expandedTaskCompleted, setExpandedTaskCompleted] = useState<any>(false);
+  const [expandedTaskNotes, setExpandedTaskNotes] = useState<any>([]);
+
   const [tasks, setTasks] = useState<[]>([]);
   
   const columns: TableColumn<DataRow>[] = [
@@ -111,9 +118,23 @@ function Tasks({ sidebarHidden }: TasksProps) {
   }
 
   async function expandTask(row: DataRow) {
-    const rowArray = Object.entries(row);
+    const taskArray = Object.entries(row);
+    const taskObject = Object.fromEntries(taskArray);
 
-    setExpandedTaskData(rowArray);
+    // request notes for task
+    const res = await axios.get(import.meta.env.VITE_URL + `/notes/${taskObject.ID}`, {
+      withCredentials: true,
+    });
+    if (res.status === 200) {
+      setExpandedTaskNotes(res.data);
+    }
+
+    setExpandedTaskID(taskObject.ID);
+    setExpandedTaskTitle(taskObject.Title);
+    setExpandedTaskDifficulty(taskObject.Difficulty);
+    setExpandedTaskTimeSpent(taskObject.TimeSpent);
+    setExpandedTaskCompleted(taskObject.Completed);
+
     setShowExpandedTask(true);
   }
 
@@ -144,7 +165,9 @@ function Tasks({ sidebarHidden }: TasksProps) {
       />
 
       <NewTask showNewTask={showNewTask} setShowNewTask={setShowNewTask} getTasks={getTasks} sidebarHidden={sidebarHidden} />
-      <ExpandedTask showExpandedTask={showExpandedTask} setShowExpandedTask={setShowExpandedTask} expandedTaskData={expandedTaskData} />
+      <ExpandedTask showExpandedTask={showExpandedTask} setShowExpandedTask={setShowExpandedTask} expandedTaskID={expandedTaskID}
+      expandedTaskTitle={expandedTaskTitle}  expandedTaskDifficulty={expandedTaskDifficulty}expandedTaskTimeSpent={expandedTaskTimeSpent} 
+      expandedTaskCompleted={expandedTaskCompleted} expandedTaskNotes={expandedTaskNotes} />
     </div>
     
   )

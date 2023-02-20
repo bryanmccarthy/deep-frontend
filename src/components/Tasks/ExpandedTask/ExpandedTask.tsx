@@ -1,15 +1,34 @@
-import './ExpandedTask.scss'
+import './ExpandedTask.scss';
+import axios from 'axios';
+import { useQuery } from 'react-query';
+import { useState } from 'react';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
 interface ExpandedTaskProps {
   showExpandedTask: boolean;
   setShowExpandedTask: (show: boolean) => void;
-  expandedTaskData: any;
+  expandedTaskID: number;
+  expandedTaskTitle: string;
+  expandedTaskDifficulty: number;
+  expandedTaskTimeSpent: number;
+  expandedTaskCompleted: boolean;
+  expandedTaskNotes: [];
 }
 
-function ExpandedTask({ showExpandedTask, setShowExpandedTask, expandedTaskData }: ExpandedTaskProps) {
+function ExpandedTask({ showExpandedTask, setShowExpandedTask, expandedTaskID, expandedTaskTitle, expandedTaskDifficulty, expandedTaskTimeSpent, expandedTaskCompleted, expandedTaskNotes }: ExpandedTaskProps) {
+  const [noteTitle, setNoteTitle] = useState<string>('');
 
-  console.log('expandedTaskData: ', expandedTaskData) // TODO: reference for index of data
+  console.log(expandedTaskNotes);
+
+  async function createNote() {
+    await axios.post(import.meta.env.VITE_URL + '/notes/create', {
+      Title: noteTitle,
+      TaskID: expandedTaskID,
+    },
+    {
+      withCredentials: true,
+    });
+  }
 
   const handleCloseExpandedTask = () => {
     setShowExpandedTask(false);
@@ -17,10 +36,29 @@ function ExpandedTask({ showExpandedTask, setShowExpandedTask, expandedTaskData 
 
   return (
     <div className="ExpandedTask" style={{ visibility: showExpandedTask ? "visible" : "hidden" }}>
-      <button className="CloseButton" onClick={handleCloseExpandedTask}><KeyboardReturnIcon /></button>
-      <div className="TaskData">
+      <button className="CloseButton" onClick={handleCloseExpandedTask}><KeyboardReturnIcon fontSize="large" /></button>
+      <div className="TaskData" style={{marginTop: '5em'}}>
         Task Data:
-        { expandedTaskData }
+        <div>id: {expandedTaskID}</div>
+        <div>title: {expandedTaskTitle}</div>
+        <div>difficulty: {expandedTaskDifficulty}</div>
+        <div>time spent: {expandedTaskTimeSpent}</div>
+        {expandedTaskCompleted ? <div>completed: true</div> : <div>completed: false</div>}
+        Notes:
+        {
+          expandedTaskNotes.map((note: any) => {
+            return (
+              <div key={note.ID}>
+                {note.Title}
+              </div>
+            )
+          })
+        }
+      </div>
+
+      <div className="NoteCreate" style={{marginTop: '5em'}}>
+        <input className="NoteTitleInput" type="text" placeholder="Title" value={noteTitle} onChange={(e) => setNoteTitle(e.target.value)} />
+        <button className="CreateNoteButton" onClick={createNote}>Create Note</button>
       </div>
     </div>
   )
