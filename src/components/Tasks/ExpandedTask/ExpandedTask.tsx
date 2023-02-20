@@ -1,6 +1,5 @@
 import './ExpandedTask.scss';
 import axios from 'axios';
-import { useQuery } from 'react-query';
 import { useState } from 'react';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
@@ -17,8 +16,6 @@ interface ExpandedTaskProps {
 
 function ExpandedTask({ showExpandedTask, setShowExpandedTask, expandedTaskID, expandedTaskTitle, expandedTaskDifficulty, expandedTaskTimeSpent, expandedTaskCompleted, expandedTaskNotes }: ExpandedTaskProps) {
   const [noteTitle, setNoteTitle] = useState<string>('');
-
-  console.log(expandedTaskNotes);
 
   async function createNote() {
     await axios.post(import.meta.env.VITE_URL + '/notes/create', {
