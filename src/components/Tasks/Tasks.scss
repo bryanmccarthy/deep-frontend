@@ -15,4 +15,20 @@
       cursor: pointer;
     }
   }
+
+  .NoTasks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    .NoTasksText {
+      padding: 4em;
+      font-size: 24px;
+      font-weight: 400;
+      color: #8a8a8a;
+      border: 2px dashed #8a8a8a;
+      border-radius: 0.5em;
+    }
+  }
 }

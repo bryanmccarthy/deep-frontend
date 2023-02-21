@@ -165,16 +165,27 @@ function Tasks({ sidebarHidden }: TasksProps) {
         <NoteAddIcon className="NoteAddIcon" onClick={ handleNewTask } />
       </div>
 
-      <DataTable
-        className="DataTable"
-        columns={columns}
-        data={tasks}
-        customStyles={customStyles}
-        pagination
-        highlightOnHover
-        pointerOnHover
-        onRowClicked={(row) => expandTask(row)}
-      />
+      { 
+        tasks.length === 0 
+        ? 
+          <div className="NoTasks">
+            <div className="NoTasksText">
+              begin adding tasks
+            </div>
+          </div> 
+        :
+          <DataTable
+            className="DataTable"
+            columns={columns}
+            data={tasks}
+            customStyles={customStyles}
+            pagination
+            highlightOnHover
+            pointerOnHover
+            noDataComponent
+            onRowClicked={(row) => expandTask(row)}
+          />
+      }
 
       <NewTask showNewTask={showNewTask} setShowNewTask={setShowNewTask} getTasks={getTasks} sidebarHidden={sidebarHidden} />
       <ExpandedTask showExpandedTask={showExpandedTask} handleCloseExpandedTask={handleCloseExpandedTask} expandedTaskID={expandedTaskID}
