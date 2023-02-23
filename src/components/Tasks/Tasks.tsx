@@ -18,11 +18,7 @@ type DataRow = {
   Completed: boolean;
 }
 
-interface TasksProps {
-  sidebarHidden: boolean;
-}
-
-function Tasks({ sidebarHidden }: TasksProps) {
+function Tasks() {
   const [showExpandedTask, setShowExpandedTask] = useState<boolean>(false);
   const [showNewTask, setShowNewTask] = useState<boolean>(false);
 
@@ -64,7 +60,7 @@ function Tasks({ sidebarHidden }: TasksProps) {
   const customStyles = {
     rows: {
       style: {
-        minHeight: '5em',
+        minHeight: '4em',
         backgroundColor: '#faf9f6',
       }
     },
@@ -187,7 +183,7 @@ function Tasks({ sidebarHidden }: TasksProps) {
           />
       }
 
-      <NewTask showNewTask={showNewTask} setShowNewTask={setShowNewTask} getTasks={getTasks} sidebarHidden={sidebarHidden} />
+      <NewTask showNewTask={showNewTask} setShowNewTask={setShowNewTask} getTasks={getTasks} />
       <ExpandedTask showExpandedTask={showExpandedTask} handleCloseExpandedTask={handleCloseExpandedTask} expandedTaskID={expandedTaskID}
       expandedTaskTitle={expandedTaskTitle}  expandedTaskDifficulty={expandedTaskDifficulty}expandedTaskTimeSpent={expandedTaskTimeSpent} 
       expandedTaskCompleted={expandedTaskCompleted} setExpandedTaskCompleted={setExpandedTaskCompleted} expandedTaskNotes={expandedTaskNotes} />

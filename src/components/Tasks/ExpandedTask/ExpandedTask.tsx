@@ -58,6 +58,9 @@ function ExpandedTask({ showExpandedTask, handleCloseExpandedTask, expandedTaskI
         <div>{ formattedTimeSpent(expandedTaskTimeSpent) }</div>
         { expandedTaskCompleted ? <CheckCircleIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, true) } /> : <CircleOutlinedIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, false) } /> }
       </div>
+      <div className="TaskNotes">
+
+      </div>
     </div>
   )
 }

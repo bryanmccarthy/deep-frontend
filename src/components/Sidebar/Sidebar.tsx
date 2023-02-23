@@ -3,14 +3,12 @@ import axios from "axios";
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import LogoutIcon from '@mui/icons-material/Logout';
-import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 interface SidebarProps {
   setPage: (page: string) => void;
-  setSidebarHidden: (sidebarHidden: boolean) => void;
 }
 
-function Sidebar({ setPage, setSidebarHidden }: SidebarProps) {
+function Sidebar({ setPage }: SidebarProps) {
 
   function handleTasks() {
     setPage('tasks');
@@ -49,7 +47,6 @@ function Sidebar({ setPage, setSidebarHidden }: SidebarProps) {
             <button className="NavButton" onClick={handleLogout}>Logout</button>
           </div>
         </div>
-        <button className="CloseSidebarButton" onClick={() => setSidebarHidden(true)}><ArrowLeftIcon fontSize="large" /></button>
     </div>
   );
 }

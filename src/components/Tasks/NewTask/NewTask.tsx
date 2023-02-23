@@ -8,10 +8,9 @@ interface NewTaskProps {
   showNewTask: boolean;
   setShowNewTask: (show: boolean) => void;
   getTasks: () => void;
-  sidebarHidden: boolean;
 }
 
-function NewTask({ showNewTask, setShowNewTask, getTasks, sidebarHidden }: NewTaskProps) {
+function NewTask({ showNewTask, setShowNewTask, getTasks }: NewTaskProps) {
   const ref = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState('');
   const [difficulty, setDifficulty] = useState(0);
@@ -54,7 +53,7 @@ function NewTask({ showNewTask, setShowNewTask, getTasks, sidebarHidden }: NewTa
   });
   
   return (
-    <div ref={ref} className="NewTask" style={{ visibility: showNewTask ? "visible" : "hidden", left: sidebarHidden ? '3.2em' : '10.8em' }}>
+    <div ref={ref} className="NewTask" style={{ visibility: showNewTask ? "visible" : "hidden", left: '3em' }}>
       <button className="CloseButton" onClick={handleCloseNewTask}>&times;</button>
       <div className="NewTaskForm">
         <input className="TitleInput" type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />

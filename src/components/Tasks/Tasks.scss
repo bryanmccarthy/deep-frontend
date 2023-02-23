@@ -1,3 +1,5 @@
+@import '../../utils/variables.scss';
+
 .Tasks {
   display: flex;
   flex-direction: column;
@@ -31,4 +33,30 @@
       border-radius: 0.5em;
     }
   }
+
+  overflow: hidden;
+  
+  .DataTable {
+    height: 100%;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    overflow: auto;
+  }
+
+::-webkit-scrollbar {
+  width: 1em;
+}
+
+::-webkit-scrollbar-track {
+  background: $off-white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $black;
+  border-radius: 1em;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $off-white;
+}
 }

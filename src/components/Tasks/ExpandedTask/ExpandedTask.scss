@@ -36,4 +36,15 @@
       cursor: pointer;
     }
   }
+
+  .TaskNotes {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 90%;
+    width: 100%;
+    margin-top: 2em;
+    background-color: antiquewhite;
+  }
 }

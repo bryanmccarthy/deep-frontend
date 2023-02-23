@@ -10,11 +10,8 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 function Main() {
   const [showPomodoro, setShowPomodoro] = useState<boolean>(false);
   const [page, setPage] = useState<string>('tasks');
-  const [sidebarHidden, setSidebarHidden] = useState<boolean>(false);
 
-  function handleShowSiderbar() {
-    setSidebarHidden(false);
-  }
+  
 
   function handlePomodoro() {
     setShowPomodoro(true);
@@ -22,9 +19,8 @@ function Main() {
 
   return (
     <div className="Main">
-      { sidebarHidden === true ? <button className="OpenSidebarButton" onClick={handleShowSiderbar}><ArrowRightIcon fontSize="large" /></button> : <Sidebar setPage={setPage} setSidebarHidden={setSidebarHidden} /> }
       <div className="Page">
-        { page === 'tasks' ? <Tasks sidebarHidden={sidebarHidden} /> : null }
+        { page === 'tasks' ? <Tasks /> : null }
         { page === 'dashboard' ? <Dashboard /> : null }
         <Pomodoro showPomodoro={showPomodoro} setShowPomodoro={setShowPomodoro} />
       </div>
