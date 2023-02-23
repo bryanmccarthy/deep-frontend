@@ -39,7 +39,7 @@ function Tasks() {
     {
       name: 'Difficulty',
       selector: row => row.Difficulty,
-      cell: row => row.Difficulty === 0 ? <p style={{ color: 'green' }}>Easy</p> : row.Difficulty === 1 ? <p style={{ color: 'orange' }}>Medium</p> : <p style={{ color: 'red' }}>Hard</p>,
+      cell: row => row.Difficulty,
       sortable: true,
     },
     {
@@ -78,6 +78,7 @@ function Tasks() {
     },
     pagination: {
       style: {
+        justifyContent: 'center',
         fontSize: '16px',
         backgroundColor: '#faf9f6',
       }
@@ -139,10 +140,6 @@ function Tasks() {
     getTasks();
   }
 
-  function handleNewTask() {
-    setShowNewTask(true);
-  }
-
   function formattedTimeSpent(timeSpent: number) {
     const hours = Math.floor(timeSpent / 60);
     const minutes = timeSpent % 60;
@@ -158,32 +155,23 @@ function Tasks() {
   return (
     <div className="Tasks">
       <div className="TasksHeading">
-        <NoteAddIcon className="NoteAddIcon" onClick={ handleNewTask } />
+        <NoteAddIcon className="NoteAddIcon" onClick={() => setShowNewTask(true) } />
+        <NewTask showNewTask={showNewTask} setShowNewTask={setShowNewTask} getTasks={getTasks} />
       </div>
-
-      { 
-        tasks.length === 0 
-        ? 
-          <div className="NoTasks">
-            <div className="NoTasksText">
-              begin adding tasks
-            </div>
-          </div> 
-        :
-          <DataTable
-            className="DataTable"
-            columns={columns}
-            data={tasks}
-            customStyles={customStyles}
-            pagination
-            highlightOnHover
-            pointerOnHover
-            noDataComponent
-            onRowClicked={(row) => expandTask(row)}
-          />
-      }
-
-      <NewTask showNewTask={showNewTask} setShowNewTask={setShowNewTask} getTasks={getTasks} />
+      
+      <DataTable
+        className="DataTable"
+        columns={columns}
+        data={tasks}
+        customStyles={customStyles}
+        pagination
+        paginationPerPage={10}
+        paginationComponentOptions={{ noRowsPerPage: true }}
+        highlightOnHover
+        pointerOnHover
+        noDataComponent
+        onRowClicked={(row) => expandTask(row)}
+      />
       <ExpandedTask showExpandedTask={showExpandedTask} handleCloseExpandedTask={handleCloseExpandedTask} expandedTaskID={expandedTaskID}
       expandedTaskTitle={expandedTaskTitle}  expandedTaskDifficulty={expandedTaskDifficulty}expandedTaskTimeSpent={expandedTaskTimeSpent} 
       expandedTaskCompleted={expandedTaskCompleted} setExpandedTaskCompleted={setExpandedTaskCompleted} expandedTaskNotes={expandedTaskNotes} />

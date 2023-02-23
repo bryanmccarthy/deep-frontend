@@ -11,52 +11,9 @@
 
     .NoteAddIcon {
       margin-left: 0.2em;
-      margin-top: 0.2em;
-      height: 1.2em;
-      width: 1.2em;
+      height: 1em;
+      width: 1em;
       cursor: pointer;
     }
   }
-
-  .NoTasks {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-
-    .NoTasksText {
-      padding: 4em;
-      font-size: 24px;
-      font-weight: 400;
-      color: #8a8a8a;
-      border: 2px dashed #8a8a8a;
-      border-radius: 0.5em;
-    }
-  }
-
-  overflow: hidden;
-  
-  .DataTable {
-    height: 100%;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    overflow: auto;
-  }
-
-::-webkit-scrollbar {
-  width: 1em;
-}
-
-::-webkit-scrollbar-track {
-  background: $off-white;
-}
-
-::-webkit-scrollbar-thumb {
-  background: $black;
-  border-radius: 1em;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: $off-white;
-}
 }

@@ -3,33 +3,21 @@
 .Main {
   position: relative;
   display: flex;
+  flex-direction: column;
   height: 100%;
   width: 100%;
   background-color: $off-white;
 
-  .Page {
-    height: 100%;
-    width: 100%;
-  }
+  .Icons {
+    display: flex;
+    align-items: center;
+    justify-content: right;
 
     .Icon {
-      position: absolute;
-      top: 0.2em;
-      right: 0.2em;
-      height: 1.2em;
-      width: 1.2em;
-      cursor: pointer;
-    }
-
-    .OpenSidebarButton {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      margin: 0.2em;
+      height: 1em;
       width: 1em;
-      padding: 0.1em;
-      border: 0.8px solid $black;
-      border-radius: 1em;
-      background-color: $off-white;
       cursor: pointer;
     }
+  }
 }
