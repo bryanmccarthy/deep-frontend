@@ -7,6 +7,9 @@
   .NavSection {
     display: flex;
     align-items: center;
+    padding-top: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
 
     .NavIcon {
       width: 1em;
@@ -31,7 +34,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 1.2em;
+    width: 1em;
     padding: 0.1em;
     border: 0.8px solid $black;
     border-radius: 1em;
