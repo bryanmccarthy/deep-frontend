@@ -54,7 +54,7 @@ function ExpandedTask({ showExpandedTask, handleCloseExpandedTask, expandedTaskI
       <button className="CloseButton" onClick={handleCloseExpandedTask}><KeyboardReturnIcon fontSize="large" /></button>
       <div className="TaskInfoHeader">
         <div>{ expandedTaskTitle }</div>
-        { expandedTaskDifficulty === 0 ? <div style={{ color: 'green' }}>Easy</div> : expandedTaskDifficulty === 1 ? <div style={{ color: 'orange' }}>Medium</div> : <div style={{ color: 'red' }}>Hard</div> }
+        <div>{ expandedTaskDifficulty }</div>
         <div>{ formattedTimeSpent(expandedTaskTimeSpent) }</div>
         { expandedTaskCompleted ? <CheckCircleIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, true) } /> : <CircleOutlinedIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, false) } /> }
       </div>

@@ -5,7 +5,7 @@
   background-color: $off-white;
 
     .TitleInput {
-      height: 1.5em;
+      height: 1em;
       border: none;
       border-bottom: 1px solid $black;
       background: none;
@@ -16,6 +16,8 @@
     }
 
     .CreateTaskButton {
+      height: 1em;
+      width: 1em;
       cursor: pointer;
     }
 }
