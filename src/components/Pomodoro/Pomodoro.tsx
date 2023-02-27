@@ -34,6 +34,7 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
       // TODO: Handle notification
       if (currentTimer === 'Work') {
         // TODO: Handle saving current work time
+        console.log('Work time + ' + workDuration)
         setCurrentTimer('Break');
         setSeconds(breakDuration);
         setFormattedDuration(formatDuration(breakDuration));

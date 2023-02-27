@@ -9,6 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 type DataRow = {
   ID: number;
@@ -39,7 +40,7 @@ function Tasks() {
     {
       name: 'Difficulty',
       selector: row => row.Difficulty,
-      cell: row => row.Difficulty,
+      cell: row => row.Difficulty === 0 ? <div><FiberManualRecordIcon fontSize="small" /></div> : row.Difficulty === 1 ? <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div> : <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div>,
       sortable: true,
     },
     {
@@ -60,7 +61,7 @@ function Tasks() {
   const customStyles = {
     rows: {
       style: {
-        minHeight: '4em',
+        minHeight: '4.5em',
         backgroundColor: '#faf9f6',
       }
     },

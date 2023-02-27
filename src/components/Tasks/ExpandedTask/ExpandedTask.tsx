@@ -4,6 +4,7 @@ import { useState } from 'react';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 interface ExpandedTaskProps {
   showExpandedTask: boolean;
@@ -54,7 +55,9 @@ function ExpandedTask({ showExpandedTask, handleCloseExpandedTask, expandedTaskI
       <button className="CloseButton" onClick={handleCloseExpandedTask}><KeyboardReturnIcon fontSize="large" /></button>
       <div className="TaskInfoHeader">
         <div>{ expandedTaskTitle }</div>
-        <div>{ expandedTaskDifficulty }</div>
+        <div>
+          { expandedTaskDifficulty === 0 ? <FiberManualRecordIcon fontSize="small" /> : expandedTaskDifficulty === 1 ? <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div> : <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div> }
+        </div>
         <div>{ formattedTimeSpent(expandedTaskTimeSpent) }</div>
         { expandedTaskCompleted ? <CheckCircleIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, true) } /> : <CircleOutlinedIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, false) } /> }
       </div>

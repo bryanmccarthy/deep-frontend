@@ -47,7 +47,7 @@ function NewTask({ showNewTask, setShowNewTask, getTasks }: NewTaskProps) {
   
   return (
     <div ref={ref} className="NewTask" style={{ visibility: showNewTask ? "visible" : "hidden" }}>
-        <input className="TitleInput" type="text" placeholder="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <input className="TitleInput" type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
         <div className="DifficultySetting">
 
         </div>
