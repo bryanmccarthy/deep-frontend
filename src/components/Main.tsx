@@ -35,13 +35,17 @@ function Main() {
   return (
     <div className="Main">
       <div className="Icons">
-        {
-          page === 'dashboard' ?
-          <FormatListBulletedIcon className="Icon" onClick={ () => setPage('tasks') } /> :
-          <DashboardIcon className="Icon" onClick={ () => setPage('dashboard') } />
-        }
-        <TimerIcon className="Icon" onClick={ handlePomodoro } />
-        <LogoutIcon className="Icon" onClick={ handleLogout } />
+        <div>
+          {
+            page === 'dashboard' ?
+            <FormatListBulletedIcon className="Icon" onClick={ () => setPage('tasks') } /> :
+            <DashboardIcon className="Icon" onClick={ () => setPage('dashboard') } />
+          }
+        </div>
+        <div>
+          <TimerIcon className="Icon" onClick={ handlePomodoro } />
+          <LogoutIcon className="Icon" onClick={ handleLogout } />
+        </div>
       </div>
       <div className="Page">
         { page === 'tasks' ? <Tasks /> : null }
