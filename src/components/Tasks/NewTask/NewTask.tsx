@@ -1,7 +1,9 @@
 import './NewTask.scss';
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
-import AddBoxIcon from '@mui/icons-material/AddBox';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import { TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
 interface NewTaskProps {
   showNewTask: boolean;
@@ -28,30 +30,27 @@ function NewTask({ showNewTask, setShowNewTask, getTasks }: NewTaskProps) {
     getTasks();
   }
 
-  const handleSliderChange = (event: Event, value: number | number[]) => {
-    setDifficulty(value as number);
+  function handleDifficultyChange(event: any) {
+    setDifficulty(event.target.value);
   }
-
-  useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setShowNewTask(false);
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside, true);
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  });
   
   return (
-    <div ref={ref} className="NewTask" style={{ visibility: showNewTask ? "visible" : "hidden" }}>
-        <input className="TitleInput" type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-        <div className="DifficultySetting">
-
-        </div>
-        <AddBoxIcon className="CreateTaskButton" onClick={createTask} />
+    <div className="NewTask">
+        <TextField className="TitleInput" label="Title" variant="standard" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <FormControl className="DifficultyForm" variant="standard" size="small">
+          <InputLabel>Difficulty</InputLabel>
+          <Select
+          className="DifficultySelect"
+          value={difficulty}
+          label="Difficulty"
+          onChange={(e) => handleDifficultyChange(e)}
+          >
+            <MenuItem value={0}><FiberManualRecordIcon /></MenuItem>
+            <MenuItem value={1}><FiberManualRecordIcon /><FiberManualRecordIcon /></MenuItem>
+            <MenuItem value={2}><FiberManualRecordIcon /><FiberManualRecordIcon /><FiberManualRecordIcon /></MenuItem>
+          </Select>
+        </FormControl>
+        <NoteAddIcon className="NoteAddIcon" onClick={createTask}/>
     </div>
   )
 }

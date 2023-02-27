@@ -6,14 +6,8 @@
   margin: 0;
   height: 100%;
 
-  .TasksHeading {
+  .NewTask {
     display: flex;
-
-    .NoteAddIcon {
-      margin-left: 0.2em;
-      height: 1em;
-      width: 1em;
-      cursor: pointer;
-    }
+    justify-content: right;
   }
 }

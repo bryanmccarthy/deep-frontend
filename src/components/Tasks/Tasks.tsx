@@ -61,7 +61,7 @@ function Tasks() {
   const customStyles = {
     rows: {
       style: {
-        minHeight: '4.5em',
+        height: '4.3em',
         backgroundColor: '#faf9f6',
       }
     },
@@ -155,8 +155,7 @@ function Tasks() {
 
   return (
     <div className="Tasks">
-      <div className="TasksHeading">
-        <NoteAddIcon className="NoteAddIcon" onClick={() => setShowNewTask(true) } />
+      <div className="NewTask">
         <NewTask showNewTask={showNewTask} setShowNewTask={setShowNewTask} getTasks={getTasks} />
       </div>
       

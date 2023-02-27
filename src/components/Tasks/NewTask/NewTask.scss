@@ -2,22 +2,25 @@
 
 .NewTask {
   display: flex;
-  background-color: $off-white;
+  align-items: baseline;
+  margin-top: 0.5em;
+  padding-right: 0.5em;
 
-    .TitleInput {
-      height: 1em;
-      border: none;
-      border-bottom: 1px solid $black;
-      background: none;
-      font-size: 18px;
-      font-weight: 600;
-      color: $black;
-      outline: none;
-    }
+  .TitleInput {
+    padding-right: 0.5em;
+  }
 
-    .CreateTaskButton {
-      height: 1em;
-      width: 1em;
-      cursor: pointer;
+  .DifficultyForm {
+    padding-right: 0.5em;
+
+    .DifficultySelect {
+      width: 7em;
     }
+  }
+
+  .NoteAddIcon {
+    height: 1.2em;
+    width: 1.2em;
+    cursor: pointer;
+  }
 }
