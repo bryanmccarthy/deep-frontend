@@ -62,6 +62,22 @@ function ExpandedTask({ showExpandedTask, handleCloseExpandedTask, expandedTaskI
         { expandedTaskCompleted ? <CheckCircleIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, true) } /> : <CircleOutlinedIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, false) } /> }
       </div>
       <div className="TaskNotes">
+        Notes:
+        {
+          expandedTaskNotes.map((note: any) => {
+            return (
+              <div className="Note" key={note.ID}>
+                <div>{ note.Title }</div>
+                <div>{ note.Content }</div>
+              </div>
+            )
+          })
+        }
+
+        <div className="NewNote" style={{paddingTop:'5em'}}>
+          <input className="NoteTitleInput" type="text" placeholder="Title" value={noteTitle} onChange={(e) => setNoteTitle(e.target.value)} />
+          <button className="CreateNoteButton" onClick={createNote}>Add Note</button>
+        </div>
 
       </div>
     </div>
