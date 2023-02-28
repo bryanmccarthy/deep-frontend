@@ -21,7 +21,6 @@ type DataRow = {
 
 function Tasks() {
   const [showExpandedTask, setShowExpandedTask] = useState<boolean>(false);
-  const [showNewTask, setShowNewTask] = useState<boolean>(false);
   const [expandedTaskID, setExpandedTaskID] = useState<any>(0);
   const [expandedTaskTitle, setExpandedTaskTitle] = useState<any>('');
   const [expandedTaskDifficulty, setExpandedTaskDifficulty] = useState<any>(0);
@@ -149,7 +148,7 @@ function Tasks() {
   return (
     <div className="Tasks">
       <div className="NewTask">
-        <NewTask setShowNewTask={setShowNewTask} getTasks={getTasks} />
+        <NewTask getTasks={getTasks} />
       </div>
       
       <DataTable

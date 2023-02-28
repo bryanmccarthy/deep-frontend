@@ -10,11 +10,10 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Dayjs } from 'dayjs';
 
 interface NewTaskProps {
-  setShowNewTask: (show: boolean) => void;
   getTasks: () => void;
 }
 
-function NewTask({ setShowNewTask, getTasks }: NewTaskProps) {
+function NewTask({ getTasks }: NewTaskProps) {
   const [title, setTitle] = useState<string>('');
   const [difficulty, setDifficulty] = useState<number>(0);
   const [dueDate, setDueDate] = useState<Dayjs | null>(null);
@@ -34,7 +33,6 @@ function NewTask({ setShowNewTask, getTasks }: NewTaskProps) {
     setTitle('');
     setDifficulty(0);
     setDueDate(null);
-    setShowNewTask(false);
     getTasks();
   }
 
