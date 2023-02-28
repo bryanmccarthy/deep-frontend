@@ -13,8 +13,10 @@
     align-items: center;
     justify-content: space-between;
     margin: 0.2em;
-    border: 1px solid $black;
+    margin-bottom: 0.1em;
+    border: none;
     border-radius: 0.5em;
+    box-shadow: 0 0 0.15em $black;
 
 
     .Icon {
@@ -28,8 +30,9 @@
   .Page {
     height: 100%;
     margin: 0.2em;
-    border: 1px solid $black;
+    border: none;
     border-radius: 0.5em;
+    box-shadow: 0 0 0.15em $black;
     overflow: auto;
   }
 }

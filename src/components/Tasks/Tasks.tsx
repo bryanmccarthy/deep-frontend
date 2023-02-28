@@ -60,7 +60,7 @@ function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTa
   const customStyles = {
     rows: {
       style: {
-        height: '4.5em',
+        height: '4em',
         backgroundColor: '#faf9f6',
       }
     },

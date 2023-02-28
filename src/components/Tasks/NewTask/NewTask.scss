@@ -4,30 +4,27 @@
   display: flex;
   align-items: center;
   margin: 0.5em;
-  padding: 0.5em;
-  border: 1px solid $black;
-  border-radius: 0.5em;
 
   .TitleInput {
-    margin-right: 0.5em;
+    margin: 0.5em;
   }
 
   .DifficultyForm {
-    margin-right: 0.5em;
+    margin: 0.5em;
     width: 8em;
 
     .DifficultyIcon {
-      height: 0.8em;
+      height: 0.6em;
     }
   }
 
   .DueDatePicker {
-    margin-right: 0.5em;
+    margin: 0.5em;
   }
 
   .NoteAddIcon {
-    height: 1.8em;
-    width: 1.8em;
+    height: 2em;
+    width: 2em;
     cursor: pointer;
   }
 }

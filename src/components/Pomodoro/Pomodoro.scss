@@ -3,13 +3,13 @@
 .Pomodoro {
   position: absolute;
   top: 2.9em;
-  right: 1em;
+  right: 2em;
   background-color: $off-white;
   height: 20em;
   width: 22em;
-  border: 1px solid $black;
-  border-bottom-left-radius: 0.5em;
-  border-bottom-right-radius: 0.5em;
+  border: none;
+  box-shadow: 0 0 0.15em $black;
+  border-radius: 0.5em;
   z-index: 1;
 
   .CloseButton {
