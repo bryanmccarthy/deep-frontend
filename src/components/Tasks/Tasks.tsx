@@ -8,13 +8,13 @@ import DataTable, { TableColumn } from 'react-data-table-component';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import dayjs, { Dayjs } from 'dayjs';
 
 type DataRow = {
   id: number;
   title: string;
-  timeSpent: number;
+  due_date: number;
   difficulty: number;
   completed: boolean;
 }
@@ -22,7 +22,6 @@ type DataRow = {
 function Tasks() {
   const [showExpandedTask, setShowExpandedTask] = useState<boolean>(false);
   const [showNewTask, setShowNewTask] = useState<boolean>(false);
-
   const [expandedTaskID, setExpandedTaskID] = useState<any>(0);
   const [expandedTaskTitle, setExpandedTaskTitle] = useState<any>('');
   const [expandedTaskDifficulty, setExpandedTaskDifficulty] = useState<any>(0);
@@ -40,7 +39,12 @@ function Tasks() {
     {
       name: 'Difficulty',
       selector: row => row.difficulty,
-      cell: row => row.difficulty === 0 ? <div><FiberManualRecordIcon fontSize="small" /></div> : row.difficulty === 1 ? <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div> : <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div>,
+      cell: row => row.difficulty === 0 ? <div><FiberManualRecordIcon className="DifficultyIcon" /></div> : row.difficulty === 1 ? <div><FiberManualRecordIcon className="DifficultyIcon" /> <FiberManualRecordIcon className="DifficultyIcon" /></div> : <div><FiberManualRecordIcon className="DifficultyIcon" /> <FiberManualRecordIcon className="DifficultyIcon" /> <FiberManualRecordIcon className="DifficultyIcon" /></div>,
+      sortable: true,
+    },
+    {
+      name: 'Due Date',
+      selector: row => dayjs(row.due_date).format('MM/DD/YYYY'),
       sortable: true,
     },
     {
@@ -56,7 +60,7 @@ function Tasks() {
   const customStyles = {
     rows: {
       style: {
-        height: '4.3em',
+        height: '4.2em',
         backgroundColor: '#faf9f6',
       }
     },
@@ -92,6 +96,7 @@ function Tasks() {
     getTasks();
   }
   
+  // TODO: show a Snackbar when task is deleted w/ undo option
   async function deleteTask(id: number) {
     await axios.delete(import.meta.env.VITE_URL + '/tasks/delete', {
       data: {
@@ -144,7 +149,7 @@ function Tasks() {
   return (
     <div className="Tasks">
       <div className="NewTask">
-        <NewTask showNewTask={showNewTask} setShowNewTask={setShowNewTask} getTasks={getTasks} />
+        <NewTask setShowNewTask={setShowNewTask} getTasks={getTasks} />
       </div>
       
       <DataTable

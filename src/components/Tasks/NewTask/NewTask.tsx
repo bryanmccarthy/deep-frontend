@@ -1,31 +1,39 @@
 import './NewTask.scss';
 import axios from 'axios';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import { TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { Dayjs } from 'dayjs';
 
 interface NewTaskProps {
-  showNewTask: boolean;
   setShowNewTask: (show: boolean) => void;
   getTasks: () => void;
 }
 
-function NewTask({ showNewTask, setShowNewTask, getTasks }: NewTaskProps) {
-  const ref = useRef<HTMLInputElement>(null);
-  const [title, setTitle] = useState('');
-  const [difficulty, setDifficulty] = useState(0);
+function NewTask({ setShowNewTask, getTasks }: NewTaskProps) {
+  const [title, setTitle] = useState<string>('');
+  const [difficulty, setDifficulty] = useState<number>(0);
+  const [dueDate, setDueDate] = useState<Dayjs | null>(null);
 
   async function createTask() {
+    if (title === '') return;
+    if (dueDate === null) return;
+
     await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
       title: title,
       difficulty: difficulty,
+      due_date: dueDate,
     },
     {
       withCredentials: true,
     });
     setTitle('');
     setDifficulty(0);
+    setDueDate(null);
     setShowNewTask(false);
     getTasks();
   }
@@ -36,8 +44,8 @@ function NewTask({ showNewTask, setShowNewTask, getTasks }: NewTaskProps) {
   
   return (
     <div className="NewTask">
-        <TextField className="TitleInput" label="Title" variant="standard" value={title} onChange={(e) => setTitle(e.target.value)} />
-        <FormControl className="DifficultyForm" variant="standard" size="small">
+        <TextField className="TitleInput" label="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <FormControl className="DifficultyForm">
           <InputLabel>Difficulty</InputLabel>
           <Select
           className="DifficultySelect"
@@ -45,11 +53,21 @@ function NewTask({ showNewTask, setShowNewTask, getTasks }: NewTaskProps) {
           label="Difficulty"
           onChange={(e) => handleDifficultyChange(e)}
           >
-            <MenuItem value={0}><FiberManualRecordIcon fontSize="small" /></MenuItem>
-            <MenuItem value={1}><FiberManualRecordIcon fontSize="small" /><FiberManualRecordIcon fontSize="small" /></MenuItem>
-            <MenuItem value={2}><FiberManualRecordIcon fontSize="small" /><FiberManualRecordIcon fontSize="small" /><FiberManualRecordIcon fontSize="small" /></MenuItem>
+            <MenuItem value={0}><FiberManualRecordIcon className="DifficultyIcon" /></MenuItem>
+            <MenuItem value={1}><FiberManualRecordIcon className="DifficultyIcon" /><FiberManualRecordIcon className="DifficultyIcon" /></MenuItem>
+            <MenuItem value={2}><FiberManualRecordIcon className="DifficultyIcon" /><FiberManualRecordIcon className="DifficultyIcon" /><FiberManualRecordIcon className="DifficultyIcon" /></MenuItem>
           </Select>
         </FormControl>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DesktopDatePicker
+            className="DueDatePicker"
+            label="Due"
+            inputFormat="MM/DD/YYYY"
+            value={dueDate}
+            onChange={(date) => setDueDate(date)}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
         <NoteAddIcon className="NoteAddIcon" onClick={createTask}/>
     </div>
   )
