@@ -48,7 +48,7 @@ function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTa
       sortable: true,
     },
     {
-      name: 'Completed',
+      name: 'Done',
       selector: row => row.completed,
       cell: row => row.completed ? <CheckCircleIcon onClick={() => toggleCompleted(row.id, true) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.id, false) } />,
     },
@@ -145,7 +145,7 @@ function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTa
     <div className="Tasks">
       <div className="NewTaskContainer">
         <div className="TasksCompletedRatio">
-          Completed {tasks.filter((task: any) => task.completed === true).length}/{tasks.length}
+          <label className="CompletedLabel">Completed</label> {tasks.filter((task: any) => task.completed === true).length}/{tasks.length}
         </div>
         <NewTask getTasks={getTasks} />
       </div>
