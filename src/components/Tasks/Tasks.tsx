@@ -20,10 +20,10 @@ type DataRow = {
 
 interface TasksProps {
   setPage: (page: string) => void;
-  setExpandedTaskID: (id: number) => void;
-  setExpandedTaskTitle: (title: string) => void;
-  setExpandedTaskDifficulty: (difficulty: number) => void;
-  setExpandedTaskCompleted: (completed: boolean) => void;
+  setExpandedTaskID: (id: any) => void;
+  setExpandedTaskTitle: (title: any) => void;
+  setExpandedTaskDifficulty: (difficulty: any) => void;
+  setExpandedTaskCompleted: (completed: any) => void;
   setExpandedTaskNotes: (notes: []) => void;
 }
 
@@ -59,7 +59,7 @@ function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTa
   const customStyles = {
     rows: {
       style: {
-        height: '4.2em',
+        height: '4.5em',
         backgroundColor: '#faf9f6',
       }
     },
@@ -141,7 +141,7 @@ function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTa
 
   return (
     <div className="Tasks">
-      <div className="NewTask">
+      <div className="NewTaskContainer">
         <NewTask getTasks={getTasks} />
       </div>
       
@@ -151,8 +151,6 @@ function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTa
         data={tasks}
         customStyles={customStyles}
         pagination
-        paginationPerPage={10}
-        paginationComponentOptions={{ noRowsPerPage: true }}
         highlightOnHover
         pointerOnHover
         noDataComponent

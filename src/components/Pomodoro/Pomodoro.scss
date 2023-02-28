@@ -2,15 +2,14 @@
 
 .Pomodoro {
   position: absolute;
-  top: 2.7em;
+  top: 2.9em;
   right: 1em;
   background-color: $off-white;
   height: 20em;
   width: 22em;
-  border: 0.5px solid $black;
+  border: 1px solid $black;
   border-bottom-left-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
-  box-shadow: 0 0 0.1em $black;
   z-index: 1;
 
   .CloseButton {

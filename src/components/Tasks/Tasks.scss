@@ -3,15 +3,19 @@
 .Tasks {
   display: flex;
   flex-direction: column;
-  margin: 0;
   height: 100%;
 
-  .NewTask {
+  .NewTaskContainer {
     display: flex;
     justify-content: right;
   }
 
+  .DataTable {
+    height: 100%;
+    overflow: auto;
+  }
+
   .DifficultyIcon {
-    height: 0.8em;
+    height: 0.6em;
   }
 }

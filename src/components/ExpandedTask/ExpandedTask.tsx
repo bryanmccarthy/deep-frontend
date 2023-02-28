@@ -43,8 +43,8 @@ function ExpandedTask({ handleCloseExpandedTask, expandedTaskID, expandedTaskTit
 
   return (
     <div className="ExpandedTask">
-      <button className="CloseButton" onClick={handleCloseExpandedTask}><KeyboardReturnIcon fontSize="large" /></button>
       <div className="TaskInfoHeader">
+        <KeyboardReturnIcon className="CloseExpandedTask" onClick={handleCloseExpandedTask} />
         <div>{ expandedTaskTitle }</div>
         <div>
           { expandedTaskDifficulty === 0 ? <FiberManualRecordIcon fontSize="small" /> : expandedTaskDifficulty === 1 ? <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div> : <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div> }

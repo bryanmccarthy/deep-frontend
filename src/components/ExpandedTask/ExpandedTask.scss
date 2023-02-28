@@ -2,27 +2,18 @@
 
 .ExpandedTask {
   background-color: $off-white;
-  height: 100%;
-  width: 100%;
-
-  .CloseButton {
-    height: 0.8em;
-    width: 0.8em;
-    border: none;
-    background: none;
-    cursor: pointer;
-  }
+  border-radius: 0.5em;
 
   .TaskInfoHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 18px;
-    padding-top: 0.7em;
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-bottom: 0.7em;
-    border-bottom: 0.5px solid $black;
+    padding: 0.7em;
+
+    .CloseExpandedTask {
+      cursor: pointer;
+    }
 
     .TaskCompleted {
       cursor: pointer;
