@@ -18,6 +18,7 @@ function Main() {
   const [expandedTaskID, setExpandedTaskID] = useState<number>(0);
   const [expandedTaskTitle, setExpandedTaskTitle] = useState<string>('');
   const [expandedTaskDifficulty, setExpandedTaskDifficulty] = useState<number>(0);
+  const [expandedTaskDueDate, setExpandedTaskDueDate] = useState<string>('');
   const [expandedTaskCompleted, setExpandedTaskCompleted] = useState<boolean>(false);
   const [expandedTaskNotes, setExpandedTaskNotes] = useState<[]>([]);
 
@@ -65,6 +66,7 @@ function Main() {
             setExpandedTaskID={setExpandedTaskID}
             setExpandedTaskTitle={setExpandedTaskTitle}
             setExpandedTaskDifficulty={setExpandedTaskDifficulty}
+            setExpandedTaskDueDate={setExpandedTaskDueDate}
             setExpandedTaskCompleted={setExpandedTaskCompleted}
             setExpandedTaskNotes={setExpandedTaskNotes}
          />
@@ -78,7 +80,8 @@ function Main() {
             handleCloseExpandedTask={handleCloseExpandedTask} 
             expandedTaskID={expandedTaskID}
             expandedTaskTitle={expandedTaskTitle}  
-            expandedTaskDifficulty={expandedTaskDifficulty} 
+            expandedTaskDifficulty={expandedTaskDifficulty}
+            expandedTaskDueDate={expandedTaskDueDate}
             expandedTaskCompleted={expandedTaskCompleted} 
             setExpandedTaskCompleted={setExpandedTaskCompleted} 
             expandedTaskNotes={expandedTaskNotes} 

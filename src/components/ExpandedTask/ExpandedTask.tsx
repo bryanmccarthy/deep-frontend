@@ -5,19 +5,21 @@ import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import dayjs from 'dayjs';
 
 interface ExpandedTaskProps {
   handleCloseExpandedTask: () => void;
   expandedTaskID: number;
   expandedTaskTitle: string;
   expandedTaskDifficulty: number;
+  expandedTaskDueDate: string;
   expandedTaskCompleted: boolean;
   setExpandedTaskCompleted: (completed: boolean) => void;
   expandedTaskNotes: [];
 }
 
 function ExpandedTask({ handleCloseExpandedTask, expandedTaskID, expandedTaskTitle, expandedTaskDifficulty,
-                       expandedTaskCompleted, setExpandedTaskCompleted, expandedTaskNotes }: ExpandedTaskProps) {
+                       expandedTaskDueDate, expandedTaskCompleted, setExpandedTaskCompleted, expandedTaskNotes }: ExpandedTaskProps) {
   const [noteTitle, setNoteTitle] = useState<string>('');
 
   async function createNote() {
@@ -47,8 +49,9 @@ function ExpandedTask({ handleCloseExpandedTask, expandedTaskID, expandedTaskTit
         <KeyboardReturnIcon className="CloseExpandedTask" onClick={handleCloseExpandedTask} />
         <div>{ expandedTaskTitle }</div>
         <div>
-          { expandedTaskDifficulty === 0 ? <FiberManualRecordIcon fontSize="small" /> : expandedTaskDifficulty === 1 ? <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div> : <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div> }
+          { expandedTaskDifficulty === 0 ? <FiberManualRecordIcon className="DifficultyIcon" /> : expandedTaskDifficulty === 1 ? <div><FiberManualRecordIcon className="DifficultyIcon" /> <FiberManualRecordIcon className="DifficultyIcon" /></div> : <div><FiberManualRecordIcon className="DifficultyIcon" /> <FiberManualRecordIcon className="DifficultyIcon" /> <FiberManualRecordIcon className="DifficultyIcon" /></div> }
         </div>
+        <div>{ dayjs(expandedTaskDueDate).format('MM/DD/YYYY') }</div>
         { expandedTaskCompleted ? <CheckCircleIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, true) } /> : <CircleOutlinedIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, false) } /> }
       </div>
       <div className="TaskNotes">

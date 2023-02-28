@@ -23,11 +23,12 @@ interface TasksProps {
   setExpandedTaskID: (id: any) => void;
   setExpandedTaskTitle: (title: any) => void;
   setExpandedTaskDifficulty: (difficulty: any) => void;
+  setExpandedTaskDueDate: (dueDate: any) => void;
   setExpandedTaskCompleted: (completed: any) => void;
   setExpandedTaskNotes: (notes: []) => void;
 }
 
-function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskCompleted, setExpandedTaskNotes }: TasksProps) {
+function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted, setExpandedTaskNotes }: TasksProps) {
   const [tasks, setTasks] = useState<[]>([]);
   
   const columns: TableColumn<DataRow>[] = [
@@ -130,6 +131,7 @@ function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTa
     setExpandedTaskID(taskObject.id);
     setExpandedTaskTitle(taskObject.title);
     setExpandedTaskDifficulty(taskObject.difficulty);
+    setExpandedTaskDueDate(taskObject.due_date);
     setExpandedTaskCompleted(taskObject.completed);
   }
 
