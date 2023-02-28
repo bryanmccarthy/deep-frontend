@@ -3,6 +3,7 @@ import axios from "axios";
 import Tasks from "./Tasks/Tasks";
 import Dashboard from "./Dashboard/Dashboard";
 import Pomodoro from "./Pomodoro/Pomodoro";
+import ExpandedTask from "./ExpandedTask/ExpandedTask";
 import { useState } from 'react';
 import TimerIcon from '@mui/icons-material/Timer';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
@@ -13,10 +14,19 @@ function Main() {
   const [showPomodoro, setShowPomodoro] = useState<boolean>(false);
   const [page, setPage] = useState<string>('tasks');
 
-  
+  // Expanded Task State Variables
+  const [expandedTaskID, setExpandedTaskID] = useState<number>(0);
+  const [expandedTaskTitle, setExpandedTaskTitle] = useState<string>('');
+  const [expandedTaskDifficulty, setExpandedTaskDifficulty] = useState<number>(0);
+  const [expandedTaskCompleted, setExpandedTaskCompleted] = useState<boolean>(false);
+  const [expandedTaskNotes, setExpandedTaskNotes] = useState<[]>([]);
 
   function handlePomodoro() {
     setShowPomodoro(true);
+  }
+
+  function handleCloseExpandedTask() {
+    setPage('tasks');
   }
 
   async function handleLogout() {
@@ -48,8 +58,34 @@ function Main() {
         </div>
       </div>
       <div className="Page">
-        { page === 'tasks' ? <Tasks /> : null }
+        { 
+          page === 'tasks' ?
+         <Tasks
+            setPage={setPage}
+            setExpandedTaskID={setExpandedTaskID}
+            setExpandedTaskTitle={setExpandedTaskTitle}
+            setExpandedTaskDifficulty={setExpandedTaskDifficulty}
+            setExpandedTaskCompleted={setExpandedTaskCompleted}
+            setExpandedTaskNotes={setExpandedTaskNotes}
+         />
+          : 
+          null 
+        }
         { page === 'dashboard' ? <Dashboard /> : null }
+        { 
+          page === 'expandedTask' ? 
+          <ExpandedTask 
+            handleCloseExpandedTask={handleCloseExpandedTask} 
+            expandedTaskID={expandedTaskID}
+            expandedTaskTitle={expandedTaskTitle}  
+            expandedTaskDifficulty={expandedTaskDifficulty} 
+            expandedTaskCompleted={expandedTaskCompleted} 
+            setExpandedTaskCompleted={setExpandedTaskCompleted} 
+            expandedTaskNotes={expandedTaskNotes} 
+          /> 
+          :
+          null 
+        }
         <Pomodoro showPomodoro={showPomodoro} setShowPomodoro={setShowPomodoro} />
       </div>
     </div>

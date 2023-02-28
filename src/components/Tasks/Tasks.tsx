@@ -1,5 +1,4 @@
 import './Tasks.scss';
-import ExpandedTask from './ExpandedTask/ExpandedTask';
 import NewTask from './NewTask/NewTask';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
@@ -9,7 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
 type DataRow = {
   id: number;
@@ -19,15 +18,16 @@ type DataRow = {
   completed: boolean;
 }
 
-function Tasks() {
-  const [showExpandedTask, setShowExpandedTask] = useState<boolean>(false);
-  const [expandedTaskID, setExpandedTaskID] = useState<any>(0);
-  const [expandedTaskTitle, setExpandedTaskTitle] = useState<any>('');
-  const [expandedTaskDifficulty, setExpandedTaskDifficulty] = useState<any>(0);
-  const [expandedTaskTimeSpent, setExpandedTaskTimeSpent] = useState<any>(0);
-  const [expandedTaskCompleted, setExpandedTaskCompleted] = useState<any>(false);
-  const [expandedTaskNotes, setExpandedTaskNotes] = useState<any>([]);
+interface TasksProps {
+  setPage: (page: string) => void;
+  setExpandedTaskID: (id: number) => void;
+  setExpandedTaskTitle: (title: string) => void;
+  setExpandedTaskDifficulty: (difficulty: number) => void;
+  setExpandedTaskCompleted: (completed: boolean) => void;
+  setExpandedTaskNotes: (notes: []) => void;
+}
 
+function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskCompleted, setExpandedTaskNotes }: TasksProps) {
   const [tasks, setTasks] = useState<[]>([]);
   
   const columns: TableColumn<DataRow>[] = [
@@ -114,7 +114,7 @@ function Tasks() {
     setTasks(res.data);
   }
 
-  async function expandTask(row: DataRow) {
+  async function handleExpandTask(row: DataRow) {
     const taskArray = Object.entries(row);
     const taskObject = Object.fromEntries(taskArray);
 
@@ -126,20 +126,14 @@ function Tasks() {
       setExpandedTaskNotes(res.data);
     }
 
+    setPage('expandedTask');
     setExpandedTaskID(taskObject.id);
     setExpandedTaskTitle(taskObject.title);
     setExpandedTaskDifficulty(taskObject.difficulty);
-    setExpandedTaskTimeSpent(taskObject.timeSpent);
     setExpandedTaskCompleted(taskObject.completed);
-
-    setShowExpandedTask(true);
   }
 
-  function handleCloseExpandedTask() {
-    setShowExpandedTask(false);
-    getTasks();
-  }
-
+  // Fetch tasks on page load
   const { status } = useQuery('tasks', getTasks);
 
   if (status === 'loading') return <div>Loading...</div>;
@@ -162,13 +156,9 @@ function Tasks() {
         highlightOnHover
         pointerOnHover
         noDataComponent
-        onRowClicked={(row) => expandTask(row)}
+        onRowClicked={(row) => handleExpandTask(row)}
       />
-      <ExpandedTask showExpandedTask={showExpandedTask} handleCloseExpandedTask={handleCloseExpandedTask} expandedTaskID={expandedTaskID}
-      expandedTaskTitle={expandedTaskTitle}  expandedTaskDifficulty={expandedTaskDifficulty}expandedTaskTimeSpent={expandedTaskTimeSpent} 
-      expandedTaskCompleted={expandedTaskCompleted} setExpandedTaskCompleted={setExpandedTaskCompleted} expandedTaskNotes={expandedTaskNotes} />
     </div>
-    
   )
 }
 

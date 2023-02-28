@@ -7,19 +7,17 @@ import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 interface ExpandedTaskProps {
-  showExpandedTask: boolean;
   handleCloseExpandedTask: () => void;
   expandedTaskID: number;
   expandedTaskTitle: string;
   expandedTaskDifficulty: number;
-  expandedTaskTimeSpent: number;
   expandedTaskCompleted: boolean;
   setExpandedTaskCompleted: (completed: boolean) => void;
   expandedTaskNotes: [];
 }
 
-function ExpandedTask({ showExpandedTask, handleCloseExpandedTask, expandedTaskID, expandedTaskTitle, expandedTaskDifficulty,
-                       expandedTaskTimeSpent, expandedTaskCompleted, setExpandedTaskCompleted, expandedTaskNotes }: ExpandedTaskProps) {
+function ExpandedTask({ handleCloseExpandedTask, expandedTaskID, expandedTaskTitle, expandedTaskDifficulty,
+                       expandedTaskCompleted, setExpandedTaskCompleted, expandedTaskNotes }: ExpandedTaskProps) {
   const [noteTitle, setNoteTitle] = useState<string>('');
 
   async function createNote() {
@@ -44,7 +42,7 @@ function ExpandedTask({ showExpandedTask, handleCloseExpandedTask, expandedTaskI
   }
 
   return (
-    <div className="ExpandedTask" style={{ visibility: showExpandedTask ? "visible" : "hidden" }}>
+    <div className="ExpandedTask">
       <button className="CloseButton" onClick={handleCloseExpandedTask}><KeyboardReturnIcon fontSize="large" /></button>
       <div className="TaskInfoHeader">
         <div>{ expandedTaskTitle }</div>
