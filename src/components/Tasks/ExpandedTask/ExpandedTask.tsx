@@ -58,7 +58,6 @@ function ExpandedTask({ showExpandedTask, handleCloseExpandedTask, expandedTaskI
         <div>
           { expandedTaskDifficulty === 0 ? <FiberManualRecordIcon fontSize="small" /> : expandedTaskDifficulty === 1 ? <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div> : <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div> }
         </div>
-        <div>{ formattedTimeSpent(expandedTaskTimeSpent) }</div>
         { expandedTaskCompleted ? <CheckCircleIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, true) } /> : <CircleOutlinedIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, false) } /> }
       </div>
       <div className="TaskNotes">
@@ -68,7 +67,6 @@ function ExpandedTask({ showExpandedTask, handleCloseExpandedTask, expandedTaskI
             return (
               <div className="Note" key={note.ID}>
                 <div>{ note.Title }</div>
-                <div>{ note.Content }</div>
               </div>
             )
           })

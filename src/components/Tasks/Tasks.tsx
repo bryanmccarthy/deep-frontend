@@ -44,11 +44,6 @@ function Tasks() {
       sortable: true,
     },
     {
-      name: 'Time Spent',
-      selector: row => formattedTimeSpent(row.TimeSpent),
-      sortable: true,
-    },
-    {
       name: 'Completed',
       selector: row => row.Completed,
       cell: row => row.Completed ? <CheckCircleIcon onClick={() => toggleCompleted(row.ID, true) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.ID, false) } />,

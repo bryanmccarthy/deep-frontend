@@ -45,9 +45,9 @@ function NewTask({ showNewTask, setShowNewTask, getTasks }: NewTaskProps) {
           label="Difficulty"
           onChange={(e) => handleDifficultyChange(e)}
           >
-            <MenuItem value={0}><FiberManualRecordIcon /></MenuItem>
-            <MenuItem value={1}><FiberManualRecordIcon /><FiberManualRecordIcon /></MenuItem>
-            <MenuItem value={2}><FiberManualRecordIcon /><FiberManualRecordIcon /><FiberManualRecordIcon /></MenuItem>
+            <MenuItem value={0}><FiberManualRecordIcon fontSize="small" /></MenuItem>
+            <MenuItem value={1}><FiberManualRecordIcon fontSize="small" /><FiberManualRecordIcon fontSize="small" /></MenuItem>
+            <MenuItem value={2}><FiberManualRecordIcon fontSize="small" /><FiberManualRecordIcon fontSize="small" /><FiberManualRecordIcon fontSize="small" /></MenuItem>
           </Select>
         </FormControl>
         <NoteAddIcon className="NoteAddIcon" onClick={createTask}/>
