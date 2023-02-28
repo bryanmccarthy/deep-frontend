@@ -144,6 +144,9 @@ function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTa
   return (
     <div className="Tasks">
       <div className="NewTaskContainer">
+        <div className="TasksCompletedRatio">
+          Completed {tasks.filter((task: any) => task.completed === true).length}/{tasks.length}
+        </div>
         <NewTask getTasks={getTasks} />
       </div>
       
