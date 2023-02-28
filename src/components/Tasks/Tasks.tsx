@@ -12,11 +12,11 @@ import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 type DataRow = {
-  ID: number;
-  Title: string;
-  TimeSpent: number;
-  Difficulty: number;
-  Completed: boolean;
+  id: number;
+  title: string;
+  timeSpent: number;
+  difficulty: number;
+  completed: boolean;
 }
 
 function Tasks() {
@@ -35,21 +35,21 @@ function Tasks() {
   const columns: TableColumn<DataRow>[] = [
     {
       name: 'Task',
-      selector: row => row.Title,
+      selector: row => row.title,
     },
     {
       name: 'Difficulty',
-      selector: row => row.Difficulty,
-      cell: row => row.Difficulty === 0 ? <div><FiberManualRecordIcon fontSize="small" /></div> : row.Difficulty === 1 ? <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div> : <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div>,
+      selector: row => row.difficulty,
+      cell: row => row.difficulty === 0 ? <div><FiberManualRecordIcon fontSize="small" /></div> : row.difficulty === 1 ? <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div> : <div><FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /> <FiberManualRecordIcon fontSize="small" /></div>,
       sortable: true,
     },
     {
       name: 'Completed',
-      selector: row => row.Completed,
-      cell: row => row.Completed ? <CheckCircleIcon onClick={() => toggleCompleted(row.ID, true) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.ID, false) } />,
+      selector: row => row.completed,
+      cell: row => row.completed ? <CheckCircleIcon onClick={() => toggleCompleted(row.id, true) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.id, false) } />,
     },
     {
-      cell: row => <DeleteIcon color="action" onClick={() => deleteTask(row.ID)}></DeleteIcon>,
+      cell: row => <DeleteIcon color="action" onClick={() => deleteTask(row.id)}></DeleteIcon>,
     }
   ];
 
@@ -83,8 +83,8 @@ function Tasks() {
 
   async function toggleCompleted(id: number, completed: boolean) {
     await axios.put(import.meta.env.VITE_URL + '/tasks/update/completed', {
-      ID: id,
-      Completed: !completed,
+      id: id,
+      completed: !completed,
     },
     {
       withCredentials: true,
@@ -95,7 +95,7 @@ function Tasks() {
   async function deleteTask(id: number) {
     await axios.delete(import.meta.env.VITE_URL + '/tasks/delete', {
       data: {
-        ID: id,
+        id: id,
       },
       withCredentials: true,
     });
@@ -115,18 +115,18 @@ function Tasks() {
     const taskObject = Object.fromEntries(taskArray);
 
     // Request notes for task
-    const res = await axios.get(import.meta.env.VITE_URL + `/notes/${taskObject.ID}`, {
+    const res = await axios.get(import.meta.env.VITE_URL + `/notes/${taskObject.id}`, {
       withCredentials: true,
     });
     if (res.status === 200) {
       setExpandedTaskNotes(res.data);
     }
 
-    setExpandedTaskID(taskObject.ID);
-    setExpandedTaskTitle(taskObject.Title);
-    setExpandedTaskDifficulty(taskObject.Difficulty);
-    setExpandedTaskTimeSpent(taskObject.TimeSpent);
-    setExpandedTaskCompleted(taskObject.Completed);
+    setExpandedTaskID(taskObject.id);
+    setExpandedTaskTitle(taskObject.title);
+    setExpandedTaskDifficulty(taskObject.difficulty);
+    setExpandedTaskTimeSpent(taskObject.timeSpent);
+    setExpandedTaskCompleted(taskObject.completed);
 
     setShowExpandedTask(true);
   }
@@ -134,13 +134,6 @@ function Tasks() {
   function handleCloseExpandedTask() {
     setShowExpandedTask(false);
     getTasks();
-  }
-
-  function formattedTimeSpent(timeSpent: number) {
-    const hours = Math.floor(timeSpent / 60);
-    const minutes = timeSpent % 60;
-
-    return `${hours}h ${minutes}m`;
   }
 
   const { status } = useQuery('tasks', getTasks);

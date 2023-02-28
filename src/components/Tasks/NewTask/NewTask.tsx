@@ -18,8 +18,8 @@ function NewTask({ showNewTask, setShowNewTask, getTasks }: NewTaskProps) {
 
   async function createTask() {
     await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
-      Title: title,
-      Difficulty: difficulty,
+      title: title,
+      difficulty: difficulty,
     },
     {
       withCredentials: true,

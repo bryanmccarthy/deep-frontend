@@ -24,8 +24,8 @@ function ExpandedTask({ showExpandedTask, handleCloseExpandedTask, expandedTaskI
 
   async function createNote() {
     await axios.post(import.meta.env.VITE_URL + '/notes/create', {
-      Title: noteTitle,
-      TaskID: expandedTaskID,
+      title: noteTitle,
+      task_id: expandedTaskID,
     },
     {
       withCredentials: true,
@@ -34,20 +34,13 @@ function ExpandedTask({ showExpandedTask, handleCloseExpandedTask, expandedTaskI
 
   async function toggleCompleted(id: number, completed: boolean) {
     await axios.put(import.meta.env.VITE_URL + '/tasks/update/completed', {
-      ID: id,
-      Completed: !completed,
+      id: id,
+      completed: !completed,
     },
     {
       withCredentials: true,
     });
     setExpandedTaskCompleted(!completed);
-  }
-
-  function formattedTimeSpent(timeSpent: number) {
-    const hours = Math.floor(timeSpent / 60);
-    const minutes = timeSpent % 60;
-
-    return `${hours}h ${minutes}m`;
   }
 
   return (
@@ -65,8 +58,8 @@ function ExpandedTask({ showExpandedTask, handleCloseExpandedTask, expandedTaskI
         {
           expandedTaskNotes.map((note: any) => {
             return (
-              <div className="Note" key={note.ID}>
-                <div>{ note.Title }</div>
+              <div className="Note" key={note.id}>
+                <div>{ note.title }</div>
               </div>
             )
           })
