@@ -1,7 +1,5 @@
 import './Tasks.scss';
 import NewTask from './NewTask/NewTask';
-import { useState } from 'react';
-import { useQuery } from 'react-query';
 import axios from 'axios';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -20,6 +18,8 @@ type DataRow = {
 
 interface TasksProps {
   setPage: (page: string) => void;
+  tasks: any;
+  getTasks: () => void;
   setExpandedTaskID: (id: any) => void;
   setExpandedTaskTitle: (title: any) => void;
   setExpandedTaskDifficulty: (difficulty: any) => void;
@@ -28,8 +28,7 @@ interface TasksProps {
   setExpandedTaskNotes: (notes: []) => void;
 }
 
-function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted, setExpandedTaskNotes }: TasksProps) {
-  const [tasks, setTasks] = useState<[]>([]);
+function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted, setExpandedTaskNotes }: TasksProps) {
   const paginationPerPage = localStorage.getItem('paginationPerPage') ? parseInt(localStorage.getItem('paginationPerPage')!) : 10;
   
   const columns: TableColumn<DataRow>[] = [
@@ -54,7 +53,7 @@ function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTa
       cell: row => row.completed ? <CheckCircleIcon onClick={() => toggleCompleted(row.id, true) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.id, false) } />,
     },
     {
-      cell: row => <DeleteIcon color="action" onClick={() => deleteTask(row.id)}></DeleteIcon>,
+      cell: row => <DeleteIcon className="DeleteIcon" onClick={() => deleteTask(row.id)}></DeleteIcon>,
     }
   ];
 
@@ -62,14 +61,16 @@ function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTa
     rows: {
       style: {
         height: '4em',
-        backgroundColor: '#faf9f6',
+        color: '#03243B', // accent
+        backgroundColor: '#faf9f6', // primary
       }
     },
     headCells: {
       style: {
         fontSize: '18px',
         fontWeight: '600',
-        backgroundColor: '#faf9f6',
+        color: '#03243B', // accent
+        backgroundColor: '#faf9f6', // primary
       },
     },
     cells: {
@@ -81,7 +82,8 @@ function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTa
       style: {
         justifyContent: 'center',
         fontSize: '16px',
-        backgroundColor: '#faf9f6',
+        color: '#03243B', // accent
+        backgroundColor: '#faf9f6', // primary
       }
     }
   };
@@ -108,14 +110,6 @@ function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTa
     getTasks();
   }
 
-  async function getTasks() {
-    const res = await axios.get(import.meta.env.VITE_URL + '/tasks', 
-    {
-      withCredentials: true,
-    });
-    setTasks(res.data);
-  }
-
   async function handleExpandTask(row: DataRow) {
     const taskArray = Object.entries(row);
     const taskObject = Object.fromEntries(taskArray);
@@ -136,20 +130,24 @@ function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTa
     setExpandedTaskCompleted(taskObject.completed);
   }
 
-  // Fetch tasks on page load
-  const { status } = useQuery('tasks', getTasks);
-
-  if (status === 'loading') return <div>Loading...</div>;
-  if (status === 'error') return <div>Error</div>;
-
   return (
     <div className="Tasks">
       <div className="NewTaskContainer">
         <div className="TasksCompletedRatio">
-          <label className="CompletedLabel">Completed</label> {tasks.filter((task: any) => task.completed === true).length}/{tasks.length}
+          <label className="CompletedLabel">Complete</label> 
+          <div className="CompletedNumber">{tasks.filter((task: any) => task.completed === true).length}/{tasks.length}</div>
         </div>
         <NewTask getTasks={getTasks} />
       </div>
+    
+      {
+        tasks.length <= 0 ?
+        <div className="TasksEmpty">
+          <h1 className="TasksEmptyText">no tasks yet</h1> // TODO: style
+        </div>
+        : 
+        null
+      }
       
       <DataTable
         className="DataTable"
@@ -158,8 +156,11 @@ function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTa
         customStyles={customStyles}
         pagination
         paginationPerPage={paginationPerPage}
-        paginationRowsPerPageOptions={[10, 15, 20, 25, 30, 40, 50]}
         onChangeRowsPerPage={(perPage) => localStorage.setItem('paginationPerPage', perPage.toString())}
+        paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30, 40, 50]}
+        paginationComponentOptions={{
+          rowsPerPageText: 'Tasks per page:'
+        }}
         highlightOnHover
         pointerOnHover
         noDataComponent

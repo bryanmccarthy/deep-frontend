@@ -9,6 +9,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: $accent;
 
     .TasksCompletedRatio {
       display: flex;
@@ -21,13 +22,35 @@
       padding-right: 0.5em;
       height: 4.5em;
       max-width: 5em;
-      border: 0.5px solid $black;
       border-radius: 0.5em;
 
       .CompletedLabel {
         font-size: 16px;
         font-weight: 600;
       }
+
+      .CompletedNumber {
+        font-size: 16px;
+        font-weight: 600;
+        padding: 0.5em;
+        border-radius: 0.5em;
+        background-color: $accent;
+        color: $primary;
+      }
+    }
+  }
+
+  .TasksEmpty {
+    display: flex;
+    justify-content: center;
+    color: $accent;
+    background-color: $primary;
+    height: 100%;
+    width: 100%;
+
+    .TasksEmptyText {
+      font-size: 24px;
+      font-weight: 400;
     }
   }
 
@@ -37,6 +60,7 @@
   }
 
   .DifficultyIcon {
+    color: $accent;
     height: 0.6em;
   }
 }

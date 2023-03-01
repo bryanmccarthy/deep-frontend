@@ -1,7 +1,7 @@
 @import '../../utils/variables';
 
 .ExpandedTask {
-  background-color: $off-white;
+  background-color: $primary;
   border-radius: 0.5em;
 
   .TaskInfoHeader {
@@ -10,6 +10,7 @@
     align-items: center;
     font-size: 18px;
     padding: 0.7em;
+    color: $accent;
 
     .CloseExpandedTask {
       cursor: pointer;
@@ -24,13 +25,16 @@
     }
   }
 
+  // wip
   .TaskProgress {
     margin: 0.5em;
-    border: 1px solid $black;
+    color: $accent;
+    border: 1px solid $accent;
     border-radius: 0.5em;
   }
-
-  .TaskNotes {
+  
+  // wip
+  .TaskNotes { 
     height: 90%;
     width: 100%;
     margin-top: 2em;

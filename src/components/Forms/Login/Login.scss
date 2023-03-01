@@ -16,21 +16,21 @@
       height: 2em;
       margin-bottom: 2em;
       border: none;
-      border-bottom: 1px solid $black;
+      border-bottom: 1px solid $accent;
       background: none;
       font-size: 18px;
       font-weight: 600;
-      color: $black;
+      color: $accent;
       outline: none;
     }
 
     .LoginButton {
       width: 100%;
       height: 3em;
-      border: 1px solid $black;
+      border: 1px solid $accent;
       border-radius: 3em;
-      color: $white;
-      background-color: $form-button;
+      color: #fff;
+      background-color: $accent;
       font-size: 18px;
       font-weight: 600;
       cursor: pointer;

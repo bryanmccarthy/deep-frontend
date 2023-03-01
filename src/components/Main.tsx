@@ -5,6 +5,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import Pomodoro from "./Pomodoro/Pomodoro";
 import ExpandedTask from "./ExpandedTask/ExpandedTask";
 import { useState } from 'react';
+import { useQuery } from 'react-query';
 import TimerIcon from '@mui/icons-material/Timer';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -13,6 +14,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 function Main() {
   const [showPomodoro, setShowPomodoro] = useState<boolean>(false);
   const [page, setPage] = useState<string>('tasks');
+
+  const [tasks, setTasks] = useState<[]>([]);
 
   // Expanded Task State Variables
   const [expandedTaskID, setExpandedTaskID] = useState<number>(0);
@@ -27,6 +30,7 @@ function Main() {
   }
 
   function handleCloseExpandedTask() {
+    getTasks();
     setPage('tasks');
   }
 
@@ -42,6 +46,20 @@ function Main() {
       window.location.reload();
     }
   }
+
+  async function getTasks() {
+    const res = await axios.get(import.meta.env.VITE_URL + '/tasks', 
+    {
+      withCredentials: true,
+    });
+    setTasks(res.data);
+  }
+
+  // Fetch tasks on page load
+  const { status } = useQuery('tasks', getTasks);
+
+  if (status === 'loading') return <div>Loading...</div>;
+  if (status === 'error') return <div>Error</div>;
 
   return (
     <div className="Main">
@@ -63,6 +81,8 @@ function Main() {
           page === 'tasks' ?
          <Tasks
             setPage={setPage}
+            tasks={tasks}
+            getTasks={getTasks}
             setExpandedTaskID={setExpandedTaskID}
             setExpandedTaskTitle={setExpandedTaskTitle}
             setExpandedTaskDifficulty={setExpandedTaskDifficulty}
@@ -73,7 +93,12 @@ function Main() {
           : 
           null 
         }
-        { page === 'dashboard' ? <Dashboard /> : null }
+        { 
+          page === 'dashboard' ? 
+          <Dashboard /> 
+          : 
+          null 
+        }
         { 
           page === 'expandedTask' ? 
           <ExpandedTask 

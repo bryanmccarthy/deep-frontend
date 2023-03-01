@@ -51,9 +51,9 @@ function NewTask({ getTasks }: NewTaskProps) {
           label="Difficulty"
           onChange={(e) => handleDifficultyChange(e)}
           >
-            <MenuItem value={0}><FiberManualRecordIcon className="DifficultyIcon" /></MenuItem>
-            <MenuItem value={1}><FiberManualRecordIcon className="DifficultyIcon" /><FiberManualRecordIcon className="DifficultyIcon" /></MenuItem>
-            <MenuItem value={2}><FiberManualRecordIcon className="DifficultyIcon" /><FiberManualRecordIcon className="DifficultyIcon" /><FiberManualRecordIcon className="DifficultyIcon" /></MenuItem>
+            <MenuItem value={0}><FiberManualRecordIcon className="DifficultyIcon" fontSize="small" /></MenuItem>
+            <MenuItem value={1}><FiberManualRecordIcon className="DifficultyIcon" fontSize="small" /><FiberManualRecordIcon className="DifficultyIcon" fontSize="small" /></MenuItem>
+            <MenuItem value={2}><FiberManualRecordIcon className="DifficultyIcon" fontSize="small" /><FiberManualRecordIcon className="DifficultyIcon" fontSize="small" /><FiberManualRecordIcon className="DifficultyIcon" fontSize="small" /></MenuItem>
           </Select>
         </FormControl>
         <LocalizationProvider dateAdapter={AdapterDayjs}>

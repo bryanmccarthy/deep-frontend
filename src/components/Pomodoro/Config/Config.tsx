@@ -12,6 +12,9 @@ interface ConfigProps {
   setIsActive: (active: boolean) => void;
 }
 
+const primary = "#faf9f6";
+const accent = "#03243B";
+
 function Config({ currentTimer, setCurrentTimer, setSeconds, setFormattedDuration, isActive, setIsActive }: ConfigProps ) {
   const workDuration: number = localStorage.getItem('workDuration') ? parseInt(localStorage.getItem('workDuration') as string) : 25 * 60;
   const breakDuration: number = localStorage.getItem('breakDuration') ? parseInt(localStorage.getItem('breakDuration') as string) : 5 * 60;
@@ -62,21 +65,25 @@ function Config({ currentTimer, setCurrentTimer, setSeconds, setFormattedDuratio
     <div className="Config">
       <div className="DurationSettings">
         {currentTimer === 'Work' ? 
-          <Slider disabled={isActive ? true : false} value={workDuration} sx={{color: 'black'}} onChange={handleSliderChange} valueLabelDisplay="off" step={300} min={0} max={7200} />
+          <Slider disabled={isActive ? true : false} value={workDuration} sx={{color: accent}} onChange={handleSliderChange} valueLabelDisplay="off" step={300} min={0} max={7200} />
         : 
-          <Slider disabled={isActive ? true : false} value={breakDuration} sx={{color: 'black'}} onChange={handleSliderChange} valueLabelDisplay="off" step={60} min={0} max={1800} />
+          <Slider disabled={isActive ? true : false} value={breakDuration} sx={{color: accent}} onChange={handleSliderChange} valueLabelDisplay="off" step={60} min={0} max={1800} />
         }
       </div>
       <div className="TimerToggle">
         <button disabled={isActive ? true : false} className="TimerButton" 
-          style={{backgroundColor: isActive && currentTimer === 'Work' ? '#ccc' : currentTimer === 'Work' ? '#000' : '#faf9f6',
-                color: isActive && currentTimer !== 'Work' ? '#ccc' : currentTimer === 'Work' ? '#fff' : '#000'}} 
+          style={{
+            backgroundColor: isActive && currentTimer === 'Work' ? '#ccc' : currentTimer === 'Work' ? accent : primary,
+            color: isActive && currentTimer !== 'Work' ? '#ccc' : currentTimer === 'Work' ? primary : accent
+          }} 
           onClick={handleWorkClick}>
             work
         </button>
         <button disabled={isActive ? true : false} className="TimerButton" 
-          style={{backgroundColor: isActive && currentTimer === 'Break' ? '#ccc' : currentTimer === 'Break' ? '#000' : '#faf9f6',
-                color: isActive && currentTimer !== 'Break' ? '#ccc' : currentTimer === 'Break' ? '#fff' : '#000'}} 
+          style={{
+            backgroundColor: isActive && currentTimer === 'Break' ? '#ccc' : currentTimer === 'Break' ? accent : primary,
+            color: isActive && currentTimer !== 'Break' ? '#ccc' : currentTimer === 'Break' ? primary : accent
+          }} 
           onClick={handleBreakClick}>
             break
         </button>
