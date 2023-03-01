@@ -1,6 +1,7 @@
 import './ExpandedTask.scss';
 import axios from 'axios';
 import { useState } from 'react';
+import { useQuery } from 'react-query';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
@@ -8,19 +9,18 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import dayjs from 'dayjs';
 
 interface ExpandedTaskProps {
-  handleCloseExpandedTask: () => void;
   expandedTaskID: number;
   expandedTaskTitle: string;
   expandedTaskDifficulty: number;
   expandedTaskDueDate: string;
   expandedTaskCompleted: boolean;
   setExpandedTaskCompleted: (completed: boolean) => void;
-  expandedTaskNotes: [];
+  handleCloseExpandedTask: () => void;
 }
 
-function ExpandedTask({ handleCloseExpandedTask, expandedTaskID, expandedTaskTitle, expandedTaskDifficulty,
-                       expandedTaskDueDate, expandedTaskCompleted, setExpandedTaskCompleted, expandedTaskNotes }: ExpandedTaskProps) {
+function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficulty, expandedTaskDueDate, expandedTaskCompleted, setExpandedTaskCompleted, handleCloseExpandedTask }: ExpandedTaskProps) {
   const [noteTitle, setNoteTitle] = useState<string>('');
+  const [expandedTaskNotes, setExpandedTaskNotes] = useState<[]>([]);
 
   async function createNote() {
     await axios.post(import.meta.env.VITE_URL + '/notes/create', {
@@ -30,6 +30,8 @@ function ExpandedTask({ handleCloseExpandedTask, expandedTaskID, expandedTaskTit
     {
       withCredentials: true,
     });
+
+    getNotes(); // TODO: maybe change to use state
   }
 
   async function toggleCompleted(id: number, completed: boolean) {
@@ -42,6 +44,21 @@ function ExpandedTask({ handleCloseExpandedTask, expandedTaskID, expandedTaskTit
     });
     setExpandedTaskCompleted(!completed);
   }
+
+  async function getNotes() {
+    const res = await axios.get(import.meta.env.VITE_URL + `/notes/${expandedTaskID}`, {
+      withCredentials: true,
+    });
+    if (res.status === 200) {
+      setExpandedTaskNotes(res.data);
+    }
+  }
+
+  // Fetch notes on page load
+  const { status } = useQuery('tasks', getNotes);
+
+  if (status === 'loading') return <div>Loading...</div>;
+  if (status === 'error') return <div>Error</div>;
 
   return (
     <div className="ExpandedTask">

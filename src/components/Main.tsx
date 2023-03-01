@@ -23,7 +23,6 @@ function Main() {
   const [expandedTaskDifficulty, setExpandedTaskDifficulty] = useState<number>(0);
   const [expandedTaskDueDate, setExpandedTaskDueDate] = useState<string>('');
   const [expandedTaskCompleted, setExpandedTaskCompleted] = useState<boolean>(false);
-  const [expandedTaskNotes, setExpandedTaskNotes] = useState<[]>([]);
 
   function handlePomodoro() {
     setShowPomodoro(true);
@@ -88,7 +87,6 @@ function Main() {
             setExpandedTaskDifficulty={setExpandedTaskDifficulty}
             setExpandedTaskDueDate={setExpandedTaskDueDate}
             setExpandedTaskCompleted={setExpandedTaskCompleted}
-            setExpandedTaskNotes={setExpandedTaskNotes}
          />
           : 
           null 
@@ -101,15 +99,14 @@ function Main() {
         }
         { 
           page === 'expandedTask' ? 
-          <ExpandedTask 
-            handleCloseExpandedTask={handleCloseExpandedTask} 
+          <ExpandedTask
             expandedTaskID={expandedTaskID}
-            expandedTaskTitle={expandedTaskTitle}  
+            expandedTaskTitle={expandedTaskTitle}
             expandedTaskDifficulty={expandedTaskDifficulty}
             expandedTaskDueDate={expandedTaskDueDate}
-            expandedTaskCompleted={expandedTaskCompleted} 
-            setExpandedTaskCompleted={setExpandedTaskCompleted} 
-            expandedTaskNotes={expandedTaskNotes} 
+            expandedTaskCompleted={expandedTaskCompleted}
+            setExpandedTaskCompleted={setExpandedTaskCompleted}
+            handleCloseExpandedTask={handleCloseExpandedTask} 
           /> 
           :
           null 

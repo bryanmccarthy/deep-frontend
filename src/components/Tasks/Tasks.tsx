@@ -25,10 +25,9 @@ interface TasksProps {
   setExpandedTaskDifficulty: (difficulty: any) => void;
   setExpandedTaskDueDate: (dueDate: any) => void;
   setExpandedTaskCompleted: (completed: any) => void;
-  setExpandedTaskNotes: (notes: []) => void;
 }
 
-function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted, setExpandedTaskNotes }: TasksProps) {
+function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted }: TasksProps) {
   const paginationPerPage = localStorage.getItem('paginationPerPage') ? parseInt(localStorage.getItem('paginationPerPage')!) : 10;
   
   const columns: TableColumn<DataRow>[] = [
@@ -113,14 +112,6 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
   async function handleExpandTask(row: DataRow) {
     const taskArray = Object.entries(row);
     const taskObject = Object.fromEntries(taskArray);
-
-    // Request notes for task
-    const res = await axios.get(import.meta.env.VITE_URL + `/notes/${taskObject.id}`, {
-      withCredentials: true,
-    });
-    if (res.status === 200) {
-      setExpandedTaskNotes(res.data);
-    }
 
     setPage('expandedTask');
     setExpandedTaskID(taskObject.id);
