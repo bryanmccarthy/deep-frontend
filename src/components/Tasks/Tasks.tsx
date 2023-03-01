@@ -30,6 +30,7 @@ interface TasksProps {
 
 function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted, setExpandedTaskNotes }: TasksProps) {
   const [tasks, setTasks] = useState<[]>([]);
+  const paginationPerPage = localStorage.getItem('paginationPerPage') ? parseInt(localStorage.getItem('paginationPerPage')!) : 10;
   
   const columns: TableColumn<DataRow>[] = [
     {
@@ -156,6 +157,9 @@ function Tasks({ setPage, setExpandedTaskID, setExpandedTaskTitle, setExpandedTa
         data={tasks}
         customStyles={customStyles}
         pagination
+        paginationPerPage={paginationPerPage}
+        paginationRowsPerPageOptions={[10, 15, 20, 25, 30, 40, 50]}
+        onChangeRowsPerPage={(perPage) => localStorage.setItem('paginationPerPage', perPage.toString())}
         highlightOnHover
         pointerOnHover
         noDataComponent
