@@ -78,7 +78,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
 
       {/* TODO: Notes */}
       <div className="TaskNotes">
-        Notes:
+        Notes carousel goes here
         {
           expandedTaskNotes.map((note: any) => {
             return (
@@ -89,11 +89,14 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
           })
         }
 
-        <div className="NewNote" style={{paddingTop:'5em'}}>
+        <div className="NewNote">
           <input className="NoteTitleInput" type="text" placeholder="Title" value={noteTitle} onChange={(e) => setNoteTitle(e.target.value)} />
           <button className="CreateNoteButton" onClick={createNote}>Add Note</button>
         </div>
+      </div>
 
+      <div className="TaskCurrentNote">
+        <textarea className="TaskCurrentNoteText"></textarea>
       </div>
     </div>
   )
