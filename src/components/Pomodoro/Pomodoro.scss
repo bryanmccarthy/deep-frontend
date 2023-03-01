@@ -11,6 +11,7 @@
   border-top: none;
   border-bottom-left-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
+  box-shadow: 0 0.15em 1em -1em $accent; // Box shadow on bottom
   z-index: 1;
 
   .CloseButton {
