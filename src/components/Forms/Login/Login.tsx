@@ -2,7 +2,7 @@ import './Login.scss';
 import { useState } from 'react';
 import axios from 'axios';
 
-interface LoginProps {
+type LoginProps = {
   setUser: (user: string | null) => void;
 }
 

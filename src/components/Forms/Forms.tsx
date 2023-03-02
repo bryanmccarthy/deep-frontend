@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Login from './Login/Login';
 import Register from './Register/Register';
 
-interface FormsProps {
+type FormsProps = {
   setUser: (user: string | null) => void;
 }
 

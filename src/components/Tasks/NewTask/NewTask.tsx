@@ -9,7 +9,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Dayjs } from 'dayjs';
 
-interface NewTaskProps {
+type NewTaskProps = {
   getTasks: () => void;
 }
 

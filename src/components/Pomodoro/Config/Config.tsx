@@ -3,7 +3,7 @@ import Slider from '@mui/material/Slider';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import CancelIcon from '@mui/icons-material/Cancel';
 
-interface ConfigProps {
+type ConfigProps = {
   currentTimer: string;
   setCurrentTimer: (timer: string) => void;
   setSeconds: (seconds: number) => void;

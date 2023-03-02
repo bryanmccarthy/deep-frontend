@@ -3,7 +3,7 @@ import Config from './Config/Config';
 import { formatDuration } from './Config/Config';
 import { useEffect, useState, useRef } from 'react';
 
-interface PomodoroProps {
+type PomodoroProps = {
   showPomodoro: boolean;
   setShowPomodoro: (show: boolean) => void;
 }

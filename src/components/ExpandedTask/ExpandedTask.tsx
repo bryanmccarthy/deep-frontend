@@ -8,7 +8,7 @@ import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import dayjs from 'dayjs';
 
-interface ExpandedTaskProps {
+type ExpandedTaskProps = {
   expandedTaskID: number;
   expandedTaskTitle: string;
   expandedTaskDifficulty: number;

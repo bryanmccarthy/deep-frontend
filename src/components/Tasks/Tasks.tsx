@@ -16,7 +16,7 @@ type DataRow = {
   completed: boolean;
 }
 
-interface TasksProps {
+type TasksProps = {
   setPage: (page: string) => void;
   tasks: any;
   getTasks: () => void;

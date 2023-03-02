@@ -4,7 +4,7 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from "@fullcalendar/interaction"
 
-interface CalendarProps {
+type CalendarProps = {
   setPage: (page: string) => void;
   tasks: any;
   setExpandedTaskID: (id: number) => void;
