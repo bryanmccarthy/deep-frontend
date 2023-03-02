@@ -134,7 +134,7 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
       {
         tasks.length <= 0 ?
         <div className="TasksEmpty">
-          <h1 className="TasksEmptyText">no tasks yet</h1> // TODO: style
+          <h1 className="TasksEmptyText">no tasks yet</h1> {/* TODO: style */}
         </div>
         : 
         null

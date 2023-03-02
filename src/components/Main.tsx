@@ -2,6 +2,7 @@ import './Main.scss';
 import axios from "axios";
 import Tasks from "./Tasks/Tasks";
 import Dashboard from "./Dashboard/Dashboard";
+import Calendar from './Calendar/Calendar';
 import Pomodoro from "./Pomodoro/Pomodoro";
 import ExpandedTask from "./ExpandedTask/ExpandedTask";
 import { useState } from 'react';
@@ -9,6 +10,7 @@ import { useQuery } from 'react-query';
 import TimerIcon from '@mui/icons-material/Timer';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 function Main() {
@@ -64,11 +66,9 @@ function Main() {
     <div className="Main">
       <div className="Icons">
         <div>
-          {
-            page === 'dashboard' ?
-            <FormatListBulletedIcon className="Icon" onClick={ () => setPage('tasks') } /> :
-            <DashboardIcon className="Icon" onClick={ () => setPage('dashboard') } />
-          }
+          <FormatListBulletedIcon className="Icon" onClick={() => setPage('tasks') } />
+          <CalendarMonthIcon className="Icon" onClick={() => setPage('calendar')} />
+          <DashboardIcon className="Icon" onClick={() => setPage('dashboard') } />
         </div>
         <div>
           <TimerIcon className="Icon" onClick={ handlePomodoro } />
@@ -96,6 +96,12 @@ function Main() {
           <Dashboard /> 
           : 
           null 
+        }
+        {
+          page === 'calendar' ?
+          <Calendar />
+          :
+          null
         }
         { 
           page === 'expandedTask' ? 
