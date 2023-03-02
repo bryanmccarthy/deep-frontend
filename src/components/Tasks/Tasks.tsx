@@ -27,6 +27,9 @@ type TasksProps = {
   setExpandedTaskCompleted: (completed: boolean) => void;
 }
 
+const accent = '#000000';
+const primary = '#ffffff';
+
 function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted }: TasksProps) {
   const paginationPerPage = localStorage.getItem('paginationPerPage') ? parseInt(localStorage.getItem('paginationPerPage')!) : 10;
   
@@ -60,16 +63,16 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
     rows: {
       style: {
         height: '4em',
-        color: '#03243B', // accent
-        backgroundColor: '#faf9f6', // primary
+        color: accent,
+        backgroundColor: primary,
       }
     },
     headCells: {
       style: {
         fontSize: '18px',
         fontWeight: '600',
-        color: '#03243B', // accent
-        backgroundColor: '#faf9f6', // primary
+        color: accent,
+        backgroundColor: primary,
       },
     },
     cells: {
@@ -81,8 +84,8 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
       style: {
         justifyContent: 'center',
         fontSize: '16px',
-        color: '#03243B', // accent
-        backgroundColor: '#faf9f6', // primary
+        color: accent,
+        backgroundColor: primary,
       }
     }
   };

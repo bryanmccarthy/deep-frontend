@@ -16,7 +16,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 function Main() {
   const [showPomodoro, setShowPomodoro] = useState<boolean>(false);
   const [page, setPage] = useState<string>('tasks');
-
   const [tasks, setTasks] = useState<[]>([]);
 
   // Expanded Task State Variables
@@ -53,6 +52,10 @@ function Main() {
     setPage('calendar');
   }
 
+  function handleDashboardPageClick() {
+    setPage('dashboard');
+  }
+
   async function getTasks() {
     const res = await axios.get(import.meta.env.VITE_URL + '/tasks', 
     {
@@ -73,7 +76,7 @@ function Main() {
         <div>
           <FormatListBulletedIcon className="Icon" onClick={handleTaskPageClick} />
           <CalendarMonthIcon className="Icon" onClick={handleCalendarPageClick} />
-          <DashboardIcon className="Icon" onClick={() => setPage('dashboard') } />
+          <DashboardIcon className="Icon" onClick={handleDashboardPageClick} />
         </div>
         <div>
           <TimerIcon className="Icon" onClick={ handlePomodoro } />

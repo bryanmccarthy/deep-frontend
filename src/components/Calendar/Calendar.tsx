@@ -1,8 +1,9 @@
 import './Calendar.scss';
 import axios from 'axios';
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import interactionPlugin from "@fullcalendar/interaction"
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from "@fullcalendar/interaction";
+import styled from "@emotion/styled";
 
 type CalendarProps = {
   setPage: (page: string) => void;

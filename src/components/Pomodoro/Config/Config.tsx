@@ -12,8 +12,8 @@ type ConfigProps = {
   setIsActive: (active: boolean) => void;
 }
 
-const primary = "#faf9f6";
-const accent = "#03243B";
+const primary = "#ffffff";
+const accent = "#000000";
 
 function Config({ currentTimer, setCurrentTimer, setSeconds, setFormattedDuration, isActive, setIsActive }: ConfigProps ) {
   const workDuration: number = localStorage.getItem('workDuration') ? parseInt(localStorage.getItem('workDuration') as string) : 25 * 60;

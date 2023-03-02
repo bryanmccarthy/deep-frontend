@@ -8,12 +8,44 @@
     height: 100%;
     background-color: $primary;
     color: $accent;
-    font-size: 14px;
     padding: 0.5em;
 
     // Border-box so padding doesn't affect width & height
     -moz-box-sizing: border-box; 
     -webkit-box-sizing: border-box; 
-    box-sizing: border-box; 
+    box-sizing: border-box;
+
+    // FullCalendar styles override
+    .fc {
+      .fc-button, .fc-button-primary {
+        background-color: $primary;
+        color: $accent;
+        border: 1px solid $accent;
+        border-radius: 0.2em;
+        padding: 0.2em 0.5em;
+        margin: 0.2em;
+        cursor: pointer;
+
+        &:disabled {
+          color: transparent;
+          background-color: transparent;
+          border: none;
+        }
+      }
+
+      .fc-toolbar {
+        margin-bottom: 0.5em;
+
+        .fc-toolbar-title {
+          font-size: 18px;
+        }
+      }
+
+      .fc-event-title-container {
+        display: flex;
+        justify-content: center;
+        padding: 0.5em;
+      }
+    }
   }
 }
