@@ -46,9 +46,6 @@ function Calendar({ setPage, tasks, setExpandedTaskID, setExpandedTaskTitle, set
   }
 
   async function handleEventChange(info: any) {
-    console.log(Number(info.event.id)); // TODO: update task due date
-    console.log(String(info.event.startStr)); // The new date
-    
     await axios.put(import.meta.env.VITE_URL + '/tasks/update/due_date', {
       id: Number(info.event.id),
       due_date: String(info.event.startStr),
