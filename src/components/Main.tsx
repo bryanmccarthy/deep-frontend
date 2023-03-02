@@ -99,7 +99,7 @@ function Main() {
         }
         {
           page === 'calendar' ?
-          <Calendar />
+          <Calendar tasks={tasks} />
           :
           null
         }
