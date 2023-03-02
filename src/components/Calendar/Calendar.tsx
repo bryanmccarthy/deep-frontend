@@ -6,11 +6,11 @@ import interactionPlugin from "@fullcalendar/interaction"
 interface CalendarProps {
   setPage: (page: string) => void;
   tasks: any;
-  setExpandedTaskID: (id: any) => void;
-  setExpandedTaskTitle: (title: any) => void;
-  setExpandedTaskDifficulty: (difficulty: any) => void;
-  setExpandedTaskDueDate: (dueDate: any) => void;
-  setExpandedTaskCompleted: (completed: any) => void;
+  setExpandedTaskID: (id: number) => void;
+  setExpandedTaskTitle: (title: string) => void;
+  setExpandedTaskDifficulty: (difficulty: number) => void;
+  setExpandedTaskDueDate: (dueDate: string) => void;
+  setExpandedTaskCompleted: (completed: boolean) => void;
 }
 
 function Calendar({ setPage, tasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted  }: CalendarProps) {
@@ -34,11 +34,11 @@ function Calendar({ setPage, tasks, setExpandedTaskID, setExpandedTaskTitle, set
 
   function handleEventClick(info: any) {
     setPage('expandedTask');
-    setExpandedTaskID(info.event.id);
-    setExpandedTaskTitle(info.event.title);
-    setExpandedTaskDifficulty(info.event._def.extendedProps.difficulty);
-    setExpandedTaskDueDate(info.event.startStr);
-    setExpandedTaskCompleted(info.event._def.extendedProps.completed);
+    setExpandedTaskID(Number(info.event.id));
+    setExpandedTaskTitle(String(info.event.title));
+    setExpandedTaskDifficulty(Number(info.event._def.extendedProps.difficulty));
+    setExpandedTaskDueDate(String(info.event.startStr));
+    setExpandedTaskCompleted(Boolean(info.event._def.extendedProps.completed));
   }
 
   function handleDateClick(info: any) {

@@ -35,6 +35,11 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
   }
 
   async function toggleCompleted(id: number, completed: boolean) {
+
+    // logs
+    console.log('id: ', id);
+    console.log('completed: ', completed);
+
     await axios.put(import.meta.env.VITE_URL + '/tasks/update/completed', {
       id: id,
       completed: !completed,
