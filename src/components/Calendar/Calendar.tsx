@@ -69,6 +69,7 @@ function Calendar({ setPage, tasks, setExpandedTaskID, setExpandedTaskTitle, set
           events={parseTasks(tasks)}
           displayEventTime={false}
           editable={true}
+          height="100%"
           dateClick={handleDateClick}
           eventClick={handleEventClick}
           eventChange={handleEventChange}
