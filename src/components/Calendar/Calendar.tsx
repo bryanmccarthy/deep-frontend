@@ -7,6 +7,7 @@ import interactionPlugin from "@fullcalendar/interaction"
 type CalendarProps = {
   setPage: (page: string) => void;
   tasks: any;
+  getTasks: () => void;
   setExpandedTaskID: (id: number) => void;
   setExpandedTaskTitle: (title: string) => void;
   setExpandedTaskDifficulty: (difficulty: number) => void;
@@ -14,7 +15,7 @@ type CalendarProps = {
   setExpandedTaskCompleted: (completed: boolean) => void;
 }
 
-function Calendar({ setPage, tasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted  }: CalendarProps) {
+function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted  }: CalendarProps) {
 
   // Necessary for FullCalendar as it needs date & allDay
   function parseTasks(tasks: any) {
@@ -43,6 +44,7 @@ function Calendar({ setPage, tasks, setExpandedTaskID, setExpandedTaskTitle, set
 
   function handleDateClick(info: any) {
     console.log(info.dateStr); // TODO: prompt user to create new task with this date
+    // getTasks();
   }
 
   async function handleEventChange(info: any) {

@@ -9,5 +9,11 @@
     background-color: $primary;
     color: $accent;
     font-size: 14px;
+    padding: 0.5em;
+
+    // Border-box so padding doesn't affect width & height
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+    box-sizing: border-box; 
   }
 }
