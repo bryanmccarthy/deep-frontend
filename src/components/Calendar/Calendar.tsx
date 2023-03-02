@@ -1,6 +1,7 @@
 import './Calendar.scss';
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import interactionPlugin from "@fullcalendar/interaction"
 
 function Calendar({ tasks }: { tasks: any}) {
 
@@ -19,10 +20,14 @@ function Calendar({ tasks }: { tasks: any}) {
   return (
     <div className="Calendar">
       <FullCalendar
-        plugins={[ dayGridPlugin ]}
+        plugins={[ dayGridPlugin, interactionPlugin ]}
         initialView="dayGridMonth"
         events={parseTasks(tasks)}
         displayEventTime={false}
+        editable={true} // TODO: update task due date when event is dragged
+        dateClick={(info) => {
+          console.log(info.dateStr) // TODO: prompt user to create new task with this date
+        }}
       />
     </div>
   )
