@@ -28,7 +28,6 @@ function Calendar({ setPage, tasks, setExpandedTaskID, setExpandedTaskTitle, set
         allDay: true,
       })
     })
-    console.log(events)
     return events;
   }
 

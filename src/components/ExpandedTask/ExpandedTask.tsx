@@ -15,10 +15,9 @@ interface ExpandedTaskProps {
   expandedTaskDueDate: string;
   expandedTaskCompleted: boolean;
   setExpandedTaskCompleted: (completed: boolean) => void;
-  handleCloseExpandedTask: () => void;
 }
 
-function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficulty, expandedTaskDueDate, expandedTaskCompleted, setExpandedTaskCompleted, handleCloseExpandedTask }: ExpandedTaskProps) {
+function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficulty, expandedTaskDueDate, expandedTaskCompleted, setExpandedTaskCompleted }: ExpandedTaskProps) {
   const [noteTitle, setNoteTitle] = useState<string>('');
   const [expandedTaskNotes, setExpandedTaskNotes] = useState<[]>([]);
 
@@ -35,11 +34,6 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
   }
 
   async function toggleCompleted(id: number, completed: boolean) {
-
-    // logs
-    console.log('id: ', id);
-    console.log('completed: ', completed);
-
     await axios.put(import.meta.env.VITE_URL + '/tasks/update/completed', {
       id: id,
       completed: !completed,
@@ -68,7 +62,6 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
   return (
     <div className="ExpandedTask">
       <div className="TaskInfoHeader">
-        <KeyboardReturnIcon className="CloseExpandedTask" onClick={handleCloseExpandedTask} />
         <div>{ expandedTaskTitle }</div>
         <div>
           { expandedTaskDifficulty === 0 ? <FiberManualRecordIcon className="DifficultyIcon" /> : expandedTaskDifficulty === 1 ? <div><FiberManualRecordIcon className="DifficultyIcon" /> <FiberManualRecordIcon className="DifficultyIcon" /></div> : <div><FiberManualRecordIcon className="DifficultyIcon" /> <FiberManualRecordIcon className="DifficultyIcon" /> <FiberManualRecordIcon className="DifficultyIcon" /></div> }

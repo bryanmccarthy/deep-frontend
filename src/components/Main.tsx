@@ -30,11 +30,6 @@ function Main() {
     setShowPomodoro(true);
   }
 
-  function handleCloseExpandedTask() {
-    getTasks();
-    setPage('tasks');
-  }
-
   async function handleLogout() {
     const res = await axios.get(import.meta.env.VITE_URL + '/auth/logout', {
       withCredentials: true,
@@ -46,6 +41,16 @@ function Main() {
       sessionStorage.removeItem('userLastName');
       window.location.reload();
     }
+  }
+
+  function handleTaskPageClick() {
+    getTasks();
+    setPage('tasks');
+  }
+
+  function handleCalendarPageClick() {
+    getTasks();
+    setPage('calendar');
   }
 
   async function getTasks() {
@@ -66,8 +71,8 @@ function Main() {
     <div className="Main">
       <div className="Icons">
         <div>
-          <FormatListBulletedIcon className="Icon" onClick={() => setPage('tasks') } />
-          <CalendarMonthIcon className="Icon" onClick={() => setPage('calendar')} />
+          <FormatListBulletedIcon className="Icon" onClick={handleTaskPageClick} />
+          <CalendarMonthIcon className="Icon" onClick={handleCalendarPageClick} />
           <DashboardIcon className="Icon" onClick={() => setPage('dashboard') } />
         </div>
         <div>
@@ -120,7 +125,6 @@ function Main() {
             expandedTaskDueDate={expandedTaskDueDate}
             expandedTaskCompleted={expandedTaskCompleted}
             setExpandedTaskCompleted={setExpandedTaskCompleted}
-            handleCloseExpandedTask={handleCloseExpandedTask} 
           /> 
           :
           null 

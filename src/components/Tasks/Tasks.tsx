@@ -20,11 +20,11 @@ interface TasksProps {
   setPage: (page: string) => void;
   tasks: any;
   getTasks: () => void;
-  setExpandedTaskID: (id: any) => void;
-  setExpandedTaskTitle: (title: any) => void;
-  setExpandedTaskDifficulty: (difficulty: any) => void;
-  setExpandedTaskDueDate: (dueDate: any) => void;
-  setExpandedTaskCompleted: (completed: any) => void;
+  setExpandedTaskID: (id: number) => void;
+  setExpandedTaskTitle: (title: string) => void;
+  setExpandedTaskDifficulty: (difficulty: number) => void;
+  setExpandedTaskDueDate: (dueDate: string) => void;
+  setExpandedTaskCompleted: (completed: boolean) => void;
 }
 
 function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted }: TasksProps) {
@@ -114,18 +114,11 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
     const taskObject = Object.fromEntries(taskArray);
 
     setPage('expandedTask');
-    setExpandedTaskID(taskObject.id);
-    setExpandedTaskTitle(taskObject.title);
-    setExpandedTaskDifficulty(taskObject.difficulty);
-    setExpandedTaskDueDate(taskObject.due_date);
-    setExpandedTaskCompleted(taskObject.completed);
-
-    // log all
-    console.log(taskObject.id)
-    console.log(taskObject.title)
-    console.log(taskObject.difficulty)
-    console.log(taskObject.due_date)
-    console.log(taskObject.completed)
+    setExpandedTaskID(Number(taskObject.id));
+    setExpandedTaskTitle(String(taskObject.title));
+    setExpandedTaskDifficulty(Number(taskObject.difficulty));
+    setExpandedTaskDueDate(String(taskObject.due_date));
+    setExpandedTaskCompleted(Boolean(taskObject.completed));
   }
 
   return (
