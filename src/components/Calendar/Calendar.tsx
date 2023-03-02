@@ -61,6 +61,11 @@ function Calendar({ setPage, tasks, setExpandedTaskID, setExpandedTaskTitle, set
         <FullCalendar
           plugins={[ dayGridPlugin, interactionPlugin ]}
           initialView="dayGridMonth"
+          headerToolbar={{
+            left: "dayGridMonth,dayGridWeek,dayGridDay",
+            center: "title",
+            right: "today prev,next"
+          }}
           events={parseTasks(tasks)}
           displayEventTime={false}
           editable={true}
