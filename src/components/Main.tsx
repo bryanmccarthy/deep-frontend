@@ -25,10 +25,6 @@ function Main() {
   const [expandedTaskDueDate, setExpandedTaskDueDate] = useState<string>('');
   const [expandedTaskCompleted, setExpandedTaskCompleted] = useState<boolean>(false);
 
-  function handlePomodoro() {
-    setShowPomodoro(true);
-  }
-
   async function handleLogout() {
     const res = await axios.get(import.meta.env.VITE_URL + '/auth/logout', {
       withCredentials: true,
@@ -55,6 +51,18 @@ function Main() {
   function handleDashboardPageClick() {
     setPage('dashboard');
   }
+
+  function handlePomodoro() {
+    setShowPomodoro(true);
+  }
+
+  /*
+    TODO: settings Icon w/ dropdown like pomodoro ??
+    - display done tasks or not
+    - dark mode
+    - notifications
+    - 
+  */
 
   async function getTasks() {
     const res = await axios.get(import.meta.env.VITE_URL + '/tasks', 
