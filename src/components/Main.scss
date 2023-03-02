@@ -12,13 +12,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0.2em;
-    margin-bottom: 0.1em;
-    border: none;
-    border-radius: 0.5em;
+    border-bottom: 1px solid $accent;
     color: $accent;
     background-color: $primary;
-    box-shadow: 0 0 0.15em $accent;
 
     .Icon {
       margin: 0.2em;
@@ -30,11 +26,7 @@
 
   .Page {
     height: 100%;
-    margin: 0.2em;
     background-color: $primary;
-    border: none;
-    border-radius: 0.5em;
-    box-shadow: 0 0 0.15em $accent;
     overflow: auto;
   }
 }

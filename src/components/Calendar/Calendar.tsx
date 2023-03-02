@@ -1,4 +1,5 @@
 import './Calendar.scss';
+import axios from 'axios';
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from "@fullcalendar/interaction"
@@ -44,9 +45,17 @@ function Calendar({ setPage, tasks, setExpandedTaskID, setExpandedTaskTitle, set
     console.log(info.dateStr); // TODO: prompt user to create new task with this date
   }
 
-  function handleEventChange(info: any) {
-    console.log(info.event.id); // TODO: update task due date
-    console.log(info.event.startStr); // The new date
+  async function handleEventChange(info: any) {
+    console.log(Number(info.event.id)); // TODO: update task due date
+    console.log(String(info.event.startStr)); // The new date
+    
+    await axios.put(import.meta.env.VITE_URL + '/tasks/update/due_date', {
+      id: Number(info.event.id),
+      due_date: String(info.event.startStr),
+    },
+    {
+      withCredentials: true,
+    });
   }
 
   return (
