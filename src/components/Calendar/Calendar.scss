@@ -1,4 +1,13 @@
+@import '../../utils/variables';
+
 .Calendar {
   margin: 0;
   height: 100%;
+
+  .FullCalendar {
+    padding: 0.5em;
+    background-color: $primary;
+    color: $accent;
+    font-size: 14px;
+  }
 }

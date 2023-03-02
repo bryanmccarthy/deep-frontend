@@ -119,6 +119,13 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
     setExpandedTaskDifficulty(taskObject.difficulty);
     setExpandedTaskDueDate(taskObject.due_date);
     setExpandedTaskCompleted(taskObject.completed);
+
+    // log all
+    console.log(taskObject.id)
+    console.log(taskObject.title)
+    console.log(taskObject.difficulty)
+    console.log(taskObject.due_date)
+    console.log(taskObject.completed)
   }
 
   return (

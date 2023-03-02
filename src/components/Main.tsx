@@ -99,7 +99,15 @@ function Main() {
         }
         {
           page === 'calendar' ?
-          <Calendar tasks={tasks} />
+          <Calendar
+            setPage={setPage}
+            tasks={tasks}
+            setExpandedTaskID={setExpandedTaskID}
+            setExpandedTaskTitle={setExpandedTaskTitle}
+            setExpandedTaskDifficulty={setExpandedTaskDifficulty}
+            setExpandedTaskDueDate={setExpandedTaskDueDate}
+            setExpandedTaskCompleted={setExpandedTaskCompleted}
+          />
           :
           null
         }
