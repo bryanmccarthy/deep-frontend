@@ -45,7 +45,8 @@ type TaskType = {
 
 function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted }: TasksProps) {
   const paginationPerPage: number = localStorage.getItem('paginationPerPage') ? parseInt(localStorage.getItem('paginationPerPage')!) : 10;
-  const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
+  const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
+  const [taskDeletedSnackbarOpen, setTaskDeletedSnackbarOpen] = useState<boolean>(false);
   const [deletedTask, setDeletedTask] = useState<TaskType | null>(null);
 
   const columns: TableColumn<DataRow>[] = [
@@ -117,7 +118,7 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
     if (res.status === 200) {
       getTasks();
     } else {
-      // TODO: display error snackbar
+      setErrorSnackbarOpen(true);
     }
   }
 
@@ -148,14 +149,15 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
     if (res.status === 200) {
       handleSetDeletedTask(id);
       getTasks();
-      setSnackbarOpen(true);
+      setTaskDeletedSnackbarOpen(true);
     } else {
-      // TODO: display error snackbar
+      setErrorSnackbarOpen(true);
     }
   }
 
   function handleSnackbarClose() {
-    setSnackbarOpen(false);
+    setTaskDeletedSnackbarOpen(false);
+    setErrorSnackbarOpen(false);
   };
 
   async function handleSnackbarUndo() {
@@ -172,25 +174,9 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
     if (res.status === 200) {
       getTasks();
     } else {
-      // TODO: display error snackbar
+      setErrorSnackbarOpen(true);
     }
   }
-
-  const action = (
-    <div>
-      <Button color="secondary" size="small" onClick={handleSnackbarUndo}>
-        UNDO
-      </Button>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleSnackbarClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </div>
-  );
 
   async function handleExpandTask(row: DataRow) {
     const taskArray = Object.entries(row);
@@ -242,11 +228,44 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
       />
 
       <Snackbar
-        open={snackbarOpen}
+        open={taskDeletedSnackbarOpen}
         autoHideDuration={5000}
         onClose={handleSnackbarClose}
         message="Task deleted"
-        action={action}
+        action={
+          <div>
+            <Button color="secondary" size="small" onClick={handleSnackbarUndo}>
+              UNDO
+            </Button>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleSnackbarClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </div>
+        }
+      />
+
+      <Snackbar
+        open={errorSnackbarOpen}
+        autoHideDuration={5000}
+        onClose={handleSnackbarClose}
+        message="oops, something went wrong!"
+        action={
+          <div>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleSnackbarClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </div>
+        }
       />
     </div>
   )

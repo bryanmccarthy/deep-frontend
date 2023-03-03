@@ -2,11 +2,13 @@ import './ExpandedTask.scss';
 import axios from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import dayjs from 'dayjs';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 type ExpandedTaskProps = {
   expandedTaskID: number;
@@ -20,6 +22,7 @@ type ExpandedTaskProps = {
 function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficulty, expandedTaskDueDate, expandedTaskCompleted, setExpandedTaskCompleted }: ExpandedTaskProps) {
   const [noteTitle, setNoteTitle] = useState<string>('');
   const [expandedTaskNotes, setExpandedTaskNotes] = useState<[]>([]);
+  const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
 
   async function createNote() {
     const res = await axios.post(import.meta.env.VITE_URL + '/notes/create', {
@@ -49,7 +52,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
     if (res.status === 200) {
       setExpandedTaskCompleted(!completed);
     } else {
-      // TODO: display error snackbar
+      setErrorSnackbarOpen(true);
     }
   }
 
@@ -59,8 +62,14 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
     });
     if (res.status === 200) {
       setExpandedTaskNotes(res.data);
+    } else {
+      setErrorSnackbarOpen(true);
     }
   }
+
+  function handleSnackbarClose() {
+    setErrorSnackbarOpen(false);
+  };
 
   // Fetch notes on page load
   const { status } = useQuery('tasks', getNotes);
@@ -105,6 +114,25 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
       <div className="TaskCurrentNote">
         <textarea className="TaskCurrentNoteText"></textarea>
       </div>
+
+      <Snackbar
+        open={errorSnackbarOpen}
+        autoHideDuration={5000}
+        onClose={handleSnackbarClose}
+        message="oops, something went wrong!"
+        action={
+          <div>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleSnackbarClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </div>
+        }
+      />
     </div>
   )
 }

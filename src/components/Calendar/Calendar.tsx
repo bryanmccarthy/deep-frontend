@@ -1,8 +1,12 @@
 import './Calendar.scss';
 import axios from 'axios';
+import { useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 type CalendarProps = {
   setPage: (page: string) => void;
@@ -16,6 +20,7 @@ type CalendarProps = {
 }
 
 function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted  }: CalendarProps) {
+  const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
 
   // Necessary for FullCalendar as it needs date & allDay
   function parseTasks(tasks: any) {
@@ -59,10 +64,8 @@ function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTask
       withCredentials: true,
     });
 
-    if (res.status === 200) {
-      console.log('Task created successfully');
-    } else {
-      // TODO: display error snackbar
+    if (res.status !== 200) {
+      setErrorSnackbarOpen(true);
     }
   }
 
@@ -75,12 +78,14 @@ function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTask
       withCredentials: true,
     });
 
-    if (res.status === 200) {
-      console.log('Task updated successfully');
-    } else {
-      // TODO: display error snackbar
+    if (res.status !== 200) {
+      setErrorSnackbarOpen(true);
     }
   }
+
+  function handleSnackbarClose() {
+    setErrorSnackbarOpen(false);
+  };
 
   return (
     <div className="Calendar">
@@ -102,6 +107,25 @@ function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTask
           eventChange={handleEventChange}
         />
       </div>
+
+      <Snackbar
+        open={errorSnackbarOpen}
+        autoHideDuration={5000}
+        onClose={handleSnackbarClose}
+        message="oops, something went wrong!"
+        action={
+          <div>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleSnackbarClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </div>
+        }
+      />
     </div>
   )
 }
