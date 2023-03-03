@@ -12,11 +12,15 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LogoutIcon from '@mui/icons-material/Logout';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 function Main() {
   const [showPomodoro, setShowPomodoro] = useState<boolean>(false);
   const [page, setPage] = useState<string>('tasks');
   const [tasks, setTasks] = useState<[]>([]);
+  const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
 
   // Expanded Task State Variables
   const [expandedTaskID, setExpandedTaskID] = useState<number>(0);
@@ -69,8 +73,20 @@ function Main() {
     {
       withCredentials: true,
     });
-    setTasks(res.data);
+    
+    if (res.status === 200) {
+      res.data.sort((a: any, b: any) => { // Sort tasks by due date
+        return new Date(a.due_date).getTime() - new Date(b.due_date).getTime();
+      });
+      setTasks(res.data);
+    } else {
+      setErrorSnackbarOpen(true);
+    }
   }
+
+  function handleSnackbarClose() {
+    setErrorSnackbarOpen(false);
+  };
 
   // Fetch tasks on page load
   const { status } = useQuery('tasks', getTasks);
@@ -143,6 +159,25 @@ function Main() {
         }
         <Pomodoro showPomodoro={showPomodoro} setShowPomodoro={setShowPomodoro} />
       </div>
+
+      <Snackbar
+        open={errorSnackbarOpen}
+        autoHideDuration={5000}
+        onClose={handleSnackbarClose}
+        message="oops, something went wrong!"
+        action={
+          <div>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleSnackbarClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </div>
+        }
+      />
     </div>
   )
 }
