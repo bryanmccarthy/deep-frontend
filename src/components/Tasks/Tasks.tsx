@@ -1,11 +1,16 @@
 import './Tasks.scss';
 import NewTask from './NewTask/NewTask';
+import { useState } from 'react';
 import axios from 'axios';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 import dayjs from 'dayjs';
 
 type DataRow = {
@@ -30,8 +35,18 @@ type TasksProps = {
 const accent = '#000000';
 const primary = '#ffffff';
 
+type taskType = {
+  id: number;
+  title: string;
+  due_date: number;
+  difficulty: number;
+  completed: boolean;
+}
+
 function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted }: TasksProps) {
   const paginationPerPage: number = localStorage.getItem('paginationPerPage') ? parseInt(localStorage.getItem('paginationPerPage')!) : 10;
+  const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
+  const [deletedTask, setDeletedTask] = useState<taskType | null>(null);
 
   const columns: TableColumn<DataRow>[] = [
     {
@@ -100,6 +115,22 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
     }); // TODO: handle error
     getTasks();
   }
+
+  function handleSetDeletedTask(id: number) {
+    tasks.forEach((task: any) => {
+      if (task.id === id) {
+        setDeletedTask(
+          {
+            id: task.id,
+            title: task.title,
+            due_date: task.due_date,
+            difficulty: task.difficulty,
+            completed: task.completed,
+          }
+        );
+      }
+    });    
+  }
   
   // TODO: show a Snackbar when task is deleted w/ undo option
   async function deleteTask(id: number) {
@@ -109,8 +140,46 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
       },
       withCredentials: true,
     }); // TODO: handle error
+    handleSetDeletedTask(id);
     getTasks();
+    setSnackbarOpen(true);
   }
+
+  function handleSnackbarClose() {
+    setSnackbarOpen(false);
+  };
+
+  async function handleSnackbarUndo() {
+    const res = await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
+      title: deletedTask!.title,
+      difficulty: deletedTask!.difficulty,
+      due_date: deletedTask!.due_date,
+      completed: deletedTask!.completed,
+    },
+    {
+      withCredentials: true,
+    });
+
+    if (res.status === 200) {
+      getTasks();
+    }
+  }
+
+  const action = (
+    <div>
+      <Button color="secondary" size="small" onClick={handleSnackbarUndo}>
+        UNDO
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleSnackbarClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </div>
+  );
 
   async function handleExpandTask(row: DataRow) {
     const taskArray = Object.entries(row);
@@ -159,6 +228,14 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
         pointerOnHover
         noDataComponent
         onRowClicked={(row) => handleExpandTask(row)}
+      />
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={5000}
+        onClose={handleSnackbarClose}
+        message="Task deleted"
+        action={action}
       />
     </div>
   )
