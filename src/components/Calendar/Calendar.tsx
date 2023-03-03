@@ -50,24 +50,36 @@ function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTask
     if (title === '') return;
     if (dueDate === null) return;
 
-    await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
+    const res = await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
       title: title,
       difficulty: difficulty,
       due_date: dueDate,
     },
     {
       withCredentials: true,
-    }); // TODO: handle errors
+    });
+
+    if (res.status === 200) {
+      console.log('Task created successfully');
+    } else {
+      // TODO: display error snackbar
+    }
   }
 
   async function handleEventChange(info: any) {
-    await axios.put(import.meta.env.VITE_URL + '/tasks/update/due_date', {
+    const res = await axios.put(import.meta.env.VITE_URL + '/tasks/update/due_date', {
       id: Number(info.event.id),
       due_date: String(info.event.startStr),
     },
     {
       withCredentials: true,
-    }); // TODO: handle errors
+    });
+
+    if (res.status === 200) {
+      console.log('Task updated successfully');
+    } else {
+      // TODO: display error snackbar
+    }
   }
 
   return (

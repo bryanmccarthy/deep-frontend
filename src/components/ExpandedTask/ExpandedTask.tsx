@@ -22,26 +22,35 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
   const [expandedTaskNotes, setExpandedTaskNotes] = useState<[]>([]);
 
   async function createNote() {
-    await axios.post(import.meta.env.VITE_URL + '/notes/create', {
+    const res = await axios.post(import.meta.env.VITE_URL + '/notes/create', {
       title: noteTitle,
       task_id: expandedTaskID,
     },
     {
       withCredentials: true,
-    }); // TODO: add error handling
+    });
 
-    getNotes(); // TODO: maybe change to use state
+    if (res.status === 200) {
+      getNotes();
+    } else {
+      // TODO: display error snackbar
+    }
   }
 
   async function toggleCompleted(id: number, completed: boolean) {
-    await axios.put(import.meta.env.VITE_URL + '/tasks/update/completed', {
+    const res = await axios.put(import.meta.env.VITE_URL + '/tasks/update/completed', {
       id: id,
       completed: !completed,
     },
     {
       withCredentials: true,
-    }); // TODO: add error handling
-    setExpandedTaskCompleted(!completed);
+    });
+
+    if (res.status === 200) {
+      setExpandedTaskCompleted(!completed);
+    } else {
+      // TODO: display error snackbar
+    }
   }
 
   async function getNotes() {

@@ -35,7 +35,7 @@ type TasksProps = {
 const accent = '#000000';
 const primary = '#ffffff';
 
-type taskType = {
+type TaskType = {
   id: number;
   title: string;
   due_date: number;
@@ -46,7 +46,7 @@ type taskType = {
 function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted }: TasksProps) {
   const paginationPerPage: number = localStorage.getItem('paginationPerPage') ? parseInt(localStorage.getItem('paginationPerPage')!) : 10;
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
-  const [deletedTask, setDeletedTask] = useState<taskType | null>(null);
+  const [deletedTask, setDeletedTask] = useState<TaskType | null>(null);
 
   const columns: TableColumn<DataRow>[] = [
     {
@@ -106,14 +106,19 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
   };
 
   async function toggleCompleted(id: number, completed: boolean) {
-    await axios.put(import.meta.env.VITE_URL + '/tasks/update/completed', {
+    const res = await axios.put(import.meta.env.VITE_URL + '/tasks/update/completed', {
       id: id,
       completed: !completed,
     },
     {
       withCredentials: true,
-    }); // TODO: handle error
-    getTasks();
+    });
+
+    if (res.status === 200) {
+      getTasks();
+    } else {
+      // TODO: display error snackbar
+    }
   }
 
   function handleSetDeletedTask(id: number) {
@@ -132,17 +137,21 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
     });    
   }
   
-  // TODO: show a Snackbar when task is deleted w/ undo option
   async function deleteTask(id: number) {
-    await axios.delete(import.meta.env.VITE_URL + '/tasks/delete', {
+    const res = await axios.delete(import.meta.env.VITE_URL + '/tasks/delete', {
       data: {
         id: id,
       },
       withCredentials: true,
-    }); // TODO: handle error
-    handleSetDeletedTask(id);
-    getTasks();
-    setSnackbarOpen(true);
+    });
+
+    if (res.status === 200) {
+      handleSetDeletedTask(id);
+      getTasks();
+      setSnackbarOpen(true);
+    } else {
+      // TODO: display error snackbar
+    }
   }
 
   function handleSnackbarClose() {
@@ -162,6 +171,8 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
 
     if (res.status === 200) {
       getTasks();
+    } else {
+      // TODO: display error snackbar
     }
   }
 
