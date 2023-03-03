@@ -28,7 +28,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
     },
     {
       withCredentials: true,
-    });
+    }); // TODO: add error handling
 
     getNotes(); // TODO: maybe change to use state
   }
@@ -40,7 +40,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
     },
     {
       withCredentials: true,
-    });
+    }); // TODO: add error handling
     setExpandedTaskCompleted(!completed);
   }
 

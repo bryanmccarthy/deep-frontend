@@ -45,7 +45,7 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
       sortable: true,
     },
     {
-      name: 'Due Date',
+      name: 'Due',
       selector: row => dayjs(row.due_date).format('MM/DD/YYYY'),
       sortable: true,
     },
@@ -97,7 +97,7 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
     },
     {
       withCredentials: true,
-    });
+    }); // TODO: handle error
     getTasks();
   }
   
@@ -108,7 +108,7 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
         id: id,
       },
       withCredentials: true,
-    });
+    }); // TODO: handle error
     getTasks();
   }
 

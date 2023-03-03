@@ -3,7 +3,6 @@ import axios from 'axios';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from "@fullcalendar/interaction";
-import styled from "@emotion/styled";
 
 type CalendarProps = {
   setPage: (page: string) => void;
@@ -43,9 +42,22 @@ function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTask
     setExpandedTaskCompleted(Boolean(info.event._def.extendedProps.completed));
   }
 
-  function handleDateClick(info: any) {
-    console.log(info.dateStr); // TODO: prompt user to create new task with this date
-    // getTasks();
+  async function handleDateClick(info: any) {
+    const dueDate = info.date;
+    const title = prompt('Enter a new task title'); // TODO: use something other than prompt
+    const difficulty = Number(prompt('Enter a difficulty level (0, 1, 2)')); // TODO: use something other than prompt
+
+    if (title === '') return;
+    if (dueDate === null) return;
+
+    await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
+      title: title,
+      difficulty: difficulty,
+      due_date: dueDate,
+    },
+    {
+      withCredentials: true,
+    }); // TODO: handle errors
   }
 
   async function handleEventChange(info: any) {
@@ -55,7 +67,7 @@ function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTask
     },
     {
       withCredentials: true,
-    });
+    }); // TODO: handle errors
   }
 
   return (

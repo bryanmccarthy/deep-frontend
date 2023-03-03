@@ -29,7 +29,7 @@ function NewTask({ getTasks }: NewTaskProps) {
     },
     {
       withCredentials: true,
-    });
+    }); // 
     setTitle('');
     setDifficulty(0);
     setDueDate(null);
