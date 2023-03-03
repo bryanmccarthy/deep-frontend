@@ -31,8 +31,8 @@ const accent = '#000000';
 const primary = '#ffffff';
 
 function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted }: TasksProps) {
-  const paginationPerPage = localStorage.getItem('paginationPerPage') ? parseInt(localStorage.getItem('paginationPerPage')!) : 10;
-  
+  const paginationPerPage: number = localStorage.getItem('paginationPerPage') ? parseInt(localStorage.getItem('paginationPerPage')!) : 10;
+
   const columns: TableColumn<DataRow>[] = [
     {
       name: 'Task',
