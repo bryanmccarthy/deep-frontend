@@ -32,9 +32,6 @@ type TasksProps = {
   setExpandedTaskCompleted: (completed: boolean) => void;
 }
 
-const accent = '#000000';
-const primary = '#ffffff';
-
 type TaskType = {
   id: number;
   title: string;
@@ -42,6 +39,9 @@ type TaskType = {
   difficulty: number;
   completed: boolean;
 }
+
+const accent = '#000000';
+const primary = '#ffffff';
 
 function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted }: TasksProps) {
   const paginationPerPage: number = localStorage.getItem('paginationPerPage') ? parseInt(localStorage.getItem('paginationPerPage')!) : 10;
