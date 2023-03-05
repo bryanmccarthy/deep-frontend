@@ -4,8 +4,9 @@ import { useState } from 'react';
 import axios from 'axios';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import DeleteIcon from '@mui/icons-material/Delete';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+import EditIcon from '@mui/icons-material/Edit';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
@@ -68,10 +69,10 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
     {
       name: 'Done',
       selector: row => row.completed,
-      cell: row => row.completed ? <CheckCircleIcon onClick={() => toggleCompleted(row.id, true) } /> : <CircleOutlinedIcon onClick={() => toggleCompleted(row.id, false) } />,
+      cell: row => row.completed ? <CheckBoxIcon onClick={() => toggleCompleted(row.id, true) } /> : <CheckBoxOutlineBlankIcon onClick={() => toggleCompleted(row.id, false) } />,
     },
     {
-      cell: row => <DeleteIcon className="DeleteIcon" onClick={() => deleteTask(row.id)}></DeleteIcon>,
+    cell: row => <div><EditIcon className="EditIcon" onClick={() => console.log("edit")}></EditIcon><DeleteIcon className="DeleteIcon" onClick={() => deleteTask(row.id)}></DeleteIcon></div>,
     }
   ];
 
@@ -203,6 +204,7 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
       {
         tasks.length <= 0 ?
         <div className="TasksEmpty">
+    height: 100%;
           <h1 className="TasksEmptyText">no tasks yet</h1> {/* TODO: style */}
         </div>
         : 
