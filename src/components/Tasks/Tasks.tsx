@@ -72,7 +72,7 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
       cell: row => row.completed ? <CheckBoxIcon onClick={() => toggleCompleted(row.id, true) } /> : <CheckBoxOutlineBlankIcon onClick={() => toggleCompleted(row.id, false) } />,
     },
     {
-    cell: row => <div><EditIcon className="EditIcon" onClick={() => console.log("edit")}></EditIcon><DeleteIcon className="DeleteIcon" onClick={() => deleteTask(row.id)}></DeleteIcon></div>,
+    cell: row => <div><EditIcon className="EditIcon" onClick={() => editTask(row.id)}></EditIcon><DeleteIcon className="DeleteIcon" onClick={() => deleteTask(row.id)}></DeleteIcon></div>, // TODO: handle edit click
     }
   ];
 
@@ -137,6 +137,21 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
         );
       }
     });    
+  }
+
+  async function editTask(id: number) {
+    const newTaskTitle = prompt("Enter new task title:"); // TODO: update way to get new title
+    const res = await axios.put(import.meta.env.VITE_URL + '/tasks/update/title', {
+      id: id,
+      title: newTaskTitle,
+    },
+    {
+      withCredentials: true,
+    });
+
+    if (res.status === 200) {
+      console.log("edit task success");
+    }
   }
   
   async function deleteTask(id: number) {
