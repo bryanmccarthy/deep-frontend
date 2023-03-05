@@ -94,8 +94,7 @@ function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTask
           plugins={[ dayGridPlugin, interactionPlugin ]}
           initialView="dayGridMonth"
           headerToolbar={{
-            left: "dayGridMonth,dayGridWeek,dayGridDay",
-            center: "title",
+            left: "title",
             right: "today prev,next"
           }}
           events={parseTasks(tasks)}
