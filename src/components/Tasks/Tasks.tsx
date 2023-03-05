@@ -234,7 +234,7 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
         pagination
         paginationPerPage={paginationPerPage}
         onChangeRowsPerPage={(perPage) => localStorage.setItem('paginationPerPage', perPage.toString())}
-        paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30, 40, 50]}
+        paginationRowsPerPageOptions={[5, 10, 15, 20, 30, 40, 50]}
         paginationComponentOptions={{
           rowsPerPageText: 'Tasks per page:'
         }}
