@@ -16,6 +16,7 @@ function TaskList({ tasks, handleDeleteTask, handleExpandTask, handleToggleCompl
         tasks.map((task: any) => {
           return (
             <Task 
+              key={task.id}
               task={task} 
               handleDeleteTask={handleDeleteTask} 
               handleExpandTask={handleExpandTask} 

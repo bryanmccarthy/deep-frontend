@@ -113,6 +113,7 @@ function Main() {
          <Tasks
             setPage={setPage}
             tasks={tasks}
+            setTasks={setTasks}
             getTasks={getTasks}
             setExpandedTaskID={setExpandedTaskID}
             setExpandedTaskTitle={setExpandedTaskTitle}
@@ -134,6 +135,7 @@ function Main() {
           <Calendar
             setPage={setPage}
             tasks={tasks}
+            setTasks={setTasks}
             getTasks={getTasks}
             setExpandedTaskID={setExpandedTaskID}
             setExpandedTaskTitle={setExpandedTaskTitle}

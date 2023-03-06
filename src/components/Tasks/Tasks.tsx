@@ -12,6 +12,7 @@ import dayjs from 'dayjs';
 type TasksProps = {
   setPage: (page: string) => void;
   tasks: any;
+  setTasks: (tasks: any) => void;
   getTasks: () => void;
   setExpandedTaskID: (id: number) => void;
   setExpandedTaskTitle: (title: string) => void;
@@ -31,7 +32,7 @@ type TaskType = {
 const accent = '#000000';
 const primary = '#ffffff';
 
-function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted }: TasksProps) {
+function Tasks({ setPage, tasks, setTasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted }: TasksProps) {
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
   const [taskDeletedSnackbarOpen, setTaskDeletedSnackbarOpen] = useState<boolean>(false);
   const [deletedTask, setDeletedTask] = useState<TaskType | null>(null);
@@ -46,7 +47,14 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
     });
 
     if (res.status === 200) {
-      getTasks();
+      // getTasks();
+      const newTasks = tasks.map((task: TaskType) => {
+        if (task.id === id) {
+          return { ...task, completed: !completed };
+        }
+        return task;
+      });
+      setTasks(newTasks);
     } else {
       setErrorSnackbarOpen(true);
     }

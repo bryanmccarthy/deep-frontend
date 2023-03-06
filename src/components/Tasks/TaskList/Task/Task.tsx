@@ -29,8 +29,8 @@ function Task({ task, handleDeleteTask, handleExpandTask, handleToggleCompleted 
       <div className="TaskRight">
         <div>{task.difficulty}</div> {/* TODO: use ICONS */}
         <div>{dayjs(task.due_date).format('MM/DD/YYYY')}</div>
-        <DeleteIcon className="DeleteIcon" onClick={() => handleDeleteTask(task)} />
         <LaunchIcon className="LaunchIcon" onClick={() => handleExpandTask(task)} />
+        <DeleteIcon className="DeleteIcon" onClick={() => handleDeleteTask(task)} />
       </div>
     </div>
   )
