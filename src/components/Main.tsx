@@ -159,7 +159,13 @@ function Main() {
           :
           null 
         }
-        <Pomodoro showPomodoro={showPomodoro} setShowPomodoro={setShowPomodoro} />
+
+        <Pomodoro
+          showPomodoro={showPomodoro} 
+          setShowPomodoro={setShowPomodoro} 
+          errorSnackbarOpen={errorSnackbarOpen} 
+          setErrorSnackbarOpen={setErrorSnackbarOpen}
+        />
       </div>
 
       <Snackbar

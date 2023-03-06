@@ -1,14 +1,17 @@
 import './Pomodoro.scss'
 import Config from './Config/Config';
 import { formatDuration } from './Config/Config';
+import axios from 'axios';
 import { useEffect, useState, useRef } from 'react';
 
 type PomodoroProps = {
   showPomodoro: boolean;
   setShowPomodoro: (show: boolean) => void;
+  errorSnackbarOpen: boolean;
+  setErrorSnackbarOpen: (open: boolean) => void;
 }
 
-function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
+function Pomodoro({ showPomodoro, setShowPomodoro, errorSnackbarOpen, setErrorSnackbarOpen }: PomodoroProps) {
   const ref = useRef<HTMLInputElement>(null);
   const workDuration: number = localStorage.getItem('workDuration') ? parseInt(localStorage.getItem('workDuration') as string) : 25 * 60;
   const breakDuration: number = localStorage.getItem('breakDuration') ? parseInt(localStorage.getItem('breakDuration') as string) : 5 * 60;
@@ -17,6 +20,19 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
   const [seconds, setSeconds] = useState<number>(workDuration);
   const [formattedDuration, setFormattedDuration] = useState<string>(formatDuration(workDuration));
   const [isActive, setIsActive] = useState<boolean>(false);
+
+  async function handleUpdateTimeSpent() {
+    const res = await axios.put(import.meta.env.VITE_URL + '/user/update/time_spent', {
+      time_spent: workDuration,
+    },
+    {
+      withCredentials: true,
+    });
+
+    if (res.status !== 200) {
+      setErrorSnackbarOpen(true);
+    }
+  }
 
   useEffect(() => {
     let interval: any = null;
@@ -33,8 +49,7 @@ function Pomodoro({ showPomodoro, setShowPomodoro }: PomodoroProps) {
     if (seconds < 0) {
       // TODO: Handle notification
       if (currentTimer === 'Work') {
-        // TODO: Handle saving current work time
-        console.log('Work time + ' + workDuration)
+        handleUpdateTimeSpent();
         setCurrentTimer('Break');
         setSeconds(breakDuration);
         setFormattedDuration(formatDuration(breakDuration));
