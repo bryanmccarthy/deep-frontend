@@ -3,16 +3,22 @@
 .Task {
   display: flex;
   align-items: center;
-  margin: 0.3em;
-  padding-left: 0.3em;
-  padding-right: 0.3em;
-  border: 1px solid $accent;
-  border-radius: 0.3em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-bottom: 0.5px solid $accent;
+
+  &:hover {
+    background-color: #e4e3e6; 
+  }
 
   .TaskLeft {
     display: flex;
     align-items: center;
     flex: 3;
+
+    .CheckBoxIcon {
+      cursor: pointer;
+    }
   }
 
   .TaskRight {
@@ -20,5 +26,13 @@
     align-items: center;
     justify-content: space-between;
     flex: 1;
+
+    .DeleteIcon {
+      cursor: pointer;
+    }
+
+    .LaunchIcon {
+      cursor: pointer;
+    }
   }
 }

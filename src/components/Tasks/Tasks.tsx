@@ -36,7 +36,7 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
   const [taskDeletedSnackbarOpen, setTaskDeletedSnackbarOpen] = useState<boolean>(false);
   const [deletedTask, setDeletedTask] = useState<TaskType | null>(null);
 
-  async function toggleCompleted(id: number, completed: boolean) {
+  async function handleToggleCompleted(id: number, completed: boolean) {
     const res = await axios.put(import.meta.env.VITE_URL + '/tasks/update/completed', {
       id: id,
       completed: !completed,
@@ -51,33 +51,17 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
       setErrorSnackbarOpen(true);
     }
   }
-
-  function handleSetDeletedTask(id: number) {
-    tasks.forEach((task: any) => {
-      if (task.id === id) {
-        setDeletedTask(
-          {
-            id: task.id,
-            title: task.title,
-            due_date: task.due_date,
-            difficulty: task.difficulty,
-            completed: task.completed,
-          }
-        );
-      }
-    });    
-  }
     
-  async function deleteTask(id: number) {
+  async function handleDeleteTask(task: TaskType) {
     const res = await axios.delete(import.meta.env.VITE_URL + '/tasks/delete', {
       data: {
-        id: id,
+        id: task.id,
       },
       withCredentials: true,
     });
 
     if (res.status === 200) {
-      handleSetDeletedTask(id);
+      setDeletedTask(task);
       getTasks();
       setTaskDeletedSnackbarOpen(true);
     } else {
@@ -122,7 +106,6 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
       <div className="NewTaskContainer">
         {/* TODO: put completed ratio in its own component */}
         <div className="TasksCompletedRatio">
-          <label className="CompletedLabel">Completed</label> 
           <div className="CompletedNumber">{tasks.filter((task: any) => task.completed === true).length}/{tasks.length}</div>
         </div>
         <NewTask getTasks={getTasks} />
@@ -138,7 +121,11 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
         null
       }
 
-      <TaskList tasks={tasks} handleExpandTask={handleExpandTask}/> 
+      <TaskList 
+        tasks={tasks} handleDeleteTask={handleDeleteTask}
+        handleExpandTask={handleExpandTask} 
+        handleToggleCompleted={handleToggleCompleted}
+      /> 
 
       {/* Task Deleted Snackbar TODO: maybe move inside other component */}
       <Snackbar
