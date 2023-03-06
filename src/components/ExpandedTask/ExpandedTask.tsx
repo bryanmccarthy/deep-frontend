@@ -2,8 +2,8 @@ import './ExpandedTask.scss';
 import axios from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import dayjs from 'dayjs';
 import Snackbar from '@mui/material/Snackbar';
@@ -85,7 +85,10 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
           { expandedTaskDifficulty === 0 ? <FiberManualRecordIcon className="DifficultyIcon" /> : expandedTaskDifficulty === 1 ? <div><FiberManualRecordIcon className="DifficultyIcon" /> <FiberManualRecordIcon className="DifficultyIcon" /></div> : <div><FiberManualRecordIcon className="DifficultyIcon" /> <FiberManualRecordIcon className="DifficultyIcon" /> <FiberManualRecordIcon className="DifficultyIcon" /></div> }
         </div>
         <div>{ dayjs(expandedTaskDueDate).format('MM/DD/YYYY') }</div>
-        { expandedTaskCompleted ? <CheckCircleIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, true) } /> : <CircleOutlinedIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, false) } /> }
+        { expandedTaskCompleted ? 
+            <CheckBoxIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, true) } />
+          : 
+            <CheckBoxOutlineBlankIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, false) } /> }
         {/* TODO: change circle icon*/}
       </div>
 
