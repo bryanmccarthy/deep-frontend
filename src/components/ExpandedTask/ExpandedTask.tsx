@@ -86,6 +86,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
         </div>
         <div>{ dayjs(expandedTaskDueDate).format('MM/DD/YYYY') }</div>
         { expandedTaskCompleted ? <CheckCircleIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, true) } /> : <CircleOutlinedIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, false) } /> }
+        {/* TODO: change circle icon*/}
       </div>
 
       <div className="TaskProgress">
