@@ -3,29 +3,24 @@
 .NewTask {
   display: flex;
   align-items: center;
-  margin: 0.5em;
-  border-radius: 0.5em;
+  margin: 0.2em;
 
   .TitleInput {
-    margin: 0.5em;
+    margin: 0.2em;
   }
 
   .DifficultyForm {
-    margin: 0.5em;
+    margin: 0.2em;
     width: 8em;
-
-    .DifficultyIcon {
-      height: 0.6em;
-    }
   }
 
   .DueDatePicker {
-    margin: 0.5em;
+    margin: 0.2em;
   }
 
   .NoteAddIcon {
-    height: 2em;
-    width: 2em;
+    height: 1.5em;
+    width: 1.5em;
     cursor: pointer;
   }
 }

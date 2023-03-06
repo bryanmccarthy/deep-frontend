@@ -108,16 +108,13 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
     }
   }
 
-  async function handleExpandTask(row: DataRow) {
-    const taskArray = Object.entries(row);
-    const taskObject = Object.fromEntries(taskArray);
-
+  function handleExpandTask(task: TaskType) {
     setPage('expandedTask');
-    setExpandedTaskID(Number(taskObject.id));
-    setExpandedTaskTitle(String(taskObject.title));
-    setExpandedTaskDifficulty(Number(taskObject.difficulty));
-    setExpandedTaskDueDate(String(taskObject.due_date));
-    setExpandedTaskCompleted(Boolean(taskObject.completed));
+    setExpandedTaskID(task.id);
+    setExpandedTaskTitle(task.title);
+    setExpandedTaskDifficulty(task.difficulty);
+    setExpandedTaskDueDate(task.due_date);
+    setExpandedTaskCompleted(task.completed);
   }
 
   return (
@@ -141,7 +138,7 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
         null
       }
 
-      <TaskList tasks={tasks} /> 
+      <TaskList tasks={tasks} handleExpandTask={handleExpandTask}/> 
 
       {/* Task Deleted Snackbar TODO: maybe move inside other component */}
       <Snackbar

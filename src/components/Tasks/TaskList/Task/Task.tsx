@@ -6,9 +6,10 @@ import dayjs from 'dayjs';
 
 type TaskProps = {
   task: any;
+  handleExpandTask: () => void;
 }
 
-function Task({ task } :TaskProps) {
+function Task({ task, handleExpandTask } :TaskProps) {
 
   return (
     <div className="Task">
@@ -22,6 +23,7 @@ function Task({ task } :TaskProps) {
         <div>{task.difficulty}</div>
         <div>{dayjs(task.due_date).format('MM/DD/YYYY')}</div>
         <DeleteIcon />
+        <div onClick={() => handleExpandTask(task)}>Expand</div>
       </div>
     </div>
   )

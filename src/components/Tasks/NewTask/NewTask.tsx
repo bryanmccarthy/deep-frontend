@@ -42,28 +42,29 @@ function NewTask({ getTasks }: NewTaskProps) {
   
   return (
     <div className="NewTask">
-        <TextField className="TitleInput" label="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <TextField className="TitleInput" label="Title" size="small" value={title} onChange={(e) => setTitle(e.target.value)} />
         <FormControl className="DifficultyForm">
           <InputLabel>Difficulty</InputLabel>
           <Select
           className="DifficultySelect"
           value={difficulty}
           label="Difficulty"
+          size="small"
           onChange={(e) => handleDifficultyChange(e)}
           >
-            <MenuItem value={0}><FiberManualRecordIcon className="DifficultyIcon" fontSize="small" /></MenuItem>
-            <MenuItem value={1}><FiberManualRecordIcon className="DifficultyIcon" fontSize="small" /><FiberManualRecordIcon className="DifficultyIcon" fontSize="small" /></MenuItem>
-            <MenuItem value={2}><FiberManualRecordIcon className="DifficultyIcon" fontSize="small" /><FiberManualRecordIcon className="DifficultyIcon" fontSize="small" /><FiberManualRecordIcon className="DifficultyIcon" fontSize="small" /></MenuItem>
+            <MenuItem value={0}>0</MenuItem>
+            <MenuItem value={1}>1</MenuItem>
+            <MenuItem value={2}>2</MenuItem>
           </Select>
         </FormControl>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DesktopDatePicker
             className="DueDatePicker"
-            label="Due"
             inputFormat="MM/DD/YYYY"
+            size="small"
             value={dueDate}
             onChange={(date) => setDueDate(date)}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => <TextField {...params} size="small" />}
           />
         </LocalizationProvider>
         <NoteAddIcon className="NoteAddIcon" onClick={createTask}/>
