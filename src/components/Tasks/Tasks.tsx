@@ -47,14 +47,12 @@ function Tasks({ setPage, tasks, setTasks, getTasks, setExpandedTaskID, setExpan
     });
 
     if (res.status === 200) {
-      // getTasks();
-      const newTasks = tasks.map((task: TaskType) => {
+      setTasks(tasks.map((task: TaskType) => {
         if (task.id === id) {
           return { ...task, completed: !completed };
         }
         return task;
-      });
-      setTasks(newTasks);
+      }));
     } else {
       setErrorSnackbarOpen(true);
     }
@@ -69,8 +67,8 @@ function Tasks({ setPage, tasks, setTasks, getTasks, setExpandedTaskID, setExpan
     });
 
     if (res.status === 200) {
-      setDeletedTask(task);
-      getTasks();
+      setDeletedTask(task); // For Snackbar undo
+      setTasks(tasks.filter((t: TaskType) => t.id !== task.id));
       setTaskDeletedSnackbarOpen(true);
     } else {
       setErrorSnackbarOpen(true);
@@ -94,8 +92,17 @@ function Tasks({ setPage, tasks, setTasks, getTasks, setExpandedTaskID, setExpan
     });
 
     if (res.status === 200) {
-      getTasks();
-    } else {
+      setTasks([...tasks, {
+        id: res.data.id,
+        title: deletedTask!.title,
+        difficulty: deletedTask!.difficulty,
+        due_date: deletedTask!.due_date,
+        completed: deletedTask!.completed,
+      }].sort((a: TaskType, b: TaskType) => {
+        return dayjs(a.due_date) - dayjs(b.due_date);
+        })
+      );      
+      } else {
       setErrorSnackbarOpen(true);
     }
   }
