@@ -3,11 +3,6 @@ import NewTask from './NewTask/NewTask';
 import TaskList from './TaskList/TaskList';
 import { useState } from 'react';
 import axios from 'axios';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
@@ -72,22 +67,7 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
       }
     });    
   }
-
-  async function editTask(id: number) {
-    const newTaskTitle = prompt("Enter new task title:"); // TODO: update way to get new title
-    const res = await axios.put(import.meta.env.VITE_URL + '/tasks/update/title', {
-      id: id,
-      title: newTaskTitle,
-    },
-    {
-      withCredentials: true,
-    });
-
-    if (res.status === 200) {
-      console.log("edit task success");
-    }
-  }
-  
+    
   async function deleteTask(id: number) {
     const res = await axios.delete(import.meta.env.VITE_URL + '/tasks/delete', {
       data: {
@@ -161,9 +141,9 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
         null
       }
 
-      <TaskList /> 
+      <TaskList tasks={tasks} /> 
 
-      {/* Task Deleted Snackbar */}
+      {/* Task Deleted Snackbar TODO: maybe move inside other component */}
       <Snackbar
         open={taskDeletedSnackbarOpen}
         autoHideDuration={5000}
@@ -186,7 +166,7 @@ function Tasks({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTit
         }
       />
 
-      {/* Error Snackbar */}
+      {/* Error Snackbar TODO: maybe move inside other component */}
       <Snackbar
         open={errorSnackbarOpen}
         autoHideDuration={5000}

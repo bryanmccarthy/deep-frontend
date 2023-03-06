@@ -1,0 +1,24 @@
+@import '../../../../utils/variables';
+
+.Task {
+  display: flex;
+  align-items: center;
+  margin: 0.3em;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  border: 1px solid $accent;
+  border-radius: 0.3em;
+
+  .TaskLeft {
+    display: flex;
+    align-items: center;
+    flex: 3;
+  }
+
+  .TaskRight {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+  }
+}

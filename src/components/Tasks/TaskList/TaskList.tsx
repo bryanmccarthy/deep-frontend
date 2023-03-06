@@ -1,11 +1,19 @@
 import './TaskList.scss';
+import Task from './Task/Task';
 
-function TaskList() {
+type TaskListProps = {
+  tasks: any;
+}
+
+function TaskList({ tasks }: TaskListProps) {
 
   return (
     <div className="TaskList">
-     <p>TaskList</p> 
-     {/* render Task components */}
+      {
+        tasks.map((task: any) => {
+          return <Task task={task} key={task.id} />
+        })
+      }
     </div>
   )
 }

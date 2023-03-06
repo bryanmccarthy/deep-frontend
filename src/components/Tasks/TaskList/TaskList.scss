@@ -1,7 +1,6 @@
-@import '../../../utils/variables.scss';
+@import '../../../utils/variables';
 
 .TaskList {
-  border: 1px solid $accent;
   height: 100%;
   overflow: auto;
 }
