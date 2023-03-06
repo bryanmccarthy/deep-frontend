@@ -123,7 +123,7 @@ function Tasks({ setPage, tasks, setTasks, getTasks, setExpandedTaskID, setExpan
         <div className="TasksCompletedRatio">
           <div className="CompletedNumber">{tasks.filter((task: any) => task.completed === true).length}/{tasks.length}</div>
         </div>
-        <NewTask getTasks={getTasks} />
+        <NewTask tasks={tasks} setTasks={setTasks} />
       </div>
     
       {
@@ -142,7 +142,6 @@ function Tasks({ setPage, tasks, setTasks, getTasks, setExpandedTaskID, setExpan
         handleToggleCompleted={handleToggleCompleted}
       /> 
 
-      {/* Task Deleted Snackbar TODO: maybe move inside other component */}
       <Snackbar
         open={taskDeletedSnackbarOpen}
         autoHideDuration={5000}
@@ -165,7 +164,6 @@ function Tasks({ setPage, tasks, setTasks, getTasks, setExpandedTaskID, setExpan
         }
       />
 
-      {/* Error Snackbar TODO: maybe move inside other component */}
       <Snackbar
         open={errorSnackbarOpen}
         autoHideDuration={5000}

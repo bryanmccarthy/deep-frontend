@@ -7,13 +7,14 @@ import { TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/mater
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
 type NewTaskProps = {
-  getTasks: () => void;
+  tasks: any;
+  setTasks: (tasks: any) => void;
 }
 
-function NewTask({ getTasks }: NewTaskProps) {
+function NewTask({ tasks, setTasks }: NewTaskProps) {
   const [title, setTitle] = useState<string>('');
   const [difficulty, setDifficulty] = useState<number>(0);
   const [dueDate, setDueDate] = useState<Dayjs | null>(null);
@@ -22,18 +23,34 @@ function NewTask({ getTasks }: NewTaskProps) {
     if (title === '') return;
     if (dueDate === null) return;
 
-    await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
+    const res = await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
       title: title,
       difficulty: difficulty,
       due_date: dueDate,
     },
     {
       withCredentials: true,
-    }); // handle error
+    });
+
+    // Clear inputs
     setTitle('');
     setDifficulty(0);
     setDueDate(null);
-    getTasks();
+
+    if (res.status === 200) {
+      setTasks([...tasks, {
+        id: res.data.id,
+        title: res.data.title,
+        difficulty: res.data.difficulty,
+        due_date: res.data.due_date,
+        completed: res.data.completed,
+      }].sort((a: TaskType, b: TaskType) => {
+        return dayjs(a.due_date) - dayjs(b.due_date);
+        })
+      );      
+      } else {
+      setErrorSnackbarOpen(true);
+    }
   }
 
   function handleDifficultyChange(event: any) {
