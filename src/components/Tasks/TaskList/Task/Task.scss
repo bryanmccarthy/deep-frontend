@@ -14,10 +14,15 @@
   .TaskLeft {
     display: flex;
     align-items: center;
-    flex: 3;
+    flex: 2.5;
 
     .CheckBoxIcon {
       cursor: pointer;
+    }
+
+    .TaskTitle {
+      margin-left: 0.5em;
+      font-size: 1rem;
     }
   }
 
@@ -26,6 +31,14 @@
     align-items: center;
     justify-content: space-between;
     flex: 1;
+
+    .TaskDifficulty {
+      margin-right: 1em;
+    }
+
+    .TaskDueDate {
+      margin-right: 1em;
+    }
 
     .DeleteIcon {
       cursor: pointer;

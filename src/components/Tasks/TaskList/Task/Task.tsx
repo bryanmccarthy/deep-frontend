@@ -23,12 +23,12 @@ function Task({ task, handleDeleteTask, handleExpandTask, handleToggleCompleted 
           : 
             <CheckBoxOutlineBlankIcon className="CheckBoxIcon" onClick={() => handleToggleCompleted(task.id, task.completed)} />
         }
-        <p>{task.title}</p>
+        <p className="TaskTitle">{task.title}</p>
         {/* TODO: possibly add time spent */}
       </div>
       <div className="TaskRight">
-        <div>{task.difficulty}</div> {/* TODO: use ICONS */}
-        <div>{dayjs(task.due_date).format('MM/DD/YYYY')}</div>
+        <div className="TaskDifficulty">{task.difficulty}</div> {/* TODO: use ICONS */}
+        <div className="TaskDueDate">{dayjs(task.due_date).format('MM/DD/YYYY')}</div>
         <LaunchIcon className="LaunchIcon" onClick={() => handleExpandTask(task)} />
         <DeleteIcon className="DeleteIcon" onClick={() => handleDeleteTask(task)} />
       </div>
