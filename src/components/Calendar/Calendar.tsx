@@ -7,6 +7,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import dayjs from 'dayjs';
 
 type CalendarProps = {
   setPage: (page: string) => void;
@@ -22,7 +23,7 @@ type CalendarProps = {
 function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted  }: CalendarProps) {
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
 
-  // Necessary for FullCalendar as it needs date & allDay
+  // Necessary for FullCalendar as it needs date & allDay fields
   function parseTasks(tasks: any) {
     let events: any = [];
     tasks.forEach((task: any) => {

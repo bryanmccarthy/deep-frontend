@@ -7,9 +7,9 @@ import dayjs from 'dayjs';
 
 type TaskProps = {
   task: any;
-  handleDeleteTask: () => void;
-  handleExpandTask: () => void;
-  handleToggleCompleted: () => void;
+  handleDeleteTask: (task: any) => void;
+  handleExpandTask: (tasK: any) => void;
+  handleToggleCompleted: (id: number, completed: boolean) => void;
 }
 
 function Task({ task, handleDeleteTask, handleExpandTask, handleToggleCompleted } :TaskProps) {

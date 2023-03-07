@@ -9,9 +9,11 @@ type PomodoroProps = {
   setShowPomodoro: (show: boolean) => void;
   errorSnackbarOpen: boolean;
   setErrorSnackbarOpen: (open: boolean) => void;
+  page: string;
+  expandedTaskID: number;
 }
 
-function Pomodoro({ showPomodoro, setShowPomodoro, errorSnackbarOpen, setErrorSnackbarOpen }: PomodoroProps) {
+function Pomodoro({ showPomodoro, setShowPomodoro, errorSnackbarOpen, setErrorSnackbarOpen, page, expandedTaskID }: PomodoroProps) {
   const ref = useRef<HTMLInputElement>(null);
   const workDuration: number = localStorage.getItem('workDuration') ? parseInt(localStorage.getItem('workDuration') as string) : 25 * 60;
   const breakDuration: number = localStorage.getItem('breakDuration') ? parseInt(localStorage.getItem('breakDuration') as string) : 5 * 60;
@@ -41,6 +43,9 @@ function Pomodoro({ showPomodoro, setShowPomodoro, errorSnackbarOpen, setErrorSn
         let formattedDuration = formatDuration(seconds - 1);
         setFormattedDuration(formattedDuration);
         document.title = `${currentTimer}: ${formattedDuration}`;
+        
+        if (page === 'expandedTask') console.log(expandedTaskID)
+        // TODO: update time spent for that task
 
         setSeconds(seconds - 1);
       }, 1000);
@@ -69,6 +74,7 @@ function Pomodoro({ showPomodoro, setShowPomodoro, errorSnackbarOpen, setErrorSn
     setShowPomodoro(false);
   }
 
+  // Listen for clicks outside of the element
   useEffect(() => {
     const handleClickOutside = (event: any) => {
       if (ref.current && !ref.current.contains(event.target)) {

@@ -7,13 +7,11 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import dayjs from 'dayjs';
 
 type TasksProps = {
   setPage: (page: string) => void;
   tasks: any;
   setTasks: (tasks: any) => void;
-  getTasks: () => void;
   setExpandedTaskID: (id: number) => void;
   setExpandedTaskTitle: (title: string) => void;
   setExpandedTaskDifficulty: (difficulty: number) => void;
@@ -21,21 +19,13 @@ type TasksProps = {
   setExpandedTaskCompleted: (completed: boolean) => void;
 }
 
-type TaskType = {
-  id: number;
-  title: string;
-  due_date: number;
-  difficulty: number;
-  completed: boolean;
-}
-
 const accent = '#000000';
 const primary = '#ffffff';
 
-function Tasks({ setPage, tasks, setTasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted }: TasksProps) {
+function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted }: TasksProps) {
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
   const [taskDeletedSnackbarOpen, setTaskDeletedSnackbarOpen] = useState<boolean>(false);
-  const [deletedTask, setDeletedTask] = useState<TaskType | null>(null);
+  const [deletedTask, setDeletedTask] = useState<any | null>(null);
 
   async function handleToggleCompleted(id: number, completed: boolean) {
     const res = await axios.put(import.meta.env.VITE_URL + '/tasks/update/completed', {
@@ -47,7 +37,7 @@ function Tasks({ setPage, tasks, setTasks, getTasks, setExpandedTaskID, setExpan
     });
 
     if (res.status === 200) {
-      setTasks(tasks.map((task: TaskType) => {
+      setTasks(tasks.map((task: any) => {
         if (task.id === id) {
           return { ...task, completed: !completed };
         }
@@ -58,7 +48,7 @@ function Tasks({ setPage, tasks, setTasks, getTasks, setExpandedTaskID, setExpan
     }
   }
     
-  async function handleDeleteTask(task: TaskType) {
+  async function handleDeleteTask(task: any) {
     const res = await axios.delete(import.meta.env.VITE_URL + '/tasks/delete', {
       data: {
         id: task.id,
@@ -68,7 +58,7 @@ function Tasks({ setPage, tasks, setTasks, getTasks, setExpandedTaskID, setExpan
 
     if (res.status === 200) {
       setDeletedTask(task); // For Snackbar undo
-      setTasks(tasks.filter((t: TaskType) => t.id !== task.id));
+      setTasks(tasks.filter((t: any) => t.id !== task.id));
       setTaskDeletedSnackbarOpen(true);
     } else {
       setErrorSnackbarOpen(true);
@@ -98,8 +88,8 @@ function Tasks({ setPage, tasks, setTasks, getTasks, setExpandedTaskID, setExpan
         difficulty: deletedTask!.difficulty,
         due_date: deletedTask!.due_date,
         completed: deletedTask!.completed,
-      }].sort((a: TaskType, b: TaskType) => {
-        return dayjs(a.due_date) - dayjs(b.due_date);
+      }].sort((a: any, b: any) => {
+        return a.due_date - b.due_date;
         })
       );      
       } else {
@@ -107,7 +97,7 @@ function Tasks({ setPage, tasks, setTasks, getTasks, setExpandedTaskID, setExpan
     }
   }
 
-  function handleExpandTask(task: TaskType) {
+  function handleExpandTask(task: any) {
     setPage('expandedTask');
     setExpandedTaskID(task.id);
     setExpandedTaskTitle(task.title);
@@ -123,7 +113,7 @@ function Tasks({ setPage, tasks, setTasks, getTasks, setExpandedTaskID, setExpan
         <div className="TasksCompletedRatio">
           <div className="CompletedNumber">{tasks.filter((task: any) => task.completed === true).length}/{tasks.length}</div>
         </div>
-        <NewTask tasks={tasks} setTasks={setTasks} />
+        <NewTask tasks={tasks} setTasks={setTasks} setErrorSnackbarOpen={setErrorSnackbarOpen} />
       </div>
     
       {
@@ -137,7 +127,8 @@ function Tasks({ setPage, tasks, setTasks, getTasks, setExpandedTaskID, setExpan
       }
 
       <TaskList 
-        tasks={tasks} handleDeleteTask={handleDeleteTask}
+        tasks={tasks} 
+        handleDeleteTask={handleDeleteTask}
         handleExpandTask={handleExpandTask} 
         handleToggleCompleted={handleToggleCompleted}
       /> 

@@ -1,20 +1,20 @@
 import './NewTask.scss';
 import axios from 'axios';
 import { useState } from 'react';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import { TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs from 'dayjs';
+import { Dayjs } from 'dayjs';
 
 type NewTaskProps = {
   tasks: any;
   setTasks: (tasks: any) => void;
+  setErrorSnackbarOpen: (bool: boolean) => void;
 }
 
-function NewTask({ tasks, setTasks }: NewTaskProps) {
+function NewTask({ tasks, setTasks, setErrorSnackbarOpen }: NewTaskProps) {
   const [title, setTitle] = useState<string>('');
   const [difficulty, setDifficulty] = useState<number>(0);
   const [dueDate, setDueDate] = useState<Dayjs | null>(null);
@@ -44,8 +44,8 @@ function NewTask({ tasks, setTasks }: NewTaskProps) {
         difficulty: res.data.difficulty,
         due_date: res.data.due_date,
         completed: res.data.completed,
-      }].sort((a: TaskType, b: TaskType) => {
-        return dayjs(a.due_date) - dayjs(b.due_date);
+      }].sort((a: any, b: any) => {
+        return a.due_date - b.due_date;
         })
       );      
       } else {
@@ -78,7 +78,6 @@ function NewTask({ tasks, setTasks }: NewTaskProps) {
           <DesktopDatePicker
             className="DueDatePicker"
             inputFormat="MM/DD/YYYY"
-            size="small"
             value={dueDate}
             onChange={(date) => setDueDate(date)}
             renderInput={(params) => <TextField {...params} size="small" />}

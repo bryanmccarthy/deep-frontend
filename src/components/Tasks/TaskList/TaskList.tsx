@@ -3,9 +3,9 @@ import Task from './Task/Task';
 
 type TaskListProps = {
   tasks: any;
-  handleDeleteTask: () => void;
-  handleExpandTask: () => void;
-  handleToggleCompleted: () => void;
+  handleDeleteTask: (task: any) => void;
+  handleExpandTask: (task: any) => void;
+  handleToggleCompleted: (id: number, completed: boolean) => void;
 }
 
 function TaskList({ tasks, handleDeleteTask, handleExpandTask, handleToggleCompleted }: TaskListProps) {

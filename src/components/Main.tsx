@@ -114,7 +114,6 @@ function Main() {
             setPage={setPage}
             tasks={tasks}
             setTasks={setTasks}
-            getTasks={getTasks}
             setExpandedTaskID={setExpandedTaskID}
             setExpandedTaskTitle={setExpandedTaskTitle}
             setExpandedTaskDifficulty={setExpandedTaskDifficulty}
@@ -135,7 +134,6 @@ function Main() {
           <Calendar
             setPage={setPage}
             tasks={tasks}
-            setTasks={setTasks}
             getTasks={getTasks}
             setExpandedTaskID={setExpandedTaskID}
             setExpandedTaskTitle={setExpandedTaskTitle}
@@ -165,6 +163,8 @@ function Main() {
           setShowPomodoro={setShowPomodoro} 
           errorSnackbarOpen={errorSnackbarOpen} 
           setErrorSnackbarOpen={setErrorSnackbarOpen}
+          page={page}
+          expandedTaskID={expandedTaskID}
         />
       </div>
 
