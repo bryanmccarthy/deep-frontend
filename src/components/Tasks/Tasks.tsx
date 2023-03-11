@@ -88,9 +88,7 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
         difficulty: deletedTask!.difficulty,
         due_date: deletedTask!.due_date,
         completed: deletedTask!.completed,
-      }].sort((a: any, b: any) => {
-        return a.due_date - b.due_date;
-        })
+      }].sort((a: any, b: any) => { return new Date(a.due_date).getTime() - new Date(b.due_date).getTime(); })
       );      
       } else {
       setErrorSnackbarOpen(true);
