@@ -4,23 +4,90 @@
   display: flex;
   align-items: center;
   margin: 0.2em;
+  overflow: auto;
 
-  .TitleInput {
+  .NewTaskInputs {
+    display: flex;
+    align-items: center;
     margin: 0.2em;
-  }
+    overflow: hidden;
 
-  .DifficultyForm {
-    margin: 0.2em;
-    width: 8em;
-  }
+    .TitleInput {
+      margin: 0.2em;
+      width: 12em;
+    }
 
-  .DueDatePicker {
-    margin: 0.2em;
+    .DifficultyForm {
+      margin: 0.2em;
+      width: 12em;
+    }
+
+    .DueDatePicker {
+      margin: 0.2em;
+      width: 12em;
+    }
   }
 
   .NoteAddIcon {
     height: 1.5em;
     width: 1.5em;
     cursor: pointer;
+  }
+}
+
+@media (max-width: 1000px) {
+  .NewTask {
+
+    .NewTaskInputs {
+      .TitleInput {
+        width: 10em;
+      }
+  
+      .DifficultyForm {
+        width: 10em;
+      }
+  
+      .DueDatePicker {
+        width: 10em;
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .NewTask {
+
+    .NewTaskInputs {
+      .TitleInput {
+        width: 8em;
+      }
+  
+      .DifficultyForm {
+        width: 8em;
+      }
+  
+      .DueDatePicker {
+        width: 8em;
+      }
+    }
+  }
+
+  @media (max-width: 550px) {
+    .NewTask {
+  
+      .NewTaskInputs {
+        .TitleInput {
+          width: 6em;
+        }
+    
+        .DifficultyForm {
+          width: 6em;
+        }
+    
+        .DueDatePicker {
+          width: 6em;
+        }
+      }
+    }
   }
 }

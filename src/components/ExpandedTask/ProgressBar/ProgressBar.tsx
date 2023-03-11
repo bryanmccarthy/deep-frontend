@@ -6,7 +6,7 @@ import Slider from '@mui/material/Slider';
 const accent = "#000000";
 
 function ProgressBar() {
-  const [progress, setProgress] = useState<number>(0);
+  const [progress, setProgress] = useState<number>(0); // fetch progress for task default to 0
 
   function handleSliderChange(event: Event, value: number | number[]) {
     setProgress(value as number);

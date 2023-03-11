@@ -59,30 +59,32 @@ function NewTask({ tasks, setTasks, setErrorSnackbarOpen }: NewTaskProps) {
   
   return (
     <div className="NewTask">
-        <TextField className="TitleInput" label="Title" size="small" value={title} onChange={(e) => setTitle(e.target.value)} />
-        <FormControl className="DifficultyForm">
-          <InputLabel>Difficulty</InputLabel>
-          <Select
-          className="DifficultySelect"
-          value={difficulty}
-          label="Difficulty"
-          size="small"
-          onChange={(e) => handleDifficultyChange(e)}
-          >
-            <MenuItem value={0}>0</MenuItem>
-            <MenuItem value={1}>1</MenuItem>
-            <MenuItem value={2}>2</MenuItem>
-          </Select>
-        </FormControl>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DesktopDatePicker
-            className="DueDatePicker"
-            inputFormat="MM/DD/YYYY"
-            value={dueDate}
-            onChange={(date) => setDueDate(date)}
-            renderInput={(params) => <TextField {...params} size="small" />}
-          />
-        </LocalizationProvider>
+        <div className="NewTaskInputs">
+          <TextField className="TitleInput" label="Title" size="small" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <FormControl className="DifficultyForm">
+            <InputLabel>Difficulty</InputLabel>
+            <Select
+            className="DifficultySelect"
+            value={difficulty}
+            label="Difficulty"
+            size="small"
+            onChange={(e) => handleDifficultyChange(e)}
+            >
+              <MenuItem value={0}>0</MenuItem>
+              <MenuItem value={1}>1</MenuItem>
+              <MenuItem value={2}>2</MenuItem>
+            </Select>
+          </FormControl>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DesktopDatePicker
+              className="DueDatePicker"
+              inputFormat="MM/DD/YYYY"
+              value={dueDate}
+              onChange={(date) => setDueDate(date)}
+              renderInput={(params) => <TextField {...params} size="small" />}
+            />
+          </LocalizationProvider>
+        </div>
         <NoteAddIcon className="NoteAddIcon" onClick={createTask}/>
     </div>
   )

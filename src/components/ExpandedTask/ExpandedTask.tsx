@@ -115,7 +115,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
       </div>
 
       <div className="TaskCurrentNote">
-        <textarea className="TaskCurrentNoteText"></textarea>
+        <textarea className="TaskCurrentNoteText" placeholder="begin typing..."></textarea>
       </div>
 
       <Snackbar
