@@ -38,16 +38,14 @@ function NewTask({ tasks, setTasks, setErrorSnackbarOpen }: NewTaskProps) {
     setDueDate(null);
 
     if (res.status === 200) {
-      setTasks([...tasks, {
+      const newTasks = [...tasks, {
         id: res.data.id,
         title: res.data.title,
         difficulty: res.data.difficulty,
         due_date: res.data.due_date,
         completed: res.data.completed,
-      }].sort((a: any, b: any) => {
-        return a.due_date - b.due_date;
-        })
-      );      
+      }].sort((a: any, b: any) => { return new Date(a.due_date).getTime() - new Date(b.due_date).getTime(); });
+      setTasks(newTasks);
       } else {
       setErrorSnackbarOpen(true);
     }

@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import dayjs from 'dayjs';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
@@ -83,7 +82,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
       <div className="TaskInfoHeader">
         <div>{ expandedTaskTitle }</div>
         <div>
-          { expandedTaskDifficulty === 0 ? <FiberManualRecordIcon className="DifficultyIcon" /> : expandedTaskDifficulty === 1 ? <div><FiberManualRecordIcon className="DifficultyIcon" /> <FiberManualRecordIcon className="DifficultyIcon" /></div> : <div><FiberManualRecordIcon className="DifficultyIcon" /> <FiberManualRecordIcon className="DifficultyIcon" /> <FiberManualRecordIcon className="DifficultyIcon" /></div> }
+          { expandedTaskDifficulty === 0 ? '0' : expandedTaskDifficulty === 1 ? '1' : '2' }
         </div>
         <div>{ dayjs(expandedTaskDueDate).format('MM/DD/YYYY') }</div>
         { expandedTaskCompleted ? 
