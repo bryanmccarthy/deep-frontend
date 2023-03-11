@@ -28,6 +28,7 @@ function Main() {
   const [expandedTaskDifficulty, setExpandedTaskDifficulty] = useState<number>(0);
   const [expandedTaskDueDate, setExpandedTaskDueDate] = useState<string>('');
   const [expandedTaskCompleted, setExpandedTaskCompleted] = useState<boolean>(false);
+  const [expandedTaskProgress, setExpandedTaskProgress] = useState<number>(0);
 
   async function handleLogout() {
     const res = await axios.get(import.meta.env.VITE_URL + '/auth/logout', {
@@ -119,6 +120,7 @@ function Main() {
             setExpandedTaskDifficulty={setExpandedTaskDifficulty}
             setExpandedTaskDueDate={setExpandedTaskDueDate}
             setExpandedTaskCompleted={setExpandedTaskCompleted}
+            setExpandedTaskProgress={setExpandedTaskProgress}
          />
           : 
           null 
@@ -140,6 +142,7 @@ function Main() {
             setExpandedTaskDifficulty={setExpandedTaskDifficulty}
             setExpandedTaskDueDate={setExpandedTaskDueDate}
             setExpandedTaskCompleted={setExpandedTaskCompleted}
+            setExpandedTaskProgress={setExpandedTaskProgress}
           />
           :
           null
@@ -153,6 +156,8 @@ function Main() {
             expandedTaskDueDate={expandedTaskDueDate}
             expandedTaskCompleted={expandedTaskCompleted}
             setExpandedTaskCompleted={setExpandedTaskCompleted}
+            expandedTaskProgress={expandedTaskProgress}
+            setExpandedTaskProgress={setExpandedTaskProgress}
           /> 
           :
           null 

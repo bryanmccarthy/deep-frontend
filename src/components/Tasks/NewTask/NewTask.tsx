@@ -27,6 +27,8 @@ function NewTask({ tasks, setTasks, setErrorSnackbarOpen }: NewTaskProps) {
       title: title,
       difficulty: difficulty,
       due_date: dueDate,
+      completed: false,
+      progress: 0,
     },
     {
       withCredentials: true,

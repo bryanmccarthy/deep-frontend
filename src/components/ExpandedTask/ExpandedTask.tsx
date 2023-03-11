@@ -17,9 +17,11 @@ type ExpandedTaskProps = {
   expandedTaskDueDate: string;
   expandedTaskCompleted: boolean;
   setExpandedTaskCompleted: (completed: boolean) => void;
+  expandedTaskProgress: number;
+  setExpandedTaskProgress: (progress: number) => void;
 }
 
-function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficulty, expandedTaskDueDate, expandedTaskCompleted, setExpandedTaskCompleted }: ExpandedTaskProps) {
+function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficulty, expandedTaskDueDate, expandedTaskCompleted, setExpandedTaskCompleted, expandedTaskProgress, setExpandedTaskProgress }: ExpandedTaskProps) {
   const [noteTitle, setNoteTitle] = useState<string>('');
   const [expandedTaskNotes, setExpandedTaskNotes] = useState<[]>([]);
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
@@ -92,7 +94,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
         {/* TODO: change circle icon*/}
       </div>
 
-      <ProgressBar />
+      <ProgressBar expandedTaskID={expandedTaskID} expandedTaskProgress={expandedTaskProgress} />
 
       {/* TODO: Notes */}
       <div className="TaskNotes">

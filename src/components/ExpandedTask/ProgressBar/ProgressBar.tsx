@@ -1,15 +1,37 @@
 import './ProgressBar.scss';
+import axios from 'axios';
 import { useState } from 'react';
 import Slider from '@mui/material/Slider';
 
 // const primary = "#ffffff";
 const accent = "#000000";
 
-function ProgressBar() {
-  const [progress, setProgress] = useState<number>(0); // fetch progress for task default to 0
+type ProgressBarProps = {
+  expandedTaskID: number;
+  expandedTaskProgress: number;
+}
 
-  function handleSliderChange(event: Event, value: number | number[]) {
+function ProgressBar({ expandedTaskID, expandedTaskProgress }: ProgressBarProps ) {
+  const [progress, setProgress] = useState<number>(expandedTaskProgress);
+
+  async function handleSliderChange(event: Event, value: number | number[]) {
     setProgress(value as number);
+    console.log(expandedTaskID);
+
+    const res = await axios.put(import.meta.env.VITE_URL + '/tasks/update/progress', {
+      task_id: expandedTaskID,
+      progress: value as number,
+    },
+    {
+      withCredentials: true,
+    });
+
+    if (res.status === 200) {
+      console.log('updated progress');
+    } else {
+      console.log('error updating progress');
+      // Snackbar
+    }
   }
   
   return (

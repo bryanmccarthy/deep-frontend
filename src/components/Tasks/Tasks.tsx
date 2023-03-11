@@ -17,12 +17,13 @@ type TasksProps = {
   setExpandedTaskDifficulty: (difficulty: number) => void;
   setExpandedTaskDueDate: (dueDate: string) => void;
   setExpandedTaskCompleted: (completed: boolean) => void;
+  setExpandedTaskProgress: (progress: number) => void;
 }
 
 const accent = '#000000';
 const primary = '#ffffff';
 
-function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted }: TasksProps) {
+function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted, setExpandedTaskProgress }: TasksProps) {
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
   const [taskDeletedSnackbarOpen, setTaskDeletedSnackbarOpen] = useState<boolean>(false);
   const [deletedTask, setDeletedTask] = useState<any | null>(null);
@@ -76,6 +77,7 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
       difficulty: deletedTask!.difficulty,
       due_date: deletedTask!.due_date,
       completed: deletedTask!.completed,
+      progress: deletedTask!.progress,
     },
     {
       withCredentials: true,
@@ -88,6 +90,7 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
         difficulty: deletedTask!.difficulty,
         due_date: deletedTask!.due_date,
         completed: deletedTask!.completed,
+        progress: deletedTask!.progress,
       }].sort((a: any, b: any) => { return new Date(a.due_date).getTime() - new Date(b.due_date).getTime(); })
       );      
       } else {
@@ -102,6 +105,7 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
     setExpandedTaskDifficulty(task.difficulty);
     setExpandedTaskDueDate(task.due_date);
     setExpandedTaskCompleted(task.completed);
+    setExpandedTaskProgress(task.progress);
   }
 
   return (
