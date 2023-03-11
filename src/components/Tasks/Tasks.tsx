@@ -121,7 +121,6 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
       {
         tasks.length <= 0 ?
         <div className="TasksEmpty">
-    height: 100%;
           <h1 className="TasksEmptyText">no tasks yet</h1> {/* TODO: style */}
         </div>
         : 

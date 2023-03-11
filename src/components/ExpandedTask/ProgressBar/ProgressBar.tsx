@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useState } from 'react';
 import Slider from '@mui/material/Slider';
 
-// const primary = "#ffffff";
 const accent = "#000000";
 
 type ProgressBarProps = {
@@ -14,13 +13,14 @@ type ProgressBarProps = {
 function ProgressBar({ expandedTaskID, expandedTaskProgress }: ProgressBarProps ) {
   const [progress, setProgress] = useState<number>(expandedTaskProgress);
 
-  async function handleSliderChange(event: Event, value: number | number[]) {
+  function handleSliderChange(event: Event, value: number | number[]) {
     setProgress(value as number);
-    console.log(expandedTaskID);
+  }
 
+  async function handleSliderChangeCommited() {
     const res = await axios.put(import.meta.env.VITE_URL + '/tasks/update/progress', {
       task_id: expandedTaskID,
-      progress: value as number,
+      progress: progress,
     },
     {
       withCredentials: true,
@@ -42,6 +42,7 @@ function ProgressBar({ expandedTaskID, expandedTaskProgress }: ProgressBarProps 
           value={progress}
           sx={{color: accent}}
           onChange={handleSliderChange}
+          onChangeCommitted={handleSliderChangeCommited}
           valueLabelDisplay="off"
           min={0}
           step={1}
