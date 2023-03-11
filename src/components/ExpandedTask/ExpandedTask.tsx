@@ -91,7 +91,6 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
             <CheckBoxIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, true) } />
           : 
             <CheckBoxOutlineBlankIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, false) } /> }
-        {/* TODO: change circle icon*/}
       </div>
 
       <ProgressBar expandedTaskID={expandedTaskID} expandedTaskProgress={expandedTaskProgress} />
