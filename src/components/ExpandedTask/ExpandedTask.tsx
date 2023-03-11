@@ -1,4 +1,5 @@
 import './ExpandedTask.scss';
+import ProgressBar from './ProgressBar/ProgressBar';
 import axios from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
@@ -92,9 +93,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
         {/* TODO: change circle icon*/}
       </div>
 
-      <div className="TaskProgress">
-        task progress bar goes here
-      </div>
+      <ProgressBar />
 
       {/* TODO: Notes */}
       <div className="TaskNotes">

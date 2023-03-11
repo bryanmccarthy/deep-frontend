@@ -1,0 +1,22 @@
+@import '../../../utils/variables';
+
+.ProgressBar {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 2em;
+  font-size: 1rem;
+  font-weight: 600;
+
+  .ProgressSlider {
+    display: flex;
+    align-items: center;
+    margin-left: 2em;
+    margin-right: 2em;
+
+    .ProgressNumber {
+      margin-left: 2em;
+      width: 3em;
+    }
+  }
+}
