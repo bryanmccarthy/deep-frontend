@@ -1,10 +1,12 @@
 import './AddTask.scss';
 import axios from 'axios';
-import { useEffect, useState, useRef } from 'react';
+import { useState } from 'react';
 import { TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import InfoIcon from '@mui/icons-material/Info';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { Dayjs } from 'dayjs';
 
 type PomodoroProps = {
@@ -21,6 +23,7 @@ function AddTask({ tasks, setTasks, showAddTask, setShowAddTask, errorSnackbarOp
   const [title, setTitle] = useState<string>('');
   const [difficulty, setDifficulty] = useState<number>(0);
   const [dueDate, setDueDate] = useState<Dayjs | null>(null);
+  const [showInfo, setShowInfo] = useState<boolean>(false);
 
   async function handleCreateTask() {
     if (title === '') return;
@@ -57,6 +60,13 @@ function AddTask({ tasks, setTasks, showAddTask, setShowAddTask, errorSnackbarOp
     }
   }
 
+  function handleMouseOver() {
+    setShowInfo(true);
+  }
+
+  function handleMouseOut() {
+    setShowInfo(false);
+  }
 
   function handleClosePomodoro() {
     setShowAddTask(false);
@@ -72,20 +82,34 @@ function AddTask({ tasks, setTasks, showAddTask, setShowAddTask, errorSnackbarOp
       
       <div className="AddTaskInputs">
           <TextField className="TitleInput" label="Title" size="small" value={title} onChange={(e) => setTitle(e.target.value)} />
-          <FormControl className="DifficultyForm">
-            <InputLabel>Difficulty</InputLabel>
-            <Select
-            className="DifficultySelect"
-            value={difficulty}
-            label="Difficulty"
-            size="small"
-            onChange={(e) => handleDifficultyChange(e)}
-            >
-              <MenuItem value={0}>0</MenuItem>
-              <MenuItem value={1}>1</MenuItem>
-              <MenuItem value={2}>2</MenuItem>
-            </Select>
-          </FormControl>
+          <div className="DifficultyContainer">
+            <FormControl className="DifficultyForm">
+              <InputLabel>Difficulty</InputLabel>
+              <Select
+              className="DifficultySelect"
+              value={difficulty}
+              label="Difficulty"
+              size="small"
+              onChange={(e) => handleDifficultyChange(e)}
+              >
+                <MenuItem value={0}>0</MenuItem>
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+              </Select>
+            </FormControl>
+            <InfoIcon className="DifficultyInfoIcon" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} />
+            { showInfo && 
+              <div className="DifficultyInfo">
+                <ArrowDropUpIcon className="DifficultyInfoArrow" />
+                <div className="DifficultyInfoText">
+                  {/* TODO: diff grid 1-6 (1 = 20-30 mins) (2 = 30-60) (3 = 60-120) (4 = 120-240) (5 = 240 - 360) (6 = 360 - 480) */}
+                  <p>12</p>
+                  <p>34</p>
+                  <p>56</p>
+                </div>
+              </div> 
+            }
+            </div>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DesktopDatePicker
               className="DueDatePicker"
