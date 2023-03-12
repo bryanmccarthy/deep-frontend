@@ -2,7 +2,7 @@ import './Pomodoro.scss'
 import Config from './Config/Config';
 import { formatDuration } from './Config/Config';
 import axios from 'axios';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 type PomodoroProps = {
   showPomodoro: boolean;
@@ -14,7 +14,6 @@ type PomodoroProps = {
 }
 
 function Pomodoro({ showPomodoro, setShowPomodoro, errorSnackbarOpen, setErrorSnackbarOpen, page, expandedTaskID }: PomodoroProps) {
-  const ref = useRef<HTMLInputElement>(null);
   const workDuration: number = localStorage.getItem('workDuration') ? parseInt(localStorage.getItem('workDuration') as string) : 25 * 60;
   const breakDuration: number = localStorage.getItem('breakDuration') ? parseInt(localStorage.getItem('breakDuration') as string) : 5 * 60;
 
@@ -74,22 +73,8 @@ function Pomodoro({ showPomodoro, setShowPomodoro, errorSnackbarOpen, setErrorSn
     setShowPomodoro(false);
   }
 
-  // Listen for clicks outside of the element
-  useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setShowPomodoro(false);
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside, true);
-    return () => {
-      document.removeEventListener('click', handleClickOutside, true);
-    };
-  });
-
   return (
-    <div ref={ref} className="Pomodoro" style={{ visibility: showPomodoro ? "visible" : "hidden" }}>
+    <div className="Pomodoro" style={{ visibility: showPomodoro ? "visible" : "hidden" }}>
       <button className="CloseButton" onClick={handleClosePomodoro}>&times;</button>
       <div className="Timer">
         <h1 className="FormattedDuration">{ formattedDuration }</h1>
