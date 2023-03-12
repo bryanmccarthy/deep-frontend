@@ -3,10 +3,12 @@ import axios from "axios";
 import Tasks from "./Tasks/Tasks";
 import Dashboard from "./Dashboard/Dashboard";
 import Calendar from './Calendar/Calendar';
+import AddTask from "./AddTask/AddTask";
 import Pomodoro from "./Pomodoro/Pomodoro";
 import ExpandedTask from "./ExpandedTask/ExpandedTask";
 import { useState } from 'react';
 import { useQuery } from 'react-query';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import TimerIcon from '@mui/icons-material/Timer';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -18,6 +20,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 function Main() {
   const [showPomodoro, setShowPomodoro] = useState<boolean>(false);
+  const [showAddTask, setShowAddTask] = useState<boolean>(false);
   const [page, setPage] = useState<string>('tasks');
   const [tasks, setTasks] = useState<[]>([]);
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
@@ -55,6 +58,10 @@ function Main() {
 
   function handleDashboardPageClick() {
     setPage('dashboard');
+  }
+
+  function handleAddTask() {
+    setShowAddTask(true);
   }
 
   function handlePomodoro() {
@@ -104,8 +111,9 @@ function Main() {
           <DashboardIcon className="Icon" onClick={handleDashboardPageClick} />
         </div>
         <div>
-          <TimerIcon className="Icon" onClick={ handlePomodoro } />
-          <LogoutIcon className="Icon" onClick={ handleLogout } />
+          <NoteAddIcon className="Icon" onClick={handleAddTask} />
+          <TimerIcon className="Icon" onClick={handlePomodoro} />
+          <LogoutIcon className="Icon" onClick={handleLogout} />
         </div>
       </div>
       <div className="Page">
@@ -162,6 +170,16 @@ function Main() {
           :
           null 
         }
+
+        <AddTask
+          tasks={tasks}
+          setTasks={setTasks}
+          showAddTask={showAddTask}
+          setShowAddTask={setShowAddTask}
+          errorSnackbarOpen={errorSnackbarOpen}
+          setErrorSnackbarOpen={setErrorSnackbarOpen}
+          page={page}
+        />
 
         <Pomodoro
           showPomodoro={showPomodoro} 

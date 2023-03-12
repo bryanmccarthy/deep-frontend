@@ -1,25 +1,28 @@
-import './NewTask.scss';
+import './AddTask.scss';
 import axios from 'axios';
-import { useState } from 'react';
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import { useEffect, useState, useRef } from 'react';
 import { TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Dayjs } from 'dayjs';
 
-type NewTaskProps = {
+type PomodoroProps = {
   tasks: any;
   setTasks: (tasks: any) => void;
-  setErrorSnackbarOpen: (bool: boolean) => void;
+  showAddTask: boolean;
+  setShowAddTask: (show: boolean) => void;
+  errorSnackbarOpen: boolean;
+  setErrorSnackbarOpen: (open: boolean) => void;
+  page: string;
 }
 
-function NewTask({ tasks, setTasks, setErrorSnackbarOpen }: NewTaskProps) {
+function AddTask({ tasks, setTasks, showAddTask, setShowAddTask, errorSnackbarOpen, setErrorSnackbarOpen, page }: PomodoroProps) {
   const [title, setTitle] = useState<string>('');
   const [difficulty, setDifficulty] = useState<number>(0);
   const [dueDate, setDueDate] = useState<Dayjs | null>(null);
 
-  async function createTask() {
+  async function handleCreateTask() {
     if (title === '') return;
     if (dueDate === null) return;
 
@@ -34,11 +37,6 @@ function NewTask({ tasks, setTasks, setErrorSnackbarOpen }: NewTaskProps) {
       withCredentials: true,
     });
 
-    // Clear inputs
-    setTitle('');
-    setDifficulty(0);
-    setDueDate(null);
-
     if (res.status === 200) {
       const newTasks = [...tasks, {
         id: res.data.id,
@@ -48,18 +46,31 @@ function NewTask({ tasks, setTasks, setErrorSnackbarOpen }: NewTaskProps) {
         completed: res.data.completed,
       }].sort((a: any, b: any) => { return new Date(a.due_date).getTime() - new Date(b.due_date).getTime(); });
       setTasks(newTasks);
+
+      // Clear inputs
+      setTitle('');
+      setDifficulty(0);
+      setDueDate(null);
+      setShowAddTask(false);
       } else {
       setErrorSnackbarOpen(true);
     }
   }
 
+
+  function handleClosePomodoro() {
+    setShowAddTask(false);
+  }
+
   function handleDifficultyChange(event: any) {
     setDifficulty(event.target.value);
   }
-  
+
   return (
-    <div className="NewTask">
-        <div className="NewTaskInputs">
+    <div className="AddTask" style={{ visibility: showAddTask ? "visible" : "hidden" }}>
+      <button className="CloseButton" onClick={handleClosePomodoro}>&times;</button>
+      
+      <div className="AddTaskInputs">
           <TextField className="TitleInput" label="Title" size="small" value={title} onChange={(e) => setTitle(e.target.value)} />
           <FormControl className="DifficultyForm">
             <InputLabel>Difficulty</InputLabel>
@@ -84,10 +95,10 @@ function NewTask({ tasks, setTasks, setErrorSnackbarOpen }: NewTaskProps) {
               renderInput={(params) => <TextField {...params} size="small" />}
             />
           </LocalizationProvider>
+          <button className="AddTaskButton" onClick={handleCreateTask}>Create</button>
         </div>
-        <NoteAddIcon className="NoteAddIcon" onClick={createTask}/>
     </div>
   )
 }
 
-export default NewTask;
+export default AddTask;

@@ -1,0 +1,66 @@
+@import '../../utils/variables';
+
+.AddTask {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 2.73em;
+  right: 4.3em;
+  background-color: $primary;
+  height: 20em;
+  width: 22em;
+  border: 1px solid $accent;
+  border-top: none;
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  box-shadow: 0 0.15em 1em -1em $accent; // Box shadow on bottom
+  z-index: 1;
+
+  .CloseButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1em;
+    width: 1em;
+    border: none;
+    border-radius: 0.1em;
+    background: none;
+    position: absolute;
+    top: 0.2em;
+    right: 0.2em;
+    font-size: 2em;
+    color: $accent;
+    cursor: pointer;
+  }
+
+  .AddTaskInputs {
+    display: flex;
+    flex-direction: column;
+
+    .TitleInput {
+      margin: 0.5em;
+    }
+
+    .DifficultyForm {
+      margin: 0.5em;
+    }
+
+    .DueDatePicker {
+      margin: 0.5em;
+    }
+
+    .AddTaskButton {
+      margin: 0.5em;
+      border: 1px solid $accent;
+      border-radius: 0.3em;
+      background-color: $accent;
+      color: $primary;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.5em;
+      cursor: pointer;
+    }
+  }
+}

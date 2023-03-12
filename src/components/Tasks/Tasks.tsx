@@ -1,5 +1,4 @@
 import './Tasks.scss';
-import NewTask from './NewTask/NewTask';
 import TaskList from './TaskList/TaskList';
 import { useState } from 'react';
 import axios from 'axios';
@@ -110,13 +109,16 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
 
   return (
     <div className="Tasks">
-      <div className="NewTaskContainer">
-        {/* TODO: put completed ratio in its own component */}
-        <div className="TasksCompletedRatio">
-          <div className="CompletedNumber">{tasks.filter((task: any) => task.completed === true).length}/{tasks.length}</div>
-        </div>
-        <NewTask tasks={tasks} setTasks={setTasks} setErrorSnackbarOpen={setErrorSnackbarOpen} />
-      </div>
+      {
+        tasks.length > 0 ?
+          <div className="TasksHeader">
+            <p className="TaskCol">task</p>
+            <p className="DiffCol">difficulty</p>
+            <p className="DueCol">due date</p>
+          </div>
+        :
+          null
+      }
     
       {
         tasks.length <= 0 ?

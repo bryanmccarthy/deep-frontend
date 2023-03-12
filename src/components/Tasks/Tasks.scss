@@ -5,34 +5,9 @@
   flex-direction: column;
   height: 100%;
 
-  .NewTaskContainer {
+  .TasksHeader {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    color: $accent;
-
-    .TasksCompletedRatio {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 0.5em;
-      margin-right: 0;
-      padding-left: 0.5em;
-      padding-right: 0.5em;
-      height: 4.5em;
-      max-width: 5em;
-      border-radius: 0.5em;
-
-      .CompletedNumber {
-        font-size: 1rem;
-        font-weight: 600;
-        padding: 0.5em;
-        border-radius: 0.5em;
-        background-color: $accent;
-        color: $primary;
-      }
-    }
   }
 
   .TasksEmpty {
