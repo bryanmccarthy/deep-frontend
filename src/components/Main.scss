@@ -12,11 +12,10 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid $accent;
-    color: $accent;
     background-color: $primary;
 
     .Icon {
-      margin: 0.2em;
+      padding: 0.2em;
       height: 1.2em;
       width: 1.2em;
       cursor: pointer;

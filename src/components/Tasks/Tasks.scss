@@ -5,19 +5,13 @@
   flex-direction: column;
   height: 100%;
 
-  .TasksHeader {
-    display: flex;
-    align-items: center;
-  }
-
   .TasksEmpty {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $accent;
+    color: $accent2;
     background-color: $primary;
     height: 100%;
-    width: 100%;
 
     .TasksEmptyText {
       font-size: 2rem;

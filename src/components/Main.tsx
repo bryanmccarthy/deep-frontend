@@ -18,6 +18,9 @@ import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
+const accent = '#000000';
+const accent2 = '#7c7c7c';
+
 function Main() {
   const [showPomodoro, setShowPomodoro] = useState<boolean>(false);
   const [showAddTask, setShowAddTask] = useState<boolean>(false);
@@ -60,11 +63,13 @@ function Main() {
     setPage('dashboard');
   }
 
-  function handleAddTask() {
+  function handleShowAddTask() {
+    if (showPomodoro) setShowPomodoro(false);
     setShowAddTask(true);
   }
 
-  function handlePomodoro() {
+  function handleShowPomodoro() {
+    if (showAddTask) setShowAddTask(false);
     setShowPomodoro(true);
   }
 
@@ -106,13 +111,13 @@ function Main() {
     <div className="Main">
       <div className="Icons">
         <div>
-          <FormatListBulletedIcon className="Icon" onClick={handleTaskPageClick} />
-          <CalendarMonthIcon className="Icon" onClick={handleCalendarPageClick} />
-          <DashboardIcon className="Icon" onClick={handleDashboardPageClick} />
+          <FormatListBulletedIcon className="Icon" onClick={handleTaskPageClick} style={{color: page === 'tasks' ? accent2 : accent }} />
+          <CalendarMonthIcon className="Icon" onClick={handleCalendarPageClick} style={{color: page === 'calendar' ? accent2 : accent }} />
+          <DashboardIcon className="Icon" onClick={handleDashboardPageClick} style={{color: page === 'dashboard' ? accent2 : accent }} />
         </div>
         <div>
-          <NoteAddIcon className="Icon" onClick={handleAddTask} />
-          <TimerIcon className="Icon" onClick={handlePomodoro} />
+          <NoteAddIcon className="Icon" onClick={handleShowAddTask} />
+          <TimerIcon className="Icon" onClick={handleShowPomodoro} />
           <LogoutIcon className="Icon" onClick={handleLogout} />
         </div>
       </div>

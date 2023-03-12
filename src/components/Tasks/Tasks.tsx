@@ -110,17 +110,6 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
   return (
     <div className="Tasks">
       {
-        tasks.length > 0 ?
-          <div className="TasksHeader">
-            <p className="TaskCol">task</p>
-            <p className="DiffCol">difficulty</p>
-            <p className="DueCol">due date</p>
-          </div>
-        :
-          null
-      }
-    
-      {
         tasks.length <= 0 ?
         <div className="TasksEmpty">
           <h1 className="TasksEmptyText">no tasks yet</h1> {/* TODO: style */}
