@@ -9,7 +9,7 @@
   top: 2.73em;
   right: 4.3em;
   background-color: $primary;
-  height: 20em;
+  height: 21em;
   width: 22em;
   border: 1px solid $accent;
   border-top: none;
@@ -19,18 +19,16 @@
   z-index: 1;
 
   .CloseButton {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 1em;
-    width: 1em;
     border: none;
     border-radius: 0.1em;
     background: none;
-    position: absolute;
-    top: 0.2em;
+    top: 0.1em;
     right: 0.2em;
-    font-size: 2em;
+    font-size: 2rem;
     color: $accent;
     cursor: pointer;
   }
@@ -41,6 +39,7 @@
 
     .TitleInput {
       margin: 0.5em;
+      margin-top: 0;
     }
 
     .DifficultyContainer {
@@ -51,35 +50,6 @@
       .DifficultyForm {
         margin: 0.5em;
         width: 100%;
-      }
-
-      .DifficultyInfoIcon {
-        margin-right: 0.4em;
-        cursor: pointer;
-      }
-
-      .DifficultyInfo {
-        position: absolute;
-        bottom: 1.6em;
-        width: 19em;
-        height: 11.5em;
-        z-index: 1;
-        font-size: 0.8rem;
-
-        .DifficultyInfoArrow {
-          position: absolute;
-          top: 0;
-          right: 0.3em;
-        }
-
-        .DifficultyInfoText {
-          position: absolute;
-          background-color: $primary;
-          top: 1.1em;
-          width: 100%;
-          border: 1px solid $accent;
-          border-radius: 0.5em;
-        }
       }
     }
 

@@ -5,8 +5,6 @@ import { TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/mater
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import InfoIcon from '@mui/icons-material/Info';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { Dayjs } from 'dayjs';
 
 type PomodoroProps = {
@@ -21,9 +19,8 @@ type PomodoroProps = {
 
 function AddTask({ tasks, setTasks, showAddTask, setShowAddTask, errorSnackbarOpen, setErrorSnackbarOpen, page }: PomodoroProps) {
   const [title, setTitle] = useState<string>('');
-  const [difficulty, setDifficulty] = useState<number>(0);
+  const [difficulty, setDifficulty] = useState<number>(1);
   const [dueDate, setDueDate] = useState<Dayjs | null>(null);
-  const [showInfo, setShowInfo] = useState<boolean>(false);
 
   async function handleCreateTask() {
     if (title === '') return;
@@ -52,20 +49,12 @@ function AddTask({ tasks, setTasks, showAddTask, setShowAddTask, errorSnackbarOp
 
       // Clear inputs
       setTitle('');
-      setDifficulty(0);
+      setDifficulty(1);
       setDueDate(null);
       setShowAddTask(false);
       } else {
       setErrorSnackbarOpen(true);
     }
-  }
-
-  function handleMouseOver() {
-    setShowInfo(true);
-  }
-
-  function handleMouseOut() {
-    setShowInfo(false);
   }
 
   function handleClosePomodoro() {
@@ -92,23 +81,13 @@ function AddTask({ tasks, setTasks, showAddTask, setShowAddTask, errorSnackbarOp
               size="small"
               onChange={(e) => handleDifficultyChange(e)}
               >
-                <MenuItem value={0}>0</MenuItem>
-                <MenuItem value={1}>1</MenuItem>
-                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={1} dense>1 (20-30 mins)</MenuItem>
+                <MenuItem value={2} dense>2 (30-60 mins)</MenuItem>
+                <MenuItem value={3} dense>3 (1 - 2 hrs)</MenuItem>
+                <MenuItem value={4} dense>4 (2 - 4 hrs)</MenuItem>
+                <MenuItem value={5} dense>5 (4 - 6 hrs)</MenuItem>
               </Select>
             </FormControl>
-            <InfoIcon className="DifficultyInfoIcon" onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} />
-            { showInfo && 
-              <div className="DifficultyInfo">
-                <ArrowDropUpIcon className="DifficultyInfoArrow" />
-                <div className="DifficultyInfoText">
-                  {/* TODO: diff grid 1-6 (1 = 20-30 mins) (2 = 30-60) (3 = 60-120) (4 = 120-240) (5 = 240 - 360) (6 = 360 - 480) */}
-                  <p>12</p>
-                  <p>34</p>
-                  <p>56</p>
-                </div>
-              </div> 
-            }
             </div>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DesktopDatePicker
