@@ -123,7 +123,7 @@ function Main() {
       </div>
       <div className="Page">
         { 
-          page === 'tasks' ?
+          page === 'tasks' &&
          <Tasks
             setPage={setPage}
             tasks={tasks}
@@ -135,17 +135,13 @@ function Main() {
             setExpandedTaskCompleted={setExpandedTaskCompleted}
             setExpandedTaskProgress={setExpandedTaskProgress}
          />
-          : 
-          null 
         }
         { 
-          page === 'dashboard' ? 
+          page === 'dashboard' &&
           <Dashboard /> 
-          : 
-          null 
         }
         {
-          page === 'calendar' ?
+          page === 'calendar' &&
           <Calendar
             setPage={setPage}
             tasks={tasks}
@@ -157,11 +153,9 @@ function Main() {
             setExpandedTaskCompleted={setExpandedTaskCompleted}
             setExpandedTaskProgress={setExpandedTaskProgress}
           />
-          :
-          null
         }
         { 
-          page === 'expandedTask' ? 
+          page === 'expandedTask' &&
           <ExpandedTask
             expandedTaskID={expandedTaskID}
             expandedTaskTitle={expandedTaskTitle}
@@ -172,8 +166,6 @@ function Main() {
             expandedTaskProgress={expandedTaskProgress}
             setExpandedTaskProgress={setExpandedTaskProgress}
           /> 
-          :
-          null 
         }
 
         <AddTask

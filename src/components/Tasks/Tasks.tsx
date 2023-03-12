@@ -110,12 +110,10 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
   return (
     <div className="Tasks">
       {
-        tasks.length <= 0 ?
+        tasks.length <= 0 &&
         <div className="TasksEmpty">
           <h1 className="TasksEmptyText">no tasks yet</h1> {/* TODO: style */}
         </div>
-        : 
-        null
       }
 
       <TaskList 
