@@ -11,7 +11,7 @@
   border-top: none;
   border-bottom-left-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
-  box-shadow: 0 0.15em 1em -1em $accent; // Box shadow on bottom
+  box-shadow: 0 0.5em 1em -1em $accent; // Box shadow on bottom
   z-index: 1;
 
   .CloseButton {
@@ -42,5 +42,19 @@
     .FormattedDuration {
       color: $accent;
     }
+  }
+}
+
+@media (max-width: 475px) {
+  .Pomodoro {
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 360px) {
+  .Pomodoro {
+    width: 18em;
   }
 }
