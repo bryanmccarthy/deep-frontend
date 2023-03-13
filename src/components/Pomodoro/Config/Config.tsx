@@ -10,6 +10,7 @@ type ConfigProps = {
   setFormattedDuration: (duration: string) => void;
   isActive: boolean;
   setIsActive: (active: boolean) => void;
+  handleUpdateTimeSpent: () => void;
   handleUpdateExpandedTaskTimeSpent: (timeSpent: number) => void;
   expandedTaskDuration: number;
 }
@@ -17,7 +18,7 @@ type ConfigProps = {
 const primary = "#ffffff";
 const accent = "#000000";
 
-function Config({ currentTimer, setCurrentTimer, setSeconds, setFormattedDuration, isActive, setIsActive, handleUpdateExpandedTaskTimeSpent, expandedTaskDuration }: ConfigProps ) {
+function Config({ currentTimer, setCurrentTimer, setSeconds, setFormattedDuration, isActive, setIsActive, handleUpdateTimeSpent, handleUpdateExpandedTaskTimeSpent, expandedTaskDuration }: ConfigProps ) {
   const workDuration: number = localStorage.getItem('workDuration') ? parseInt(localStorage.getItem('workDuration') as string) : 25 * 60;
   const breakDuration: number = localStorage.getItem('breakDuration') ? parseInt(localStorage.getItem('breakDuration') as string) : 5 * 60;
 
@@ -52,7 +53,10 @@ function Config({ currentTimer, setCurrentTimer, setSeconds, setFormattedDuratio
       return;
     }
 
-    handleUpdateExpandedTaskTimeSpent(expandedTaskDuration);
+    if (currentTimer === 'Work') {
+      handleUpdateTimeSpent();
+      handleUpdateExpandedTaskTimeSpent(expandedTaskDuration);
+    }
     setIsActive(false); // TODO: prompt user to confirm before stopping
     document.title='Deep';
     if (currentTimer === 'Work') {

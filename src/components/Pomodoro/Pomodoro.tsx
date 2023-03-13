@@ -22,11 +22,12 @@ function Pomodoro({ showPomodoro, setShowPomodoro, errorSnackbarOpen, setErrorSn
   const [seconds, setSeconds] = useState<number>(workDuration);
   const [formattedDuration, setFormattedDuration] = useState<string>(formatDuration(workDuration));
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [timeElapsed, setTimeElapsed] = useState<number>(0);
   const [expandedTaskDuration, setExpandedTaskDuration] = useState<number>(0);
 
   async function handleUpdateTimeSpent() {
     const res = await axios.put(import.meta.env.VITE_URL + '/user/update/time_spent', {
-      time_spent: workDuration,
+      time_spent: timeElapsed,
     },
     {
       withCredentials: true,
@@ -62,17 +63,15 @@ function Pomodoro({ showPomodoro, setShowPomodoro, errorSnackbarOpen, setErrorSn
         setFormattedDuration(formattedDuration);
         document.title = `${currentTimer}: ${formattedDuration}`;
         
-        if (page === 'expandedTask') {
-          console.log(expandedTaskID);
+        if (page === 'expandedTask' && currentTimer === 'Work') {
           setExpandedTaskDuration(expandedTaskDuration + 1);
-          console.log(expandedTaskDuration);
         } else if (page !== 'expandedTask' && expandedTaskDuration !== 0) {
           handleUpdateExpandedtaskTimeSpent(expandedTaskDuration);
-          console.log('updating time spent' + expandedTaskDuration);
           setExpandedTaskDuration(0);
         }
 
         setSeconds(seconds - 1);
+        setTimeElapsed(timeElapsed + 1);
       }, 1000);
     }
 
@@ -111,7 +110,8 @@ function Pomodoro({ showPomodoro, setShowPomodoro, errorSnackbarOpen, setErrorSn
         setSeconds={setSeconds} 
         setFormattedDuration={setFormattedDuration} 
         isActive={isActive} 
-        setIsActive={setIsActive} 
+        setIsActive={setIsActive}
+        handleUpdateTimeSpent={handleUpdateTimeSpent}
         handleUpdateExpandedTaskTimeSpent={handleUpdateExpandedtaskTimeSpent} 
         expandedTaskDuration={expandedTaskDuration} 
       />
