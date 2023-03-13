@@ -3,9 +3,9 @@ import Task from './Task/Task';
 
 type TaskListProps = {
   tasks: any;
-  handleDeleteTask: (task: any) => void;
+  handleDeleteTask: (task: any, e: React.MouseEvent) => void;
   handleExpandTask: (task: any) => void;
-  handleToggleCompleted: (id: number, completed: boolean) => void;
+  handleToggleCompleted: (id: number, completed: boolean, e: React.MouseEvent) => void;
 }
 
 function TaskList({ tasks, handleDeleteTask, handleExpandTask, handleToggleCompleted }: TaskListProps) {

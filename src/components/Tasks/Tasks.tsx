@@ -28,7 +28,9 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
   const [taskDeletedSnackbarOpen, setTaskDeletedSnackbarOpen] = useState<boolean>(false);
   const [deletedTask, setDeletedTask] = useState<any | null>(null);
 
-  async function handleToggleCompleted(id: number, completed: boolean) {
+  async function handleToggleCompleted(id: number, completed: boolean, e: React.MouseEvent) {
+    e.stopPropagation();
+
     const res = await axios.put(import.meta.env.VITE_URL + '/tasks/update/completed', {
       id: id,
       completed: !completed,
@@ -49,7 +51,8 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
     }
   }
     
-  async function handleDeleteTask(task: any) {
+  async function handleDeleteTask(task: any, e: React.MouseEvent) {
+    e.stopPropagation();
     const res = await axios.delete(import.meta.env.VITE_URL + '/tasks/delete', {
       data: {
         id: task.id,
@@ -72,6 +75,8 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
   };
 
   async function handleSnackbarUndo() {
+    setTaskDeletedSnackbarOpen(false);
+
     const res = await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
       title: deletedTask!.title,
       difficulty: deletedTask!.difficulty,
@@ -116,7 +121,7 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
       {
         tasks.length <= 0 &&
         <div className="TasksEmpty">
-          <h1 className="TasksEmptyText">no tasks yet</h1> {/* TODO: style */}
+          <h1 className="TasksEmptyText">no tasks yet</h1> {/* TODO: style and say 'start by creating a task' */}
         </div>
       }
 
