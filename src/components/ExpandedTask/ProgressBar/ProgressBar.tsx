@@ -2,6 +2,7 @@ import './ProgressBar.scss';
 import axios from 'axios';
 import { useState } from 'react';
 import Slider from '@mui/material/Slider';
+import InfoIcon from '@mui/icons-material/Info';
 
 const accent = "#000000";
 
@@ -12,6 +13,7 @@ type ProgressBarProps = {
 
 function ProgressBar({ expandedTaskID, expandedTaskProgress }: ProgressBarProps ) {
   const [progress, setProgress] = useState<number>(expandedTaskProgress);
+  const [showInfo, setShowInfo] = useState<boolean>(false);
 
   function handleSliderChange(event: Event, value: number | number[]) {
     setProgress(value as number);
@@ -33,11 +35,20 @@ function ProgressBar({ expandedTaskID, expandedTaskProgress }: ProgressBarProps 
       // Snackbar
     }
   }
+
+  function handleMouseOver() {
+    setShowInfo(true);
+  }
+
+  function handleMouseOut() {
+    setShowInfo(false);
+  }
   
   return (
     <div className="ProgressBar">
       <div className="ProgressLabel">Task Progress</div>
       <div className="ProgressSlider">
+        <InfoIcon className="InfoIcon" sx={{color: accent}} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut} />
         <Slider
           value={progress}
           sx={{color: accent}}
@@ -50,6 +61,11 @@ function ProgressBar({ expandedTaskID, expandedTaskProgress }: ProgressBarProps 
         />
         <div className="ProgressNumber">{progress}%</div>
       </div>
+      { showInfo &&
+        <div className="ProgressInfo">
+          Estimated time to complete: 1 hour { /* TODO: calculate this */ }
+        </div>
+      }
     </div>
   )
 }

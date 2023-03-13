@@ -96,7 +96,6 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
       </div>
 
       <ProgressBar expandedTaskID={expandedTaskID} expandedTaskProgress={expandedTaskProgress} />
-      <div className="TaskTimeSpent">{ expandedTaskTimeSpent } seconds </div> { /* TODO: Format time spent */ }
 
       {/* TODO: Notes */}
       <div className="TaskNotes">

@@ -7,12 +7,19 @@
   margin: 2em;
   font-size: 1rem;
   font-weight: 600;
+  height: 9em;
 
   .ProgressSlider {
     display: flex;
     align-items: center;
     margin-left: 2em;
     margin-right: 2em;
+    margin-bottom: 0.5em;
+
+    .InfoIcon {
+      margin-right: 1em;
+      cursor: pointer;
+    }
 
     .ProgressNumber {
       margin-left: 2em;
