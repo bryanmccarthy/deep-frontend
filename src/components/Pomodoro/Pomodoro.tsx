@@ -21,10 +21,25 @@ function Pomodoro({ showPomodoro, setShowPomodoro, errorSnackbarOpen, setErrorSn
   const [seconds, setSeconds] = useState<number>(workDuration);
   const [formattedDuration, setFormattedDuration] = useState<string>(formatDuration(workDuration));
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [expandedTaskTimeSpent, setExpandedTaskTimeSpent] = useState<number>(0);
 
   async function handleUpdateTimeSpent() {
     const res = await axios.put(import.meta.env.VITE_URL + '/user/update/time_spent', {
       time_spent: workDuration,
+    },
+    {
+      withCredentials: true,
+    });
+
+    if (res.status !== 200) {
+      setErrorSnackbarOpen(true);
+    }
+  }
+
+  async function handleUpdateExpandedtaskTimeSpent() {
+    const res = await axios.put(import.meta.env.VITE_URL + '/tasks/update/time_spent', {
+      id: expandedTaskID,
+      time_spent: expandedTaskTimeSpent,
     },
     {
       withCredentials: true,
@@ -43,8 +58,14 @@ function Pomodoro({ showPomodoro, setShowPomodoro, errorSnackbarOpen, setErrorSn
         setFormattedDuration(formattedDuration);
         document.title = `${currentTimer}: ${formattedDuration}`;
         
-        if (page === 'expandedTask') console.log(expandedTaskID)
-        // TODO: update time spent for that task
+        if (page === 'expandedTask') {
+          console.log(expandedTaskID);
+          setExpandedTaskTimeSpent(expandedTaskTimeSpent + 1);
+          console.log(expandedTaskTimeSpent);
+        } else if (page !== 'expandedTask' && expandedTaskTimeSpent !== 0) {
+          setExpandedTaskTimeSpent(0);
+          handleUpdateExpandedtaskTimeSpent();
+        }
 
         setSeconds(seconds - 1);
       }, 1000);
