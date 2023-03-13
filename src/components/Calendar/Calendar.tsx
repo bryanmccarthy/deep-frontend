@@ -19,9 +19,10 @@ type CalendarProps = {
   setExpandedTaskDueDate: (dueDate: string) => void;
   setExpandedTaskCompleted: (completed: boolean) => void;
   setExpandedTaskProgress: (progress: number) => void;
+  setExpandedTaskTimeSpent: (timeSpent: number) => void;
 }
 
-function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted, setExpandedTaskProgress }: CalendarProps) {
+function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted, setExpandedTaskProgress, setExpandedTaskTimeSpent }: CalendarProps) {
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
 
   // Necessary for FullCalendar as it needs date & allDay fields
@@ -35,6 +36,7 @@ function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTask
         difficulty: task.difficulty,
         completed: task.completed,
         progress: task.progress,
+        time_spent: task.time_spent,
         allDay: true,
       })
     })
@@ -49,6 +51,7 @@ function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTask
     setExpandedTaskDueDate(String(info.event.startStr));
     setExpandedTaskCompleted(Boolean(info.event._def.extendedProps.completed));
     setExpandedTaskProgress(Number(info.event._def.extendedProps.progress));
+    setExpandedTaskTimeSpent(Number(info.event._def.extendedProps.time_spent));
   }
 
   async function handleDateClick(info: any) {
@@ -65,6 +68,7 @@ function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTask
       due_date: dueDate,
       completed: false,
       progress: 0,
+      time_spent: 0,
     },
     {
       withCredentials: true,

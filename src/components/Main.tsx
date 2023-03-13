@@ -35,6 +35,7 @@ function Main() {
   const [expandedTaskDueDate, setExpandedTaskDueDate] = useState<string>('');
   const [expandedTaskCompleted, setExpandedTaskCompleted] = useState<boolean>(false);
   const [expandedTaskProgress, setExpandedTaskProgress] = useState<number>(0);
+  const [expandedTaskTimeSpent, setExpandedTaskTimeSpent] = useState<number>(0);
 
   async function handleLogout() {
     const res = await axios.get(import.meta.env.VITE_URL + '/auth/logout', {
@@ -134,6 +135,7 @@ function Main() {
             setExpandedTaskDueDate={setExpandedTaskDueDate}
             setExpandedTaskCompleted={setExpandedTaskCompleted}
             setExpandedTaskProgress={setExpandedTaskProgress}
+            setExpandedTaskTimeSpent={setExpandedTaskTimeSpent}
          />
         }
         { 
@@ -152,6 +154,7 @@ function Main() {
             setExpandedTaskDueDate={setExpandedTaskDueDate}
             setExpandedTaskCompleted={setExpandedTaskCompleted}
             setExpandedTaskProgress={setExpandedTaskProgress}
+            setExpandedTaskTimeSpent={setExpandedTaskTimeSpent}
           />
         }
         { 
@@ -165,6 +168,8 @@ function Main() {
             setExpandedTaskCompleted={setExpandedTaskCompleted}
             expandedTaskProgress={expandedTaskProgress}
             setExpandedTaskProgress={setExpandedTaskProgress}
+            expandedTaskTimeSpent={expandedTaskTimeSpent}
+            setExpandedTaskTimeSpent={setExpandedTaskTimeSpent}
           /> 
         }
 
@@ -185,6 +190,7 @@ function Main() {
           setErrorSnackbarOpen={setErrorSnackbarOpen}
           page={page}
           expandedTaskID={expandedTaskID}
+          setExpandedTaskTimeSpent={setExpandedTaskTimeSpent}
         />
       </div>
 

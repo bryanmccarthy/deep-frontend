@@ -19,9 +19,11 @@ type ExpandedTaskProps = {
   setExpandedTaskCompleted: (completed: boolean) => void;
   expandedTaskProgress: number;
   setExpandedTaskProgress: (progress: number) => void;
+  expandedTaskTimeSpent: number;
+  setExpandedTaskTimeSpent: (timeSpent: number) => void;
 }
 
-function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficulty, expandedTaskDueDate, expandedTaskCompleted, setExpandedTaskCompleted, expandedTaskProgress, setExpandedTaskProgress }: ExpandedTaskProps) {
+function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficulty, expandedTaskDueDate, expandedTaskCompleted, setExpandedTaskCompleted, expandedTaskProgress, setExpandedTaskProgress, expandedTaskTimeSpent, setExpandedTaskTimeSpent }: ExpandedTaskProps) {
   const [noteTitle, setNoteTitle] = useState<string>('');
   const [expandedTaskNotes, setExpandedTaskNotes] = useState<[]>([]);
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
@@ -94,6 +96,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
       </div>
 
       <ProgressBar expandedTaskID={expandedTaskID} expandedTaskProgress={expandedTaskProgress} />
+      <div className="TaskTimeSpent">{ expandedTaskTimeSpent } seconds </div> { /* TODO: Format time spent */ }
 
       {/* TODO: Notes */}
       <div className="TaskNotes">

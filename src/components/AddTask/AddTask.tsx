@@ -32,6 +32,7 @@ function AddTask({ tasks, setTasks, showAddTask, setShowAddTask, errorSnackbarOp
       due_date: dueDate,
       completed: false,
       progress: 0,
+      time_spent: 0,
     },
     {
       withCredentials: true,

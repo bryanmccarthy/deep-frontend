@@ -10,25 +10,27 @@ type ConfigProps = {
   setFormattedDuration: (duration: string) => void;
   isActive: boolean;
   setIsActive: (active: boolean) => void;
+  handleUpdateExpandedTaskTimeSpent: (timeSpent: number) => void;
+  expandedTaskDuration: number;
 }
 
 const primary = "#ffffff";
 const accent = "#000000";
 
-function Config({ currentTimer, setCurrentTimer, setSeconds, setFormattedDuration, isActive, setIsActive }: ConfigProps ) {
+function Config({ currentTimer, setCurrentTimer, setSeconds, setFormattedDuration, isActive, setIsActive, handleUpdateExpandedTaskTimeSpent, expandedTaskDuration }: ConfigProps ) {
   const workDuration: number = localStorage.getItem('workDuration') ? parseInt(localStorage.getItem('workDuration') as string) : 25 * 60;
   const breakDuration: number = localStorage.getItem('breakDuration') ? parseInt(localStorage.getItem('breakDuration') as string) : 5 * 60;
 
   const handleWorkClick = () => {
     setCurrentTimer('Work');
     setSeconds(workDuration);
-    setFormattedDuration(formatDuration(workDuration))
+    setFormattedDuration(formatDuration(workDuration));
   }
 
   const handleBreakClick = () => {
     setCurrentTimer('Break');
     setSeconds(breakDuration);
-    setFormattedDuration(formatDuration(breakDuration))
+    setFormattedDuration(formatDuration(breakDuration));
   }
 
   const handleSliderChange = (event: Event, value: number | number[]) => {
@@ -50,6 +52,7 @@ function Config({ currentTimer, setCurrentTimer, setSeconds, setFormattedDuratio
       return;
     }
 
+    handleUpdateExpandedTaskTimeSpent(expandedTaskDuration);
     setIsActive(false); // TODO: prompt user to confirm before stopping
     document.title='Deep';
     if (currentTimer === 'Work') {
