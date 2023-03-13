@@ -5,15 +5,14 @@
   align-items: center;
   padding-left: 1em;
   padding-right: 1em;
-  margin: 0.5em;
-  border: none;
-  border-radius: 0.2em;
-  box-shadow: 0 0 1.2px $accent;
+  margin: 0.6em;
+  border: 1px solid $accent2;
+  border-radius: 0.15em;
   background-color: $primary;
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0 0 0.15em $accent;
+    box-shadow: 0 0 0.25em $accent2;
   }
 
   .TaskLeft {

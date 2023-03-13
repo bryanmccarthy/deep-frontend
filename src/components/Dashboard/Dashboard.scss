@@ -1,4 +1,7 @@
+@import '../../utils/variables';
+
 .Dashboard {
   display: flex;
   height: 100%;
+  background-color: $secondary;
 }

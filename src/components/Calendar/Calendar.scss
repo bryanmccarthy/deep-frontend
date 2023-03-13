@@ -6,9 +6,9 @@
 
   .FullCalendar {
     height: 100%;
-    background-color: $primary;
+    background-color: $secondary;
     color: $accent;
-    padding: 0.5em;
+    padding: 1em;
 
     // Border-box so padding doesn't affect width & height
     -moz-box-sizing: border-box; 
@@ -41,9 +41,21 @@
         }
       }
 
+      .fc-scrollgrid {
+        background-color: $primary;
+      }
+
+      .fc-daygrid {
+        background-color: $primary;
+      }
+
       .fc-event-title-container {
         padding: 0.1em;
         font-size: 1rem;
+
+        &:hover {
+          box-shadow: 0 0 0.25em $accent;
+        }
       }
     }
   }

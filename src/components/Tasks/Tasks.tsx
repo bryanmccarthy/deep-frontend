@@ -134,7 +134,7 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
 
       <Snackbar
         open={taskDeletedSnackbarOpen}
-        autoHideDuration={5000}
+        autoHideDuration={3000}
         onClose={handleSnackbarClose}
         message="Task deleted"
         action={

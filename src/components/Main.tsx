@@ -20,7 +20,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Dayjs } from 'dayjs';
 
 const accent = '#000000';
-const accent2 = '#7c7c7c';
+const secondary = '#e6e8ed';
 
 function Main() {
   const [showPomodoro, setShowPomodoro] = useState<boolean>(false);
@@ -115,9 +115,9 @@ function Main() {
     <div className="Main">
       <div className="Icons">
         <div>
-          <FormatListBulletedIcon className="Icon" onClick={handleTaskPageClick} style={{color: page === 'tasks' ? accent2 : accent }} />
-          <CalendarMonthIcon className="Icon" onClick={handleCalendarPageClick} style={{color: page === 'calendar' ? accent2 : accent }} />
-          <DashboardIcon className="Icon" onClick={handleDashboardPageClick} style={{color: page === 'dashboard' ? accent2 : accent }} />
+          <FormatListBulletedIcon className="Icon" onClick={handleTaskPageClick} style={{color: page === 'tasks' ? secondary : accent }} />
+          <CalendarMonthIcon className="Icon" onClick={handleCalendarPageClick} style={{color: page === 'calendar' ? secondary : accent }} />
+          <DashboardIcon className="Icon" onClick={handleDashboardPageClick} style={{color: page === 'dashboard' ? secondary : accent }} />
         </div>
         <div>
           <NoteAddIcon className="Icon" onClick={handleShowAddTask} />

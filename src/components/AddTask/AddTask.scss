@@ -6,16 +6,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  top: 2.73em;
+  top: 3em;
   right: 4.3em;
   background-color: $primary;
   height: 21em;
   width: 22em;
-  border: 1px solid $accent;
-  border-top: none;
-  border-bottom-left-radius: 0.5em;
-  border-bottom-right-radius: 0.5em;
-  box-shadow: 0 0.5em 1em -1em $accent; // Box shadow on bottom
+  border: 1px solid $accent2;
+  border-radius: 0.5em;
+  box-shadow: 0 0 0.15em $accent2;
   z-index: 1;
 
   .CloseButton {
