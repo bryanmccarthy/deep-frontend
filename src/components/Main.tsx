@@ -17,6 +17,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import { Dayjs } from 'dayjs';
 
 const accent = '#000000';
 const accent2 = '#7c7c7c';
@@ -36,6 +37,8 @@ function Main() {
   const [expandedTaskCompleted, setExpandedTaskCompleted] = useState<boolean>(false);
   const [expandedTaskProgress, setExpandedTaskProgress] = useState<number>(0);
   const [expandedTaskTimeSpent, setExpandedTaskTimeSpent] = useState<number>(0);
+
+  const [dueDate, setDueDate] = useState<Dayjs | null>(null);
 
   async function handleLogout() {
     const res = await axios.get(import.meta.env.VITE_URL + '/auth/logout', {
@@ -147,7 +150,8 @@ function Main() {
           <Calendar
             setPage={setPage}
             tasks={tasks}
-            getTasks={getTasks}
+            setShowAddTask={setShowAddTask}
+            setDueDate={setDueDate}
             setExpandedTaskID={setExpandedTaskID}
             setExpandedTaskTitle={setExpandedTaskTitle}
             setExpandedTaskDifficulty={setExpandedTaskDifficulty}
@@ -181,6 +185,8 @@ function Main() {
           errorSnackbarOpen={errorSnackbarOpen}
           setErrorSnackbarOpen={setErrorSnackbarOpen}
           page={page}
+          dueDate={dueDate}
+          setDueDate={setDueDate}
         />
 
         <Pomodoro

@@ -7,12 +7,13 @@ import interactionPlugin from "@fullcalendar/interaction";
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import dayjs from 'dayjs';
+import { Dayjs } from 'dayjs';
 
 type CalendarProps = {
   setPage: (page: string) => void;
   tasks: any;
-  getTasks: () => void;
+  setShowAddTask: (showAddTask: boolean) => void;
+  setDueDate: (dueDate: Dayjs | null) => void;
   setExpandedTaskID: (id: number) => void;
   setExpandedTaskTitle: (title: string) => void;
   setExpandedTaskDifficulty: (difficulty: number) => void;
@@ -22,7 +23,7 @@ type CalendarProps = {
   setExpandedTaskTimeSpent: (timeSpent: number) => void;
 }
 
-function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted, setExpandedTaskProgress, setExpandedTaskTimeSpent }: CalendarProps) {
+function Calendar({ setPage, tasks, setShowAddTask, setDueDate, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted, setExpandedTaskProgress, setExpandedTaskTimeSpent }: CalendarProps) {
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
 
   // Necessary for FullCalendar as it needs date & allDay fields
@@ -56,27 +57,8 @@ function Calendar({ setPage, tasks, getTasks, setExpandedTaskID, setExpandedTask
 
   async function handleDateClick(info: any) {
     const dueDate = info.date;
-    const title = prompt('Enter a new task title'); // TODO: use something other than prompt
-    const difficulty = Number(prompt('Enter a difficulty level (0, 1, 2)')); // TODO: use something other than prompt
-
-    if (title === '') return;
-    if (dueDate === null) return;
-
-    const res = await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
-      title: title,
-      difficulty: difficulty,
-      due_date: dueDate,
-      completed: false,
-      progress: 0,
-      time_spent: 0,
-    },
-    {
-      withCredentials: true,
-    });
-
-    if (res.status !== 200) {
-      setErrorSnackbarOpen(true);
-    }
+    setShowAddTask(true);
+    setDueDate(dueDate);
   }
 
   async function handleEventChange(info: any) {

@@ -15,12 +15,13 @@ type PomodoroProps = {
   errorSnackbarOpen: boolean;
   setErrorSnackbarOpen: (open: boolean) => void;
   page: string;
+  dueDate: Dayjs | null;
+  setDueDate: (dueDate: Dayjs | null) => void;
 }
 
-function AddTask({ tasks, setTasks, showAddTask, setShowAddTask, errorSnackbarOpen, setErrorSnackbarOpen, page }: PomodoroProps) {
+function AddTask({ tasks, setTasks, showAddTask, setShowAddTask, errorSnackbarOpen, setErrorSnackbarOpen, page, dueDate, setDueDate }: PomodoroProps) {
   const [title, setTitle] = useState<string>('');
   const [difficulty, setDifficulty] = useState<number>(1);
-  const [dueDate, setDueDate] = useState<Dayjs | null>(null);
 
   async function handleCreateTask() {
     if (title === '') return;
