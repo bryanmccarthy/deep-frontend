@@ -1,0 +1,33 @@
+@import '../../../utils/variables';
+
+.ExpandedTaskHeader {
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    margin: 1em;
+    padding: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    color: $accent;
+    background-color: $primary;
+    border: 1px solid $accent2;
+    border-radius: 0.2em;
+
+    .TaskInfoHeaderLeft {
+      display: flex;
+      align-items: center;
+
+      .TaskInfoHeaderTitle {
+        margin-left: 0.5em;
+      }
+
+      .TaskCompleted {
+        cursor: pointer;
+      }
+    }
+
+    .DifficultyIcon {
+      height: 0.6em;
+    }
+}

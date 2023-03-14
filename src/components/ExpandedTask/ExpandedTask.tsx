@@ -1,5 +1,6 @@
 import './ExpandedTask.scss';
 import ProgressBar from './ProgressBar/ProgressBar';
+import ExpandedTaskHeader from './ExpandedTaskHeader/ExpandedTaskHeader';
 import axios from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
@@ -49,22 +50,6 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
     }
   }
 
-  async function toggleCompleted(id: number, completed: boolean) {
-    const res = await axios.put(import.meta.env.VITE_URL + '/tasks/update/completed', {
-      id: id,
-      completed: !completed,
-    },
-    {
-      withCredentials: true,
-    });
-
-    if (res.status === 200) {
-      setExpandedTaskCompleted(!completed);
-    } else {
-      setErrorSnackbarOpen(true);
-    }
-  }
-
   async function handleUpdateNoteContent() {
     const res = await axios.put(import.meta.env.VITE_URL + '/notes/update/content', {
       id: openNoteID,
@@ -90,6 +75,10 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
     }
   }
 
+  function handleSnackbarOpen() {
+    setErrorSnackbarOpen(true);
+  }
+
   function handleSnackbarClose() {
     setErrorSnackbarOpen(false);
   };
@@ -111,17 +100,14 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
 
   return (
     <div className="ExpandedTask">
-      <div className="TaskInfoHeader">
-        <div className="TaskInfoHeaderLeft">
-          { expandedTaskCompleted ? 
-              <CheckBoxIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, true) } />
-            : 
-              <CheckBoxOutlineBlankIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, false) } /> 
-          }
-          <div className="TaskInfoHeaderTitle">{ expandedTaskTitle }</div>
-        </div>
-        <div>Due: { dayjs(expandedTaskDueDate).format('MM/DD/YYYY') }</div>
-      </div>
+      <ExpandedTaskHeader 
+        expandedTaskCompleted={expandedTaskCompleted}
+        setExpandedTaskCompleted={setExpandedTaskCompleted}
+        expandedTaskTitle={expandedTaskTitle} 
+        expandedTaskDueDate={expandedTaskDueDate} 
+        expandedTaskID={expandedTaskID}
+        handleSnackbarOpen={handleSnackbarOpen}
+      />
 
       <ProgressBar 
         expandedTaskID={expandedTaskID} 

@@ -29,7 +29,8 @@
         animation-duration: 3.5s;
         animation-iteration-count: infinite;
         animation-timing-function: ease-in-out;
-
+        
+        /* Reference for animation: https://www.geeksforgeeks.org/css-floating-animation/ */
         @keyframes floating {
           0% { transform: translate(0,  0px); }
           50%  { transform: translate(0, 5px); }

@@ -88,7 +88,7 @@ function Task({ tasks, setTasks, task, handleDeleteTask, handleExpandTask, handl
         />
       </div>
       <div className="TaskRight">
-        <div className="TaskDueDate">{dayjs(task.due_date).format('MM/DD/YYYY')}</div>
+        <div className="TaskDueDate">Due: {dayjs(task.due_date).format('MM/DD/YYYY')}</div>
         <LaunchIcon className="LaunchIcon" onClick={() => handleExpandTask(task)} />
         <DeleteIcon className="DeleteIcon" onClick={(e) => handleDeleteTask(task, e)} />
       </div>
