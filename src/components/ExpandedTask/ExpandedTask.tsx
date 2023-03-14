@@ -27,6 +27,8 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
   const [noteTitle, setNoteTitle] = useState<string>('');
   const [expandedTaskNotes, setExpandedTaskNotes] = useState<[]>([]);
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
+  const [openNoteID, setOpenNoteID] = useState<number | null>(null);
+  const [openNoteContent, setOpenNoteContent] = useState<string>('');
 
   async function createNote() {
     const res = await axios.post(import.meta.env.VITE_URL + '/notes/create', {
@@ -40,7 +42,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
     if (res.status === 200) {
       getNotes();
     } else {
-      // TODO: display error snackbar
+      setErrorSnackbarOpen(true);
     }
   }
 
@@ -60,6 +62,22 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
     }
   }
 
+  async function handleUpdateNoteContent() {
+    const res = await axios.put(import.meta.env.VITE_URL + '/notes/update/content', {
+      id: openNoteID,
+      content: openNoteContent,
+    },
+    {
+      withCredentials: true,
+    });
+
+    if (res.status === 200) {
+      console.log(res.data)
+    } else {
+      setErrorSnackbarOpen(true);
+    }
+  }
+
   async function getNotes() {
     const res = await axios.get(import.meta.env.VITE_URL + `/notes/${expandedTaskID}`, {
       withCredentials: true,
@@ -74,6 +92,15 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
   function handleSnackbarClose() {
     setErrorSnackbarOpen(false);
   };
+
+  function handleNoteChange(note: any) {
+    setOpenNoteID(note.id);
+    setOpenNoteContent(note.content);
+  }
+
+  function handleContentChange(e: any) {
+    setOpenNoteContent(e.target.value);
+  }
 
   // Fetch notes on page load
   const { status } = useQuery('tasks', getNotes);
@@ -101,27 +128,38 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
         expandedTaskDifficulty={expandedTaskDifficulty} 
       />
 
-      {/* TODO: Notes */}
       <div className="TaskNotes">
-        Notes carousel goes here
         {
           expandedTaskNotes.map((note: any) => {
             return (
               <div className="Note" key={note.id}>
-                <div>{ note.title }</div>
+                <div className="NoteTitle" onClick={() => handleNoteChange(note)}>{ note.title }</div>
               </div>
             )
           })
         }
+      </div>
 
-        <div className="NewNote">
+      <div className="NewNote">
           <input className="NoteTitleInput" type="text" placeholder="Title" value={noteTitle} onChange={(e) => setNoteTitle(e.target.value)} />
           <button className="CreateNoteButton" onClick={createNote}>Add Note</button>
-        </div>
       </div>
 
       <div className="TaskCurrentNote">
-        <textarea className="TaskCurrentNoteText" placeholder="begin typing..."></textarea>
+        <textarea 
+          className="TaskCurrentNoteText" 
+          placeholder="begin typing..." 
+          value={openNoteContent} 
+          onChange={handleContentChange}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleUpdateNoteContent();
+              e.currentTarget.blur(); // Unfocus input
+            } else if (e.key === 'Escape') {
+              e.currentTarget.blur(); // Unfocus input
+            }
+          }}>
+        </textarea>
       </div>
 
       <Snackbar
