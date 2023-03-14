@@ -6,6 +6,8 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import NorthIcon from '@mui/icons-material/North';
+import { North } from '@mui/icons-material';
 
 type TasksProps = {
   setPage: (page: string) => void;
@@ -148,7 +150,11 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
       {
         tasks.length <= 0 &&
         <div className="TasksEmpty">
-          <h1 className="TasksEmptyText">no tasks yet</h1> {/* TODO: style and say 'start by creating a task' */}
+          <div className="TasksDirection">
+            <p>create a task</p>
+            <NorthIcon className="UpArrow" />
+          </div>
+          <p className="TasksEmptyText">no tasks</p>
         </div>
       }
 
