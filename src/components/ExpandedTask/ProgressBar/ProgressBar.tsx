@@ -70,7 +70,7 @@ function ProgressBar({ expandedTaskID, expandedTaskProgress, expandedTaskDifficu
       </div>
       { showInfo ?
         <div className="ProgressDescription">
-          <p>Track your progress to get a more accurate estimation of your time remaining</p>
+          <p>Track your progress to get a more accurate estimation of your time remaining.</p>
         </div>
         :
         <div className="ProgressInfo">
