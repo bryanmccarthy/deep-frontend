@@ -23,6 +23,8 @@ type ExpandedTaskProps = {
   setExpandedTaskTimeSpent: (timeSpent: number) => void;
 }
 
+const accent2 = '#ccced1';
+
 function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficulty, expandedTaskDueDate, expandedTaskCompleted, setExpandedTaskCompleted, expandedTaskProgress, setExpandedTaskProgress, expandedTaskTimeSpent, setExpandedTaskTimeSpent }: ExpandedTaskProps) {
   const [noteTitle, setNoteTitle] = useState<string>('');
   const [expandedTaskNotes, setExpandedTaskNotes] = useState<[]>([]);
@@ -33,6 +35,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
   async function createNote() {
     const res = await axios.post(import.meta.env.VITE_URL + '/notes/create', {
       title: noteTitle,
+      content: '',
       task_id: expandedTaskID,
     },
     {
@@ -71,9 +74,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
       withCredentials: true,
     });
 
-    if (res.status === 200) {
-      console.log(res.data)
-    } else {
+    if (res.status !== 200) {
       setErrorSnackbarOpen(true);
     }
   }
@@ -128,13 +129,12 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
         expandedTaskDifficulty={expandedTaskDifficulty} 
       />
 
-      {/* TODO: responsive carousel*/}
       <div className="TaskNotes">
         {
           expandedTaskNotes.map((note: any) => {
             return (
-              <div className="Note" key={note.id}>
-                <div className="NoteTitle" onClick={() => handleNoteChange(note)}>{ note.title }</div>
+              <div className="Note" onClick={() => handleNoteChange(note)} key={note.id} style={{ boxShadow: openNoteID === note.id ? `0 0 1em ${accent2}` : 'none'}}>
+                <div className="NoteTitle">{ note.title }</div>
               </div>
             )
           })
@@ -142,25 +142,36 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
       </div>
 
       <div className="NewNote">
-          <input className="NoteTitleInput" type="text" placeholder="Title" value={noteTitle} onChange={(e) => setNoteTitle(e.target.value)} />
+          <input 
+            className="NoteTitleInput" 
+            type="text" 
+            placeholder="Title" 
+            value={noteTitle} 
+            onChange={(e) => setNoteTitle(e.target.value)} 
+          />
           <button className="CreateNoteButton" onClick={createNote}>Add Note</button>
       </div>
 
       <div className="TaskCurrentNote">
-        <textarea 
-          className="TaskCurrentNoteText" 
-          placeholder="begin typing..." 
-          value={openNoteContent} 
-          onChange={handleContentChange}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              handleUpdateNoteContent();
-              e.currentTarget.blur(); // Unfocus input
-            } else if (e.key === 'Escape') {
-              e.currentTarget.blur(); // Unfocus input
-            }
-          }}>
-        </textarea>
+        {
+          openNoteID ?
+            <textarea 
+              className="TaskCurrentNoteText" 
+              placeholder="begin typing..." 
+              value={openNoteContent} 
+              onChange={handleContentChange}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleUpdateNoteContent();
+                  e.currentTarget.blur(); // Unfocus input
+                } else if (e.key === 'Escape') {
+                  e.currentTarget.blur(); // Unfocus input
+                }
+              }}>
+            </textarea>
+          :
+            null
+        }
       </div>
 
       <Snackbar
