@@ -43,16 +43,17 @@
   .TaskNotes {
     display: flex;
     align-items: center;
-    margin: 0.5em;
+    margin: 1.2em;
     margin-top: 0;
     height: 14em;
-    border-radius: 0.5em;
     overflow-y: auto;
 
     .Note {
       display: flex;
       justify-content: center;
       align-items: center;
+      border: 1px solid $accent2;
+      border-radius: 0.15em;
       width: 5em;
       min-width: 5em;
       height: 5em;
@@ -63,6 +64,7 @@
 
       &:hover {
         cursor: pointer;
+        box-shadow: 0 0 0.3em $accent2;
       }
     }
   }

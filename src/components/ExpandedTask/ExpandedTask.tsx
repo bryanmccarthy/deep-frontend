@@ -128,6 +128,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
         expandedTaskDifficulty={expandedTaskDifficulty} 
       />
 
+      {/* TODO: responsive carousel*/}
       <div className="TaskNotes">
         {
           expandedTaskNotes.map((note: any) => {

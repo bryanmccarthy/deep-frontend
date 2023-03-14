@@ -20,13 +20,11 @@ type TasksProps = {
   setExpandedTaskTimeSpent: (timeSpent: number) => void;
 }
 
-const accent = '#000000';
-const primary = '#ffffff';
-
 function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTitle, setExpandedTaskDifficulty, setExpandedTaskDueDate, setExpandedTaskCompleted, setExpandedTaskProgress, setExpandedTaskTimeSpent }: TasksProps) {
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
   const [taskDeletedSnackbarOpen, setTaskDeletedSnackbarOpen] = useState<boolean>(false);
   const [deletedTask, setDeletedTask] = useState<any | null>(null);
+  const [deletedTaskNotes, setDeletedTaskNotes] = useState<any | null>(null);
 
   async function handleToggleCompleted(id: number, completed: boolean, e: React.MouseEvent) {
     e.stopPropagation();
@@ -50,9 +48,23 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
       setErrorSnackbarOpen(true);
     }
   }
+
+  async function handleSetDeletedTaskNotes(id: number) {
+    const res = await axios.get(import.meta.env.VITE_URL + `/notes/${id}`, {
+      withCredentials: true,
+    });
+
+    if (res.status === 200) {
+      setDeletedTaskNotes(res.data);
+    } else {
+      setErrorSnackbarOpen(true);
+    }
+  }
     
   async function handleDeleteTask(task: any, e: React.MouseEvent) {
     e.stopPropagation();
+    handleSetDeletedTaskNotes(task.id);
+    
     const res = await axios.delete(import.meta.env.VITE_URL + '/tasks/delete', {
       data: {
         id: task.id,
@@ -77,7 +89,7 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
   async function handleSnackbarUndo() {
     setTaskDeletedSnackbarOpen(false);
 
-    const res = await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
+    const res1 = await axios.post(import.meta.env.VITE_URL + '/tasks/create', {
       title: deletedTask!.title,
       difficulty: deletedTask!.difficulty,
       due_date: deletedTask!.due_date,
@@ -89,9 +101,9 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
       withCredentials: true,
     });
 
-    if (res.status === 200) {
+    if (res1.status === 200) {
       setTasks([...tasks, {
-        id: res.data.id,
+        id: res1.data.id,
         title: deletedTask!.title,
         difficulty: deletedTask!.difficulty,
         due_date: deletedTask!.due_date,
@@ -103,6 +115,21 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
       } else {
       setErrorSnackbarOpen(true);
     }
+
+    deletedTaskNotes.forEach(async (note: any) => {
+      const res2 = await axios.post(import.meta.env.VITE_URL + '/notes/create', {
+        title: note.title,
+        content: note.content,
+        task_id: res1.data.id,
+      },
+      {
+        withCredentials: true,
+      });
+
+      if (res2.status !== 200) {
+        setErrorSnackbarOpen(true);
+      }
+    });
   }
 
   function handleExpandTask(task: any) {
