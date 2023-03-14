@@ -74,8 +74,8 @@ function ProgressBar({ expandedTaskID, expandedTaskProgress, expandedTaskDifficu
         </div>
         :
         <div className="ProgressInfo">
-          <p>Difficulty: {expandedTaskDifficulty} ({difficultyTimes.get(expandedTaskDifficulty)})</p>
-          <p>Estimated time remaining: 1 hour { /* TODO: calculate this */ }</p>
+          <p style={{ paddingRight: '1em' }}>Difficulty: {expandedTaskDifficulty} ({difficultyTimes.get(expandedTaskDifficulty)})</p>
+          <p style={{ paddingLeft: '1em' }}>Estimated time remaining: 1 hour { /* TODO: calculate this */ }</p>
         </div>
       }
     </div>

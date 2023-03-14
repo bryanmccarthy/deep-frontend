@@ -126,7 +126,8 @@ function Tasks({ setPage, tasks, setTasks, setExpandedTaskID, setExpandedTaskTit
       }
 
       <TaskList 
-        tasks={tasks} 
+        tasks={tasks}
+        setTasks={setTasks}
         handleDeleteTask={handleDeleteTask}
         handleExpandTask={handleExpandTask} 
         handleToggleCompleted={handleToggleCompleted}

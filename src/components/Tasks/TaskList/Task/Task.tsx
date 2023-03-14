@@ -8,13 +8,15 @@ import { useState } from 'react';
 import axios from 'axios';
 
 type TaskProps = {
+  tasks: any;
+  setTasks: (tasks: any) => void;
   task: any;
   handleDeleteTask: (task: any, e: React.MouseEvent) => void;
   handleExpandTask: (tasK: any) => void;
   handleToggleCompleted: (id: number, completed: boolean, e: React.MouseEvent) => void;
 }
 
-function Task({ task, handleDeleteTask, handleExpandTask, handleToggleCompleted } :TaskProps) {
+function Task({ tasks, setTasks, task, handleDeleteTask, handleExpandTask, handleToggleCompleted } :TaskProps) {
 
   const [updatedTitle, setUpdatedTitle] = useState<string>('');
 
@@ -29,6 +31,12 @@ function Task({ task, handleDeleteTask, handleExpandTask, handleToggleCompleted 
 
     if (res.status === 200) {
       setUpdatedTitle('');
+      setTasks(tasks.map((task: any) => {
+        if (task.id === res.data.id) {
+          return { ...task, title: res.data.title };
+        }
+        return task;
+      }));
     }
   }
 
