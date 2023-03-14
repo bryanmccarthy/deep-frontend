@@ -5,13 +5,20 @@ import Slider from '@mui/material/Slider';
 import InfoIcon from '@mui/icons-material/Info';
 
 const accent = "#000000";
+let difficultyTimes: Map<number, string> = new Map();
+difficultyTimes.set(1, '20-30 mins');
+difficultyTimes.set(2, '30-60 mins');
+difficultyTimes.set(3, '1-2 hrs');
+difficultyTimes.set(4, '2-4 hrs');
+difficultyTimes.set(5, '4-6 hrs');
 
 type ProgressBarProps = {
   expandedTaskID: number;
   expandedTaskProgress: number;
+  expandedTaskDifficulty: number;
 }
 
-function ProgressBar({ expandedTaskID, expandedTaskProgress }: ProgressBarProps ) {
+function ProgressBar({ expandedTaskID, expandedTaskProgress, expandedTaskDifficulty }: ProgressBarProps ) {
   const [progress, setProgress] = useState<number>(expandedTaskProgress);
   const [showInfo, setShowInfo] = useState<boolean>(false);
 
@@ -61,9 +68,14 @@ function ProgressBar({ expandedTaskID, expandedTaskProgress }: ProgressBarProps 
         />
         <div className="ProgressNumber">{progress}%</div>
       </div>
-      { showInfo &&
+      { showInfo ?
+        <div className="ProgressDescription">
+          <p>Track your progress to get a more accurate estimation of your time remaining</p>
+        </div>
+        :
         <div className="ProgressInfo">
-          Estimated time to complete: 1 hour { /* TODO: calculate this */ }
+          <p>Difficulty: {expandedTaskDifficulty} ({difficultyTimes.get(expandedTaskDifficulty)})</p>
+          <p>Estimated time remaining: 1 hour { /* TODO: calculate this */ }</p>
         </div>
       }
     </div>

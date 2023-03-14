@@ -35,11 +35,11 @@ function Task({ task, handleDeleteTask, handleExpandTask, handleToggleCompleted 
   // Handle setting input width based on title length
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     setUpdatedTitle(e.target.value);
-    e.target.style.width = `${e.target.value.length * 8}px`;
+    e.target.style.width = `${e.target.value.length * 8}px`; // 8px per char
   }
 
   function handleInputWidth() {
-    return task.title.length * 8;
+    return task.title.length * 8; // 8px per char
   }
 
   function handleTaskClick() {

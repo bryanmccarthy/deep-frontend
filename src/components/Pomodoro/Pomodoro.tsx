@@ -39,6 +39,9 @@ function Pomodoro({ showPomodoro, setShowPomodoro, errorSnackbarOpen, setErrorSn
   }
 
   async function handleUpdateExpandedtaskTimeSpent(timeSpent: number) {
+    if (timeSpent === 0) return;
+
+    console.log(timeSpent);
     const res = await axios.put(import.meta.env.VITE_URL + '/tasks/update/time_spent', {
       id: expandedTaskID,
       time_spent: timeSpent,

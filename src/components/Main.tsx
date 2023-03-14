@@ -20,7 +20,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Dayjs } from 'dayjs';
 
 const accent = '#000000';
-const secondary = '#e6e8ed';
+const accent2 = '#ccced1';
 
 function Main() {
   const [showPomodoro, setShowPomodoro] = useState<boolean>(false);
@@ -115,13 +115,13 @@ function Main() {
     <div className="Main">
       <div className="Icons">
         <div>
-          <FormatListBulletedIcon className="Icon" onClick={handleTaskPageClick} style={{color: page === 'tasks' ? secondary : accent }} />
-          <CalendarMonthIcon className="Icon" onClick={handleCalendarPageClick} style={{color: page === 'calendar' ? secondary : accent }} />
-          <DashboardIcon className="Icon" onClick={handleDashboardPageClick} style={{color: page === 'dashboard' ? secondary : accent }} />
+          <FormatListBulletedIcon className="Icon" onClick={handleTaskPageClick} style={{ color: page === 'tasks' ? accent2 : accent }} />
+          <CalendarMonthIcon className="Icon" onClick={handleCalendarPageClick} style={{ color: page === 'calendar' ? accent2 : accent }} />
+          <DashboardIcon className="Icon" onClick={handleDashboardPageClick} style={{ color: page === 'dashboard' ? accent2 : accent }} />
         </div>
         <div>
-          <NoteAddIcon className="Icon" onClick={handleShowAddTask} />
-          <TimerIcon className="Icon" onClick={handleShowPomodoro} />
+          <NoteAddIcon className="Icon" onClick={handleShowAddTask} style={{ color: showAddTask ? accent2 : accent, visibility: page === 'expandedTask' ? 'hidden' : 'visible' }} />
+          <TimerIcon className="Icon" onClick={handleShowPomodoro} style={{ color: showPomodoro ? accent2 : accent }} />
           <LogoutIcon className="Icon" onClick={handleLogout} />
         </div>
       </div>

@@ -4,17 +4,22 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin: 2em;
+  margin: 1em;
+  padding-top: 1em;
   font-size: 1rem;
   font-weight: 600;
-  height: 9em;
+  height: 10em;
+  background-color: $primary;
+  border: 1px solid $accent2;
+  border-radius: 0.2em;
 
   .ProgressSlider {
+    padding-top: 0.4em;
     display: flex;
     align-items: center;
     margin-left: 2em;
     margin-right: 2em;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.3em;
 
     .InfoIcon {
       margin-right: 1em;
@@ -25,5 +30,23 @@
       margin-left: 2em;
       width: 3em;
     }
+  }
+
+  .ProgressDescription {
+    display: flex;
+    justify-content: center;
+    margin-left: 3em;
+    margin-right: 3em;
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+
+  .ProgressInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 3em;
+    margin-right: 3em;
+    font-size: 0.8rem;
+    font-weight: 400;
   }
 }

@@ -84,18 +84,22 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
   return (
     <div className="ExpandedTask">
       <div className="TaskInfoHeader">
-        <div>{ expandedTaskTitle }</div>
-        <div>
-          { expandedTaskDifficulty === 0 ? '0' : expandedTaskDifficulty === 1 ? '1' : '2' }
+        <div className="TaskInfoHeaderLeft">
+          { expandedTaskCompleted ? 
+              <CheckBoxIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, true) } />
+            : 
+              <CheckBoxOutlineBlankIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, false) } /> 
+          }
+          <div className="TaskInfoHeaderTitle">{ expandedTaskTitle }</div>
         </div>
-        <div>{ dayjs(expandedTaskDueDate).format('MM/DD/YYYY') }</div>
-        { expandedTaskCompleted ? 
-            <CheckBoxIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, true) } />
-          : 
-            <CheckBoxOutlineBlankIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, false) } /> }
+        <div>Due: { dayjs(expandedTaskDueDate).format('MM/DD/YYYY') }</div>
       </div>
 
-      <ProgressBar expandedTaskID={expandedTaskID} expandedTaskProgress={expandedTaskProgress} />
+      <ProgressBar 
+        expandedTaskID={expandedTaskID} 
+        expandedTaskProgress={expandedTaskProgress}
+        expandedTaskDifficulty={expandedTaskDifficulty} 
+      />
 
       {/* TODO: Notes */}
       <div className="TaskNotes">
