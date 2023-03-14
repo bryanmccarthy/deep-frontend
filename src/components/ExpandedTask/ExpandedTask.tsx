@@ -4,9 +4,7 @@ import ExpandedTaskHeader from './ExpandedTaskHeader/ExpandedTaskHeader';
 import axios from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import dayjs from 'dayjs';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
@@ -24,18 +22,18 @@ type ExpandedTaskProps = {
   setExpandedTaskTimeSpent: (timeSpent: number) => void;
 }
 
-const accent2 = '#ccced1';
+const primary = '#ffffff';
+const accent = '#000000';
 
 function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficulty, expandedTaskDueDate, expandedTaskCompleted, setExpandedTaskCompleted, expandedTaskProgress, setExpandedTaskProgress, expandedTaskTimeSpent, setExpandedTaskTimeSpent }: ExpandedTaskProps) {
-  const [noteTitle, setNoteTitle] = useState<string>('');
-  const [expandedTaskNotes, setExpandedTaskNotes] = useState<[]>([]);
+  const [expandedTaskNotes, setExpandedTaskNotes] = useState<any>([]);
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
   const [openNoteID, setOpenNoteID] = useState<number | null>(null);
   const [openNoteContent, setOpenNoteContent] = useState<string>('');
 
-  async function createNote() {
+  async function handleCreateNote() {
     const res = await axios.post(import.meta.env.VITE_URL + '/notes/create', {
-      title: noteTitle,
+      title: '',
       content: '',
       task_id: expandedTaskID,
     },
@@ -44,7 +42,27 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
     });
 
     if (res.status === 200) {
-      getNotes();
+      setExpandedTaskNotes([...expandedTaskNotes, res.data]);
+      setOpenNoteID(res.data.id);
+      setOpenNoteContent('');
+    } else {
+      setErrorSnackbarOpen(true);
+    }
+  }
+
+  async function handleCreateFirstNote() {
+    const res = await axios.post(import.meta.env.VITE_URL + '/notes/create', {
+      title: '',
+      content: openNoteContent,
+      task_id: expandedTaskID,
+    },
+    {
+      withCredentials: true,
+    });
+
+    if (res.status === 200) {
+      setExpandedTaskNotes([...expandedTaskNotes, res.data]);
+      setOpenNoteID(res.data.id);
     } else {
       setErrorSnackbarOpen(true);
     }
@@ -59,7 +77,16 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
       withCredentials: true,
     });
 
-    if (res.status !== 200) {
+    if (res.status === 200) {
+      const updatedNotes = expandedTaskNotes.map((note: any) => {
+        if (note.id === openNoteID) {
+          return res.data;
+        } else {
+          return note;
+        }
+      });
+      setExpandedTaskNotes(updatedNotes);
+    } else {
       setErrorSnackbarOpen(true);
     }
   }
@@ -70,6 +97,8 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
     });
     if (res.status === 200) {
       setExpandedTaskNotes(res.data);
+      setOpenNoteID(res.data[0].id);
+      setOpenNoteContent(res.data[0].content);
     } else {
       setErrorSnackbarOpen(true);
     }
@@ -89,6 +118,10 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
   }
 
   function handleContentChange(e: any) {
+    setOpenNoteContent(e.target.value);
+  }
+
+  function handleNewNoteChange(e: any) {
     setOpenNoteContent(e.target.value);
   }
 
@@ -115,27 +148,18 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
         expandedTaskDifficulty={expandedTaskDifficulty} 
       />
 
+      <NoteAddIcon className="AddNoteIcon" onClick={handleCreateNote} />
+
       <div className="TaskNotes">
         {
           expandedTaskNotes.map((note: any) => {
             return (
-              <div className="Note" onClick={() => handleNoteChange(note)} key={note.id} style={{ boxShadow: openNoteID === note.id ? `0 0 1em ${accent2}` : 'none'}}>
+              <div className="Note" onClick={() => handleNoteChange(note)} key={note.id} style={{ backgroundColor: openNoteID === note.id ? accent : primary }}>
                 <div className="NoteTitle">{ note.title }</div>
               </div>
             )
           })
         }
-      </div>
-
-      <div className="NewNote">
-          <input 
-            className="NoteTitleInput" 
-            type="text" 
-            placeholder="Title" 
-            value={noteTitle} 
-            onChange={(e) => setNoteTitle(e.target.value)} 
-          />
-          <button className="CreateNoteButton" onClick={createNote}>Add Note</button>
       </div>
 
       <div className="TaskCurrentNote">
@@ -156,7 +180,20 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
               }}>
             </textarea>
           :
-            null
+            <textarea
+              className="TaskCurrentNoteText"
+              placeholder="begin typing..."
+              value={openNoteContent}
+              onChange={handleNewNoteChange}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleCreateFirstNote();
+                  e.currentTarget.blur(); // Unfocus input
+                } else if (e.key === 'Escape') {
+                  e.currentTarget.blur(); // Unfocus input
+                }
+              }}>
+            </textarea>
         }
       </div>
 

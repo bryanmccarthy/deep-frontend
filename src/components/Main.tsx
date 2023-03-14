@@ -8,7 +8,7 @@ import Pomodoro from "./Pomodoro/Pomodoro";
 import ExpandedTask from "./ExpandedTask/ExpandedTask";
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import TimerIcon from '@mui/icons-material/Timer';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -120,7 +120,7 @@ function Main() {
           <DashboardIcon className="Icon" onClick={handleDashboardPageClick} style={{ color: page === 'dashboard' ? accent2 : accent }} />
         </div>
         <div>
-          <NoteAddIcon className="Icon" onClick={handleShowAddTask} style={{ color: showAddTask ? accent2 : accent, visibility: page === 'expandedTask' ? 'hidden' : 'visible' }} />
+          <PlaylistAddIcon className="Icon" onClick={handleShowAddTask} style={{ color: showAddTask ? accent2 : accent, visibility: page === 'expandedTask' ? 'hidden' : 'visible' }} />
           <TimerIcon className="Icon" onClick={handleShowPomodoro} style={{ color: showPomodoro ? accent2 : accent }} />
           <LogoutIcon className="Icon" onClick={handleLogout} />
         </div>

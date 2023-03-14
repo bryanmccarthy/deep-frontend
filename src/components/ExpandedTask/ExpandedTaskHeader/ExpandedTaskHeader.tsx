@@ -35,9 +35,9 @@ function ExpandedTaskHeader({ expandedTaskCompleted, setExpandedTaskCompleted, e
     <div className="ExpandedTaskHeader">
         <div className="TaskInfoHeaderLeft">
           { expandedTaskCompleted ? 
-              <CheckBoxIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, true) } />
+              <CheckBoxIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, expandedTaskCompleted)} />
             : 
-              <CheckBoxOutlineBlankIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, false) } /> 
+              <CheckBoxOutlineBlankIcon className="TaskCompleted" onClick={() => toggleCompleted(expandedTaskID, expandedTaskCompleted)} /> 
           }
           <div className="TaskInfoHeaderTitle">{ expandedTaskTitle }</div>
         </div>
