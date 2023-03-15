@@ -27,22 +27,34 @@
     }
 
     .Note {
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
       border: 1px solid $accent2;
       border-top-left-radius: 0.2em;
       border-top-right-radius: 0.2em;
-      width: 5em;
-      min-width: 5em;
+      width: 5.5em;
+      min-width: 5.5em;
       height: 1.6em;
       margin: 0.1em;
       margin-bottom: 0;
       padding-bottom: 0;
       background-color: $primary;
       overflow: hidden;
+      cursor: pointer;
 
-      &:hover {
+      .NoteDeleteIcon {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.1em;
+        height: 0.6em;
+        width: 0.6em;
+        font-size: 1.2rem;
+        top: 0;
+        right: 0;
         cursor: pointer;
       }
     }

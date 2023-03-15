@@ -127,6 +127,35 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
     setOpenNoteContent(e.target.value);
   }
 
+  async function handleDeleteNote(e: any, id: number) {
+    e.stopPropagation();
+    const res = await axios.delete(import.meta.env.VITE_URL + '/notes/delete', {
+      data: {
+        id: id
+      },
+      withCredentials: true,
+    });
+
+    if (res.status === 200) {
+      const updatedNotes = expandedTaskNotes.filter((note: any) => {
+        return note.id !== id;
+      });
+      if (updatedNotes.length === 0) {
+        setExpandedTaskNotes([]);
+        setOpenNoteID(null);
+        setOpenNoteContent('');
+      } else {
+        setExpandedTaskNotes(updatedNotes);
+        if (id === openNoteID) {
+          setOpenNoteID(updatedNotes[0].id);
+          setOpenNoteContent(updatedNotes[0].content);
+        }
+      }
+    } else {
+      setErrorSnackbarOpen(true);
+    }
+  }
+
   // Fetch notes on page load
   const { status } = useQuery('notes', getNotes);
 
@@ -156,7 +185,9 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
             expandedTaskNotes.map((note: any) => {
               return (
                 <div className="Note" onClick={() => handleNoteChange(note)} key={note.id} style={{ backgroundColor: openNoteID === note.id ? accent : primary }}>
-                  <div className="NoteTitle">{ note.title }</div>
+                  <div className="NoteDeleteIcon" onClick={(e) => {handleDeleteNote(e, note.id)}} style={{ color: openNoteID === note.id ? primary : accent }}>
+                      &times;
+                  </div>
                 </div>
               )
             })
