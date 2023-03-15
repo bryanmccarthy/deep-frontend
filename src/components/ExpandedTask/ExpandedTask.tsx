@@ -96,6 +96,8 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
       withCredentials: true,
     });
     if (res.status === 200) {
+      if (res.data.length === 0) return;
+
       setExpandedTaskNotes(res.data);
       setOpenNoteID(res.data[0].id);
       setOpenNoteContent(res.data[0].content);
@@ -126,7 +128,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
   }
 
   // Fetch notes on page load
-  const { status } = useQuery('tasks', getNotes);
+  const { status } = useQuery('notes', getNotes);
 
   if (status === 'loading') return <div>Loading...</div>;
   if (status === 'error') return <div>Error</div>;
@@ -148,18 +150,19 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
         expandedTaskDifficulty={expandedTaskDifficulty} 
       />
 
-      <NoteAddIcon className="AddNoteIcon" onClick={handleCreateNote} />
-
       <div className="TaskNotes">
-        {
-          expandedTaskNotes.map((note: any) => {
-            return (
-              <div className="Note" onClick={() => handleNoteChange(note)} key={note.id} style={{ backgroundColor: openNoteID === note.id ? accent : primary }}>
-                <div className="NoteTitle">{ note.title }</div>
-              </div>
-            )
-          })
-        }
+        <div className="TaskNotesHeaders">
+          {
+            expandedTaskNotes.map((note: any) => {
+              return (
+                <div className="Note" onClick={() => handleNoteChange(note)} key={note.id} style={{ backgroundColor: openNoteID === note.id ? accent : primary }}>
+                  <div className="NoteTitle">{ note.title }</div>
+                </div>
+              )
+            })
+          }
+        </div>
+        <NoteAddIcon className="AddNoteIcon" onClick={handleCreateNote} />
       </div>
 
       <div className="TaskCurrentNote">

@@ -7,21 +7,24 @@
   height: 100%;
   font-family: monospace;
 
-  .AddNoteIcon {
-    height: 1.2em;
-    width: 1.2em;
-    margin: 0.5em;
-    cursor: pointer;
-  }
-
   .TaskNotes {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-left: 1em;
     margin-right: 1em;
-    margin-top: 0;
-    height: 2.5em;
-    overflow-y: auto;
+    height: 1.8em;
+
+    .TaskNotesHeaders {
+      display: flex;
+      overflow-y: auto;
+    }
+
+    .AddNoteIcon {
+      height: 1.2em;
+      width: 1.2em;
+      cursor: pointer;
+    }
 
     .Note {
       display: flex;
@@ -32,7 +35,7 @@
       border-top-right-radius: 0.5em;
       width: 5em;
       min-width: 5em;
-      height: 100%;
+      height: 1.8em;
       margin: 0.1em;
       margin-bottom: 0;
       padding-bottom: 0;
@@ -51,6 +54,8 @@
     align-items: center;
     height: 100%;
     padding: 1em;
+    margin-left: 0.3em;
+    margin-right: 0.3em;
     padding-top: 0;
 
     .TaskCurrentNoteText {
