@@ -20,9 +20,9 @@
       overflow-y: auto;
     }
 
-    .AddNoteIcon {
-      height: 1.2em;
-      width: 1.2em;
+    .AddIcon {
+      height: 1em;
+      width: 1em;
       cursor: pointer;
     }
 
@@ -31,11 +31,11 @@
       justify-content: center;
       align-items: center;
       border: 1px solid $accent2;
-      border-top-left-radius: 0.5em;
-      border-top-right-radius: 0.5em;
+      border-top-left-radius: 0.2em;
+      border-top-right-radius: 0.2em;
       width: 5em;
       min-width: 5em;
-      height: 1.8em;
+      height: 1.6em;
       margin: 0.1em;
       margin-bottom: 0;
       padding-bottom: 0;

@@ -4,7 +4,7 @@ import ExpandedTaskHeader from './ExpandedTaskHeader/ExpandedTaskHeader';
 import axios from 'axios';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import AddIcon from '@mui/icons-material/Add';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
@@ -162,7 +162,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
             })
           }
         </div>
-        <NoteAddIcon className="AddNoteIcon" onClick={handleCreateNote} />
+        <AddIcon className="AddIcon" onClick={handleCreateNote} />
       </div>
 
       <div className="TaskCurrentNote">
