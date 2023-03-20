@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function Dashboard() {
 
-  async function makeRequest() {
+  async function handleGetTotalTimeSpent() {
     const res = await axios.get(import.meta.env.VITE_URL + '/user/time_spent', {
       withCredentials: true,
     });
@@ -15,15 +15,9 @@ function Dashboard() {
     }
   }
 
-
   return (
     <div className="Dashboard">
-      <h1>Dashboard</h1>
-      <div className="TEST">
-
-        <button onClick={makeRequest}>Get total time spent</button>
-
-      </div>
+      
     </div>
   )
 }
