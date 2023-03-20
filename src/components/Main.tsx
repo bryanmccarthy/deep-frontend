@@ -120,7 +120,7 @@ function Main() {
           <DashboardIcon className="Icon" onClick={handleDashboardPageClick} style={{ color: page === 'dashboard' ? accent2 : accent }} />
         </div>
         <div>
-          <PlaylistAddIcon className="Icon" onClick={handleShowAddTask} style={{ color: showAddTask ? accent2 : accent, visibility: page === 'expandedTask' ? 'hidden' : 'visible' }} />
+          <PlaylistAddIcon className="Icon" onClick={handleShowAddTask} style={{ color: showAddTask ? accent2 : accent, visibility: page === 'expandedTask' || page === 'dashboard' ? 'hidden' : 'visible' }} />
           <TimerIcon className="Icon" onClick={handleShowPomodoro} style={{ color: showPomodoro ? accent2 : accent }} />
           <LogoutIcon className="Icon" onClick={handleLogout} />
         </div>
