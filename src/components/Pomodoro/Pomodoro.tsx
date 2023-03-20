@@ -14,7 +14,7 @@ type PomodoroProps = {
   setExpandedTaskTimeSpent: (timeSpent: number) => void;
 }
 
-function Pomodoro({ showPomodoro, setShowPomodoro, errorSnackbarOpen, setErrorSnackbarOpen, page, expandedTaskID, setExpandedTaskTimeSpent }: PomodoroProps) {
+function Pomodoro({ showPomodoro, setShowPomodoro, setErrorSnackbarOpen, page, expandedTaskID, setExpandedTaskTimeSpent }: PomodoroProps) {
   const workDuration: number = localStorage.getItem('workDuration') ? parseInt(localStorage.getItem('workDuration') as string) : 25 * 60;
   const breakDuration: number = localStorage.getItem('breakDuration') ? parseInt(localStorage.getItem('breakDuration') as string) : 5 * 60;
 

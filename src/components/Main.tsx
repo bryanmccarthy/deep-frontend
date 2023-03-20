@@ -192,7 +192,6 @@ function Main() {
         <Pomodoro
           showPomodoro={showPomodoro} 
           setShowPomodoro={setShowPomodoro} 
-          errorSnackbarOpen={errorSnackbarOpen} 
           setErrorSnackbarOpen={setErrorSnackbarOpen}
           page={page}
           expandedTaskID={expandedTaskID}
