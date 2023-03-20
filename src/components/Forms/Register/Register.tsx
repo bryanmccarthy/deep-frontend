@@ -8,14 +8,18 @@ import CloseIcon from '@mui/icons-material/Close';
 const accent = "#000000";
 const errorRed = "#f28585";
 
-function Register() {
+type RegisterProps = {
+  setForm: (form: string) => void;
+}
+
+function Register({ setForm }: RegisterProps) {
   const [firstname, setFirstname] = useState<string>('');
   const [lastname, setLastname] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
   const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
-  const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
+  const [invalidAuthSnackbarOpen, setInvalidAuthSnackbarOpen] = useState<boolean>(false);
 
   function validateEmail(email: string) {
     return email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
@@ -26,12 +30,22 @@ function Register() {
   }
 
   async function registerUser() {
-    if (firstname === '') return; // TODO: add error handling
-    if (lastname === '') return; // TODO: add error handling
-    if (!validateEmail(email)) { 
+    if (firstname === '') {
+      setInvalidAuthSnackbarOpen(true);
       return;
-    } // TODO: add error handling
-    if (password === '') return; // TODO: add error handling
+    } 
+    if (lastname === '') {
+      setInvalidAuthSnackbarOpen(true);
+      return;
+    }  
+    if (!isValidEmail) { 
+      setInvalidAuthSnackbarOpen(true);
+      return;
+    } 
+    if (!isValidPassword) {
+      setInvalidAuthSnackbarOpen(true);
+      return; 
+    }
 
     const res = await axios.post(import.meta.env.VITE_URL + '/auth/register', {
       Firstname: firstname,
@@ -40,14 +54,18 @@ function Register() {
       Password: password
     })
 
-    if (res.status !== 200) {
-      setErrorSnackbarOpen(true);
+    if (res.status === 200) {
+      setFirstname('');
+      setLastname('');
+      setEmail('');
+      setPassword('');
+      setForm('login');
+      // TODO: display registered successfully snackbar
     }
-    // TODO: Clear form fields & display success message and switch to login page
   }
 
   function handleSnackbarClose() {
-    setErrorSnackbarOpen(false);
+    setInvalidAuthSnackbarOpen(false);
   };
 
   function handleEmailChange(email: string) {
@@ -80,10 +98,10 @@ function Register() {
       </form>
 
       <Snackbar
-        open={errorSnackbarOpen}
+        open={invalidAuthSnackbarOpen}
         autoHideDuration={5000}
         onClose={handleSnackbarClose}
-        message="oops, something went wrong!"
+        message="invalid form fields"
         action={
           <div>
             <IconButton

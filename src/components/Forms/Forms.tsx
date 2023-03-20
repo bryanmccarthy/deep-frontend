@@ -16,8 +16,18 @@ function Forms({ setUser }: FormsProps) {
 
   return (
     <div className="Forms">
-      { form === 'login' ? <Login setUser={setUser} /> : <Register /> }
-      { form === 'login' ? <button className="FormButton" onClick={handleFormChange}>Don't have an account? Register</button> : <button className="FormButton" onClick={handleFormChange}>Already have an account? Login</button> }
+      { 
+        form === 'login' ? 
+          <Login setUser={setUser} /> 
+        : 
+          <Register setForm={setForm} /> 
+      }
+      { 
+        form === 'login' ? 
+          <button className="FormButton" onClick={handleFormChange}>Don't have an account? Register</button> 
+        : 
+          <button className="FormButton" onClick={handleFormChange}>Already have an account? Login</button> 
+      }
     </div>
   )
 }

@@ -35,18 +35,12 @@ function Login({ setUser }: LoginProps) {
     {
       withCredentials: true,
     });
-
-    if (res.status !== 200) {
-      setInvalidAuthSnackbarOpen(true);
-    }
-    
+   
     if (res.status === 200) {
       sessionStorage.setItem('userFirstName', res.data.firstname);
       sessionStorage.setItem('userLastName', res.data.lastname);
       setUser(res.data.firstname)
-    } else {
-      setInvalidAuthSnackbarOpen(true);
-    }
+    } 
   }
 
   function handleSnackbarClose() {
