@@ -2,7 +2,20 @@
 
 .Dashboard {
   display: flex;
+  flex-direction: column;
   height: 100%;
   width: 100%;
   background-color: $secondary;
+
+  .Grid1  {
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
+
+  .Grid2 {
+    display: flex;
+    height: 100%;
+    width: 100%;
+  }
 }
