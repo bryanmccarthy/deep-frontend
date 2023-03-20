@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 type PomodoroProps = {
   showPomodoro: boolean;
   setShowPomodoro: (show: boolean) => void;
-  errorSnackbarOpen: boolean;
   setErrorSnackbarOpen: (open: boolean) => void;
   page: string;
   expandedTaskID: number;

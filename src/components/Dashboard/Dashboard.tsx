@@ -1,5 +1,6 @@
 import './Dashboard.scss';
-import DifficultyChart from './DifficultyChart/DifficultyChart';
+import DifficultyCountChart from './DifficultyCountChart/DifficultyCountChart';
+import DifficultyTimeChart from './DifficultyTimeChart/DifficultyTimeChart';
 
 function Dashboard() {
 
@@ -17,7 +18,8 @@ function Dashboard() {
 
   return (
     <div className="Dashboard">
-      <DifficultyChart />
+      <DifficultyCountChart />
+      <DifficultyTimeChart />
     </div>
   )
 }
