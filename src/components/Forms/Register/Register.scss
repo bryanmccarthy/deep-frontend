@@ -24,6 +24,16 @@
       outline: none;
     }
 
+    .PasswordInput {
+      margin-bottom: 0;
+    }
+
+    .PasswordError {
+      font-size: 0.8rem;
+      margin-bottom: 2em;
+      color: #f28585;
+    }
+
     .RegisterButton {
       width: 100%;
       height: 3em;
