@@ -12,11 +12,21 @@ type LoginProps = {
 function Login({ setUser }: LoginProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
+  const [invalidAuthSnackbarOpen, setInvalidAuthSnackbarOpen] = useState<boolean>(false);
+
+  function validateEmail(email: string) {
+    return email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+  }
 
   async function loginUser() {
-    if (email === '') return; // TODO: add error handling
-    if (password === '') return; // TODO: add error handling
+    if (!validateEmail(email)) {
+      setInvalidAuthSnackbarOpen(true);
+      return;
+    }
+    if (password === '') {
+      setInvalidAuthSnackbarOpen(true);
+      return;
+    }
 
     const res = await axios.post(import.meta.env.VITE_URL + '/auth/login', {
       Email: email,
@@ -24,18 +34,23 @@ function Login({ setUser }: LoginProps) {
     }, 
     {
       withCredentials: true,
-    })
+    });
+
+    if (res.status !== 200) {
+      setInvalidAuthSnackbarOpen(true);
+    }
+    
     if (res.status === 200) {
       sessionStorage.setItem('userFirstName', res.data.firstname);
       sessionStorage.setItem('userLastName', res.data.lastname);
       setUser(res.data.firstname)
     } else {
-      setErrorSnackbarOpen(true);
+      setInvalidAuthSnackbarOpen(true);
     }
   }
 
   function handleSnackbarClose() {
-    setErrorSnackbarOpen(false);
+    setInvalidAuthSnackbarOpen(false);
   };
 
   return (
@@ -45,12 +60,11 @@ function Login({ setUser }: LoginProps) {
         <input className="LoginInput" placeholder="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <button className="LoginButton" type="button" onClick={loginUser}>Login</button>
       </form>
-
-      <Snackbar
-        open={errorSnackbarOpen}
+     <Snackbar
+        open={invalidAuthSnackbarOpen}
         autoHideDuration={5000}
         onClose={handleSnackbarClose}
-        message="oops, something went wrong!"
+        message="Invalid Email or Password"
         action={
           <div>
             <IconButton
