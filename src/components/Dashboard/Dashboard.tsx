@@ -1,7 +1,9 @@
 import './Dashboard.scss';
 import DifficultyCountChart from './DifficultyCountChart/DifficultyCountChart';
+import TimeSpentPieChart from './TimeSpentPieChart/TimeSpentPieChart';
 import DifficultyTimeChart from './DifficultyTimeChart/DifficultyTimeChart';
-import TasksDoneChart from './TasksDoneChart/TasksDoneChart';
+import TasksDoneScatterChart from './TasksDoneScatterChart/TasksDoneScatterChart';
+import TimeSpentBarChart from './TimeSpentBarChart/TimeSpentBarChart';
 
 function Dashboard() {
 
@@ -21,10 +23,12 @@ function Dashboard() {
     <div className="Dashboard">
       <div className="Grid1">
         <DifficultyCountChart />
+        <TimeSpentPieChart />
         <DifficultyTimeChart />
       </div>
       <div className="Grid2">
-        <TasksDoneChart />
+        <TasksDoneScatterChart />
+        <TimeSpentBarChart />
       </div>
     </div>
   )

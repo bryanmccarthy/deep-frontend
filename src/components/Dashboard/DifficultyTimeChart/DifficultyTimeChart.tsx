@@ -1,39 +1,53 @@
 import "./DifficultyTimeChart.scss";
 // import axios from "axios";
-import { ResponsiveContainer, PieChart, Pie, } from "recharts";
+import { PieChart, Pie, } from "recharts";
 
+// TODO: value is related to time spent on tasks with that difficulty
 const data = [ // TODO: Use state instead and get data from backend
-  { name: "Difficulty 1", value: 2 },
-  { name: "Difficulty 2", value: 7 },
-  { name: "Difficulty 3", value: 4 },
-  { name: "Difficulty 4", value: 12 },
-  { name: "Difficulty 5", value: 4 },
-  { name: "Difficulty 6", value: 9 },
+  { name: "1", value: 5 },
+  { name: "2", value: 3 },
+  { name: "3", value: 8 },
+  { name: "4", value: 2 },
+  { name: "5", value: 4 },
 ];
+
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, index }: any) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+      {`${data[index].name}`}
+    </text>
+  );
+};
 
 function DifficultyTimeChart() {
 
   return (
     <div className="DifficultyTimeChart">
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart
-          margin={{
-            top: 20,
-            right: 20,
-            bottom: 20,
-            left: 20,
-          }}
-        >
-          <Pie 
-            data={data} 
-            dataKey="value"
-            labelLine={false}
-            fill="#8884d8"
-            label={entry => entry.name}
-          >
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
+      <PieChart 
+        width={300} 
+        height={300}
+        margin={{
+          top: 10,
+          right: 10,
+          bottom: 10,
+          left: 10,
+        }}
+      >
+        <Pie 
+          data={data}
+          dataKey="value"
+          labelLine={false}
+          fill="#284579"
+          label={renderCustomizedLabel}
+        > 
+        </Pie> 
+      </PieChart>
+      <label>Hours spent per Task difficulty</label>
     </div>
   );
 }
