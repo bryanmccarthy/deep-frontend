@@ -31,16 +31,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      background-color: $primary;
       border: 1px solid $accent2;
-      border-top-left-radius: 0.2em;
-      border-top-right-radius: 0.2em;
-      width: 5.5em;
-      min-width: 5.5em;
-      height: 1.6em;
-      margin: 0.1em;
+      width: 7em;
+      min-width: 7em;
+      height: 1.75em;
+      margin: 0.05em;
       margin-bottom: 0;
       padding-bottom: 0;
-      background-color: $primary;
       overflow: hidden;
       cursor: pointer;
 
@@ -49,13 +47,15 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 0.1em;
-        height: 0.6em;
-        width: 0.6em;
+        height: 100%;
+        width: 1em;
         font-size: 1.2rem;
-        top: 0;
         right: 0;
         cursor: pointer;
+
+        &:hover {
+          background-color: #e4e4e4;
+        }
       }
     }
   }

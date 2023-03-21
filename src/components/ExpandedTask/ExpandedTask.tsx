@@ -24,6 +24,7 @@ type ExpandedTaskProps = {
 
 const primary = '#ffffff';
 const accent = '#000000';
+const accent2 = '#ccced1';
 
 function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficulty, expandedTaskDueDate, expandedTaskCompleted, setExpandedTaskCompleted, expandedTaskProgress, setExpandedTaskProgress, expandedTaskTimeSpent, setExpandedTaskTimeSpent }: ExpandedTaskProps) {
   const [expandedTaskNotes, setExpandedTaskNotes] = useState<any>([]);
@@ -184,8 +185,8 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
           {
             expandedTaskNotes.map((note: any) => {
               return (
-                <div className="Note" onClick={() => handleNoteChange(note)} key={note.id} style={{ backgroundColor: openNoteID === note.id ? accent : primary }}>
-                  <div className="NoteDeleteIcon" onClick={(e) => {handleDeleteNote(e, note.id)}} style={{ color: openNoteID === note.id ? primary : accent }}>
+                <div className="Note" onClick={() => handleNoteChange(note)} key={note.id} style={{ borderTop: openNoteID === note.id ? "1px solid #FFAC1C" : "1px solid #ccced1" }}>
+                  <div className="NoteDeleteIcon" onClick={(e) => {handleDeleteNote(e, note.id)}}>
                       &times;
                   </div>
                 </div>
