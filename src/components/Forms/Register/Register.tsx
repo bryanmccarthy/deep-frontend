@@ -60,7 +60,6 @@ function Register({ setForm }: RegisterProps) {
       setEmail('');
       setPassword('');
       setForm('login');
-      // TODO: display registered successfully snackbar
     }
   }
 

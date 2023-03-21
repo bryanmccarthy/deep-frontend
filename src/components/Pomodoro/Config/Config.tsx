@@ -57,7 +57,7 @@ function Config({ currentTimer, setCurrentTimer, setSeconds, setFormattedDuratio
       handleUpdateTimeSpent();
       handleUpdateExpandedTaskTimeSpent(expandedTaskDuration);
     }
-    setIsActive(false); // TODO: prompt user to confirm before stopping
+    setIsActive(false);
     document.title='Deep';
     if (currentTimer === 'Work') {
       setSeconds(workDuration);
