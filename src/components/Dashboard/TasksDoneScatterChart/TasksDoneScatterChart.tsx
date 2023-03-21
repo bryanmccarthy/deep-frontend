@@ -1,5 +1,5 @@
 import "./TasksDoneScatterChart.scss";
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { ScatterChart, Scatter, XAxis, YAxis, Tooltip } from 'recharts';
 
 const data = [
   { x: 1, y: 6 },

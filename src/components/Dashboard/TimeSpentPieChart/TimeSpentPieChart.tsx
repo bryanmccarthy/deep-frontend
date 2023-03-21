@@ -1,5 +1,5 @@
 import "./TimeSpentPieChart.scss";
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell } from 'recharts';
 
 const data = [
   { name: 'Hours spent', value: 40 },

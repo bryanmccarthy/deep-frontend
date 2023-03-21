@@ -1,6 +1,6 @@
 import "./DifficultyCountChart.scss";
 // import axios from "axios";
-import { ResponsiveContainer, PieChart, Pie, } from "recharts";
+import { PieChart, Pie, } from "recharts";
 
 // TODO: value should be number of tasks with that difficulty
 const data = [ // TODO: Use state instead and get data from backend
