@@ -31,6 +31,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
   const [openNoteID, setOpenNoteID] = useState<number | null>(null);
   const [openNoteContent, setOpenNoteContent] = useState<string>('');
+  const [updatedTitle, setUpdatedTitle] = useState<string>('');
 
   async function handleCreateNote() {
     const res = await axios.post(import.meta.env.VITE_URL + '/notes/create', {
@@ -157,6 +158,32 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
     }
   }
 
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setUpdatedTitle(e.target.value);
+  }
+
+  async function handleUpdateNoteTitle(e: React.ChangeEvent<HTMLInputElement>,id: number) {
+    const res = await axios.put(import.meta.env.VITE_URL + '/notes/update/title', {
+        id: id,
+        title: updatedTitle,
+      },
+      {
+      withCredentials: true,
+    });
+
+    if (res.status === 200) {
+      setUpdatedTitle('');
+    } else {
+      setErrorSnackbarOpen(true);
+    }
+
+    e.target.readOnly = true; // Make input readonly
+  }
+
+  function handleDoubleClick(e: React.ChangeEvent<HTMLInputElement>) {
+    e.target.readOnly = false; // Make input editable
+  }
+
   // Fetch notes on page load
   const { status } = useQuery('notes', getNotes);
 
@@ -186,6 +213,23 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
             expandedTaskNotes.map((note: any) => {
               return (
                 <div className="Note" onClick={() => handleNoteChange(note)} key={note.id} style={{ borderTop: openNoteID === note.id ? "1px solid #FFAC1C" : "1px solid #ccced1" }}>
+                  <input 
+                    className="NoteTitle" 
+                    type="text"
+                    defaultValue={note.title}
+                    placeholder="title..."
+                    readOnly={true}
+                    onDoubleClick={(e) => handleDoubleClick(e)}
+                    onChange={(e) => handleInputChange(e)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        handleUpdateNoteTitle(e, note.id);
+                        e.currentTarget.blur(); // Unfocus input
+                      } else if (e.key === 'Escape') {
+                        e.currentTarget.blur(); // Unfocus input
+                      }
+                    }} 
+                  />                  
                   <div className="NoteDeleteIcon" onClick={(e) => {handleDeleteNote(e, note.id)}}>
                       &times;
                   </div>
@@ -202,7 +246,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
           openNoteID ?
             <textarea 
               className="TaskCurrentNoteText" 
-              placeholder="begin typing..." 
+              placeholder="note..." 
               value={openNoteContent} 
               onChange={handleContentChange}
               onKeyDown={(e) => {
@@ -217,7 +261,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
           :
             <textarea
               className="TaskCurrentNoteText"
-              placeholder="begin typing..."
+              placeholder="note..."
               value={openNoteContent}
               onChange={handleNewNoteChange}
               onKeyDown={(e) => {
