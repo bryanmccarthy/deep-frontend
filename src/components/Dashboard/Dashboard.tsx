@@ -4,9 +4,14 @@ import TimeSpentPieChart from './TimeSpentPieChart/TimeSpentPieChart';
 import DifficultyTimeChart from './DifficultyTimeChart/DifficultyTimeChart';
 import TasksDoneScatterChart from './TasksDoneScatterChart/TasksDoneScatterChart';
 import TimeSpentBarChart from './TimeSpentBarChart/TimeSpentBarChart';
+// import { useState } from 'react';
+import { useQuery } from 'react-query';
 
-function Dashboard() {
+type DashboardProps = {
+  tasks: any;
+}
 
+function Dashboard({ tasks }: DashboardProps) {
   // async function handleGetTotalTimeSpent() {
   //   const res = await axios.get(import.meta.env.VITE_URL + '/user/time_spent', {
   //     withCredentials: true,
@@ -18,11 +23,11 @@ function Dashboard() {
   //     console.log('error');
   //   }
   // }
-
+   
   return (
     <div className="Dashboard">
       <div className="Grid1">
-        <DifficultyCountChart />
+        <DifficultyCountChart tasks={tasks}/>
         <TimeSpentPieChart />
         <DifficultyTimeChart />
       </div>

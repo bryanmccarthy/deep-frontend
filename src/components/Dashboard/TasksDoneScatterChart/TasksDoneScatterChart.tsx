@@ -5,10 +5,10 @@ const data = [
   { x: 1, y: 6 },
   { x: 2, y: 7 },
   { x: 3, y: 3 },
+  { x: 3, y: 7 },
+  { x: 4, y: 5 },
   { x: 4, y: 8 },
   { x: 5, y: 4 },
-  { x: 4, y: 5 },
-  { x: 3, y: 7 },
 ];
 
 function TasksDoneScatterChart() {
@@ -26,7 +26,7 @@ function TasksDoneScatterChart() {
         }}
       >
         {/* <CartesianGrid /> */}
-        <XAxis dataKey="x" name="time" />
+        <XAxis type="number" dataKey="x" name="time" />
         <YAxis type="number" dataKey="y" name="difficulty" />
         <Tooltip cursor={{ strokeDasharray: '2 4' }} />
         <Scatter name="TasksDone" data={data} fill="#284579" />

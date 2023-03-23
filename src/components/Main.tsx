@@ -28,6 +28,7 @@ function Main() {
   const [page, setPage] = useState<string>('tasks');
   const [tasks, setTasks] = useState<[]>([]);
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
+  const [dueDate, setDueDate] = useState<Dayjs | null>(null);
 
   // Expanded Task State Variables
   const [expandedTaskID, setExpandedTaskID] = useState<number>(0);
@@ -38,7 +39,10 @@ function Main() {
   const [expandedTaskProgress, setExpandedTaskProgress] = useState<number>(0);
   const [expandedTaskTimeSpent, setExpandedTaskTimeSpent] = useState<number>(0);
 
-  const [dueDate, setDueDate] = useState<Dayjs | null>(null);
+  async function handleGetDashboardData() {
+    // TODO: get data
+    // Get total hours spent (maybe store milestone on server)
+  }
 
   async function handleLogout() {
     const res = await axios.get(import.meta.env.VITE_URL + '/auth/logout', {
@@ -46,10 +50,12 @@ function Main() {
       }
     )
   
-    if (res && res.status === 200) {
+    if (res.status === 200) {
       sessionStorage.removeItem('userFirstName');
       sessionStorage.removeItem('userLastName');
       window.location.reload();
+    } else {
+      setErrorSnackbarOpen(true);
     }
   }
 
@@ -76,14 +82,6 @@ function Main() {
     if (showAddTask) setShowAddTask(false);
     setShowPomodoro(true);
   }
-
-  /*
-    TODO: settings Icon w/ dropdown like pomodoro ??
-    - display done tasks or not
-    - dark mode
-    - notifications
-    - 
-  */
 
   async function getTasks() {
     const res = await axios.get(import.meta.env.VITE_URL + '/tasks', 
@@ -143,7 +141,7 @@ function Main() {
         }
         { 
           page === 'dashboard' &&
-          <Dashboard /> 
+          <Dashboard tasks={tasks} /> 
         }
         {
           page === 'calendar' &&

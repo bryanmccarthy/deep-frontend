@@ -55,7 +55,7 @@ function Calendar({ setPage, tasks, setShowAddTask, setDueDate, setExpandedTaskI
     setExpandedTaskTimeSpent(Number(info.event._def.extendedProps.time_spent));
   }
 
-  async function handleDateClick(info: any) {
+  function handleDateClick(info: any) {
     const dueDate = info.date;
     setShowAddTask(true);
     setDueDate(dueDate);
