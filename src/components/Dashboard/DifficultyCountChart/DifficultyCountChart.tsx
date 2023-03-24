@@ -3,13 +3,15 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { PieChart, Pie, } from "recharts";
 
+const labelColor = "#FFAC1C";
+
 type DifficultyCountChartProps = {
   tasks: any;
 }
 
 function DifficultyCountChart({ tasks }: DifficultyCountChartProps) {
   const tasksPerDifficulty = new Map();
-  const [difficultyCountData, setDifficultyCountData] = useState<any>(null);
+  const [difficultyCountData, setDifficultyCountData] = useState<any>([{}]);
 
 
   const RADIAN = Math.PI / 180;
@@ -19,7 +21,7 @@ function DifficultyCountChart({ tasks }: DifficultyCountChartProps) {
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
     return (
-      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+      <text x={x} y={y} fill={labelColor} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
         {`${difficultyCountData[index].name}`}
       </text>
     );

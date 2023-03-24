@@ -4,13 +4,15 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { PieChart, Pie, } from "recharts";
 
+const labelColor = "#FFAC1C";
+
 type DifficultyTimeChartProps = {
   tasks: any;
 }
 
 function DifficultyTimeChart({ tasks }: DifficultyTimeChartProps) {
   const timePerDifficulty = new Map();
-  const [difficultyTimeData, setDifficultyTimeData] = useState<any>(null);
+  const [difficultyTimeData, setDifficultyTimeData] = useState<any>([{}]);
 
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, index }: any) => {
@@ -19,7 +21,7 @@ function DifficultyTimeChart({ tasks }: DifficultyTimeChartProps) {
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
     return (
-      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+      <text x={x} y={y} fill={labelColor} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
         {`${difficultyTimeData[index].name}`}
       </text>
     );

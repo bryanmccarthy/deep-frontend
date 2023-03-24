@@ -1,50 +1,16 @@
 import "./TimeSpentPieChart.scss";
 import { PieChart, Pie, Cell } from 'recharts';
-import { useState } from "react";
-import { useQuery } from "react-query";
 
-const COLORS = ['#284579', '#ffffff'];
+const COLORS = ['#284579', '#f0f5fc'];
+const labelColor = "#FFAC1C";
 
 type TimeSpentPieChartProps = {
   timeSpent: number;
+  timeSpentData: any;
+  milestone: number;
 }
 
-function TimeSpentPieChart({ timeSpent }: TimeSpentPieChartProps) {
-  const [data, setData] = useState<any>([{}]);
-  const [milestone, setMilestone] = useState<number>(0);
-
-  function handleSetTimeSpentData() {
-    setData([
-      { name: "hours spent", value: secondsToHours(timeSpent) },
-      { name: "hours to go", value: calculateHoursToGo(timeSpent) }, 
-    ]);
-  }
-
-  function calculateHoursToGo(timeSpent: number) {
-    const hours = secondsToHours(timeSpent);
-
-    if (hours < 5) {
-      setMilestone(5);
-      return(5 - hours);
-    } else if (hours < 10) {
-      setMilestone(10);
-      return(10 - hours);
-    } else if (hours < 25) {
-      setMilestone(25);
-      return(25 - hours);
-    } else if (hours < 50) {
-      setMilestone(50);
-      return(50 - hours);
-    } else {
-      setMilestone((Math.floor(hours / 50) + 1) * 50);
-      return(((Math.floor(hours / 50) + 1) * 50) - hours);
-    }
-  }
-
-  function secondsToHours(seconds: number) {
-    return Math.floor((seconds / 60) / 60);
-  }
-  
+function TimeSpentPieChart({ timeSpent, timeSpentData, milestone }: TimeSpentPieChartProps) {
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, index }: any) => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -52,21 +18,16 @@ function TimeSpentPieChart({ timeSpent }: TimeSpentPieChartProps) {
     let y = cy + radius * Math.sin(-midAngle * RADIAN);
 
     return (
-      <text x={x} y={y} fill="#FFAC1C" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-        { data[index].name === "hours spent" ?
-          `${data[index].value} hours spent`
+      <text x={x} y={y} fill={labelColor} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+        { timeSpentData[index].name === "hours spent" ?
+          `${timeSpentData[index].value} hours spent`
         :
-          `${data[index].value} hours to go`
+          `${timeSpentData[index].value} hours to go`
         }
       </text>
     );
   };
-
-  const { status } = useQuery('setTimeSpentData', handleSetTimeSpentData);
-
-  if (status === 'loading') return <div>Loading...</div>;
-  if (status === 'error') return <div>Error</div>;
-
+ 
   return (
     <div className="TimeSpentPieChart">
       <PieChart
@@ -80,13 +41,13 @@ function TimeSpentPieChart({ timeSpent }: TimeSpentPieChartProps) {
         }}
       >
         <Pie
-          data={data}
+          data={timeSpentData}
           labelLine={false}
           label={renderCustomizedLabel}
           innerRadius={80}
           dataKey="value"
         >
-          { data.map((entry: any, index: number) => (
+          { timeSpentData.map((entry: any, index: number) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
