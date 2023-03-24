@@ -2,7 +2,6 @@ import './Dashboard.scss';
 import DifficultyCountChart from './DifficultyCountChart/DifficultyCountChart';
 import TimeSpentPieChart from './TimeSpentPieChart/TimeSpentPieChart';
 import DifficultyTimeChart from './DifficultyTimeChart/DifficultyTimeChart';
-import TasksDoneScatterChart from './TasksDoneScatterChart/TasksDoneScatterChart';
 import TimeSpentBarChart from './TimeSpentBarChart/TimeSpentBarChart';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
@@ -40,7 +39,6 @@ function Dashboard({ tasks }: DashboardProps) {
         <DifficultyTimeChart tasks={tasks} />
       </div>
       <div className="Grid2">
-        <TasksDoneScatterChart />
         <TimeSpentBarChart />
       </div>
     </div>

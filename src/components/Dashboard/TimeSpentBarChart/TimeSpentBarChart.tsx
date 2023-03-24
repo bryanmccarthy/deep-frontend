@@ -38,8 +38,8 @@ function TimeSpentBarChart() {
   return (
     <div className="TimeSpentBarChart">
       <BarChart
-        width={500}
-        height={300}
+        width={1100}
+        height={350}
         data={data}
         margin={{
           top: 10,
@@ -49,7 +49,6 @@ function TimeSpentBarChart() {
         }}
       >
         <XAxis dataKey="name" />
-        <YAxis />
         <Tooltip />
         <Bar dataKey="time" fill="#284579" />
       </BarChart>
