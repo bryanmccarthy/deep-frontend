@@ -90,28 +90,30 @@ function DifficultyCountChart({ tasks }: DifficultyCountChartProps) {
           <div className="NoTasks"><p>no tasks</p></div>
       :
         <div>
-          <PieChart
-            width={300}
-            height={300}
-            margin={{
-              top: 10,
-              right: 10,
-              bottom: 10,
-              left: 10,
-            }}
-          >
-            <Pie
-              data={difficultyCountData} 
-              dataKey="value"
-              labelLine={false}
-              fill="#3788d8"
-              label={renderCustomizedLabel}
+          <div>
+            <PieChart
+              width={300}
+              height={300}
+              margin={{
+                top: 10,
+                right: 10,
+                bottom: 10,
+                left: 10,
+              }}
             >
-            </Pie>
-          </PieChart>
-          <label>Number of Tasks per difficulty</label>
-        </div>
-      }
+              <Pie
+                data={difficultyCountData} 
+                dataKey="value"
+                labelLine={false}
+                fill="#3788d8"
+                label={renderCustomizedLabel}
+              >
+              </Pie>
+            </PieChart>
+          </div>
+        <label>Number of Tasks per difficulty</label>
+      </div>
+    }
     </div>
   );
 }

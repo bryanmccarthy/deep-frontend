@@ -13,28 +13,28 @@ function TimeSpentPieChart({ timeSpentData, milestone }: TimeSpentPieChartProps)
    
   return (
     <div className="TimeSpentPieChart">
-      <PieChart
-        width={300}
-        height={300}
-        margin={{
-          top: 10,
-          right: 10,
-          bottom: 10,
-          left: 10,
-        }}
-      >
-        <Pie
-          data={timeSpentData}
-          labelLine={false}
-          label={timeSpentData}
-          innerRadius={80}
-          dataKey="value"
+      <div>
+        <PieChart
+          width={300}
+          height={300}
+          margin={{
+            top: 10,
+            right: 10,
+            bottom: 10,
+            left: 10,
+          }}
         >
-          { timeSpentData.map((entry: any, index: number) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-      </PieChart>
+          <Pie
+            data={timeSpentData}
+            innerRadius={80}
+            dataKey="value"
+          >
+            { timeSpentData.map((entry: any, index: number) => (
+              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            ))}
+          </Pie>
+        </PieChart>
+      </div>
       <label>{`Milestone: ${milestone} hours`}</label>
     </div>
   )
