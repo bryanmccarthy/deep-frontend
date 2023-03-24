@@ -1,7 +1,7 @@
 import "./TimeSpentPieChart.scss";
 import { PieChart, Pie, Cell } from 'recharts';
 
-const COLORS = ['#284579', '#f0f5fc'];
+const COLORS = ['#3788d8', '#f0f5fc'];
 const labelColor = "#FFAC1C";
 
 type TimeSpentPieChartProps = {
@@ -18,7 +18,7 @@ function TimeSpentPieChart({ timeSpent, timeSpentData, milestone }: TimeSpentPie
     let y = cy + radius * Math.sin(-midAngle * RADIAN);
 
     return (
-      <text x={x} y={y} fill={labelColor} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+      <text x={x} y={y} fontSize={18} fill={labelColor} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
         { timeSpentData[index].name === "hours spent" ?
           `${timeSpentData[index].value} hours spent`
         :

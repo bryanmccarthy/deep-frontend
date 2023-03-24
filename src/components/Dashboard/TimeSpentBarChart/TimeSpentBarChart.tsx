@@ -50,7 +50,7 @@ function TimeSpentBarChart() {
       >
         <XAxis dataKey="name" />
         <Tooltip />
-        <Bar dataKey="time" fill="#284579" />
+        <Bar dataKey="time" fill="#3788d8" />
       </BarChart>
     </div>
   );

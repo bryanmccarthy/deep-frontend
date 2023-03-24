@@ -21,7 +21,7 @@ function DifficultyCountChart({ tasks }: DifficultyCountChartProps) {
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
     return (
-      <text x={x} y={y} fill={labelColor} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+      <text x={x} y={y} fontSize={18} fill={labelColor} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
         {`${difficultyCountData[index].name}`}
       </text>
     );
@@ -101,7 +101,7 @@ function DifficultyCountChart({ tasks }: DifficultyCountChartProps) {
           data={difficultyCountData} 
           dataKey="value"
           labelLine={false}
-          fill="#284579"
+          fill="#3788d8"
           label={renderCustomizedLabel}
         >
         </Pie>

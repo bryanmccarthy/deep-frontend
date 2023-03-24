@@ -21,7 +21,7 @@ function DifficultyTimeChart({ tasks }: DifficultyTimeChartProps) {
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
     return (
-      <text x={x} y={y} fill={labelColor} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+      <text x={x} y={y} fontSize={18} fill={labelColor} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
         {`${difficultyTimeData[index].name}`}
       </text>
     );
@@ -99,7 +99,7 @@ function DifficultyTimeChart({ tasks }: DifficultyTimeChartProps) {
           data={difficultyTimeData}
           dataKey="value"
           labelLine={false}
-          fill="#284579"
+          fill="#3788d8"
           label={renderCustomizedLabel}
         > 
         </Pie> 
