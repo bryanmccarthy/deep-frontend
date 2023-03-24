@@ -38,7 +38,7 @@ function TimeSpentBarChart() {
   return (
     <div className="TimeSpentBarChart">
       <BarChart
-        width={1100}
+        width={1000}
         height={350}
         data={data}
         margin={{
