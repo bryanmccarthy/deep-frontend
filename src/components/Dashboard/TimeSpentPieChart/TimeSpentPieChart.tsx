@@ -1,33 +1,16 @@
 import "./TimeSpentPieChart.scss";
 import { PieChart, Pie, Cell } from 'recharts';
 
-const COLORS = ['#3788d8', '#f0f5fc'];
+const COLORS = ['#3788d8', '#ffffff'];
 const labelColor = "#FFAC1C";
 
 type TimeSpentPieChartProps = {
-  timeSpent: number;
   timeSpentData: any;
   milestone: number;
 }
 
-function TimeSpentPieChart({ timeSpent, timeSpentData, milestone }: TimeSpentPieChartProps) {
-  const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, index }: any) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    let x = 1 + cx + radius * Math.cos(-midAngle * RADIAN);
-    let y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-      <text x={x} y={y} fontSize={18} fill={labelColor} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-        { timeSpentData[index].name === "hours spent" ?
-          `${timeSpentData[index].value} hours spent`
-        :
-          `${timeSpentData[index].value} hours to go`
-        }
-      </text>
-    );
-  };
- 
+function TimeSpentPieChart({ timeSpentData, milestone }: TimeSpentPieChartProps) {
+   
   return (
     <div className="TimeSpentPieChart">
       <PieChart
@@ -43,7 +26,7 @@ function TimeSpentPieChart({ timeSpent, timeSpentData, milestone }: TimeSpentPie
         <Pie
           data={timeSpentData}
           labelLine={false}
-          label={renderCustomizedLabel}
+          label={timeSpentData}
           innerRadius={80}
           dataKey="value"
         >

@@ -7,4 +7,16 @@
   width: 100%;
   align-items: center;
   justify-content: center;
+
+  .NoTasks {
+    background-color: #3788d8;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    height: 14.5em;
+    width: 14.5em;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

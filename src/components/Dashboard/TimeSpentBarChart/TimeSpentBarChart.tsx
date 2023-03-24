@@ -1,35 +1,35 @@
 import "./TimeSpentBarChart.scss";
 
-import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
+import { BarChart, Bar, XAxis, Tooltip } from 'recharts';
 
 const data = [
   {
     name: 'Sun',
-    time: 5,
+    time: 0,
   },
   {
     name: 'Mon',
-    time: 6,
+    time: 0,
   },
   {
     name: 'Tue',
-    time: 2,
+    time: 0,
   },
   {
     name: 'Wed',
-    time: 8,
+    time: 0,
   },
   {
     name: 'Thu',
-    time: 4,
+    time: 0,
   },
   {
     name: 'Fri',
-    time: 5,
+    time: 0,
   },
   {
     name: 'Sat',
-    time: 3,
+    time: 0,
   },
 ];
 

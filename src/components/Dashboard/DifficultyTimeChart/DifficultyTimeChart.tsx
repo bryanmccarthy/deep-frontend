@@ -85,26 +85,32 @@ function DifficultyTimeChart({ tasks }: DifficultyTimeChartProps) {
 
   return (
     <div className="DifficultyTimeChart">
-      <PieChart 
-        width={300} 
-        height={300}
-        margin={{
-          top: 10,
-          right: 10,
-          bottom: 10,
-          left: 10,
-        }}
-      >
-        <Pie 
-          data={difficultyTimeData}
-          dataKey="value"
-          labelLine={false}
-          fill="#3788d8"
-          label={renderCustomizedLabel}
-        > 
-        </Pie> 
-      </PieChart>
-      <label>Time spent per Task difficulty</label>
+      { tasks.length === 0 ?
+        <div className="NoTasks"><p>no tasks</p></div>
+      :
+      <div>
+        <PieChart 
+          width={300} 
+          height={300}
+          margin={{
+            top: 10,
+            right: 10,
+            bottom: 10,
+            left: 10,
+          }}
+        >
+          <Pie 
+            data={difficultyTimeData}
+            dataKey="value"
+            labelLine={false}
+            fill="#3788d8"
+            label={renderCustomizedLabel}
+          > 
+          </Pie> 
+        </PieChart>
+        <label>Time spent per Task difficulty</label>
+      </div>
+    }
     </div>
   );
 }

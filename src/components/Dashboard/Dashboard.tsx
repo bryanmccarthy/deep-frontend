@@ -73,7 +73,7 @@ function Dashboard({ tasks }: DashboardProps) {
     <div className="Dashboard">
       <div className="Grid1">
         <DifficultyCountChart tasks={tasks}/>
-        <TimeSpentPieChart timeSpent={timeSpent} timeSpentData={timeSpentData} milestone={milestone} />
+        <TimeSpentPieChart timeSpentData={timeSpentData} milestone={milestone} />
         <DifficultyTimeChart tasks={tasks} />
       </div>
       <div className="Grid2">
