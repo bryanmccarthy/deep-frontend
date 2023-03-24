@@ -1,30 +1,85 @@
 import "./DifficultyTimeChart.scss";
 // import axios from "axios";
+import { useState } from "react";
+import { useQuery } from "react-query";
 import { PieChart, Pie, } from "recharts";
 
-// TODO: value is related to time spent on tasks with that difficulty
-const data = [ // TODO: Use state instead and get data from backend
-  { name: "1", value: 5 },
-  { name: "2", value: 3 },
-  { name: "3", value: 8 },
-  { name: "4", value: 2 },
-  { name: "5", value: 4 },
-];
+type DifficultyTimeChartProps = {
+  tasks: any;
+}
 
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, index }: any) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+function DifficultyTimeChart({ tasks }: DifficultyTimeChartProps) {
+  const timePerDifficulty = new Map();
+  const [difficultyTimeData, setDifficultyTimeData] = useState<any>(null);
 
-  return (
-    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-      {`${data[index].name}`}
-    </text>
-  );
-};
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, index }: any) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-function DifficultyTimeChart() {
+    return (
+      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+        {`${difficultyTimeData[index].name}`}
+      </text>
+    );
+  };
+
+  function handleSetDifficultyTime() {
+    tasks.forEach((task: any) => {
+      switch(task.difficulty) {
+        case 1: {
+          if (timePerDifficulty.get("1")) {
+            if (task.time_spent > 0) timePerDifficulty.set("1", timePerDifficulty.get("1") + task.time_spent);
+          } else {
+            if (task.time_spent > 0) timePerDifficulty.set("1", task.time_spent);
+          }
+          break;
+        } 
+        case 2: {
+          if (timePerDifficulty.get("2")) {
+            if (task.time_spent > 0) timePerDifficulty.set("2", timePerDifficulty.get("2") + task.time_spent);
+          } else {
+            if (task.time_spent > 0) timePerDifficulty.set("2", task.time_spent);
+          }
+          break;
+        } 
+        case 3: {
+          if (timePerDifficulty.get("3")) {
+            if (task.time_spent > 0) timePerDifficulty.set("3", timePerDifficulty.get("3") + task.time_spent);
+          } else {
+            if (task.time_spent > 0) timePerDifficulty.set("3", task.time_spent);
+          }
+          break;
+        } 
+        case 4: {
+          if (timePerDifficulty.get("4")) {
+            if (task.time_spent > 0) timePerDifficulty.set("4", timePerDifficulty.get("4") + task.time_spent);
+          } else {
+            if (task.time_spent > 0) timePerDifficulty.set("4", task.time_spent);
+          }
+          break;      
+        } 
+        case 5: {
+          if (timePerDifficulty.get("5")) {
+            if (task.time_spent > 0) timePerDifficulty.set("5", timePerDifficulty.get("5") + task.time_spent);
+          } else {
+            if (task.time_spent > 0) timePerDifficulty.set("5", task.time_spent);
+          }
+          break;      
+        } 
+        default: {
+          break;
+        }
+      };
+    });
+    setDifficultyTimeData(Array.from(timePerDifficulty, ([name, value]) => ({ name, value })));
+  }
+  
+  const { status } = useQuery('setDifficultyTimeData', handleSetDifficultyTime);
+
+  if (status === 'loading') return <div>Loading...</div>;
+  if (status === 'error') return <div>Error</div>;
 
   return (
     <div className="DifficultyTimeChart">
@@ -39,7 +94,7 @@ function DifficultyTimeChart() {
         }}
       >
         <Pie 
-          data={data}
+          data={difficultyTimeData}
           dataKey="value"
           labelLine={false}
           fill="#284579"
@@ -47,7 +102,7 @@ function DifficultyTimeChart() {
         > 
         </Pie> 
       </PieChart>
-      <label>Hours spent per Task difficulty</label>
+      <label>Time spent per Task difficulty</label>
     </div>
   );
 }
