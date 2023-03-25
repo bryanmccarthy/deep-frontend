@@ -12,7 +12,6 @@ type DashboardProps = {
 }
 
 function Dashboard({ tasks }: DashboardProps) {
-  const [timeSpent, setTimeSpent] = useState<number>(0);
   const [timeSpentData, setTimeSpentData] = useState<any>([{}]);
   const [milestone, setMilestone] = useState<number>(0);
 
@@ -57,7 +56,6 @@ function Dashboard({ tasks }: DashboardProps) {
     });
 
     if (res.status === 200) {
-      setTimeSpent(res.data);
       handleSetTimeSpentData(res.data);
     } else {
       console.log('error');
