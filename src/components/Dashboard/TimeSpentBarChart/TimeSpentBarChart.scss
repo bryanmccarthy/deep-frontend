@@ -2,12 +2,17 @@
 
 .TimeSpentBarChart {
   display: flex;
+  width: 98.5%;
   height: 100%;
-  width: 100%;
+  text-align: center;
   align-items: center;
   justify-content: center;
+  margin: 0.5em;
+  border: 1px solid $accent;
+  border-radius: 0.3em;
+  background-color: $primary;
 
   .recharts-surface {
-    width: 100%;
+    width: 95%;
   }
 }

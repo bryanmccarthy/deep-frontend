@@ -3,7 +3,6 @@
 .Dashboard {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
   width: 100%;
   background-color: $secondary;
@@ -13,10 +12,12 @@
 
   .Grid1 {
     display: flex;
+    justify-content: space-between;
   }
 
   .Grid2 {
     display: flex;
+    justify-content: center;
   }
 }
 
@@ -24,6 +25,8 @@
   .Dashboard {
     .Grid1 {
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

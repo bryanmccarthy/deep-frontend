@@ -3,10 +3,15 @@
 .DifficultyChart {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
+  width: 32%;
+  text-align: center;
   align-items: center;
   justify-content: center;
+  margin-top: 0.5em;
+  margin-left: 0.5em;
+  border: 1px solid $accent;
+  border-radius: 0.3em;
+  background-color: $primary;
 
   .NoTasks {
     background-color: #3788d8;
@@ -18,5 +23,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+}
+
+@media (max-width: 900px) {
+  .DifficultyChart {
+    width: 98%;
+    margin-right: 0.5em;
   }
 }

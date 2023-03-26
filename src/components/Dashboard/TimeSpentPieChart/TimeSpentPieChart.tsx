@@ -1,7 +1,7 @@
 import "./TimeSpentPieChart.scss";
 import { PieChart, Pie, Cell } from 'recharts';
 
-const COLORS = ['#3788d8', '#ffffff'];
+const COLORS = ['#3788d8', '#cccccc'];
 const labelColor = "#FFAC1C";
 
 type TimeSpentPieChartProps = {
@@ -35,7 +35,7 @@ function TimeSpentPieChart({ timeSpentData, milestone }: TimeSpentPieChartProps)
           </Pie>
         </PieChart>
       </div>
-      <label>{`Milestone: ${milestone} hours`}</label>
+      <label>{`Hours: ${timeSpentData[0].value} | Milestone: ${milestone} hours`}</label>
     </div>
   )
 }
