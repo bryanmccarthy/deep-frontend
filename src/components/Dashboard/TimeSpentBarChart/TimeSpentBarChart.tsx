@@ -7,31 +7,31 @@ import { BarChart, Bar, XAxis, Tooltip } from 'recharts';
 let barData = [
   {
     name: 'Sun',
-    time: 0,
+    mins: 0,
   },
   {
     name: 'Mon',
-    time: 0,
+    mins: 0,
   },
   {
     name: 'Tue',
-    time: 0,
+    mins: 0,
   },
   {
     name: 'Wed',
-    time: 0,
+    mins: 0,
   },
   {
     name: 'Thu',
-    time: 0,
+    mins: 0,
   },
   {
     name: 'Fri',
-    time: 0,
+    mins: 0,
   },
   {
     name: 'Sat',
-    time: 0,
+    mins: 0,
   },
 ];
 
@@ -51,11 +51,15 @@ function TimeSpentBarChart() {
 
     for (let i = 0; i < 7; i++) {
       if (localStorage.getItem(week[i])) {
-        barData[i].time = parseInt(localStorage.getItem(week[i]) as string);
+        barData[i].mins = getMinutes(parseInt(localStorage.getItem(week[i]) as string));
       }
     }
 
     setData(barData);
+  }
+
+  function getMinutes(time: number) {
+    return Math.floor(time / 60);
   }
 
   const { status } = useQuery('setChartData', setChartData);
@@ -78,8 +82,9 @@ function TimeSpentBarChart() {
       >
         <XAxis dataKey="name" />
         <Tooltip />
-        <Bar dataKey="time" fill="#3788d8" />
+        <Bar dataKey="mins" fill="#3788d8" />
       </BarChart>
+      <label>Time spent this week</label>
     </div>
   );
 }
