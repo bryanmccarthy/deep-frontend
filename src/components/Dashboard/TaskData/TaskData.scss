@@ -2,12 +2,24 @@
 
 .TaskData {
   display: flex;
+  flex-direction: column;
   border: 1px solid $accent;
   border-radius: 0.3em;
   width: 32%;
   height: 100%;
   margin: 0.5em;
   background-color: $primary;
+  justify-content: center;
+  align-items: center;
+
+  .TasksCompleted {
+    border-radius: 0.3em;
+    margin: 0.5em;
+    padding: 2.5em;
+    font-size: 2rem;
+    background-color: #3788d8;
+    color: #FFAC1C;
+  }
 }
 
 @media (max-width: 900px) {

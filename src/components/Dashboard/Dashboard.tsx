@@ -77,7 +77,7 @@ function Dashboard({ tasks }: DashboardProps) {
       </div>
       <div className="Grid2">
         <TimeSpentBarChart />
-        <TaskData />
+        <TaskData tasks={tasks} />
       </div>
     </div>
   )
