@@ -3,6 +3,7 @@ import DifficultyCountChart from './DifficultyCountChart/DifficultyCountChart';
 import TimeSpentPieChart from './TimeSpentPieChart/TimeSpentPieChart';
 import DifficultyTimeChart from './DifficultyTimeChart/DifficultyTimeChart';
 import TimeSpentBarChart from './TimeSpentBarChart/TimeSpentBarChart';
+import TaskData from './TaskData/TaskData';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import axios from "axios";
@@ -76,6 +77,7 @@ function Dashboard({ tasks }: DashboardProps) {
       </div>
       <div className="Grid2">
         <TimeSpentBarChart />
+        <TaskData />
       </div>
     </div>
   )

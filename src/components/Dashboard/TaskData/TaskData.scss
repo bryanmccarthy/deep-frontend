@@ -1,0 +1,17 @@
+@import "../../../utils/variables.scss";
+
+.TaskData {
+  display: flex;
+  border: 1px solid $accent;
+  border-radius: 0.3em;
+  width: 32%;
+  height: 100%;
+  margin: 0.5em;
+  background-color: $primary;
+}
+
+@media (max-width: 900px) {
+  .TaskData {
+    width: 98%;
+  }
+}

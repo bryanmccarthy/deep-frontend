@@ -2,17 +2,25 @@
 
 .TimeSpentBarChart {
   display: flex;
-  width: 98.5%;
+  width: 65%;
   height: 100%;
   text-align: center;
   align-items: center;
   justify-content: center;
-  margin: 0.5em;
+  margin-top: 0.5em;
+  margin-left: 0.5em;
   border: 1px solid $accent;
   border-radius: 0.3em;
   background-color: $primary;
 
   .recharts-surface {
-    width: 95%;
+    width: 95%
+  }
+}
+
+@media (max-width: 900px) {
+  .TimeSpentBarChart {
+    width: 98%;
+    margin-right: 0.5em;
   }
 }
