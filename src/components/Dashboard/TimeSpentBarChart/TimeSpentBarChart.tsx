@@ -1,8 +1,10 @@
 import "./TimeSpentBarChart.scss";
+import { useState } from "react";
+import { useQuery } from "react-query";
 
 import { BarChart, Bar, XAxis, Tooltip } from 'recharts';
 
-const data = [
+let barData = [
   {
     name: 'Sun',
     time: 0,
@@ -34,6 +36,32 @@ const data = [
 ];
 
 function TimeSpentBarChart() {
+  const [data, setData] = useState<any>(barData);
+
+  function setChartData() {
+    const week = [
+      'sunday',
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday',
+    ];
+
+    for (let i = 0; i < 7; i++) {
+      if (localStorage.getItem(week[i])) {
+        barData[i].time = parseInt(localStorage.getItem(week[i]) as string);
+      }
+    }
+
+    setData(barData);
+  }
+
+  const { status } = useQuery('setChartData', setChartData);
+
+  if (status === 'loading') return <div>Loading...</div>;
+  if (status === 'error') return <div>Error</div>;
 
   return (
     <div className="TimeSpentBarChart">
