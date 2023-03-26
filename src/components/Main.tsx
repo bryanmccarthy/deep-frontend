@@ -39,11 +39,6 @@ function Main() {
   const [expandedTaskProgress, setExpandedTaskProgress] = useState<number>(0);
   const [expandedTaskTimeSpent, setExpandedTaskTimeSpent] = useState<number>(0);
 
-  async function handleGetDashboardData() {
-    // TODO: get data
-    // Get total hours spent (maybe store milestone on server)
-  }
-
   async function handleLogout() {
     const res = await axios.get(import.meta.env.VITE_URL + '/auth/logout', {
       withCredentials: true,

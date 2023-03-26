@@ -35,6 +35,9 @@ function Pomodoro({ showPomodoro, setShowPomodoro, setErrorSnackbarOpen, page, e
     if (res.status !== 200) {
       setErrorSnackbarOpen(true);
     }
+
+    // TODO: update time for current day locally
+
   }
 
   async function handleUpdateExpandedtaskTimeSpent(timeSpent: number) {
@@ -78,7 +81,6 @@ function Pomodoro({ showPomodoro, setShowPomodoro, setErrorSnackbarOpen, page, e
     }
 
     if (seconds < 0) {
-      // TODO: Handle notification
       if (currentTimer === 'Work') {
         handleUpdateTimeSpent();
         setCurrentTimer('Break');
