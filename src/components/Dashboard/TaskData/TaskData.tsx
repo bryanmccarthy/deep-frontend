@@ -6,8 +6,6 @@ type TaskDataProps = {
 
 function TaskData({ tasks }: TaskDataProps) {
 
-  console.log(tasks);
-  
   return (
     <div className="TaskData">
       <div className="TasksCompleted">

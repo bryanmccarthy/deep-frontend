@@ -24,6 +24,43 @@ function Pomodoro({ showPomodoro, setShowPomodoro, setErrorSnackbarOpen, page, e
   const [timeElapsed, setTimeElapsed] = useState<number>(0);
   const [expandedTaskDuration, setExpandedTaskDuration] = useState<number>(0);
 
+  function updateWeekTimeSpent() {
+    const currDate = new Date();
+    const dayIdx = currDate.getDay();
+    const week = [
+      'sunday',
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday',
+    ];
+
+    if (localStorage.getItem('weekStart')) {
+      const weekStart = new Date(localStorage.getItem('weekStart') as string);
+      const diff = Math.abs(currDate.getTime() - weekStart.getTime());
+      const diffDays = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+      if (diffDays > 7) {
+        for (let i = 0; i < 7; i++) {
+          localStorage.removeItem(week[i]);
+        }
+
+        localStorage.setItem('weekStart', currDate.toDateString());
+      }
+    } else {
+      localStorage.setItem('weekStart', currDate.toDateString());
+    }
+    
+    if (localStorage.getItem(week[dayIdx])) {
+      const timeSpent = parseInt(localStorage.getItem(week[dayIdx]) as string) + timeElapsed;
+      localStorage.setItem(week[dayIdx], timeSpent.toString());
+    } else {
+      localStorage.setItem(week[dayIdx], timeElapsed.toString());
+    }
+  }
+
   async function handleUpdateTimeSpent() {
     const res = await axios.put(import.meta.env.VITE_URL + '/user/update/time_spent', {
       time_spent: timeElapsed,
@@ -36,8 +73,7 @@ function Pomodoro({ showPomodoro, setShowPomodoro, setErrorSnackbarOpen, page, e
       setErrorSnackbarOpen(true);
     }
 
-    // TODO: update time for current day locally
-
+    updateWeekTimeSpent();
   }
 
   async function handleUpdateExpandedtaskTimeSpent(timeSpent: number) {
@@ -60,6 +96,7 @@ function Pomodoro({ showPomodoro, setShowPomodoro, setErrorSnackbarOpen, page, e
     }
   }
 
+  // Timer
   useEffect(() => {
     let interval: any = null;
     if (isActive && seconds >= 0) {
@@ -78,6 +115,8 @@ function Pomodoro({ showPomodoro, setShowPomodoro, setErrorSnackbarOpen, page, e
         setSeconds(seconds - 1);
         setTimeElapsed(timeElapsed + 1);
       }, 1000);
+    } else {
+      setTimeElapsed(0);
     }
 
     if (seconds < 0) {
@@ -94,6 +133,7 @@ function Pomodoro({ showPomodoro, setShowPomodoro, setErrorSnackbarOpen, page, e
 
       document.title = 'Deep';
       setIsActive(false);
+      setTimeElapsed(0);
     }
     return () => clearInterval(interval);
   }, [isActive, seconds]);
