@@ -3,8 +3,9 @@
 .TaskData {
   display: flex;
   flex-direction: column;
-  border: 1px solid $accent;
-  border-radius: 0.3em;
+  border: 1px solid $accent2;
+  border-radius: 0.15em;
+  box-shadow: 0 0 0.3em $accent2;
   width: 32%;
   height: 100%;
   margin: 0.5em;
