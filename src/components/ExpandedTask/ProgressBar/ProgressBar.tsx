@@ -16,9 +16,11 @@ type ProgressBarProps = {
   expandedTaskID: number;
   expandedTaskProgress: number;
   expandedTaskDifficulty: number;
+  expandedTaskTimeSpent: number;
+  timeRemaining: number;
 }
 
-function ProgressBar({ expandedTaskID, expandedTaskProgress, expandedTaskDifficulty }: ProgressBarProps ) {
+function ProgressBar({ expandedTaskID, expandedTaskProgress, expandedTaskDifficulty, expandedTaskTimeSpent, timeRemaining }: ProgressBarProps ) {
   const [progress, setProgress] = useState<number>(expandedTaskProgress);
   const [showInfo, setShowInfo] = useState<boolean>(false);
 
@@ -39,7 +41,6 @@ function ProgressBar({ expandedTaskID, expandedTaskProgress, expandedTaskDifficu
       console.log('updated progress');
     } else {
       console.log('error updating progress');
-      // Snackbar
     }
   }
 
@@ -49,6 +50,35 @@ function ProgressBar({ expandedTaskID, expandedTaskProgress, expandedTaskDifficu
 
   function handleMouseOut() {
     setShowInfo(false);
+  }
+
+  function formatMinutes(minutes: number) {
+    if (minutes === 0) return '0 mins';
+
+    const hours = Math.floor(minutes / 60);
+    minutes = minutes % 60;
+
+    if (hours === 0) {
+      if (minutes > 1) {
+        return minutes + ' mins';
+      } else {
+        return minutes + ' min';
+      }
+    }
+
+    if (hours > 1) {
+      if (minutes > 1) {
+        return hours + ' hrs ' + minutes + ' mins';
+      } else {
+        return hours + ' hrs ' + minutes + ' min';
+      }
+    } else {
+      if (minutes > 1) {
+        return hours + ' hr ' + minutes + ' mins';
+      } else {
+        return hours + ' hr ' + minutes + ' min';
+      }
+    }
   }
   
   return (
@@ -75,7 +105,8 @@ function ProgressBar({ expandedTaskID, expandedTaskProgress, expandedTaskDifficu
         :
         <div className="ProgressInfo">
           <p style={{ paddingRight: '1em' }}>Difficulty: {expandedTaskDifficulty} ({difficultyTimes.get(expandedTaskDifficulty)})</p>
-          <p style={{ paddingLeft: '1em' }}>Estimated time remaining: 1 hour { /* TODO: calculate this */ }</p>
+          <p style={{ paddingRight: '1em' }}>Time spent: {formatMinutes(Math.floor(expandedTaskTimeSpent / 60))}</p>
+          <p style={{ paddingLeft: '1em' }}>Estimated time remaining: {formatMinutes(timeRemaining)}</p>
         </div>
       }
     </div>

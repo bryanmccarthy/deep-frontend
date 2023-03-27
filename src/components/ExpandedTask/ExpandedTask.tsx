@@ -8,6 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import { Calculate } from '@mui/icons-material';
 
 type ExpandedTaskProps = {
   expandedTaskID: number;
@@ -17,21 +18,16 @@ type ExpandedTaskProps = {
   expandedTaskCompleted: boolean;
   setExpandedTaskCompleted: (completed: boolean) => void;
   expandedTaskProgress: number;
-  setExpandedTaskProgress: (progress: number) => void;
   expandedTaskTimeSpent: number;
-  setExpandedTaskTimeSpent: (timeSpent: number) => void;
 }
 
-const primary = '#ffffff';
-const accent = '#000000';
-const accent2 = '#ccced1';
-
-function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficulty, expandedTaskDueDate, expandedTaskCompleted, setExpandedTaskCompleted, expandedTaskProgress, setExpandedTaskProgress, expandedTaskTimeSpent, setExpandedTaskTimeSpent }: ExpandedTaskProps) {
+function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficulty, expandedTaskDueDate, expandedTaskCompleted, setExpandedTaskCompleted, expandedTaskProgress, expandedTaskTimeSpent }: ExpandedTaskProps) {
   const [expandedTaskNotes, setExpandedTaskNotes] = useState<any>([]);
   const [errorSnackbarOpen, setErrorSnackbarOpen] = useState<boolean>(false);
   const [openNoteID, setOpenNoteID] = useState<number | null>(null);
   const [openNoteContent, setOpenNoteContent] = useState<string>('');
   const [updatedTitle, setUpdatedTitle] = useState<string>('');
+  const [timeRemaining, setTimeRemaining] = useState<number>(0);
 
   async function handleCreateNote() {
     const res = await axios.post(import.meta.env.VITE_URL + '/notes/create', {
@@ -93,18 +89,46 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
     }
   }
 
-  async function getNotes() {
+  async function handleExpandedTaskLoad() {
+    // Calculate time remaining for expanded task
+    calculateTimeRemaining();
+
     const res = await axios.get(import.meta.env.VITE_URL + `/notes/${expandedTaskID}`, {
       withCredentials: true,
     });
     if (res.status === 200) {
-      if (res.data.length === 0) return;
+      if (res.data.length === 0) return; // no notes
 
       setExpandedTaskNotes(res.data);
       setOpenNoteID(res.data[0].id);
       setOpenNoteContent(res.data[0].content);
     } else {
       setErrorSnackbarOpen(true);
+    }
+  }
+
+  function calculateTimeRemaining() {
+    const progressDecimal = expandedTaskProgress / 100;
+
+    // Calculate time remaining for expanded task
+    switch(expandedTaskDifficulty) {
+      case 1:
+        setTimeRemaining(Math.floor(25 - (25 * progressDecimal)));
+        break;
+      case 2:
+        setTimeRemaining(Math.floor(45 - (45 * progressDecimal)));
+        break;
+      case 3:
+        setTimeRemaining(Math.floor(90 - (90 * progressDecimal)));
+        break;
+      case 4:
+        setTimeRemaining(Math.floor(180 - (180 * progressDecimal)));
+        break;
+      case 5:
+        setTimeRemaining(Math.floor(300 - (300 * progressDecimal)));
+        break;
+      default:
+        setTimeRemaining(0);
     }
   }
 
@@ -162,7 +186,7 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
     setUpdatedTitle(e.target.value);
   }
 
-  async function handleUpdateNoteTitle(e: React.ChangeEvent<HTMLInputElement>,id: number) {
+  async function handleUpdateNoteTitle(e: any, id: number) {
     const res = await axios.put(import.meta.env.VITE_URL + '/notes/update/title', {
         id: id,
         title: updatedTitle,
@@ -180,12 +204,11 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
     e.target.readOnly = true; // Make input readonly
   }
 
-  function handleDoubleClick(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleDoubleClick(e: any) {
     e.target.readOnly = false; // Make input editable
   }
 
-  // Fetch notes on page load
-  const { status } = useQuery('notes', getNotes);
+  const { status } = useQuery('expandedTaskLoad', handleExpandedTaskLoad);
 
   if (status === 'loading') return <div>Loading...</div>;
   if (status === 'error') return <div>Error</div>;
@@ -204,7 +227,9 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
       <ProgressBar 
         expandedTaskID={expandedTaskID} 
         expandedTaskProgress={expandedTaskProgress}
-        expandedTaskDifficulty={expandedTaskDifficulty} 
+        expandedTaskDifficulty={expandedTaskDifficulty}
+        expandedTaskTimeSpent={expandedTaskTimeSpent}
+        timeRemaining={timeRemaining}
       />
 
       <div className="TaskNotes">

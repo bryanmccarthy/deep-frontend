@@ -164,9 +164,7 @@ function Main() {
             expandedTaskCompleted={expandedTaskCompleted}
             setExpandedTaskCompleted={setExpandedTaskCompleted}
             expandedTaskProgress={expandedTaskProgress}
-            setExpandedTaskProgress={setExpandedTaskProgress}
             expandedTaskTimeSpent={expandedTaskTimeSpent}
-            setExpandedTaskTimeSpent={setExpandedTaskTimeSpent}
           /> 
         }
 
