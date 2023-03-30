@@ -106,7 +106,7 @@ function ProgressBar({ expandedTaskID, expandedTaskProgress, expandedTaskDifficu
         <div className="ProgressInfo">
           <p style={{ paddingRight: '1em' }}>Difficulty: {expandedTaskDifficulty} ({difficultyTimes.get(expandedTaskDifficulty)})</p>
           <p style={{ paddingRight: '1em' }}>Time spent: {formatMinutes(Math.floor(expandedTaskTimeSpent / 60))}</p>
-          <p style={{ paddingLeft: '1em' }}>Estimated time remaining: {formatMinutes(timeRemaining)}</p>
+          <p style={{ paddingLeft: '1em' }}>Time remaining: {formatMinutes(timeRemaining)}</p>
         </div>
       }
     </div>
