@@ -8,7 +8,6 @@ import AddIcon from '@mui/icons-material/Add';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { Calculate } from '@mui/icons-material';
 
 type ExpandedTaskProps = {
   expandedTaskID: number;
