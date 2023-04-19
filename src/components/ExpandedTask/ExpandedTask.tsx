@@ -108,23 +108,44 @@ function ExpandedTask({ expandedTaskID, expandedTaskTitle, expandedTaskDifficult
 
   function calculateTimeRemaining() {
     const progressDecimal = expandedTaskProgress / 100;
+    const timeSpent = Math.floor(expandedTaskTimeSpent / 60);
 
     // Calculate time remaining for expanded task
     switch(expandedTaskDifficulty) {
       case 1:
-        setTimeRemaining(Math.floor(25 - (25 * progressDecimal)));
+        if(progressDecimal !== 0) {
+          setTimeRemaining(Math.floor(25 - (25 * progressDecimal)));
+        } else {
+          setTimeRemaining(25 - timeSpent);
+        }
         break;
       case 2:
-        setTimeRemaining(Math.floor(45 - (45 * progressDecimal)));
+        if(progressDecimal !== 0) {
+          setTimeRemaining(Math.floor(45 - (45 * progressDecimal)));
+        } else {
+          setTimeRemaining(45 - timeSpent);
+        }
         break;
       case 3:
-        setTimeRemaining(Math.floor(90 - (90 * progressDecimal)));
+        if(progressDecimal !== 0) {
+          setTimeRemaining(Math.floor(90 - (90 * progressDecimal)));
+        } else {
+          setTimeRemaining(90 - timeSpent);
+        }
         break;
       case 4:
-        setTimeRemaining(Math.floor(180 - (180 * progressDecimal)));
+        if(progressDecimal !== 0) {
+          setTimeRemaining(Math.floor(180 - (180 * progressDecimal)));
+        } else {
+          setTimeRemaining(180 - timeSpent);
+        }
         break;
       case 5:
-        setTimeRemaining(Math.floor(300 - (300 * progressDecimal)));
+        if(progressDecimal !== 0) {
+          setTimeRemaining(Math.floor(300 - (300 * progressDecimal)));
+        } else {
+          setTimeRemaining(300 - timeSpent);
+        }
         break;
       default:
         setTimeRemaining(0);
